@@ -1,6 +1,6 @@
 
 {
-  "name": "widget-starter",
+  "name": "upcover-webflow-integration",
   "version": "1.0.0",
   "scripts": {
     "dev": "parcel dev/index.html",

@@ -1,0 +1,64 @@
+#appbar {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  background-color: #f5f0eb;
+  font-size: 0.9rem;
+  padding: 0 60px;
+}
+
+.tabs button {
+  background: none;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  /* margin-right: 1rem; */
+  padding: 30px 20px;
+  color: inherit;
+  position: relative;
+  font-size: 1rem;
+  transition: color 0.3s ease, background-color 0.3s ease;
+  color: #545464;
+}
+
+.tabs button.active {
+  background-color: #ffffff;
+  color: #242826;
+  border-radius: 0;
+}
+
+.tabs button.active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: #242826;
+  border-radius: 2px;
+}
+
+.contact {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  font-weight: 600;
+  color: #333;
+  font-size: 16px;
+}
+
+.contact a {
+  text-decoration: none;
+  color: #333;
+}
+
+.contact-phone-container {
+  background-color: white;
+  padding: 10px 14px;
+  border-radius: 10px;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  gap: 10px;
+}

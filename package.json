@@ -1,0 +1,12 @@
+
+{
+  "name": "widget-starter",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "parcel dev/index.html",
+    "build": "parcel build components/**/index.ts --dist-dir dist"
+  },
+  "devDependencies": {
+    "parcel": "^2.0.0"
+  }
+}

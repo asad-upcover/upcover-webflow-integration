@@ -1,0 +1,49 @@
+.header,
+.navbar {
+  position: relative;
+  z-index: 100;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0px 60px;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.actions {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.login {
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.quote {
+  color: white;
+  border: none;
+  padding: 20px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.UPCOVER-LOGO {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#upcover-logo path {
+  pointer-events: none;
+  transition: all 0.3s ease;
+}

@@ -158,4 +158,11 @@ function renderAppBar() {
   appbar.appendChild(contactContainer);
 }
 
-document.addEventListener("DOMContentLoaded", renderAppBar);
+document.addEventListener("DOMContentLoaded", () => {
+  renderAppBar();
+
+  // Wait until DOM is ready, then activate default tab
+  requestAnimationFrame(() => {
+    if (tabs.length > 0) setActiveTab(tabs[0].id);
+  });
+});

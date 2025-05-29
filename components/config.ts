@@ -91,7 +91,7 @@ export const tabs: TabConfig[] = [
     id: "tech",
     label: "Tech Startups & Enterprises",
     themeColor: "#005DFF",
-    menuItems: ["Coveragess", "Company", "Resources", "Solutions"],
+    menuItems: ["Coverages", "Company", "Resources", "Solutions"],
     dropdown: {
       Coverages: [
         { title: "INDUSTRY", items: ["Public Liability"] },

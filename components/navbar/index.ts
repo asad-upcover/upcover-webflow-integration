@@ -50,6 +50,21 @@ function renderNavBar() {
   `;
   leftNavbar.appendChild(logoDiv);
 
+    // 2. Render the menu after the logo
+  const menuComponent = document.createElement('ul');
+  menuComponent.id = "menu-items";
+  if (Array.isArray(menuComponent)) {
+    menuComponent.forEach(item => {
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = item.href;
+      a.innerText = item.label;
+      li.appendChild(a);
+      menuComponent.appendChild(li);
+    });
+  }
+  leftNavbar.appendChild(menuComponent);
+
   const actionsDiv = document.createElement("div");
   actionsDiv.className = "actions";
 

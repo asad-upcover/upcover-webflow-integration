@@ -17,25 +17,24 @@ function setActiveTab(tabId: string) {
           <li class="menu-item ${hasDropdown ? "dropdown" : ""}">
             ${item}
             <span class="menu-icon">${selectedTab.svg}</span>
-            ${
-              hasDropdown
-                ? `<div class="dropdown-menu three-column">
+            ${hasDropdown
+            ? `<div class="dropdown-menu three-column">
                     ${dropdownSections
-                      .map(
-                        (section) => `
+              .map(
+                (section) => `
                       <div class="dropdown-column">
                         <h4>${section.title}</h4>
                         <ul>
                           ${section.items
-                            .map((li) => `<li>${li}</li>`)
-                            .join("")}
+                    .map((li) => `<li>${li}</li>`)
+                    .join("")}
                         </ul>
                       </div>`
-                      )
-                      .join("")}
+              )
+              .join("")}
                   </div>`
-                : ""
-            }
+            : ""
+          }
           </li>
         `;
       })
@@ -130,30 +129,50 @@ function renderAppBar() {
 
   const contactContainer = document.createElement("div");
   contactContainer.className = "contact";
-  // Create contact region link
-  const regionLink = document.createElement("a");
-  regionLink.href = "#";
-  regionLink.textContent = branding.contactRegion;
-  regionLink.className = "contact-region";
 
-  // Create phone container
+  // --- Region Switcher ---
+  let activeRegion = localStorage.getItem("activeRegion") || branding.contactRegion[0].code;
+
+  const renderRegionSwitcher = () => {
+    regionSwitcher.innerHTML = "";
+    branding.contactRegion.forEach((region, idx) => {
+      const regionLink = document.createElement("a");
+      regionLink.href = region.url;
+      regionLink.textContent = region.label;
+      regionLink.style.fontWeight = activeRegion === region.code ? "900" : "100";
+      regionLink.style.textDecoration = "none";
+      regionLink.style.color = "inherit";
+      regionLink.target = "_blank";
+      regionLink.rel = "noopener noreferrer";
+      regionLink.addEventListener("click", (e) => {
+        localStorage.setItem("activeRegion", region.code);
+        activeRegion = region.code;
+        renderRegionSwitcher(); // Re-render to update font weight
+        // Let the link open in new tab
+      });
+      regionSwitcher.appendChild(regionLink);
+      if (idx < branding.contactRegion.length - 1) {
+        regionSwitcher.appendChild(document.createTextNode(" | "));
+      }
+    });
+  };
+
+  const regionSwitcher = document.createElement("span");
+  regionSwitcher.className = "contact-region-switcher";
+  renderRegionSwitcher();
+
+  // --- Phone ---
   const phoneContainer = document.createElement("span");
   phoneContainer.className = "contact-phone-container";
-
-  // Create phone SVG link
   const phoneLink = document.createElement("a");
-  phoneLink.href = `tel:${branding.contactPhone}`;
+  phoneLink.href = `tel:${branding.contactPhone.replace(/\s+/g, "")}`;
   phoneLink.innerHTML = branding.svg;
   phoneLink.className = "contact-phone-svg";
-
-  // Create phone text node
   const phoneText = document.createTextNode(branding.contactPhone);
-
-  // Append elements
   phoneContainer.appendChild(phoneLink);
   phoneContainer.appendChild(phoneText);
 
-  contactContainer.appendChild(regionLink);
+  contactContainer.appendChild(regionSwitcher);
   contactContainer.appendChild(phoneContainer);
   appbar.appendChild(contactContainer);
 }

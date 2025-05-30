@@ -1,6 +1,6 @@
 import "./style.css";
 
-import { defaultTab } from "../config";
+import { defaultTab } from "../../utils/config";
 import { upcoverLogo } from "../assets/svgicons";
 
 function renderNavBar() {

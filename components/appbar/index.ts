@@ -1,7 +1,6 @@
 import "./style.css";
-import { branding, tabs } from "../config";
-import { menu } from "../utils/menu";
-import { setActiveTab } from "../utils/setActiveTab";
+import { branding, tabs } from "../../utils/config";
+import { menu, setActiveTab } from "../../utils/utilsFunctions";
 
 function renderAppBar() {
   const appbar = document.getElementById("appbar");

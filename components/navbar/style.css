@@ -81,6 +81,7 @@
 
 .menu-item.dropdown {
   position: static;
+  cursor: pointer;
 }
 
 .menu-item:hover {

@@ -12,7 +12,6 @@
   border: none;
   font-weight: bold;
   cursor: pointer;
-  /* margin-right: 1rem; */
   padding: 30px 20px;
   color: inherit;
   position: relative;
@@ -62,5 +61,6 @@
   font-size: 16px;
   gap: 10px;
 }
-
-
+.contact-region-switcher{
+  font-weight: 700;
+}

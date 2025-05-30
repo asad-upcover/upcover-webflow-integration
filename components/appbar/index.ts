@@ -1,7 +1,6 @@
 import "./style.css";
-import { branding, tabs } from "../config";
-import { menu } from "../utils/menu";
-import { setActiveTab } from "../utils/setActiveTab";
+import { branding, tabs } from "../../utils/config";
+import { menu, setActiveTab } from "../../utils/utilsFunctions";
 
 function renderAppBar() {
   const appbar = document.getElementById("appbar");
@@ -42,7 +41,7 @@ function renderAppBar() {
       const regionLink = document.createElement("a");
       regionLink.href = region.url;
       regionLink.textContent = region.label;
-      regionLink.style.fontWeight = activeRegion === region.code ? "900" : "100";
+      regionLink.style.fontWeight = activeRegion === region.code ? "900" : "600";
       regionLink.style.textDecoration = "none";
       regionLink.style.color = "inherit";
       regionLink.target = "_blank";

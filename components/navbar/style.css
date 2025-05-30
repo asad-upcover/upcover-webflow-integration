@@ -62,7 +62,7 @@
 
 .menu-item {
   margin-left: 40px;
-  padding: 40px 0px;
+  padding: 20px 0px;
   display: flex;
   align-content: center;
   align-content: center;
@@ -81,6 +81,8 @@
 
 .menu-item.dropdown {
   position: static;
+  cursor: pointer;
+  font-weight: 600;
 }
 
 .menu-item:hover {
@@ -96,7 +98,7 @@
   margin-top: 60px;
   left: 0;
   width: 100vw;
-  padding: 80px 60px;
+  padding: 40px 60px;
   transition: 0.4s ease all;
   background-color: white;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
@@ -117,12 +119,13 @@
 
 .dropdown-column h4 {
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 20px;
   color: #242826;
 }
 
 .dropdown-column ul {
+  font-weight: 400;
   list-style: none;
   padding: 0;
   margin: 0;

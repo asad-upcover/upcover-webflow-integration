@@ -1,7 +1,7 @@
 import "./style.css";
 
-import { defaultTab } from "../config";
-import { upcoverLogo } from "../assets/svgicons";
+import { defaultTab } from "../../utils/config";
+import { upcoverLogo } from "../../assets/svgicons";
 
 function renderNavBar() {
   const target = document.getElementById("navbar");

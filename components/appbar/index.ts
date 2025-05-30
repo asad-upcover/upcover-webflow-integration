@@ -41,7 +41,7 @@ function renderAppBar() {
       const regionLink = document.createElement("a");
       regionLink.href = region.url;
       regionLink.textContent = region.label;
-      regionLink.style.fontWeight = activeRegion === region.code ? "900" : "100";
+      regionLink.style.fontWeight = activeRegion === region.code ? "900" : "600";
       regionLink.style.textDecoration = "none";
       regionLink.style.color = "inherit";
       regionLink.target = "_blank";

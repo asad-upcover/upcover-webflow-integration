@@ -62,16 +62,21 @@
 
 .menu-item {
   margin-left: 40px;
-  padding: 20px 0px;
+  padding: 40px 0px;
   display: flex;
-  align-content: center;
+  justify-content: center;
   align-content: center;
   gap: 6px;
+}
+
+.menu-icon svg {
+  padding-top: 2px;
 }
 
 #menu-items {
   display: flex;
   align-items: center;
+  margin: 0;
 }
 
 .menu-item:hover .menu-icon svg {

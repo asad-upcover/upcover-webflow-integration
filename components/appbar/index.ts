@@ -44,7 +44,7 @@ function renderAppBar() {
       regionLink.style.fontWeight = activeRegion === region.code ? "900" : "600";
       regionLink.style.textDecoration = "none";
       regionLink.style.color = "inherit";
-      regionLink.target = "_blank";
+      regionLink.target = "";
       regionLink.rel = "noopener noreferrer";
       regionLink.addEventListener("click", (e) => {
         localStorage.setItem("activeRegion", region.code);

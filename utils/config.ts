@@ -1,4 +1,4 @@
-import { callIcon, arrowDownIcon } from "../components/assets/svgicons";
+import { callIcon, arrowDownIcon } from "../assets/svgicons";
 
 export interface TabConfig {
   id: string;

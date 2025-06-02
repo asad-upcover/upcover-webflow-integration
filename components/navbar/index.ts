@@ -41,7 +41,7 @@ function renderNavBar() {
   loginLink.href = "#";
   if (defaultTab?.themeColor) loginLink.style.color = defaultTab.themeColor; // Default themeColor
   loginLink.className = "login";
-  loginLink.innerText = "LOGINS";
+  loginLink.innerText = "LOGIN";
 
   // Create quote button
   const quoteButton = document.createElement("button");

@@ -9,6 +9,8 @@
   justify-content: space-between;
   align-items: center;
   margin: 0px 60px;
+  display: flex;
+  min-height: 90px;
 }
 
 .navbar-left {
@@ -38,7 +40,7 @@
   border-radius: 10px;
 }
 
-.UPCOVER-LOGO {
+.logo {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -62,7 +64,7 @@
 /* Menu item */
 
 .menu-item {
-  margin-left: 40px;
+  margin-left: 20px;
   padding: 45px 0px 40px 0px;
   display: flex;
   justify-content: center;
@@ -72,13 +74,14 @@
 }
 
 .menu-icon svg {
-  margin-top: 2px;
+  margin-top: 1px;
 }
 
 #menu-items {
   display: flex;
   align-items: center;
   margin: 0;
+  margin-left: 20px;
   padding: 0;
 }
 

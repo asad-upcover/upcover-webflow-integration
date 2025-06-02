@@ -42,6 +42,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 8px;
+  margin-right: 20px;
 }
 
 #upcover-logo path {
@@ -62,7 +64,7 @@
 /* Menu item */
 
 .menu-item {
-  margin-left: 40px;
+  margin-left: 20px;
   padding: 45px 0px 40px 0px;
   display: flex;
   justify-content: center;
@@ -72,7 +74,7 @@
 }
 
 .menu-icon svg {
-  margin-top: 2px;
+  margin-top: 4px;
 }
 
 #menu-items {

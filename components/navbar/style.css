@@ -5,10 +5,11 @@
 }
 
 #navbar {
-  display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0px 60px;
+  padding: 0px 60px;
+  display: flex;
+  min-height: 90px;
 }
 
 .navbar-left {
@@ -38,20 +39,17 @@
   border-radius: 10px;
 }
 
-.UPCOVER-LOGO {
+.logo {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-right: 20px;
 }
 
 #upcover-logo path {
   pointer-events: none;
   transition: all 0.3s ease;
 }
-
-
-
-
 
 .header,
 .navbar {
@@ -61,20 +59,6 @@
 
 /* Menu item */
 
-.menu-item {
-  margin-left: 40px;
-  padding: 45px 0px 40px 0px;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  gap: 6px;
-  font-size: 16px;
-}
-
-.menu-icon svg {
-  margin-top: 2px;
-}
-
 #menu-items {
   display: flex;
   align-items: center;
@@ -82,16 +66,24 @@
   padding: 0;
 }
 
+.menu-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  gap: 6px;
+  font-size: 16px;
+  margin-left: 20px;
+}
+
+.menu-item.dropdown, .menu-text {
+  cursor: pointer;
+  font-weight: 600;
+}
+
 .menu-item:hover .menu-icon svg {
   transition: 0.4s;
   transform: rotateX(180deg);
-}
-
-.menu-item.dropdown {
-  position: static;
-  cursor: pointer;
-  font-weight: 600;
-  /* align-items: center; */
 }
 
 .menu-item:hover {
@@ -99,11 +91,15 @@
   text-underline-offset: 4px;
 }
 
+.menu-icon svg {
+  margin-top: 8px;
+}
+
 /* Initially hidden dropdown */
 .dropdown-menu.three-column {
   display: none;
   position: fixed;
-  /* top: 0%; */
+  top: 17%;
   margin-top: 60px;
   left: 0;
   width: 100vw;

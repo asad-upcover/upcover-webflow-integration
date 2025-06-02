@@ -13,7 +13,7 @@ export function menu(tabId: string) {
 
         return `
           <li class="menu-item ${hasDropdown ? "dropdown" : ""}">
-            ${item}
+            <p class="menu-text">${item}</p>
             <span class="menu-icon">${selectedTab.svg}</span>
             ${
               hasDropdown

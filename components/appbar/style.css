@@ -61,10 +61,10 @@
   font-size: 16px;
   gap: 10px;
 }
-.contact-region-switcher{
+.contact-region-switcher {
   font-weight: 700;
 }
 
-.contact-phone-svg {
+.contact-phone-svg svg {
   vertical-align: middle;
 }

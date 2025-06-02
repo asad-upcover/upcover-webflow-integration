@@ -2,12 +2,12 @@ name: Build and Deploy to GCS (Staging)
 
 on:
   push:
-    branches: [staging]  # Only runs on staging branch
+    branches: [staging]
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    environment: staging  # 👈 References GitHub environment
+    environment: staging
 
     steps:
       - name: Checkout code
@@ -29,9 +29,22 @@ jobs:
         with:
           credentials_json: '${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}'
 
-      - name: Upload to GCS
+      - name: Upload to GCS with Cache-Control headers
         uses: google-github-actions/upload-cloud-storage@v2
         with:
           path: dist
           destination: ${{ secrets.GCP_BUCKET_NAME }}
           parent: false
+          overwrite: true
+          gzip: false
+          headers: |
+            cache-control=public,max-age=0,must-revalidate
+
+      - name: Install Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+      - name: Set Cache-Control headers with gsutil (fallback)
+        run: |
+          gsutil -m setmeta -h "Cache-Control:public,max-age=0,must-revalidate" gs://${{ secrets.GCP_BUCKET_NAME }}/**/*

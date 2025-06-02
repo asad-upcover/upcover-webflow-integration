@@ -34,17 +34,17 @@ jobs:
         with:
           path: dist
           destination: ${{ secrets.GCP_BUCKET_NAME }}
-          parent: false
-          overwrite: true
-          gzip: false
-          headers: |
-            cache-control=public,max-age=0,must-revalidate
+      #     parent: false
+      #     overwrite: true
+      #     gzip: false
+      #     headers: |
+      #       cache-control=public,max-age=0,must-revalidate
 
-      - name: Install Google Cloud SDK
-        uses: google-github-actions/setup-gcloud@v2
-        with:
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
+      # - name: Install Google Cloud SDK
+      #   uses: google-github-actions/setup-gcloud@v2
+      #   with:
+      #     project_id: ${{ secrets.GCP_PROJECT_ID }}
 
-      - name: Set Cache-Control headers with gsutil (fallback)
-        run: |
-          gsutil -m setmeta -h "Cache-Control:public,max-age=0,must-revalidate" gs://${{ secrets.GCP_BUCKET_NAME }}/**/*
+      # - name: Set Cache-Control headers with gsutil (fallback)
+      #   run: |
+      #     gsutil -m setmeta -h "Cache-Control:public,max-age=0,must-revalidate" gs://${{ secrets.GCP_BUCKET_NAME }}/**/*

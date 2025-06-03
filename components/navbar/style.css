@@ -9,6 +9,8 @@
   justify-content: space-between;
   align-items: center;
   margin: 0px 60px;
+  display: flex;
+  min-height: 90px;
 }
 
 .navbar-left {
@@ -38,7 +40,7 @@
   border-radius: 10px;
 }
 
-.UPCOVER-LOGO {
+.logo {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -70,13 +72,14 @@
 }
 
 .menu-icon svg {
-  margin-top: 4px;
+  margin-top: 4.5px;
 }
 
 #menu-items {
   display: flex;
   align-items: center;
   margin: 0;
+  margin-left: 20px;
   padding: 0;
 }
 

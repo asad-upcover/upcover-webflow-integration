@@ -53,10 +53,6 @@
   transition: all 0.3s ease;
 }
 
-
-
-
-
 .header,
 .navbar {
   position: relative;
@@ -76,7 +72,7 @@
 }
 
 .menu-icon svg {
-  margin-top: 1px;
+  margin-top: 4.5px;
 }
 
 #menu-items {

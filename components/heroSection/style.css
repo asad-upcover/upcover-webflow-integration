@@ -1,0 +1,116 @@
+.hero-section {
+  padding: 100px 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.tag-button {
+  color: #242826;
+  font-family: "Messina Sans-SemiBold", Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  background-color: #f5f0eb;
+  padding: 10px 20px;
+  border-radius: 10px;
+  display: inline-block;
+  margin-bottom: 20px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.tag-button:hover {
+  background-color: #e9e0d8;
+}
+
+h1 {
+  font-family: "Messina Sans-Black", Helvetica, Arial, sans-serif;
+  font-size: 40px;
+  font-weight: 900;
+  margin-bottom: 40px;
+}
+
+.trust-indicators {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+  justify-content: center;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  margin-right: 40px;
+}
+
+.rating img,
+.trusted-by img {
+  margin-right: 10px;
+}
+
+.score {
+  font-weight: 600;
+  margin-right: 5px;
+}
+
+.star {
+  color: #ffd700;
+  margin-right: 5px;
+}
+
+.trusted-by {
+  display: flex;
+  align-items: center;
+}
+
+.trusted-by strong {
+  font-weight: 700;
+}
+
+.cta-button {
+  display: inline-block;
+  background-color: #ff522d;
+  color: #ffffff;
+  padding: 20px 60px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.hero-image {
+  width: 100%;
+  height: 617px;
+  background-image: url(https://c.animaapp.com/PBKynVU5/img/frame-2085664320.png);
+  background-size: cover;
+  background-position: center;
+  border-radius: 200px 200px 0 0;
+}
+
+@media (max-width: 768px) {
+  .top-bar,
+  .main-nav {
+    padding: 0 20px;
+  }
+
+  .hero-section {
+    padding: 60px 20px;
+  }
+
+  h1 {
+    font-size: 32px;
+  }
+
+  .trust-indicators {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .rating {
+    margin-bottom: 20px;
+  }
+}

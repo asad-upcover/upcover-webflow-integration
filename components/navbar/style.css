@@ -2,6 +2,7 @@
 .navbar {
   position: relative;
   z-index: 100;
+  
 }
 
 #navbar {
@@ -44,7 +45,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 8px;
   margin-right: 20px;
 }
 
@@ -53,11 +53,6 @@
   transition: all 0.3s ease;
 }
 
-.header,
-.navbar {
-  position: relative;
-  z-index: 100;
-}
 
 /* Menu item */
 
@@ -72,7 +67,7 @@
 }
 
 .menu-icon svg {
-  margin-top: 4.5px;
+  margin-top: 1px;
 }
 
 #menu-items {

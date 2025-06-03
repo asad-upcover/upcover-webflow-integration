@@ -1,5 +1,5 @@
 .hero-section {
-  padding: 100px 60px;
+  padding: 500px 0px 84px 0px;
   max-width: 1200px;
   margin: 0 auto;
   text-align: center;
@@ -7,16 +7,16 @@
 
 .tag-button {
   color: #242826;
-  font-family: "Messina Sans-SemiBold", Helvetica, Arial, sans-serif;
+  font-family: "Messina Sans", Helvetica, Arial, sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
   background-color: #f5f0eb;
-  padding: 10px 20px;
+  padding: 14px 20px 13px 20px;
   border-radius: 10px;
   display: inline-block;
-  margin-bottom: 20px;
+  margin-bottom: 0;
   border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -27,10 +27,11 @@
 }
 
 h1 {
-  font-family: "Messina Sans-Black", Helvetica, Arial, sans-serif;
+  font-family: "Messina Sans", Helvetica, Arial, sans-serif;
   font-size: 40px;
   font-weight: 900;
-  margin-bottom: 40px;
+  margin-top: 40px;
+  margin-bottom: 30px;
 }
 
 .trust-indicators {
@@ -38,36 +39,66 @@ h1 {
   align-items: center;
   margin-bottom: 40px;
   justify-content: center;
+  color: #545464;
 }
 
 .rating {
   display: flex;
   align-items: center;
-  margin-right: 40px;
+  margin-right: 20px;
 }
 
 .rating img,
 .trusted-by img {
   margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .score {
   font-weight: 600;
-  margin-right: 5px;
+  margin-right: 4px;
+  margin-left: 10px;
+  font-size: 20px;
 }
 
 .star {
   color: #ffd700;
-  margin-right: 5px;
+  margin-right: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.googletext{
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .trusted-by {
   display: flex;
   align-items: center;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.shield{
+  margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .trusted-by strong {
-  font-weight: 700;
+  font-weight: 900;
+}
+
+.hero-bottom-image {
+  display: block;
+  margin: 84px auto 0 auto;
+  max-width: 100%;
+  height: auto;
 }
 
 .cta-button {
@@ -81,14 +112,6 @@ h1 {
   font-size: 16px;
 }
 
-.hero-image {
-  width: 100%;
-  height: 617px;
-  background-image: url(https://c.animaapp.com/PBKynVU5/img/frame-2085664320.png);
-  background-size: cover;
-  background-position: center;
-  border-radius: 200px 200px 0 0;
-}
 
 @media (max-width: 768px) {
   .top-bar,

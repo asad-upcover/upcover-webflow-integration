@@ -101,4 +101,7 @@ export function setActiveTab(tabId: string) {
   }
 
   document.body.style.backgroundColor = "white";
+  document.dispatchEvent(new CustomEvent("activeTabChanged", { detail: { tabId } }));
+
 }
+

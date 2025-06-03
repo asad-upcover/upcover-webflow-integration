@@ -1,70 +1,106 @@
 import "./style.css";
+import { tabs, defaultTab } from "../../utils/config";
 
-// import { defaultTab } from "../../utils/config";
-// import { upcoverLogo } from "../../assets/svgicons";
-
-function renderHeroSection() {
+// Utility to render hero section for a given tab config
+function renderHeroSection(tab = defaultTab) {
   const main = document.getElementById("hero-section");
   if (!main) return;
 
+  // Clear previous content
+  main.innerHTML = "";
   main.className = "hero-section";
-
   const contentWrapper = document.createElement("div");
   contentWrapper.className = "content-wrapper";
 
+  // Button
   const tag = document.createElement("button");
   tag.className = "tag-button";
-  tag.innerText = "Protect your growth";
+  tag.innerText = tab.hero?.primaryButtonLabel;
 
+  // Heading
   const h1 = document.createElement("h1");
-  h1.innerText = "RISK MANAGEMENT FOR HIGH GROWTH COMPANY";
+  h1.innerText = tab.hero?.heading;
 
+  // Trust indicators
   const trustIndicators = document.createElement("div");
   trustIndicators.className = "trust-indicators";
 
+  // Google rating
   const rating = document.createElement("div");
   rating.className = "rating";
-  const ratingImg = document.createElement("img");
-  ratingImg.src = "https://c.animaapp.com/PBKynVU5/img/image-12@2x.png";
-  ratingImg.alt = "Google logo";
+  if (tab.hero?.googleRating?.googleLogo) {
+    const ratingImg = document.createElement("span");
+    ratingImg.innerHTML = tab.hero.googleRating.googleLogo;
+    rating.appendChild(ratingImg);
+  }
   const score = document.createElement("span");
   score.className = "score";
-  score.innerText = "4.9/5";
+  score.innerText = tab.hero?.googleRating?.text;
   const star = document.createElement("span");
   star.className = "star";
-  star.innerText = "★";
+  star.innerHTML = tab.hero?.googleRating?.starIcon;
   const onGoogle = document.createElement("span");
-  onGoogle.innerText = "on Google";
-  rating.appendChild(ratingImg);
+  onGoogle.className = "googletext";
+  onGoogle.innerText = tab.hero?.googleRating?.onGoogle;
   rating.appendChild(score);
   rating.appendChild(star);
   rating.appendChild(onGoogle);
 
+  // Trusted by
   const trustedBy = document.createElement("div");
   trustedBy.className = "trusted-by";
-  const shieldImg = document.createElement("img");
-  shieldImg.src = "https://c.animaapp.com/PBKynVU5/img/shield-2@2x.png";
-  shieldImg.alt = "Shield icon";
+  if (tab.hero?.trustInfo?.shieldIcon) {
+    const shieldImg = document.createElement("span");
+    shieldImg.className = "shield"
+    shieldImg.innerHTML = tab.hero.trustInfo.shieldIcon;
+    trustedBy.appendChild(shieldImg);
+  }
   const trustedText = document.createElement("p");
-  trustedText.innerHTML = "Trusted by <strong>60,000+</strong> small business";
-  trustedBy.appendChild(shieldImg);
+  trustedText.className = "trustedtext";
+  trustedText.innerHTML = tab.hero?.trustInfo?.text;
   trustedBy.appendChild(trustedText);
 
   trustIndicators.appendChild(rating);
   trustIndicators.appendChild(trustedBy);
 
+  // CTA Button
   const ctaButton = document.createElement("a");
   ctaButton.href = "#";
   ctaButton.className = "cta-button";
-  ctaButton.innerText = "GET A QUOTE";
+  ctaButton.innerText = tab.hero?.secondaryButtonLabel;
+  ctaButton.style.backgroundColor = tab.themeColor;
+  ctaButton.style.color = tab.themeSecondaryColor || "#fff";
 
+
+
+
+  // Append all
   contentWrapper.appendChild(tag);
   contentWrapper.appendChild(h1);
   contentWrapper.appendChild(trustIndicators);
   contentWrapper.appendChild(ctaButton);
 
+  const bottomImg = document.createElement("img");
+  if (tab.hero?.backgroundImage) {
+    bottomImg.src = tab.hero.backgroundImage;
+    bottomImg.alt = "Hero Bottom";
+    bottomImg.className = "hero-bottom-image";
+    contentWrapper.appendChild(bottomImg);
+
+  }
+
   main.appendChild(contentWrapper);
+
 }
 
-// Auto-run on load
-document.addEventListener("DOMContentLoaded", renderHeroSection);
+// Listen for tab changes (custom event dispatched in setActiveTab)
+document.addEventListener("activeTabChanged", (e: any) => {
+  const tabId = e.detail?.tabId;
+  const tab = tabs.find((t) => t.id === tabId) || defaultTab;
+  renderHeroSection(tab);
+});
+
+// Initial render
+document.addEventListener("DOMContentLoaded", () => {
+  renderHeroSection(defaultTab);
+});

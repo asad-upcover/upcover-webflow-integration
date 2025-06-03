@@ -1,4 +1,5 @@
-import { callIcon, arrowDownIcon } from "../assets/svgicons";
+import { callIcon, arrowDownIcon, starRating, googleLogo, trustedPilot } from "../assets/svgicons";
+
 
 export interface TabConfig {
   id: string;
@@ -7,11 +8,30 @@ export interface TabConfig {
   themeSecondaryColor?: string;
   dropdown: Record<string, DropdownSection[]>;
   svg: string;
+  hero: HeroSection
 }
 export interface DropdownSection {
   title: string;
   items: string[];
 }
+
+export interface HeroSection {
+  heading: string;
+  primaryButtonLabel: string;
+  secondaryButtonLabel: string;
+  googleRating: {
+    text: string;
+    onGoogle: string
+    googleLogo: string;
+    starIcon: string;
+  };
+  trustInfo: {
+    text: string;
+    shieldIcon: string;
+  };
+  backgroundImage: string;
+}
+
 
 export const tabs: TabConfig[] = [
   {
@@ -83,6 +103,22 @@ export const tabs: TabConfig[] = [
       ],
     },
     svg: arrowDownIcon,
+    hero: {
+      heading: "RISK MANAGEMENT FOR HIGH GROWTH COMPANY ",
+      primaryButtonLabel: "Protect your growth",
+      secondaryButtonLabel: "GET A QUOTE",
+      googleRating: {
+        text: "4.9/5",
+        onGoogle: "on Google",
+        googleLogo: googleLogo,
+        starIcon: starRating,
+      },
+      trustInfo: {
+        text: "Trusted by <strong>60,000+</strong> businesses",
+        shieldIcon: trustedPilot,
+      },
+      backgroundImage: "../assets/images/imageHero1.png"
+    }
   },
   {
     id: "tech",
@@ -115,6 +151,22 @@ export const tabs: TabConfig[] = [
       ],
     },
     svg: arrowDownIcon,
+    hero: {
+      heading: "BUSINESS INSURANCE YOU CAN FINALLY TRUST",
+      primaryButtonLabel: "Protect your growth",
+      secondaryButtonLabel: "GET A QUOTE",
+      googleRating: {
+        text: "4.9/5",
+        onGoogle: "on Google",
+        googleLogo: googleLogo,
+        starIcon: starRating,
+      },
+      trustInfo: {
+        text: "Trusted by <strong>60,000+</strong> businesses",
+        shieldIcon: trustedPilot,
+      },
+      backgroundImage: "../assets/images/imageHero2.png"
+    }
   },
   {
     id: "motor",
@@ -186,6 +238,22 @@ export const tabs: TabConfig[] = [
       ],
     },
     svg: arrowDownIcon,
+    hero: {
+      heading: "INDUSTRY LEADING MOTOR AND FLEET INSURANCE",
+      primaryButtonLabel: "Protect your growth",
+      secondaryButtonLabel: "GET A QUOTE",
+      googleRating: {
+        text: "4.9/5",
+        onGoogle: "on Google",
+        googleLogo: googleLogo,
+        starIcon: starRating,
+      },
+      trustInfo: {
+        text: "Trusted by <strong>60,000+</strong> businesses",
+        shieldIcon: trustedPilot,
+      },
+      backgroundImage: "../assets/images/imageHero3.png"
+    }
   },
 ];
 

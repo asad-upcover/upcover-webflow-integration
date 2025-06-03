@@ -6,7 +6,7 @@ export function menu(tabId: string) {
   const menu = document.getElementById("menu-items");
 
   if (menu) {
-    menu.innerHTML = selectedTab.menuItems
+    menu.innerHTML = Object.keys(selectedTab.dropdown)
       .map((item) => {
         const dropdownSections = selectedTab.dropdown?.[item];
         const hasDropdown = dropdownSections && dropdownSections.length > 0;

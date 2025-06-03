@@ -5,11 +5,9 @@ export interface TabConfig {
   label: string;
   themeColor: string;
   themeSecondaryColor?: string;
-  menuItems: string[];
   dropdown: Record<string, DropdownSection[]>;
   svg: string;
 }
-
 export interface DropdownSection {
   title: string;
   items: string[];
@@ -20,7 +18,6 @@ export const tabs: TabConfig[] = [
     id: "businesses",
     label: "Businesses & Sole traders",
     themeColor: "#FF522D",
-    menuItems: ["Coverages", "Company", "Resources"],
     dropdown: {
       Coverages: [
         {
@@ -91,7 +88,6 @@ export const tabs: TabConfig[] = [
     id: "tech",
     label: "Tech Startups & Enterprises",
     themeColor: "#005DFF",
-    menuItems: ["Coverages", "Company", "Resources", "Solutions"],
     dropdown: {
       Coverages: [
         { title: "INDUSTRY", items: ["Public Liability"] },
@@ -125,7 +121,6 @@ export const tabs: TabConfig[] = [
     label: "Motor & Fleet",
     themeColor: "#D5E525",
     themeSecondaryColor: "#3B4125",
-    menuItems: ["Coverages", "Company", "Resources"],
     dropdown: {
       Coverages: [
         {

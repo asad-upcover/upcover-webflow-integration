@@ -1,5 +1,5 @@
 .hero-section {
-  padding: 60px 0px 84px 0px;
+  padding: 60px 0px 0px 0px;
   max-width: 1200px;
   margin: 0 auto;
   text-align: center;
@@ -94,13 +94,22 @@ h1 {
   font-weight: 900;
 }
 
+body{
+  overflow-x: hidden;
+
+}
+
 .hero-bottom-image {
   display: block;
   margin: 84px auto 0 auto;
-  max-width: 100%;
   height: auto;
+  position: relative; 
+  left: 50%; 
+  right: 50%; 
+  margin-left: -50vw; 
+  margin-right: -50vw; 
+  width: 100vw;
 }
-
 .cta-button {
   display: inline-block;
   background-color: #ff522d;

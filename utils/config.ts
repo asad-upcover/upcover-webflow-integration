@@ -117,7 +117,7 @@ export const tabs: TabConfig[] = [
         text: "Trusted by <strong>60,000+</strong> businesses",
         shieldIcon: trustedPilot,
       },
-      backgroundImage: "../assets/images/imageHero1.png"
+      backgroundImage: "https://storage.googleapis.com/upcover-webflow-integration/assets/images/businesses-hero-image.png"
     }
   },
   {
@@ -165,7 +165,7 @@ export const tabs: TabConfig[] = [
         text: "Trusted by <strong>60,000+</strong> businesses",
         shieldIcon: trustedPilot,
       },
-      backgroundImage: "../assets/images/imageHero2.png"
+      backgroundImage: "https://storage.googleapis.com/upcover-webflow-integration/assets/images/tech-hero-image.png"
     }
   },
   {
@@ -252,7 +252,7 @@ export const tabs: TabConfig[] = [
         text: "Trusted by <strong>60,000+</strong> businesses",
         shieldIcon: trustedPilot,
       },
-      backgroundImage: "../assets/images/imageHero3.png"
+      backgroundImage: "https://storage.googleapis.com/upcover-webflow-integration/assets/images/motor-hero-image.png"
     }
   },
 ];

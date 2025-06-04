@@ -2,7 +2,6 @@
 .navbar {
   position: relative;
   z-index: 100;
-  
 }
 
 #navbar {
@@ -56,7 +55,6 @@
   transition: all 0.3s ease;
 }
 
-
 /* Menu item */
 
 .menu-item {
@@ -70,7 +68,6 @@
 }
 
 .menu-icon svg {
-  margin-top: 1px;
 }
 
 #menu-items {

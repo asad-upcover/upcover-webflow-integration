@@ -1,21 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link
-      rel="stylesheet"
-      href="https://storage.googleapis.com/upcover-webflow-integration/assets/main.css"
-    />
-    <title>Upcover Webflow Integration Preview</title>
-  </head>
-  <body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="https://storage.googleapis.com/upcover-webflow-integration/assets/main.css" />
+  <title>Upcover Webflow Integration Preview</title>
+
+  <style>
+    .header{
+      position: sticky;
+      top: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
     <div id="appbar"></div>
     <nav id="navbar"></nav>
-    <main id="hero-section"></main>
+  </div>
+
+  <main id="hero-section"></main>
 
 
-    <script type="module" src="../components/appbar/index.ts"></script>
-    <script type="module" src="../components/navbar/index.ts"></script>
-    <script type="module" src="../components/heroSection/index.ts"></script>
-  </body>
+  <script type="module" src="../components/appbar/index.ts"></script>
+  <script type="module" src="../components/navbar/index.ts"></script>
+  <script type="module" src="../components/heroSection/index.ts"></script>
+</body>
+
 </html>

@@ -105,3 +105,16 @@ export function setActiveTab(tabId: string) {
 
 }
 
+export function renderHeroBottomImage(imageUrl: string) {
+  const existing = document.querySelector(".hero-bottom-image");
+  if (existing) existing.remove(); 
+
+  const img = document.createElement("img");
+  img.src = imageUrl;
+  img.alt = "Hero Bottom";
+  img.className = "hero-bottom-image";
+
+  document.body.appendChild(img);
+}
+
+

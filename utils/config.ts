@@ -117,8 +117,8 @@ export const tabs: TabConfig[] = [
         text: "Trusted by <strong>60,000+</strong> businesses",
         shieldIcon: trustedPilot,
       },
-      backgroundImage: "https://storage.googleapis.com/upcover-webflow-integration/assets/images/businesses-hero-image.png"
-    }
+      backgroundImage: "https://storage.googleapis.com/upcover-webflow-integration/assets/images/businesses-hero-image-full.png" 
+       }
   },
   {
     id: "tech",
@@ -165,7 +165,7 @@ export const tabs: TabConfig[] = [
         text: "Trusted by <strong>60,000+</strong> businesses",
         shieldIcon: trustedPilot,
       },
-      backgroundImage: "https://storage.googleapis.com/upcover-webflow-integration/assets/images/tech-hero-image.png"
+      backgroundImage: "https://storage.googleapis.com/upcover-webflow-integration/assets/images/tech-hero-image-full.png"
     }
   },
   {
@@ -252,7 +252,7 @@ export const tabs: TabConfig[] = [
         text: "Trusted by <strong>60,000+</strong> businesses",
         shieldIcon: trustedPilot,
       },
-      backgroundImage: "https://storage.googleapis.com/upcover-webflow-integration/assets/images/motor-hero-image.png"
+      backgroundImage: "https://storage.googleapis.com/upcover-webflow-integration/assets/images/motor-hero-image-full.png"
     }
   },
 ];

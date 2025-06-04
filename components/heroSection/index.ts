@@ -1,5 +1,6 @@
 import "./style.css";
 import { tabs, defaultTab } from "../../utils/config";
+import { renderHeroBottomImage } from "../../utils/utilsFunctions";
 
 // Utility to render hero section for a given tab config
 function renderHeroSection(tab = defaultTab) {
@@ -80,14 +81,10 @@ function renderHeroSection(tab = defaultTab) {
   contentWrapper.appendChild(trustIndicators);
   contentWrapper.appendChild(ctaButton);
 
-  const bottomImg = document.createElement("img");
   if (tab.hero?.backgroundImage) {
-    bottomImg.src = tab.hero.backgroundImage;
-    bottomImg.alt = "Hero Bottom";
-    bottomImg.className = "hero-bottom-image";
-    contentWrapper.appendChild(bottomImg);
-
+    renderHeroBottomImage(tab.hero.backgroundImage);
   }
+
 
   main.appendChild(contentWrapper);
 

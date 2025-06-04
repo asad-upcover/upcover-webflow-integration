@@ -3,40 +3,76 @@ import { tabs } from "./config";
 export function menu(tabId: string) {
   const selectedTab = tabs.find((tab) => tab.id === tabId);
   if (!selectedTab) return;
+
   const menu = document.getElementById("menu-items");
+  if (!menu) return;
 
-  if (menu) {
-    menu.innerHTML = Object.keys(selectedTab.dropdown)
-      .map((item) => {
-        const dropdownSections = selectedTab.dropdown?.[item];
-        const hasDropdown = dropdownSections && dropdownSections.length > 0;
+  menu.innerHTML = Object.keys(selectedTab.dropdown || {})
+    .map((item) => {
+      const dropdownSections = selectedTab.dropdown?.[item];
+      const hasDropdown = dropdownSections && dropdownSections.length > 0;
 
-        return `
-          <li class="menu-item ${hasDropdown ? "dropdown" : ""}">
-            ${item}
-            <span class="menu-icon">${selectedTab.svg}</span>
-            ${
-              hasDropdown
-                ? `<div class="dropdown-menu three-column">
-                    ${dropdownSections
-                      .map(
-                        (section) => `
-                      <div class="dropdown-column">
-                        <h4>${section.title}</h4>
-                        <ul>
-                          ${section.items.map((li) => `<li>${li}</li>`).join("")}
-                        </ul>
-                      </div>`
-                      )
-                      .join("")}
-                  </div>`
-                : ""
-            }
-          </li>
-        `;
-      })
-      .join("");
-  }
+      return `
+        <li class="menu-item ${hasDropdown ? "dropdown" : ""}">
+          ${item}
+          <span class="menu-icon">${selectedTab.svg}</span>
+          ${
+            hasDropdown
+              ? `<div class="dropdown-menu three-column">
+                  ${dropdownSections
+                    .map((section) => {
+                      if (section.type === "box" && section.boxContent) {
+                        const left = section.boxContent.left;
+                        const right = section.boxContent.right;
+
+                        return `
+                          <div class="dropdown-column full-width box-column">
+                            <div class="box-left">
+                              <img src="${left.imgSrc}" />
+                              <h4>${left.heading}</h4>
+                              <p>${left.text}</p>
+                              <div class="inline-buttons ${
+                                left.secondaryButton ? "two-buttons" : "single-button"
+                              }">
+                                <button class="button1">${left.primaryButton}</button>
+                                ${
+                                  left.secondaryButton
+                                    ? `<button class="button2">${left.secondaryButton}</button>`
+                                    : ""
+                                }
+                              </div>
+                            </div>
+                            ${
+                              right
+                                ? `
+                              <div class="box-right">
+                                <h4>${right.heading}</h4>
+                                <p>${right.text}</p>
+                                <button class="button">${right.button}</button>
+                              </div>`
+                                : ""
+                            }
+                          </div>
+                        `;
+                      } else {
+                        return `
+                          <div class="dropdown-column">
+                            <h4>${section.title}</h4>
+                            <ul>
+                              ${section.items?.map((li) => `<li>${li}</li>`).join("")}
+                            </ul>
+                          </div>
+                        `;
+                      }
+                    })
+                    .join("")}
+                </div>`
+              : ""
+          }
+        </li>
+      `;
+    })
+    .join("");
 
   // Hover styling (unchanged)
   const hoverStyleId = "dynamic-hover-style";
@@ -133,9 +169,8 @@ export function setActiveTab(tabId: string) {
   }
 
   document.body.style.backgroundColor = "white";
-  document.dispatchEvent(new CustomEvent("activeTabChanged", { detail: { tabId } }));
-
 }
+
 
 export function renderHeroBottomImage(imageUrl: string) {
   const existing = document.querySelector(".hero-bottom-image");

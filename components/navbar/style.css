@@ -150,7 +150,7 @@ body{
 .dropdown-column.full-width.box-column {
   max-width: 490px;
   margin-left: auto;
-  margin-right: 120px; /* space from right edge */
+  margin-right: 130px; 
 }
 .dropdown-column.full-width.box-column .box-left {
   background-color: #F7F6F3;

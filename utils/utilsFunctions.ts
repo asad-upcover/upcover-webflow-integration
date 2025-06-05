@@ -16,46 +16,42 @@ export function menu(tabId: string) {
         <li class="menu-item ${hasDropdown ? "dropdown" : ""}">
           ${item}
           <span class="menu-icon">${selectedTab.svg}</span>
-          ${
-            hasDropdown
-              ? `<div class="dropdown-menu three-column">
+          ${hasDropdown
+          ? `<div class="dropdown-menu three-column">
                   ${dropdownSections
-                    .map((section) => {
-                      if (section.type === "box" && section.boxContent) {
-                        const left = section.boxContent.left;
-                        const right = section.boxContent.right;
+            .map((section) => {
+              if (section.type === "box" && section.boxContent) {
+                const left = section.boxContent.left;
+                const right = section.boxContent.right;
 
-                        return `
+                return `
                           <div class="dropdown-column full-width box-column">
                             <div class="box-left">
                               <img src="${left.imgSrc}" />
                               <h4>${left.heading}</h4>
                               <p>${left.text}</p>
-                              <div class="inline-buttons ${
-                                left.secondaryButton ? "two-buttons" : "single-button"
-                              }">
+                              <div class="inline-buttons ${left.secondaryButton ? "two-buttons" : "single-button"
+                  }">
                                 <button class="button1">${left.primaryButton}</button>
-                                ${
-                                  left.secondaryButton
-                                    ? `<button class="button2">${left.secondaryButton}</button>`
-                                    : ""
-                                }
+                                ${left.secondaryButton
+                    ? `<button class="button2">${left.secondaryButton}</button>`
+                    : ""
+                  }
                               </div>
                             </div>
-                            ${
-                              right
-                                ? `
+                            ${right
+                    ? `
                               <div class="box-right">
                                 <h4>${right.heading}</h4>
                                 <p>${right.text}</p>
                                 <button class="button">${right.button}</button>
                               </div>`
-                                : ""
-                            }
+                    : ""
+                  }
                           </div>
                         `;
-                      } else {
-                        return `
+              } else {
+                return `
                           <div class="dropdown-column">
                             <h4>${section.title}</h4>
                             <ul>
@@ -63,12 +59,12 @@ export function menu(tabId: string) {
                             </ul>
                           </div>
                         `;
-                      }
-                    })
-                    .join("")}
+              }
+            })
+            .join("")}
                 </div>`
-              : ""
-          }
+          : ""
+        }
         </li>
       `;
     })
@@ -169,12 +165,16 @@ export function setActiveTab(tabId: string) {
   }
 
   document.body.style.backgroundColor = "white";
+
+  document.dispatchEvent(new CustomEvent("activeTabChanged", {
+    detail: { tabId }
+  }));
 }
 
 
 export function renderHeroBottomImage(imageUrl: string) {
   const existing = document.querySelector(".hero-bottom-image");
-  if (existing) existing.remove(); 
+  if (existing) existing.remove();
 
   const img = document.createElement("img");
   img.src = imageUrl;

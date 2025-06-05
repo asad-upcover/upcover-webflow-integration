@@ -13,7 +13,7 @@ function renderNavBar() {
 
   // Create upcover logo container
   const logoDiv = document.createElement("div");
-  logoDiv.className = "UPCOVER-LOGO";
+  logoDiv.className = "logo";
   logoDiv.id = "upcover-logo";
   logoDiv.innerHTML = upcoverLogo;
   leftNavbar.appendChild(logoDiv);

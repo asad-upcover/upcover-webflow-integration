@@ -6,7 +6,7 @@ export function menu(tabId: string) {
   const menu = document.getElementById("menu-items");
 
   if (menu) {
-    menu.innerHTML = selectedTab.menuItems
+    menu.innerHTML = Object.keys(selectedTab.dropdown)
       .map((item) => {
         const dropdownSections = selectedTab.dropdown?.[item];
         const hasDropdown = dropdownSections && dropdownSections.length > 0;
@@ -101,4 +101,20 @@ export function setActiveTab(tabId: string) {
   }
 
   document.body.style.backgroundColor = "white";
+  document.dispatchEvent(new CustomEvent("activeTabChanged", { detail: { tabId } }));
+
 }
+
+export function renderHeroBottomImage(imageUrl: string) {
+  const existing = document.querySelector(".hero-bottom-image");
+  if (existing) existing.remove(); 
+
+  const img = document.createElement("img");
+  img.src = imageUrl;
+  img.alt = "Hero Bottom";
+  img.className = "hero-bottom-image";
+
+  document.body.appendChild(img);
+}
+
+

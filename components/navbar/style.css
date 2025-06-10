@@ -118,13 +118,14 @@ body{
 
 .dropdown-column {
   flex: 1;
-  max-width: 274px;
+  max-width: 249px;
+  margin-right: 70px;
 }
 
 .dropdown-column h4 {
   font-size: 16px;
   font-weight: 700;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   color: #242826;
 }
 
@@ -136,7 +137,7 @@ body{
 }
 
 .dropdown-column ul li {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   font-size: 14px;
   color: #555;
   cursor: pointer;

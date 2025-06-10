@@ -115,19 +115,22 @@ body{
 /* Show on hover of menu item */
 .menu-item.dropdown:hover .dropdown-menu.three-column {
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
 }
 
 .main-dropdown{
+  display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  max-width: 600px;
+  max-width: 500px;
 }
 
 .dropdown-column {
-
+  /* background-color: white; */
   flex: 1;
   max-width: 285px;
-  min-width: 285px;
+  min-width: 220px;
   margin-right: 70px;
 }
 

@@ -92,7 +92,7 @@ export const tabs: TabConfig[] = [
             "View all coverages"
           ],
         },
-        
+
         {
           type: "box",
           boxContent: {
@@ -198,10 +198,69 @@ export const tabs: TabConfig[] = [
         { title: "ABOUT", items: ["Our Mission", "Careers", "Leadership"] },
       ],
       Solutions: [
-        { title: "INDUSTRY", items: ["Public Liability"] },
-        { title: "COVERS", items: ["Healthcare Professionals Insurance"] },
-        { title: "INDUSTRIES", items: ["Cyber Liability"] },
-        { title: "INDUSTRIES", items: ["Cyber Liability"] },
+        {
+          title: "INDUSTRY",
+          items: [
+            "Blockchain / Web3",
+            "AI",
+            "Robotics & Hardware",
+            "Life sciences & Bioscience ",
+            "Digital Health",
+            "Consumer",
+            "B2B Saas",
+            "Media Tech",
+            "EdTech",
+            "E-commerce",
+            "Fin Tech",
+            "Reg Tech",
+            "View all industries"
+          ]
+        },
+        {
+          title: "FUNDS",
+          items: [
+            "Family Offices",
+            "Venture Capital Funds",
+            "Debt Funds",
+            "Private Equity Vehicles",
+            "Investment Managers",
+            "View all Investment Vehicles"
+          ]
+        },
+        {
+          title: "NEEDS",
+          items: [
+            "Getting Insured for the First Time",
+            "Meeting Contractual Requirements",
+            "Fundraising Protection",
+            "Protecting Your Team & Workplace",
+            "Safeguarding Digital Assets",
+            "Finding the Right Coverage Package",
+            "Expanding Interstate"
+          ]
+        },
+        {
+          title: "STAGE",
+          items: [
+            "Early Stage",
+            "Growth & Late Stage",
+            "Pre-IPO, IPO & Listing"
+          ]
+        },
+                {
+          type: "box",
+          boxContent: {
+            left: {
+              imgSrc: "https://storage.googleapis.com/upcover-webflow-integration/assets/images/2a1339faabda847f116061ee305805ee8c3cd7bf.png",
+              heading: "OTHER SITUATION",
+              text: `Not quite sure of your stage?
+              <br> 
+              Bootstrapping or prefer not say?
+              `,
+              primaryButton: "TALK TO US",
+            }
+          }
+        }
       ],
     },
     svg: arrowDownIcon,
@@ -257,6 +316,7 @@ export const tabs: TabConfig[] = [
             "Heavy Vehicles"
           ],
         },
+        
         {
           type: "box",
           boxContent: {

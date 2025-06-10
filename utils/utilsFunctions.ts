@@ -55,8 +55,15 @@ export function menu(tabId: string) {
                           <div class="dropdown-column">
                             <h4>${section.title}</h4>
                             <ul>
-                              ${section.items?.map((li) => `<li>${li}</li>`).join("")}
-                            </ul>
+                              ${section.items?.map(
+                              (li) =>
+                                  `<li class="${li.includes("View all")
+                                  ? "view-all-link"
+                                  : ""
+                              }">${li}</li>`
+                          )       
+                          .join("")}
+                             </ul>
                           </div>
                         `;
               }
@@ -88,6 +95,13 @@ export function menu(tabId: string) {
     }
     .menu-item:hover .menu-icon path {
       stroke: ${hoverColor} !important;
+    }
+
+    .view-all-link {
+    color: ${selectedTab.themeColor} !important;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: underline;
     }
 
     .button1 {

@@ -81,6 +81,7 @@ export const tabs: TabConfig[] = [
             "Professional Indemnity Insurance",
             "Medical Malpractice Insurance",
             "Public Liability Insurance",
+            "Products Liability Insurance",
             "Cyber and Privacy Liability Insurance",
             "Management Liability Insurance",
             "Business Package Insurance ",
@@ -91,6 +92,7 @@ export const tabs: TabConfig[] = [
             "View all coverages"
           ],
         },
+        
         {
           type: "box",
           boxContent: {
@@ -138,8 +140,8 @@ export const tabs: TabConfig[] = [
         text: "Trusted by <strong>60,000+</strong> businesses",
         shieldIcon: trustedPilot,
       },
-      backgroundImage: "https://storage.googleapis.com/upcover-webflow-integration/assets/images/businesses-hero-image-full.png" 
-       }
+      backgroundImage: "https://storage.googleapis.com/upcover-webflow-integration/assets/images/businesses-hero-image-full.png"
+    }
   },
   {
     id: "tech",
@@ -166,10 +168,11 @@ export const tabs: TabConfig[] = [
           title: "",
           items: [
             "Crime Cover",
-            "Public and Product Liability"
+            "Public and Product Liability",
+            "View all covers"
           ],
         },
-                {
+        {
           type: "box",
           boxContent: {
             left: {
@@ -186,7 +189,7 @@ export const tabs: TabConfig[] = [
         { title: "ABOUT", items: ["Our Mission", "Careers", "Leadership"] },
         { title: "ABOUT", items: ["Our Mission", "Careers", "Leadership"] },
         { title: "ABOUT", items: ["Our Mission", "Careers", "Leadership"] },
-        
+
       ],
       Resources: [
         { title: "TOOLS", items: ["Blog", "Guides", "Case Studies"] },
@@ -228,50 +231,30 @@ export const tabs: TabConfig[] = [
     dropdown: {
       Coverages: [
         {
-          title: "INDUSTRY",
+          title: "MOTOR INSURANCE",
           items: [
-            "Public Liability",
-            "Professional Indemnity",
-            "Business Insurance",
-            "Public Liability",
-            "Professional Indemnity",
-            "Business Insurance",
+            "For Sole Traders",
+            "For Small Business",
+            "For Rideshare",
+            "Mobile, plant & Equipment"
           ],
         },
         {
-          title: "COVERS",
+          title: "FLEET MANAGERS & CORPORATES",
           items: [
-            "Healthcare Professionals Insurance",
-            "Professional Indemnity Insurance",
-            "Medical Malpractice Insurance",
-            "Products Liability Insurance",
-            "Professional Indemnity",
-            "Business Insurance",
-            "Public Liability",
-            "Professional Indemnity",
-            "Business Insurance",
+            "Courier Fleets",
+            "Own Goods Fleets",
+            "Rentals",
+            "Heavy Vehicles"
           ],
         },
         {
-          title: "INDUSTRIES",
+          title: "FLEET INSURANCE",
           items: [
-            "Cyber Liability",
-            "Portable Equipment",
-            "Tax Audit",
-            "Cyber Liability",
-            "Portable Equipment",
-            "Tax Audit",
-          ],
-        },
-        {
-          title: "INDUSTRIES",
-          items: [
-            "Cyber Liability",
-            "Portable Equipment",
-            "Tax Audit",
-            "Cyber Liability",
-            "Portable Equipment",
-            "Tax Audit",
+            "Courier Fleets",
+            "Own Goods Fleets",
+            "Rentals",
+            "Heavy Vehicles"
           ],
         },
         {

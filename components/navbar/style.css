@@ -94,6 +94,7 @@ body{
   text-underline-offset: 4px;
 }
 
+
 /* Initially hidden dropdown */
 .dropdown-menu.three-column {
   display: none;
@@ -108,7 +109,7 @@ body{
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   min-height: auto;
   flex-direction: row;
-  /* border-top: 1px solid black; */
+  flex-wrap: wrap;
 }
 
 /* Show on hover of menu item */
@@ -118,7 +119,8 @@ body{
 
 .dropdown-column {
   flex: 1;
-  max-width: 249px;
+  max-width: 285px;
+  min-width: 285px;
   margin-right: 70px;
 }
 

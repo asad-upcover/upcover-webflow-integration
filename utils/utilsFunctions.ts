@@ -52,19 +52,23 @@ export function menu(tabId: string) {
                         `;
               } else {
                 return `
+                <div class="main-dropdown">
                           <div class="dropdown-column">
                             <h4>${section.title}</h4>
-                            <ul>
-                              ${section.items?.map(
-                              (li) =>
-                                  `<li class="${li.includes("View all")
-                                  ? "view-all-link"
-                                  : ""
-                              }">${li}</li>`
-                          )       
-                          .join("")}
-                             </ul>
+<ul>
+  ${section.items
+                    ?.map(
+                      (li) => `
+        <li class="${li.includes("View all") ? "view-all-link" : ""}">
+          ${li.includes("View all")
+                          ? `<a href="#" class="view-all-link">${li}</a>`
+                          : li}
+        </li>`
+                    )
+                    .join("")}
+</ul>
                           </div>
+                    </div>
                         `;
               }
             })

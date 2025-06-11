@@ -115,6 +115,14 @@ h1 {
   font-size: 16px;
 }
 
+.cta-button:hover {
+  filter: brightness(1.2);
+}
+
+.cta-button:active, .tag-button:active {
+  filter: brightness(1.4);
+}
+
 @media (max-width: 768px) {
   .top-bar,
   .main-nav {

@@ -34,7 +34,7 @@ export function menu(tabId: string) {
                   }">
                                 <button class="button1"><a href="#">${left.primaryButton}</a></button>
                                 ${left.secondaryButton
-                    ? `<button class="button2"><a href="tel:1300872683" >${left.secondaryButton}</a></button>`
+                    ? `<a href="tel:1300872683" ><button class="button2">${left.secondaryButton}</button></a>`
                     : ""
                   }
                               </div>
@@ -113,6 +113,8 @@ export function menu(tabId: string) {
       color: ${selectedTab.themeSecondaryColor ?? "#FFFFFF"};
     }
 
+
+
     .button1 a {
       text-decoration: none;
       background-color: ${selectedTab.themeColor};
@@ -121,10 +123,12 @@ export function menu(tabId: string) {
 
 
 
-    .button2 a {
-      text-decoration: none;
+    .button2 {
+      background-color: ${selectedTab.themeTertiaryColor ?? selectedTab.themeColor};
       color: ${selectedTab.themeSecondaryColor ?? selectedTab.themeColor};
     }
+
+
 
     .box-right button {
       background-color: ${selectedTab.themeSecondaryColor ?? selectedTab.themeColor};
@@ -141,8 +145,19 @@ export function menu(tabId: string) {
 
     .button1:hover,
     .box-right button:hover {
-      filter: brightness(1.1);
+      filter: brightness(1.2);
     }
+
+    .button2:hover{
+    background-color: ${selectedTab.themeColor};
+    color: ${selectedTab.themeSecondaryColor ?? "#FFFFFF"};
+      }
+
+    .button1:active, .button2:active, .box-right button:active {
+    filter: brightness(1.4);
+    }
+
+
   `;
 }
 

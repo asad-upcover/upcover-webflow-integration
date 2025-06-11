@@ -6,7 +6,8 @@ export interface TabConfig {
   label: string;
   themeColor: string;
   themeSecondaryColor?: string;
-  buttonColor?: string; // Optional, if you want to style buttons differently
+  themeTertiaryColor?: string; 
+  buttonColor?: string; 
   dropdown: Record<string, DropdownSection[]>;
   svg: string;
   hero: HeroSection
@@ -54,6 +55,7 @@ export const tabs: TabConfig[] = [
     id: "businesses",
     label: "Businesses & Sole traders",
     themeColor: "#FF522D",
+    themeTertiaryColor: "#FFCFC5",
     dropdown: {
       Coverages: [
         {
@@ -74,6 +76,7 @@ export const tabs: TabConfig[] = [
             "View all industries"
           ],
         },
+        
         {
           title: "COVERS",
           items: [
@@ -442,6 +445,7 @@ export const tabs: TabConfig[] = [
     label: "Motor & Fleet",
     themeColor: "#D5E525",
     themeSecondaryColor: "#3B4125",
+    themeTertiaryColor: "#F8FFAF",
     buttonColor: "#F8FFAF",
     dropdown: {
       Coverages: [

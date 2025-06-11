@@ -59,12 +59,19 @@ export const tabs: TabConfig[] = [
         {
           title: "INDUSTRY",
           items: [
-            "Public Liability",
-            "Professional Indemnity",
-            "Business Insurance",
-            "Public Liability",
-            "Professional Indemnity",
-            "Business Insurance",
+            "Disability Support & Care",
+            "Independent Living, STAs and SDAs",
+            "Doctors, GPs and Clinics",
+            "Beauty and Personal Care",
+            "Therapists and Healing",
+            "Hospitality, Pubs and Restaurants",
+            "Tradespeople, Plumbers and Roofers",
+            "Construction",
+            "IT Contractors",
+            "Retail",
+            "Consultants",
+            "Real Estate",
+            "View all industries"
           ],
         },
         {
@@ -73,44 +80,33 @@ export const tabs: TabConfig[] = [
             "Healthcare Professionals Insurance",
             "Professional Indemnity Insurance",
             "Medical Malpractice Insurance",
+            "Public Liability Insurance",
             "Products Liability Insurance",
-            "Professional Indemnity",
-            "Business Insurance",
-            "Public Liability",
-            "Professional Indemnity",
-            "Business Insurance",
+            "Cyber and Privacy Liability Insurance",
+            "Management Liability Insurance",
+            "Business Package Insurance ",
+            "Business Equipment Insurance",
+            "Personal Accident & Sickness Insurance",
+            "Employment Practices Liability Insurance",
+            "Motor Insurance for Businesses",
+            "View all coverages"
           ],
         },
-        {
-          title: "INDUSTRIES",
-          items: [
-            "Cyber Liability",
-            "Portable Equipment",
-            "Tax Audit",
-            "Cyber Liability",
-            "Portable Equipment",
-            "Tax Audit",
-          ],
-        },
-        {
-          title: "INDUSTRIES",
-          items: [
-            "Cyber Liability",
-            "Portable Equipment",
-            "Tax Audit",
-            "Cyber Liability",
-            "Portable Equipment",
-            "Tax Audit",
-          ],
-        },
+
         {
           type: "box",
           boxContent: {
             left: {
-              imgSrc: "https://storage.googleapis.com/upcover-webflow-integration/assets/images/2a1339faabda847f116061ee305805ee8c3cd7bf.png",
-              heading: "COMPLEX RISK",
-              text: "Our tech-specialist brokerage team provide custom cover for high-growth companies with complex risks, web3, startups and scaleups in any stage of fundraising.",
-              primaryButton: "TALK TO A SPECIALIST ",
+              imgSrc: "https://storage.googleapis.com/upcover-webflow-integration/assets/images/bfb3d41184f6b9d53e820156bae9107d7cbd2da3.png",
+              heading: "NOT SURE?",
+              text: "Talk to our small business insurance specialists to find a tailored cover that works for you and your unique business needs. ",
+              primaryButton: "CHAT WITH A SPECIALIST",
+              secondaryButton: "CALL 1300 872 683"
+            },
+            right: {
+              heading: "GET INSTANT QUOTE",
+              text: "Coverages across 1000+ industries",
+              button: "GET A QUOTE"
             }
           }
         }
@@ -144,8 +140,8 @@ export const tabs: TabConfig[] = [
         text: "Trusted by <strong>60,000+</strong> businesses",
         shieldIcon: trustedPilot,
       },
-      backgroundImage: "https://storage.googleapis.com/upcover-webflow-integration/assets/images/businesses-hero-image-full.png" 
-       }
+      backgroundImage: "https://storage.googleapis.com/upcover-webflow-integration/assets/images/businesses-hero-image-full.png"
+    }
   },
   {
     id: "tech",
@@ -155,53 +151,35 @@ export const tabs: TabConfig[] = [
     dropdown: {
       Coverages: [
         {
-          title: "INDUSTRY",
+          title: "COVER",
           items: [
-            "Public Liability",
-            "Professional Indemnity",
-            "Business Insurance",
-            "Public Liability",
-            "Professional Indemnity",
-            "Medical Malpractice Insurance",
-            "Products Liability Insurance",
-            "Professional Indemnity",
-            "Business Insurance",
-            "Public Liability",
-            "Professional Indemnity",
-            "Business Insurance",
+            "Cyber & Technology Liability",
+            "Technology & Professional Indemnity",
+            "Intellectual Property",
+            "Business Property",
+            "Directors & Officers Liability",
+            "Medical Malpractice",
+            "Media Liability",
+            "Investment Managers Indemnity",
+            "Employment Practices Liability"
           ],
         },
         {
-          title: "COVERS",
+          title: "",
           items: [
-            "Healthcare Professionals Insurance",
-            "Professional Indemnity Insurance",
-            "Medical Malpractice Insurance",
-            "Products Liability Insurance",
-            "Professional Indemnity",
-            "Business Insurance",
-            "Public Liability",
-            "Professional Indemnity",
-            "Business Insurance",
-            "Products Liability Insurance",
-            "Professional Indemnity",
+            "Crime Cover",
+            "Public and Product Liability",
+            "View all covers"
           ],
         },
-
         {
           type: "box",
           boxContent: {
             left: {
-              imgSrc: "https://storage.googleapis.com/upcover-webflow-integration/assets/images/bfb3d41184f6b9d53e820156bae9107d7cbd2da3.png",
-              heading: "NOT SURE?",
-              text: "Talk to our small business insurance specialists to find a tailored cover that works for you and your unique business needs. ",
-              primaryButton: "CHAT WITH A SPECIALIST",
-              secondaryButton: "CALL 1300 872 683"
-            },
-            right: {
-              heading: "GET INSTANT QUOTE",
-              text: "Coverages across 1000+ industries",
-              button: "GET A QUOTE"
+              imgSrc: "https://storage.googleapis.com/upcover-webflow-integration/assets/images/2a1339faabda847f116061ee305805ee8c3cd7bf.png",
+              heading: "COMPLEX RISK",
+              text: "Our tech-specialist brokerage team provide custom cover for high-growth companies with complex risks, web3, startups and scaleups in any stage of fundraising.",
+              primaryButton: "TALK TO A SPECIALIST ",
             }
           }
         }
@@ -211,7 +189,7 @@ export const tabs: TabConfig[] = [
         { title: "ABOUT", items: ["Our Mission", "Careers", "Leadership"] },
         { title: "ABOUT", items: ["Our Mission", "Careers", "Leadership"] },
         { title: "ABOUT", items: ["Our Mission", "Careers", "Leadership"] },
-        
+
       ],
       Resources: [
         { title: "TOOLS", items: ["Blog", "Guides", "Case Studies"] },
@@ -220,10 +198,69 @@ export const tabs: TabConfig[] = [
         { title: "ABOUT", items: ["Our Mission", "Careers", "Leadership"] },
       ],
       Solutions: [
-        { title: "INDUSTRY", items: ["Public Liability"] },
-        { title: "COVERS", items: ["Healthcare Professionals Insurance"] },
-        { title: "INDUSTRIES", items: ["Cyber Liability"] },
-        { title: "INDUSTRIES", items: ["Cyber Liability"] },
+        {
+          title: "INDUSTRY",
+          items: [
+            "Blockchain / Web3",
+            "AI",
+            "Robotics & Hardware",
+            "Life sciences & Bioscience ",
+            "Digital Health",
+            "Consumer",
+            "B2B Saas",
+            "Media Tech",
+            "EdTech",
+            "E-commerce",
+            "Fin Tech",
+            "Reg Tech",
+            "View all industries"
+          ]
+        },
+        {
+          title: "FUNDS",
+          items: [
+            "Family Offices",
+            "Venture Capital Funds",
+            "Debt Funds",
+            "Private Equity Vehicles",
+            "Investment Managers",
+            "View all Investment Vehicles"
+          ]
+        },
+        {
+          title: "NEEDS",
+          items: [
+            "Getting Insured for the First Time",
+            "Meeting Contractual Requirements",
+            "Fundraising Protection",
+            "Protecting Your Team & Workplace",
+            "Safeguarding Digital Assets",
+            "Finding the Right Coverage Package",
+            "Expanding Interstate"
+          ]
+        },
+        {
+          title: "STAGE",
+          items: [
+            "Early Stage",
+            "Growth & Late Stage",
+            "Pre-IPO, IPO & Listing"
+          ]
+        },
+                {
+          type: "box",
+          boxContent: {
+            left: {
+              imgSrc: "https://storage.googleapis.com/upcover-webflow-integration/assets/images/2a1339faabda847f116061ee305805ee8c3cd7bf.png",
+              heading: "OTHER SITUATION",
+              text: `Not quite sure of your stage?
+              <br> 
+              Bootstrapping or prefer not say?
+              `,
+              primaryButton: "TALK TO US",
+            }
+          }
+        }
       ],
     },
     svg: arrowDownIcon,
@@ -253,52 +290,33 @@ export const tabs: TabConfig[] = [
     dropdown: {
       Coverages: [
         {
-          title: "INDUSTRY",
+          title: "MOTOR INSURANCE",
           items: [
-            "Public Liability",
-            "Professional Indemnity",
-            "Business Insurance",
-            "Public Liability",
-            "Professional Indemnity",
-            "Business Insurance",
+            "For Sole Traders",
+            "For Small Business",
+            "For Rideshare",
+            "Mobile, plant & Equipment"
           ],
         },
         {
-          title: "COVERS",
+          title: "FLEET MANAGERS & CORPORATES",
           items: [
-            "Healthcare Professionals Insurance",
-            "Professional Indemnity Insurance",
-            "Medical Malpractice Insurance",
-            "Products Liability Insurance",
-            "Professional Indemnity",
-            "Business Insurance",
-            "Public Liability",
-            "Professional Indemnity",
-            "Business Insurance",
+            "Courier Fleets",
+            "Own Goods Fleets",
+            "Rentals",
+            "Heavy Vehicles"
           ],
         },
         {
-          title: "INDUSTRIES",
+          title: "FLEET INSURANCE",
           items: [
-            "Cyber Liability",
-            "Portable Equipment",
-            "Tax Audit",
-            "Cyber Liability",
-            "Portable Equipment",
-            "Tax Audit",
+            "Courier Fleets",
+            "Own Goods Fleets",
+            "Rentals",
+            "Heavy Vehicles"
           ],
         },
-        {
-          title: "INDUSTRIES",
-          items: [
-            "Cyber Liability",
-            "Portable Equipment",
-            "Tax Audit",
-            "Cyber Liability",
-            "Portable Equipment",
-            "Tax Audit",
-          ],
-        },
+        
         {
           type: "box",
           boxContent: {

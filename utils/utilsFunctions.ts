@@ -32,9 +32,9 @@ export function menu(tabId: string) {
                               <p>${left.text}</p>
                               <div class="inline-buttons ${left.secondaryButton ? "two-buttons" : "single-button"
                   }">
-                                <button class="button1">${left.primaryButton}</button>
+                                <button class="button1"><a href="#">${left.primaryButton}</a></button>
                                 ${left.secondaryButton
-                    ? `<button class="button2">${left.secondaryButton}</button>`
+                    ? `<button class="button2"><a href="tel:1300872683" >${left.secondaryButton}</a></button>`
                     : ""
                   }
                               </div>
@@ -52,12 +52,23 @@ export function menu(tabId: string) {
                         `;
               } else {
                 return `
+                <div class="main-dropdown">
                           <div class="dropdown-column">
                             <h4>${section.title}</h4>
-                            <ul>
-                              ${section.items?.map((li) => `<li>${li}</li>`).join("")}
-                            </ul>
+<ul>
+  ${section.items
+                    ?.map(
+                      (li) => `
+        <li class="${li.includes("View all") ? "view-all-link" : ""}">
+          ${li.includes("View all")
+                          ? `<a href="#" class="view-all-link">${li}</a>`
+                          : li}
+        </li>`
+                    )
+                    .join("")}
+</ul>
                           </div>
+                    </div>
                         `;
               }
             })
@@ -90,15 +101,29 @@ export function menu(tabId: string) {
       stroke: ${hoverColor} !important;
     }
 
+    .view-all-link {
+    color: ${selectedTab.themeColor} !important;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: underline;
+    }
+
     .button1 {
       background-color: ${selectedTab.themeColor};
       color: ${selectedTab.themeSecondaryColor ?? "#FFFFFF"};
     }
 
-    .button2 {
-      background-color: ${selectedTab.buttonColor};
+    .button1 a {
+      text-decoration: none;
+      background-color: ${selectedTab.themeColor};
+      color: ${selectedTab.themeSecondaryColor ?? "#FFFFFF"};
+    }
+
+
+
+    .button2 a {
+      text-decoration: none;
       color: ${selectedTab.themeSecondaryColor ?? selectedTab.themeColor};
-      border: 1px solid ${selectedTab.themeColor};
     }
 
     .box-right button {
@@ -117,11 +142,6 @@ export function menu(tabId: string) {
     .button1:hover,
     .box-right button:hover {
       filter: brightness(1.1);
-    }
-
-    .button2:hover {
-      background-color: ${selectedTab.themeColor};
-      color: white;
     }
   `;
 }

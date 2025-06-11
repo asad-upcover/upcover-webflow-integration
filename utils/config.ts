@@ -112,18 +112,117 @@ export const tabs: TabConfig[] = [
         }
       ],
       Company: [
-        { title: "ABOUT", items: ["Our Mission", "Careers", "Leadership"] },
-        { title: "TOOLS", items: ["Blog", "Guides", "Case Studies"] },
-        { title: "ABOUT", items: ["Our Mission", "Careers", "Leadership"] },
-        { title: "TOOLS", items: ["Blog", "Guides", "Case Studies"] },
-        { title: "ABOUT", items: ["Our Mission", "Careers", "Leadership"] },
+        {
+          title: "INDUSTRY",
+          items: [
+            "Disability Support & Care",
+            "Independent Living, STAs and SDAs",
+            "Doctors, GPs and Clinics",
+            "Beauty and Personal Care",
+            "Therapists and Healing",
+            "Hospitality, Pubs and Restaurants",
+            "Tradespeople, Plumbers and Roofers",
+            "Construction",
+            "IT Contractors",
+            "Retail",
+            "Consultants",
+            "Real Estate",
+            "View all industries"
+          ],
+        },
+        {
+          title: "COVERS",
+          items: [
+            "Healthcare Professionals Insurance",
+            "Professional Indemnity Insurance",
+            "Medical Malpractice Insurance",
+            "Public Liability Insurance",
+            "Products Liability Insurance",
+            "Cyber and Privacy Liability Insurance",
+            "Management Liability Insurance",
+            "Business Package Insurance ",
+            "Business Equipment Insurance",
+            "Personal Accident & Sickness Insurance",
+            "Employment Practices Liability Insurance",
+            "Motor Insurance for Businesses",
+            "View all coverages"
+          ],
+        },
+
+        {
+          type: "box",
+          boxContent: {
+            left: {
+              imgSrc: "https://storage.googleapis.com/upcover-webflow-integration/assets/images/bfb3d41184f6b9d53e820156bae9107d7cbd2da3.png",
+              heading: "NOT SURE?",
+              text: "Talk to our small business insurance specialists to find a tailored cover that works for you and your unique business needs. ",
+              primaryButton: "CHAT WITH A SPECIALIST",
+              secondaryButton: "CALL 1300 872 683"
+            },
+            right: {
+              heading: "GET INSTANT QUOTE",
+              text: "Coverages across 1000+ industries",
+              button: "GET A QUOTE"
+            }
+          }
+        }
       ],
       Resources: [
-        { title: "ABOUT", items: ["Our Mission", "Careers", "Leadership"] },
-        { title: "TOOLS", items: ["Blog", "Guides", "Case Studies"] },
-        { title: "ABOUT", items: ["Our Mission", "Careers", "Leadership"] },
-        { title: "TOOLS", items: ["Blog", "Guides", "Case Studies"] },
-      ],
+        {
+          title: "INDUSTRY",
+          items: [
+            "Disability Support & Care",
+            "Independent Living, STAs and SDAs",
+            "Doctors, GPs and Clinics",
+            "Beauty and Personal Care",
+            "Therapists and Healing",
+            "Hospitality, Pubs and Restaurants",
+            "Tradespeople, Plumbers and Roofers",
+            "Construction",
+            "IT Contractors",
+            "Retail",
+            "Consultants",
+            "Real Estate",
+            "View all industries"
+          ],
+        },
+        {
+          title: "COVERS",
+          items: [
+            "Healthcare Professionals Insurance",
+            "Professional Indemnity Insurance",
+            "Medical Malpractice Insurance",
+            "Public Liability Insurance",
+            "Products Liability Insurance",
+            "Cyber and Privacy Liability Insurance",
+            "Management Liability Insurance",
+            "Business Package Insurance ",
+            "Business Equipment Insurance",
+            "Personal Accident & Sickness Insurance",
+            "Employment Practices Liability Insurance",
+            "Motor Insurance for Businesses",
+            "View all coverages"
+          ],
+        },
+
+        {
+          type: "box",
+          boxContent: {
+            left: {
+              imgSrc: "https://storage.googleapis.com/upcover-webflow-integration/assets/images/bfb3d41184f6b9d53e820156bae9107d7cbd2da3.png",
+              heading: "NOT SURE?",
+              text: "Talk to our small business insurance specialists to find a tailored cover that works for you and your unique business needs. ",
+              primaryButton: "CHAT WITH A SPECIALIST",
+              secondaryButton: "CALL 1300 872 683"
+            },
+            right: {
+              heading: "GET INSTANT QUOTE",
+              text: "Coverages across 1000+ industries",
+              button: "GET A QUOTE"
+            }
+          }
+        }
+      ]
     },
     svg: arrowDownIcon,
     hero: {
@@ -185,17 +284,74 @@ export const tabs: TabConfig[] = [
         }
       ],
       Company: [
-        { title: "ABOUT", items: ["Our Mission", "Careers", "Leadership"] },
-        { title: "ABOUT", items: ["Our Mission", "Careers", "Leadership"] },
-        { title: "ABOUT", items: ["Our Mission", "Careers", "Leadership"] },
-        { title: "ABOUT", items: ["Our Mission", "Careers", "Leadership"] },
-
+        {
+          title: "COVER",
+          items: [
+            "Cyber & Technology Liability",
+            "Technology & Professional Indemnity",
+            "Intellectual Property",
+            "Business Property",
+            "Directors & Officers Liability",
+            "Medical Malpractice",
+            "Media Liability",
+            "Investment Managers Indemnity",
+            "Employment Practices Liability"
+          ],
+        },
+        {
+          title: "",
+          items: [
+            "Crime Cover",
+            "Public and Product Liability",
+            "View all covers"
+          ],
+        },
+        {
+          type: "box",
+          boxContent: {
+            left: {
+              imgSrc: "https://storage.googleapis.com/upcover-webflow-integration/assets/images/2a1339faabda847f116061ee305805ee8c3cd7bf.png",
+              heading: "COMPLEX RISK",
+              text: "Our tech-specialist brokerage team provide custom cover for high-growth companies with complex risks, web3, startups and scaleups in any stage of fundraising.",
+              primaryButton: "TALK TO A SPECIALIST ",
+            }
+          }
+        }
       ],
       Resources: [
-        { title: "TOOLS", items: ["Blog", "Guides", "Case Studies"] },
-        { title: "TOOLS", items: ["Blog", "Guides", "Case Studies"] },
-        { title: "TOOLS", items: ["Blog", "Guides", "Case Studies"] },
-        { title: "ABOUT", items: ["Our Mission", "Careers", "Leadership"] },
+        {
+          title: "COVER",
+          items: [
+            "Cyber & Technology Liability",
+            "Technology & Professional Indemnity",
+            "Intellectual Property",
+            "Business Property",
+            "Directors & Officers Liability",
+            "Medical Malpractice",
+            "Media Liability",
+            "Investment Managers Indemnity",
+            "Employment Practices Liability"
+          ],
+        },
+        {
+          title: "",
+          items: [
+            "Crime Cover",
+            "Public and Product Liability",
+            "View all covers"
+          ],
+        },
+        {
+          type: "box",
+          boxContent: {
+            left: {
+              imgSrc: "https://storage.googleapis.com/upcover-webflow-integration/assets/images/2a1339faabda847f116061ee305805ee8c3cd7bf.png",
+              heading: "COMPLEX RISK",
+              text: "Our tech-specialist brokerage team provide custom cover for high-growth companies with complex risks, web3, startups and scaleups in any stage of fundraising.",
+              primaryButton: "TALK TO A SPECIALIST ",
+            }
+          }
+        }
       ],
       Solutions: [
         {
@@ -247,7 +403,7 @@ export const tabs: TabConfig[] = [
             "Pre-IPO, IPO & Listing"
           ]
         },
-                {
+        {
           type: "box",
           boxContent: {
             left: {
@@ -316,7 +472,7 @@ export const tabs: TabConfig[] = [
             "Heavy Vehicles"
           ],
         },
-        
+
         {
           type: "box",
           boxContent: {
@@ -333,17 +489,92 @@ export const tabs: TabConfig[] = [
         }
       ],
       Company: [
-        { title: "ABOUT", items: ["Our Mission", "Careers", "Leadership"] },
-        { title: "TOOLS", items: ["Blog", "Guides", "Case Studies"] },
-        { title: "ABOUT", items: ["Our Mission", "Careers", "Leadership"] },
-        { title: "TOOLS", items: ["Blog", "Guides", "Case Studies"] },
-        { title: "ABOUT", items: ["Our Mission", "Careers", "Leadership"] },
+        {
+          title: "MOTOR INSURANCE",
+          items: [
+            "For Sole Traders",
+            "For Small Business",
+            "For Rideshare",
+            "Mobile, plant & Equipment"
+          ],
+        },
+        {
+          title: "FLEET MANAGERS & CORPORATES",
+          items: [
+            "Courier Fleets",
+            "Own Goods Fleets",
+            "Rentals",
+            "Heavy Vehicles"
+          ],
+        },
+        {
+          title: "FLEET INSURANCE",
+          items: [
+            "Courier Fleets",
+            "Own Goods Fleets",
+            "Rentals",
+            "Heavy Vehicles"
+          ],
+        },
+
+        {
+          type: "box",
+          boxContent: {
+            left: {
+              imgSrc: "https://storage.googleapis.com/upcover-webflow-integration/assets/images/bfb3d41184f6b9d53e820156bae9107d7cbd2da3.png",
+              heading: "MAKE A CLAIM",
+              text: `If you’re a fleet manager, driver, or you have been involved in an accident it’s crucial to report this as soon as possoble
+              <br><br>
+              Takes less than 5 mins Via e-form or up to 45 mins via call`,
+              primaryButton: "REPORT CLAIM VIA E-FORM ",
+              secondaryButton: "CALL 1300 872 683"
+            }
+          }
+        }
       ],
       Resources: [
-        { title: "ABOUT", items: ["Our Mission", "Careers", "Leadership"] },
-        { title: "TOOLS", items: ["Blog", "Guides", "Case Studies"] },
-        { title: "ABOUT", items: ["Our Mission", "Careers", "Leadership"] },
-        { title: "TOOLS", items: ["Blog", "Guides", "Case Studies"] },
+        {
+          title: "MOTOR INSURANCE",
+          items: [
+            "For Sole Traders",
+            "For Small Business",
+            "For Rideshare",
+            "Mobile, plant & Equipment"
+          ],
+        },
+        {
+          title: "FLEET MANAGERS & CORPORATES",
+          items: [
+            "Courier Fleets",
+            "Own Goods Fleets",
+            "Rentals",
+            "Heavy Vehicles"
+          ],
+        },
+        {
+          title: "FLEET INSURANCE",
+          items: [
+            "Courier Fleets",
+            "Own Goods Fleets",
+            "Rentals",
+            "Heavy Vehicles"
+          ],
+        },
+
+        {
+          type: "box",
+          boxContent: {
+            left: {
+              imgSrc: "https://storage.googleapis.com/upcover-webflow-integration/assets/images/bfb3d41184f6b9d53e820156bae9107d7cbd2da3.png",
+              heading: "MAKE A CLAIM",
+              text: `If you’re a fleet manager, driver, or you have been involved in an accident it’s crucial to report this as soon as possoble
+              <br><br>
+              Takes less than 5 mins Via e-form or up to 45 mins via call`,
+              primaryButton: "REPORT CLAIM VIA E-FORM ",
+              secondaryButton: "CALL 1300 872 683"
+            }
+          }
+        }
       ],
     },
     svg: arrowDownIcon,

@@ -26,6 +26,12 @@
   border-radius: 0;
 }
 
+@media (max-width: 1235px) {
+  .tabs button {
+    padding: 30px 10px;
+}
+}
+
 .tabs button.active::after {
   content: "";
   position: absolute;

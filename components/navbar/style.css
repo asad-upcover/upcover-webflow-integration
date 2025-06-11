@@ -52,6 +52,20 @@ body{
   margin-right: 20px;
 }
 
+@media (max-width: 1245px) {
+.login {
+  font-size: 13px;
+}
+.quote {
+  font-size: 13px;
+  padding: 15px;
+}
+.logo{
+  width: 130px;  
+}
+}
+
+
 #upcover-logo path {
   pointer-events: none;
   transition: all 0.3s ease;
@@ -136,6 +150,7 @@ body{
   max-width: 285px;
   min-width: 220px;
   margin-right: 70px;
+
 }
 
 .dropdown-column h4 {

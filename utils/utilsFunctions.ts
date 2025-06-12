@@ -59,10 +59,10 @@ export function menu(tabId: string) {
   ${section.items
                     ?.map(
                       (li) => `
-        <li class="${li.includes("View all") ? "view-all-link" : ""}">
-          ${li.includes("View all")
-                          ? `<a href="#" class="view-all-link">${li}</a>`
-                          : li}
+        <li class="${li?.label?.includes("View all") ? "view-all-link" : ""}">
+          ${li?.label?.includes("View all")
+                          ? `<a href="${li?.href}" target="blank" class="view-all-link">${li?.label}</a>`
+                          : `<a href="${li?.href}" target="blank" class="links">${li?.label}</a>`}
         </li>`
                     )
                     .join("")}
@@ -106,6 +106,18 @@ export function menu(tabId: string) {
     font-weight: 700;
     cursor: pointer;
     text-decoration: underline;
+    }
+
+    .links{
+    color: #242826 !important;
+    font-weight: 400;
+    cursor: pointer;
+    text-decoration: none;
+    }
+
+    .links:hover{
+    font-weight: 500;
+    transition: 0.1s ease all;
     }
 
     .button1 {

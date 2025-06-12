@@ -1,3 +1,7 @@
+body{
+  font-family: "Messina Sans", Helvetica, Arial, sans-serif;
+}
+
 .header,
 .navbar {
   position: relative;
@@ -8,7 +12,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0px 60px;
+  padding: 0px 60px;
+  display: flex;
+  min-height: 90px;
+  background: white;
 }
 
 .navbar-left {
@@ -28,6 +35,11 @@
   font-size: 16px;
 }
 
+.login:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
 .quote {
   color: white;
   border: none;
@@ -38,32 +50,45 @@
   border-radius: 10px;
 }
 
-.UPCOVER-LOGO {
+.quote:hover{
+  filter: brightness(1.2);
+}
+
+.quote:active {
+  filter: brightness(1.4);
+}
+
+.logo {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-right: 20px;
 }
+
+@media (max-width: 1245px) {
+.login {
+  font-size: 13px;
+}
+.quote {
+  font-size: 13px;
+  padding: 15px;
+}
+.logo{
+  width: 130px;  
+}
+}
+
 
 #upcover-logo path {
   pointer-events: none;
   transition: all 0.3s ease;
 }
 
-
-
-
-
-.header,
-.navbar {
-  position: relative;
-  z-index: 100;
-}
-
 /* Menu item */
 
 .menu-item {
-  margin-left: 40px;
-  padding: 45px 0px 40px 0px;
+  margin-left: 20px;
+  padding: 40px 0px;
   display: flex;
   justify-content: center;
   align-content: center;
@@ -71,14 +96,11 @@
   font-size: 16px;
 }
 
-.menu-icon svg {
-  margin-top: 2px;
-}
-
 #menu-items {
   display: flex;
   align-items: center;
   margin: 0;
+  margin-left: 20px;
   padding: 0;
 }
 
@@ -99,37 +121,55 @@
   text-underline-offset: 4px;
 }
 
+
 /* Initially hidden dropdown */
 .dropdown-menu.three-column {
   display: none;
-  position: fixed;
-  /* top: 0%; */
-  margin-top: 60px;
+  /* margin-top: 58px; */
+  position: absolute;
+  top: 100%;
   left: 0;
-  width: 100vw;
+  right: 0;
   padding: 40px 60px;
   transition: 0.4s ease all;
   background-color: white;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-  /* z-index: -1000; */
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.10);
+  min-height: auto;
   flex-direction: row;
-  /* border-top: 1px solid black; */
+  flex-wrap: wrap;
+  max-height: calc(100vh - 170px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
+
 
 /* Show on hover of menu item */
 .menu-item.dropdown:hover .dropdown-menu.three-column {
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.main-dropdown{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
 }
 
 .dropdown-column {
+  /* background-color: white; */
   flex: 1;
-  min-width: 150px;
+  max-width: 285px;
+  min-width: 220px;
+  margin-right: 70px;
+
 }
 
 .dropdown-column h4 {
   font-size: 16px;
   font-weight: 700;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   color: #242826;
 }
 
@@ -141,7 +181,7 @@
 }
 
 .dropdown-column ul li {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   font-size: 14px;
   color: #555;
   cursor: pointer;
@@ -151,3 +191,98 @@
 .dropdown-column ul li:hover {
   color: #000;
 }
+
+
+
+.dropdown-column.full-width.box-column {
+  max-width: 490px;
+  min-width: 490px;
+  margin-left: auto;
+  margin-right: 0px; 
+}
+.dropdown-column.full-width.box-column .box-left {
+  background-color: #F7F6F3;
+  padding: 20px;
+  border: 1px solid #CED2D9;
+  border-radius: 20px;
+}
+
+.dropdown-column.full-width.box-column .box-right{
+  background-color: #F7F6F3;
+  padding: 0 20px 20px 20px;
+  border: 1px solid #CED2D9;
+  border-radius: 20px;
+}
+
+
+
+.box-left {
+  margin-bottom: 20px;
+}
+
+.box-left h4, .box-right h4 {
+  color: #242826;
+  font-weight: 700;
+  font-family: "Messina Sans", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+}
+
+.box-left p, .box-right p {
+  color: #545464;
+  font-weight: 400;
+  line-height: 25px;
+}
+
+.inline-buttons button{
+  padding: 20px 0;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  width: 48%;
+  
+}
+
+.inline-buttons.single-button .button1 {
+  width: 100%;
+}
+
+.inline-buttons.two-buttons .button2{
+  margin-left: 10px;
+}
+
+
+.box-right .button{
+  width: 100%;
+  padding: 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.box-left img{
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  object-position: 20% 30%;
+  border-radius: 10px;
+}
+
+@media (max-width: 1540px) {
+.dropdown-column.full-width.box-column {
+  min-width: 100%;
+  margin-left: auto;
+  margin-top: 16px;
+}
+
+.box-left img{
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+  object-position: 20% 25%;
+  border-radius: 10px;
+}
+
+}
+

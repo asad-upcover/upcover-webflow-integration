@@ -26,6 +26,12 @@
   border-radius: 0;
 }
 
+@media (max-width: 1235px) {
+  .tabs button {
+    padding: 30px 10px;
+}
+}
+
 .tabs button.active::after {
   content: "";
   position: absolute;
@@ -61,6 +67,10 @@
   font-size: 16px;
   gap: 10px;
 }
-.contact-region-switcher{
+.contact-region-switcher {
   font-weight: 700;
+}
+
+.contact-phone-svg svg {
+  vertical-align: middle;
 }

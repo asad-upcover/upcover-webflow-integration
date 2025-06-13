@@ -1,6 +1,5 @@
 import { callIcon, arrowDownIcon, starRating, googleLogo, trustedPilot } from "../assets/svgicons";
 
-
 export interface TabConfig {
   id: string;
   label: string;
@@ -12,6 +11,7 @@ export interface TabConfig {
   svg: string;
   hero: HeroSection
 }
+
 export interface DropdownSection {
   title?: string;
   items?: { label: string; href?: string }[];
@@ -49,7 +49,6 @@ export interface HeroSection {
   backgroundImage: string;
 }
 
-
 export const tabs: TabConfig[] = [
   {
     id: "businesses",
@@ -61,95 +60,38 @@ export const tabs: TabConfig[] = [
         {
           title: "INDUSTRY",
           items: [
-            { label: "Disability Support & Care", href: "/disability-support-care" },
-            { label: "Independent Living, STAs and SDAs", href: "/independent-living-stas-sdas" },
-            { label: "Doctors, GPs and Clinics", href: "/doctors-gps-clinics" },
-            { label: "Beauty and Personal Care", href: "/beauty-personal-care" },
-            { label: "Therapists and Healing", href: "/therapists-healing" },
-            { label: "Hospitality, Pubs and Restaurants", href: "/hospitality-pubs-restaurants" },
-            { label: "Tradespeople, Plumbers and Roofers", href: "/tradespeople-plumbers-roofers" },
-            { label: "Construction", href: "/construction" },
-            { label: "IT Contractors", href: "/it-contractors" },
-            { label: "Retail", href: "/retail" },
-            { label: "Consultants", href: "/consultants" },
-            { label: "Real Estate", href: "/real-estate" },
-            { label: "View all industries", href: "/industries" }
+            { label: "Disability Support & Care", href: "/product/disability-support-care" },
+            { label: "Independent Living, STAs and SDAs", href: "/product/independent-living-stas-sdas" },
+            { label: "Doctors, GPs and Clinics", href: "/product/doctors-gps-clinics" },
+            { label: "Beauty and Personal Care", href: "/product/beauty-personal-care" },
+            { label: "Therapists and Healing", href: "/product/therapists-healing" },
+            { label: "Hospitality, Pubs and Restaurants", href: "/product/hospitality-pubs-restaurants" },
+            { label: "Tradespeople, Plumbers and Roofers", href: "/product/tradespeople-plumbers-roofers" },
+            { label: "Construction", href: "/product/construction" },
+            { label: "IT Contractors", href: "/product/it-contractors" },
+            { label: "Retail", href: "/product/retail" },
+            { label: "Consultants", href: "/product/consultants" },
+            { label: "Real Estate", href: "/product/real-estate" },
+            { label: "View all industries", href: "/product/industries" }
           ]
-        },
-
-        {
-          title: "COVERS",
-          items: [
-            { label: "Healthcare Professionals Insurance", href: "/healthcare-professionals-insurance" },
-            { label: "Professional Indemnity Insurance", href: "/professional-indemnity-insurance" },
-            { label: "Medical Malpractice Insurance", href: "/medical-malpractice-insurance" },
-            { label: "Public Liability Insurance", href: "/public-liability-insurance" },
-            { label: "Products Liability Insurance", href: "/products-liability-insurance" },
-            { label: "Cyber and Privacy Liability Insurance", href: "/cyber-privacy-liability-insurance" },
-            { label: "Management Liability Insurance", href: "/management-liability-insurance" },
-            { label: "Business Package Insurance", href: "/business-package-insurance" },
-            { label: "Business Equipment Insurance", href: "/business-equipment-insurance" },
-            { label: "Personal Accident & Sickness Insurance", href: "/personal-accident-sickness-insurance" },
-            { label: "Employment Practices Liability Insurance", href: "/employment-practices-liability-insurance" },
-            { label: "Motor Insurance for Businesses", href: "/motor-insurance-businesses" },
-            { label: "View all coverages", href: "/coverages" }
-          ]
-        },
-
-        {
-          type: "box",
-          boxContent: {
-            left: {
-              imgSrc: "https://storage.googleapis.com/upcover-webflow-integration/assets/images/bfb3d41184f6b9d53e820156bae9107d7cbd2da3.png",
-              heading: "NOT SURE?",
-              text: "Talk to our small business insurance specialists to find a tailored cover that works for you and your unique business needs. ",
-              primaryButton: "CHAT WITH A SPECIALIST",
-              secondaryButton: "CALL 1300 872 683"
-            },
-            right: {
-              heading: "GET INSTANT QUOTE",
-              text: "Coverages across 1000+ industries",
-              button: "GET A QUOTE"
-            }
-          }
-        }
-      ],
-      Company: [
-        {
-          title: "INDUSTRY",
-          items: [
-            { label: "Disability Support & Care", href: "/industries/disability-support" },
-            { label: "Independent Living, STAs and SDAs", href: "/industries/independent-living" },
-            { label: "Doctors, GPs and Clinics", href: "/industries/doctors-gps-clinics" },
-            { label: "Beauty and Personal Care", href: "/industries/beauty-personal-care" },
-            { label: "Therapists and Healing", href: "/industries/therapists-healing" },
-            { label: "Hospitality, Pubs and Restaurants", href: "/industries/hospitality-pubs-restaurants" },
-            { label: "Tradespeople, Plumbers and Roofers", href: "/industries/tradespeople" },
-            { label: "Construction", href: "/industries/construction" },
-            { label: "IT Contractors", href: "/industries/it-contractors" },
-            { label: "Retail", href: "/industries/retail" },
-            { label: "Consultants", href: "/industries/consultants" },
-            { label: "Real Estate", href: "/industries/real-estate" },
-            { label: "View all industries", href: "/industries" },
-          ],
         },
         {
           title: "COVERS",
           items: [
-            { label: "Healthcare Professionals Insurance", href: "/coverages/healthcare-professionals" },
-            { label: "Professional Indemnity Insurance", href: "/coverages/professional-indemnity" },
-            { label: "Medical Malpractice Insurance", href: "/coverages/medical-malpractice" },
-            { label: "Public Liability Insurance", href: "/coverages/public-liability" },
-            { label: "Products Liability Insurance", href: "/coverages/products-liability" },
-            { label: "Cyber and Privacy Liability Insurance", href: "/coverages/cyber-privacy" },
-            { label: "Management Liability Insurance", href: "/coverages/management-liability" },
-            { label: "Business Package Insurance", href: "/coverages/business-package" },
-            { label: "Business Equipment Insurance", href: "/coverages/business-equipment" },
-            { label: "Personal Accident & Sickness Insurance", href: "/coverages/personal-accident-sickness" },
-            { label: "Employment Practices Liability Insurance", href: "/coverages/employment-practices" },
-            { label: "Motor Insurance for Businesses", href: "/coverages/motor" },
-            { label: "View all coverages", href: "/coverages" },
-          ],
+            { label: "Healthcare Professionals Insurance", href: "/product/healthcare-professionals-insurance" },
+            { label: "Professional Indemnity Insurance", href: "/product/professional-indemnity-insurance" },
+            { label: "Medical Malpractice Insurance", href: "/product/medical-malpractice-insurance" },
+            { label: "Public Liability Insurance", href: "/product/public-liability-insurance" },
+            { label: "Products Liability Insurance", href: "/product/products-liability-insurance" },
+            { label: "Cyber and Privacy Liability Insurance", href: "/product/cyber-privacy-liability-insurance" },
+            { label: "Management Liability Insurance", href: "/product/management-liability-insurance" },
+            { label: "Business Package Insurance", href: "/product/business-package-insurance" },
+            { label: "Business Equipment Insurance", href: "/product/business-equipment-insurance" },
+            { label: "Personal Accident & Sickness Insurance", href: "/product/personal-accident-sickness-insurance" },
+            { label: "Employment Practices Liability Insurance", href: "/product/employment-practices-liability-insurance" },
+            { label: "Motor Insurance for Businesses", href: "/product/motor-insurance-businesses" },
+            { label: "View all coverages", href: "/product/coverages" }
+          ]
         },
         {
           type: "box",
@@ -169,62 +111,6 @@ export const tabs: TabConfig[] = [
           }
         }
       ],
-      Resources: [
-        {
-          title: "INDUSTRY",
-          items: [
-            { label: "Disability Support & Care", href: "/industries/disability-support" },
-            { label: "Independent Living, STAs and SDAs", href: "/industries/independent-living" },
-            { label: "Doctors, GPs and Clinics", href: "/industries/doctors-gps-clinics" },
-            { label: "Beauty and Personal Care", href: "/industries/beauty-personal-care" },
-            { label: "Therapists and Healing", href: "/industries/therapists-healing" },
-            { label: "Hospitality, Pubs and Restaurants", href: "/industries/hospitality-pubs-restaurants" },
-            { label: "Tradespeople, Plumbers and Roofers", href: "/industries/tradespeople" },
-            { label: "Construction", href: "/industries/construction" },
-            { label: "IT Contractors", href: "/industries/it-contractors" },
-            { label: "Retail", href: "/industries/retail" },
-            { label: "Consultants", href: "/industries/consultants" },
-            { label: "Real Estate", href: "/industries/real-estate" },
-            { label: "View all industries", href: "/industries" },
-          ],
-        },
-        {
-          title: "COVERS",
-          items: [
-            { label: "Healthcare Professionals Insurance", href: "/coverages/healthcare-professionals" },
-            { label: "Professional Indemnity Insurance", href: "/coverages/professional-indemnity" },
-            { label: "Medical Malpractice Insurance", href: "/coverages/medical-malpractice" },
-            { label: "Public Liability Insurance", href: "/coverages/public-liability" },
-            { label: "Products Liability Insurance", href: "/coverages/products-liability" },
-            { label: "Cyber and Privacy Liability Insurance", href: "/coverages/cyber-privacy" },
-            { label: "Management Liability Insurance", href: "/coverages/management-liability" },
-            { label: "Business Package Insurance", href: "/coverages/business-package" },
-            { label: "Business Equipment Insurance", href: "/coverages/business-equipment" },
-            { label: "Personal Accident & Sickness Insurance", href: "/coverages/personal-accident-sickness" },
-            { label: "Employment Practices Liability Insurance", href: "/coverages/employment-practices" },
-            { label: "Motor Insurance for Businesses", href: "/coverages/motor" },
-            { label: "View all coverages", href: "/coverages" },
-          ],
-        },
-
-        {
-          type: "box",
-          boxContent: {
-            left: {
-              imgSrc: "https://storage.googleapis.com/upcover-webflow-integration/assets/images/bfb3d41184f6b9d53e820156bae9107d7cbd2da3.png",
-              heading: "NOT SURE?",
-              text: "Talk to our small business insurance specialists to find a tailored cover that works for you and your unique business needs. ",
-              primaryButton: "CHAT WITH A SPECIALIST",
-              secondaryButton: "CALL 1300 872 683"
-            },
-            right: {
-              heading: "GET INSTANT QUOTE",
-              text: "Coverages across 1000+ industries",
-              button: "GET A QUOTE"
-            }
-          }
-        }
-      ]
     },
     svg: arrowDownIcon,
     hero: {
@@ -254,23 +140,23 @@ export const tabs: TabConfig[] = [
         {
           title: "COVER",
           items: [
-            { label: "Cyber & Technology Liability", href: "/product" },
-            { label: "Technology & Professional Indemnity", href: "/coverages/technology-professional-indemnity" },
-            { label: "Intellectual Property", href: "/coverages/intellectual-property" },
-            { label: "Business Property", href: "/coverages/business-property" },
-            { label: "Directors & Officers Liability", href: "/coverages/directors-officers-liability" },
-            { label: "Medical Malpractice", href: "/coverages/medical-malpractice" },
-            { label: "Media Liability", href: "/coverages/media-liability" },
-            { label: "Investment Managers Indemnity", href: "/coverages/investment-managers-indemnity" },
-            { label: "Employment Practices Liability", href: "/coverages/employment-practices" },
+            { label: "Cyber & Technology Liability", href: "/product/cyber-technology-liability" },
+            { label: "Technology & Professional Indemnity", href: "/product/technology-professional-indemnity" },
+            { label: "Intellectual Property", href: "/product/intellectual-property" },
+            { label: "Business Property", href: "/product/business-property" },
+            { label: "Directors & Officers Liability", href: "/product/directors-officers-liability" },
+            { label: "Medical Malpractice", href: "/product/medical-malpractice" },
+            { label: "Media Liability", href: "/product/media-liability" },
+            { label: "Investment Managers Indemnity", href: "/product/investment-managers-indemnity" },
+            { label: "Employment Practices Liability", href: "/product/employment-practices" },
           ],
         },
         {
           title: "",
           items: [
-            { label: "Crime Cover", href: "/coverages/crime-cover" },
-            { label: "Public and Product Liability", href: "/coverages/public-product-liability" },
-            { label: "View all covers", href: "/coverages" },
+            { label: "Crime Cover", href: "/product/crime-cover" },
+            { label: "Public and Product Liability", href: "/product/public-product-liability" },
+            { label: "View all covers", href: "/product/coverages" },
           ],
         },
         {
@@ -285,141 +171,7 @@ export const tabs: TabConfig[] = [
           }
         }
       ],
-      Company: [
-        {
-          title: "COVER",
-          items: [
-            { label: "Cyber & Technology Liability", href: "/coverages/cyber-technology-liability" },
-            { label: "Technology & Professional Indemnity", href: "/coverages/technology-professional-indemnity" },
-            { label: "Intellectual Property", href: "/coverages/intellectual-property" },
-            { label: "Business Property", href: "/coverages/business-property" },
-            { label: "Directors & Officers Liability", href: "/coverages/directors-officers-liability" },
-            { label: "Medical Malpractice", href: "/coverages/medical-malpractice" },
-            { label: "Media Liability", href: "/coverages/media-liability" },
-            { label: "Investment Managers Indemnity", href: "/coverages/investment-managers-indemnity" },
-            { label: "Employment Practices Liability", href: "/coverages/employment-practices" },
-          ],
-        },
-        {
-          title: "",
-          items: [
-            { label: "Crime Cover", href: "/coverages/crime-cover" },
-            { label: "Public and Product Liability", href: "/coverages/public-product-liability" },
-            { label: "View all covers", href: "/coverages" },
-          ],
-        },
-        {
-          type: "box",
-          boxContent: {
-            left: {
-              imgSrc: "https://storage.googleapis.com/upcover-webflow-integration/assets/images/2a1339faabda847f116061ee305805ee8c3cd7bf.png",
-              heading: "COMPLEX RISK",
-              text: "Our tech-specialist brokerage team provide custom cover for high-growth companies with complex risks, web3, startups and scaleups in any stage of fundraising.",
-              primaryButton: "TALK TO A SPECIALIST ",
-            }
-          }
-        }
-      ],
-      Resources: [
-        {
-          title: "COVER",
-          items: [
-            { label: "Cyber & Technology Liability", href: "/coverages/cyber-technology-liability" },
-            { label: "Technology & Professional Indemnity", href: "/coverages/technology-professional-indemnity" },
-            { label: "Intellectual Property", href: "/coverages/intellectual-property" },
-            { label: "Business Property", href: "/coverages/business-property" },
-            { label: "Directors & Officers Liability", href: "/coverages/directors-officers-liability" },
-            { label: "Medical Malpractice", href: "/coverages/medical-malpractice" },
-            { label: "Media Liability", href: "/coverages/media-liability" },
-            { label: "Investment Managers Indemnity", href: "/coverages/investment-managers-indemnity" },
-            { label: "Employment Practices Liability", href: "/coverages/employment-practices" },
-          ],
-        },
-        {
-          title: "",
-          items: [
-            { label: "Crime Cover", href: "/coverages/crime-cover" },
-            { label: "Public and Product Liability", href: "/coverages/public-product-liability" },
-            { label: "View all covers", href: "/coverages" },
-          ],
-        },
-        {
-          type: "box",
-          boxContent: {
-            left: {
-              imgSrc: "https://storage.googleapis.com/upcover-webflow-integration/assets/images/2a1339faabda847f116061ee305805ee8c3cd7bf.png",
-              heading: "COMPLEX RISK",
-              text: "Our tech-specialist brokerage team provide custom cover for high-growth companies with complex risks, web3, startups and scaleups in any stage of fundraising.",
-              primaryButton: "TALK TO A SPECIALIST ",
-            }
-          }
-        }
-      ],
-      Solutions: [
-        {
-          title: "INDUSTRY",
-          items: [
-            { label: "Blockchain / Web3", href: "/industries/blockchain-web3" },
-            { label: "AI", href: "/industries/ai" },
-            { label: "Robotics & Hardware", href: "/industries/robotics-hardware" },
-            { label: "Life sciences & Bioscience", href: "/industries/life-sciences-bioscience" },
-            { label: "Digital Health", href: "/industries/digital-health" },
-            { label: "Consumer", href: "/industries/consumer" },
-            { label: "B2B Saas", href: "/industries/b2b-saas" },
-            { label: "Media Tech", href: "/industries/media-tech" },
-            { label: "EdTech", href: "/industries/edtech" },
-            { label: "E-commerce", href: "/industries/e-commerce" },
-            { label: "Fin Tech", href: "/industries/fin-tech" },
-            { label: "Reg Tech", href: "/industries/reg-tech" },
-            { label: "View all industries", href: "/industries" },
-          ]
-        },
-        {
-          title: "FUNDS",
-          items: [
-            { label: "Family Offices", href: "/funds/family-offices" },
-            { label: "Venture Capital Funds", href: "/funds/venture-capital" },
-            { label: "Debt Funds", href: "/funds/debt-funds" },
-            { label: "Private Equity Vehicles", href: "/funds/private-equity" },
-            { label: "Investment Managers", href: "/funds/investment-managers" },
-            { label: "View all Investment Vehicles", href: "/funds" },
-          ]
-        },
-        {
-          title: "NEEDS",
-          items: [
-            { label: "Getting Insured for the First Time", href: "/needs/getting-insured" },
-            { label: "Meeting Contractual Requirements", href: "/needs/contractual-requirements" },
-            { label: "Fundraising Protection", href: "/needs/fundraising-protection" },
-            { label: "Protecting Your Team & Workplace", href: "/needs/protecting-team-workplace" },
-            { label: "Safeguarding Digital Assets", href: "/needs/safeguarding-digital-assets" },
-            { label: "Finding the Right Coverage Package", href: "/needs/right-coverage-package" },
-            { label: "Expanding Interstate", href: "/needs/expanding-interstate" },
-          ]
-        },
-        {
-          title: "STAGE",
-          items: [
-            { label: "Early Stage", href: "/stage/early" },
-            { label: "Growth & Late Stage", href: "/stage/growth-late" },
-            { label: "Pre-IPO, IPO & Listing", href: "/stage/pre-ipo-ipo-listing" },
-          ]
-        },
-        {
-          type: "box",
-          boxContent: {
-            left: {
-              imgSrc: "https://storage.googleapis.com/upcover-webflow-integration/assets/images/2a1339faabda847f116061ee305805ee8c3cd7bf.png",
-              heading: "OTHER SITUATION",
-              text: `Not quite sure of your stage?
-              <br> 
-              Bootstrapping or prefer not say?
-              `,
-              primaryButton: "TALK TO US",
-            }
-          }
-        }
-      ],
+
     },
     svg: arrowDownIcon,
     hero: {
@@ -446,136 +198,50 @@ export const tabs: TabConfig[] = [
     themeSecondaryColor: "#3B4125",
     themeTertiaryColor: "#F8FFAF",
     buttonColor: "#F8FFAF",
-dropdown: {
-  Coverages: [
-    {
-      title: "MOTOR INSURANCE",
-      items: [
-        { label: "For Sole Traders", href: "/motor/for-sole-traders" },
-        { label: "For Small Business", href: "/motor/for-small-business" },
-        { label: "For Rideshare", href: "/motor/for-rideshare" },
-        { label: "Mobile, plant & Equipment", href: "/motor/mobile-plant-equipment" }
-      ],
-    },
-    {
-      title: "FLEET MANAGERS & CORPORATES",
-      items: [
-        { label: "Courier Fleets", href: "/fleet/courier-fleets" },
-        { label: "Own Goods Fleets", href: "/fleet/own-goods-fleets" },
-        { label: "Rentals", href: "/fleet/rentals" },
-        { label: "Heavy Vehicles", href: "/fleet/heavy-vehicles" }
-      ],
-    },
-    {
-      title: "FLEET INSURANCE",
-      items: [
-        { label: "Courier Fleets", href: "/fleet-insurance/courier-fleets" },
-        { label: "Own Goods Fleets", href: "/fleet-insurance/own-goods-fleets" },
-        { label: "Rentals", href: "/fleet-insurance/rentals" },
-        { label: "Heavy Vehicles", href: "/fleet-insurance/heavy-vehicles" }
-      ],
-    },
-    {
-      type: "box",
-      boxContent: {
-        left: {
-          imgSrc: "https://storage.googleapis.com/upcover-webflow-integration/assets/images/bfb3d41184f6b9d53e820156bae9107d7cbd2da3.png",
-          heading: "MAKE A CLAIM",
-          text: `If you’re a fleet manager, driver, or you have been involved in an accident it’s crucial to report this as soon as possoble
+    dropdown: {
+      Coverages: [
+        {
+          title: "MOTOR INSURANCE",
+          items: [
+            { label: "For Sole Traders", href: "/product/motor/for-sole-traders" },
+            { label: "For Small Business", href: "/product/motor/for-small-business" },
+            { label: "For Rideshare", href: "/product/motor/for-rideshare" },
+            { label: "Mobile, plant & Equipment", href: "/product/motor/mobile-plant-equipment" }
+          ],
+        },
+        {
+          title: "FLEET MANAGERS & CORPORATES",
+          items: [
+            { label: "Courier Fleets", href: "/product/fleet/courier-fleets" },
+            { label: "Own Goods Fleets", href: "/product/fleet/own-goods-fleets" },
+            { label: "Rentals", href: "/product/fleet/rentals" },
+            { label: "Heavy Vehicles", href: "/product/fleet/heavy-vehicles" }
+          ],
+        },
+        {
+          title: "FLEET INSURANCE",
+          items: [
+            { label: "Courier Fleets", href: "/product/fleet-insurance/courier-fleets" },
+            { label: "Own Goods Fleets", href: "/product/fleet-insurance/own-goods-fleets" },
+            { label: "Rentals", href: "/product/fleet-insurance/rentals" },
+            { label: "Heavy Vehicles", href: "/product/fleet-insurance/heavy-vehicles" }
+          ],
+        },
+        {
+          type: "box",
+          boxContent: {
+            left: {
+              imgSrc: "https://storage.googleapis.com/upcover-webflow-integration/assets/images/bfb3d41184f6b9d53e820156bae9107d7cbd2da3.png",
+              heading: "MAKE A CLAIM",
+              text: `If you're a fleet manager, driver, or you have been involved in an accident it's crucial to report this as soon as possoble
               <br><br>
               Takes less than 5 mins Via e-form or up to 45 mins via call`,
-          primaryButton: "REPORT CLAIM VIA E-FORM ",
-          secondaryButton: "CALL 1300 872 683"
+              primaryButton: "REPORT CLAIM VIA E-FORM ",
+              secondaryButton: "CALL 1300 872 683"
+            }
+          }
         }
-      }
-    }
-  ],
-  Company: [
-    {
-      title: "MOTOR INSURANCE",
-      items: [
-        { label: "For Sole Traders", href: "/motor/for-sole-traders" },
-        { label: "For Small Business", href: "/motor/for-small-business" },
-        { label: "For Rideshare", href: "/motor/for-rideshare" },
-        { label: "Mobile, plant & Equipment", href: "/motor/mobile-plant-equipment" }
       ],
-    },
-    {
-      title: "FLEET MANAGERS & CORPORATES",
-      items: [
-        { label: "Courier Fleets", href: "/fleet/courier-fleets" },
-        { label: "Own Goods Fleets", href: "/fleet/own-goods-fleets" },
-        { label: "Rentals", href: "/fleet/rentals" },
-        { label: "Heavy Vehicles", href: "/fleet/heavy-vehicles" }
-      ],
-    },
-    {
-      title: "FLEET INSURANCE",
-      items: [
-        { label: "Courier Fleets", href: "/fleet-insurance/courier-fleets" },
-        { label: "Own Goods Fleets", href: "/fleet-insurance/own-goods-fleets" },
-        { label: "Rentals", href: "/fleet-insurance/rentals" },
-        { label: "Heavy Vehicles", href: "/fleet-insurance/heavy-vehicles" }
-      ],
-    },
-    {
-      type: "box",
-      boxContent: {
-        left: {
-          imgSrc: "https://storage.googleapis.com/upcover-webflow-integration/assets/images/bfb3d41184f6b9d53e820156bae9107d7cbd2da3.png",
-          heading: "MAKE A CLAIM",
-          text: `If you’re a fleet manager, driver, or you have been involved in an accident it’s crucial to report this as soon as possoble
-              <br><br>
-              Takes less than 5 mins Via e-form or up to 45 mins via call`,
-          primaryButton: "REPORT CLAIM VIA E-FORM ",
-          secondaryButton: "CALL 1300 872 683"
-        }
-      }
-    }
-  ],
-    Resources: [
-    {
-      title: "MOTOR INSURANCE",
-      items: [
-        { label: "For Sole Traders", href: "/motor/for-sole-traders" },
-        { label: "For Small Business", href: "/motor/for-small-business" },
-        { label: "For Rideshare", href: "/motor/for-rideshare" },
-        { label: "Mobile, plant & Equipment", href: "/motor/mobile-plant-equipment" }
-      ],
-    },
-    {
-      title: "FLEET MANAGERS & CORPORATES",
-      items: [
-        { label: "Courier Fleets", href: "/fleet/courier-fleets" },
-        { label: "Own Goods Fleets", href: "/fleet/own-goods-fleets" },
-        { label: "Rentals", href: "/fleet/rentals" },
-        { label: "Heavy Vehicles", href: "/fleet/heavy-vehicles" }
-      ],
-    },
-    {
-      title: "FLEET INSURANCE",
-      items: [
-        { label: "Courier Fleets", href: "/fleet-insurance/courier-fleets" },
-        { label: "Own Goods Fleets", href: "/fleet-insurance/own-goods-fleets" },
-        { label: "Rentals", href: "/fleet-insurance/rentals" },
-        { label: "Heavy Vehicles", href: "/fleet-insurance/heavy-vehicles" }
-      ],
-    },
-    {
-      type: "box",
-      boxContent: {
-        left: {
-          imgSrc: "https://storage.googleapis.com/upcover-webflow-integration/assets/images/bfb3d41184f6b9d53e820156bae9107d7cbd2da3.png",
-          heading: "MAKE A CLAIM",
-          text: `If you’re a fleet manager, driver, or you have been involved in an accident it’s crucial to report this as soon as possoble
-              <br><br>
-              Takes less than 5 mins Via e-form or up to 45 mins via call`,
-          primaryButton: "REPORT CLAIM VIA E-FORM ",
-          secondaryButton: "CALL 1300 872 683"
-        }
-      }
-    }
-  ],
     },
     svg: arrowDownIcon,
     hero: {

@@ -1,9 +1,14 @@
 // import "./style.css";
-import { upcoverLogo, arrowDownIcon } from "../../assets/svgicons";
+import { upcoverLogoBusiness, upcoverLogoTech, upcoverLogoMotor, arrowDownIcon } from "../../assets/svgicons";
+import { ThemeManager } from "../../utils/theme";
 
 interface MenuItem {
   label: string;
   href: string;
+  dropdown?: {
+    title: string;
+    items: string[];
+  }[];
 }
 
 interface NavbarConfig {
@@ -17,10 +22,11 @@ interface NavbarConfig {
 export class NavbarWidget {
   private config: NavbarConfig;
   private target: HTMLElement;
+  private themeManager: ThemeManager;
 
   constructor(config: NavbarConfig = {}) {
     this.config = {
-      logo: upcoverLogo,
+      logo: upcoverLogoBusiness,
       menuItems: config.menuItems || [
         { label: "Coverages", href: "#" },
         { label: "Company", href: "#" },
@@ -33,8 +39,239 @@ export class NavbarWidget {
 
     this.target = document.createElement("div");
     this.target.id = "navbar";
+    this.themeManager = ThemeManager.getInstance();
     this.createStyles();
+
+    // Set initial menu items based on current theme
+    const currentTheme = this.themeManager.getCurrentTheme();
+    this.config.menuItems = this.getMenuItemsForTheme(currentTheme);
+    
+    // Subscribe to theme changes
+    this.themeManager.subscribe((theme) => {
+      this.updateLogo(theme);
+      this.updateMenuItems(theme);
+    });
+
     this.render();
+  }
+
+  private getMenuItemsForTheme(theme: string): MenuItem[] {
+    switch (theme) {
+      case "business":
+        return [
+          {
+            label: "Coverages",
+            href: "#",
+            dropdown: [
+              {
+                title: "INDUSTRY",
+                items: ["Public Liability", "Professional Indemnity", "Business Insurance"]
+              },
+              {
+                title: "COVERS",
+                items: ["Healthcare Insurance", "Professional Indemnity", "Medical Malpractice"]
+              },
+              {
+                title: "INDUSTRIES",
+                items: ["Cyber Liability", "Portable Equipment", "Tax Audit"]
+              }
+            ]
+          },
+          {
+            label: "Company",
+            href: "#",
+            dropdown: [
+              {
+                title: "ABOUT",
+                items: ["Our Mission", "Careers", "Leadership"]
+              },
+              {
+                title: "TOOLS",
+                items: ["Blog", "Guides", "Case Studies"]
+              }
+            ]
+          },
+          {
+            label: "Resources",
+            href: "#",
+            dropdown: [
+              {
+                title: "LEARNING",
+                items: ["Blog", "Guides", "Case Studies"]
+              },
+              {
+                title: "SUPPORT",
+                items: ["Help Center", "Contact Us", "FAQ"]
+              }
+            ]
+          }
+        ];
+      case "tech":
+        return [
+          {
+            label: "Coverages",
+            href: "#",
+            dropdown: [
+              {
+                title: "TECH COVERAGE",
+                items: ["Cyber Insurance", "Tech E&O", "Data Breach"]
+              },
+              {
+                title: "PROTECTION",
+                items: ["Intellectual Property", "Product Liability", "Network Security"]
+              }
+            ]
+          },
+          {
+            label: "Company",
+            href: "#",
+            dropdown: [
+              {
+                title: "ABOUT",
+                items: ["Our Mission", "Careers", "Leadership"]
+              },
+              {
+                title: "TEAM",
+                items: ["Management", "Board", "Advisors"]
+              }
+            ]
+          },
+          {
+            label: "Resources",
+            href: "#",
+            dropdown: [
+              {
+                title: "DEVELOPER",
+                items: ["API Docs", "SDK", "Integration Guide"]
+              },
+              {
+                title: "LEARNING",
+                items: ["Blog", "Guides", "Case Studies"]
+              }
+            ]
+          },
+          {
+            label: "Solutions",
+            href: "#",
+            dropdown: [
+              {
+                title: "PRODUCTS",
+                items: ["Cloud Insurance", "Cyber Security", "Data Protection"]
+              },
+              {
+                title: "SERVICES",
+                items: ["Consulting", "Implementation", "Support"]
+              }
+            ]
+          }
+        ];
+      case "motor":
+        return [
+          {
+            label: "Fleet",
+            href: "#",
+            dropdown: [
+              {
+                title: "FLEET SOLUTIONS",
+                items: ["Fleet Management", "Vehicle Tracking", "Fleet Insurance"]
+              },
+              {
+                title: "SERVICES",
+                items: ["Fleet Maintenance", "Fuel Management", "Route Optimization"]
+              }
+            ]
+          },
+          {
+            label: "Motor",
+            href: "#",
+            dropdown: [
+              {
+                title: "MOTOR INSURANCE",
+                items: ["Comprehensive", "Third Party", "Third Party Fire & Theft"]
+              },
+              {
+                title: "SERVICES",
+                items: ["Claims", "Roadside Assistance", "Vehicle Valuation"]
+              }
+            ]
+          }
+        ];
+      default:
+        return [
+          { label: "Coverages", href: "#" },
+          { label: "Company", href: "#" },
+          { label: "Resources", href: "#" }
+        ];
+    }
+  }
+
+  private updateLogo(theme: string) {
+    const logoDiv = document.querySelector("#upcover-logo") as HTMLElement;
+    if (!logoDiv) return;
+
+    switch (theme) {
+      case "business":
+        logoDiv.innerHTML = upcoverLogoBusiness;
+        break;
+      case "tech":
+        logoDiv.innerHTML = upcoverLogoTech;
+        break;
+      case "motor":
+        logoDiv.innerHTML = upcoverLogoMotor;
+        break;
+      default:
+        logoDiv.innerHTML = upcoverLogoBusiness;
+    }
+  }
+
+  private updateMenuItems(theme: string) {
+    const menuComponent = document.getElementById("menu-items");
+    if (!menuComponent) return;
+
+    const menuItems = this.getMenuItemsForTheme(theme);
+    menuComponent.innerHTML = '';
+    
+    menuItems.forEach(item => {
+      const li = document.createElement('li');
+      li.className = item.dropdown ? "menu-item dropdown" : "menu-item";
+      
+      const a = document.createElement('a');
+      a.href = item.href;
+      a.innerHTML = `
+        ${item.label}
+        <span class="menu-icon">${arrowDownIcon}</span>
+      `;
+      
+      li.appendChild(a);
+
+      if (item.dropdown) {
+        const dropdownMenu = document.createElement('div');
+        dropdownMenu.className = 'dropdown-menu three-column';
+        
+        item.dropdown.forEach(section => {
+          const column = document.createElement('div');
+          column.className = 'dropdown-column';
+          
+          const title = document.createElement('h4');
+          title.textContent = section.title;
+          
+          const list = document.createElement('ul');
+          section.items.forEach(listItem => {
+            const li = document.createElement('li');
+            li.textContent = listItem;
+            list.appendChild(li);
+          });
+          
+          column.appendChild(title);
+          column.appendChild(list);
+          dropdownMenu.appendChild(column);
+        });
+        
+        li.appendChild(dropdownMenu);
+      }
+      
+      menuComponent.appendChild(li);
+    });
   }
 
   private createStyles(): void {
@@ -146,7 +383,7 @@ export class NavbarWidget {
         padding: 40px 60px;
         transition: 0.4s ease all;
         background-color: white;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         flex-direction: row;
       }
 
@@ -197,42 +434,38 @@ export class NavbarWidget {
     return logoDiv;
   }
 
-  private createMenu(): HTMLElement {
-    const menuComponent = document.createElement('ul');
-    menuComponent.id = "menu-items";
-    
-    this.config.menuItems!.forEach(item => {
-      const li = document.createElement('li');
-      li.className = "menu-item";
-      
-      const a = document.createElement('a');
-      a.href = item.href;
-      a.innerHTML = `
-        ${item.label}
-        <span class="menu-icon">${arrowDownIcon}</span>
-      `;
-      
-      li.appendChild(a);
-      menuComponent.appendChild(li);
-    });
-
-    return menuComponent;
-  }
-
   private createActions(): HTMLElement {
     const actionsDiv = document.createElement("div");
     actionsDiv.className = "actions";
 
     const loginLink = document.createElement("a");
     loginLink.href = "#";
-    loginLink.style.color = this.config.themeColor || "#FF522D";
+    loginLink.style.color = this.themeManager.getCurrentColor();
     loginLink.className = "login";
     loginLink.innerText = this.config.loginText || "LOGIN";
 
     const quoteButton = document.createElement("button");
-    quoteButton.style.backgroundColor = this.config.themeColor || "#FF522D";
+    quoteButton.style.backgroundColor = this.themeManager.getCurrentColor();
     quoteButton.className = "quote";
     quoteButton.innerText = this.config.quoteText || "GET A QUOTE";
+
+    // Set initial text color based on theme
+    const currentTheme = this.themeManager.getCurrentTheme();
+    if (currentTheme === 'motor') {
+      loginLink.style.color = '#3B4125';
+      quoteButton.style.color = '#3B4125';
+    } else {
+      loginLink.style.color = this.themeManager.getCurrentColor();
+      quoteButton.style.color = 'white';
+    }
+
+    // Subscribe to theme changes
+    this.themeManager.subscribe((theme) => {
+      const newColor = this.themeManager.getCurrentColor();
+      loginLink.style.color = theme === 'motor' ? '#3B4125' : newColor;
+      quoteButton.style.backgroundColor = newColor;
+      quoteButton.style.color = theme === 'motor' ? '#3B4125' : 'white';
+    });
 
     actionsDiv.appendChild(loginLink);
     actionsDiv.appendChild(quoteButton);
@@ -247,8 +480,58 @@ export class NavbarWidget {
     leftNavbar.className = "navbar-left";
 
     leftNavbar.appendChild(this.createLogo());
-    leftNavbar.appendChild(this.createMenu());
+    
+    // Create menu container and items
+    const menuComponent = document.createElement('ul');
+    menuComponent.id = "menu-items";
+    
+    // Get current theme and create menu items
+    const currentTheme = this.themeManager.getCurrentTheme();
+    const menuItems = this.getMenuItemsForTheme(currentTheme);
+    
+    menuItems.forEach(item => {
+      const li = document.createElement('li');
+      li.className = item.dropdown ? "menu-item dropdown" : "menu-item";
+      
+      const a = document.createElement('a');
+      a.href = item.href;
+      a.innerHTML = `
+        ${item.label}
+        <span class="menu-icon">${arrowDownIcon}</span>
+      `;
+      
+      li.appendChild(a);
 
+      if (item.dropdown) {
+        const dropdownMenu = document.createElement('div');
+        dropdownMenu.className = 'dropdown-menu three-column';
+        
+        item.dropdown.forEach(section => {
+          const column = document.createElement('div');
+          column.className = 'dropdown-column';
+          
+          const title = document.createElement('h4');
+          title.textContent = section.title;
+          
+          const list = document.createElement('ul');
+          section.items.forEach(listItem => {
+            const li = document.createElement('li');
+            li.textContent = listItem;
+            list.appendChild(li);
+          });
+          
+          column.appendChild(title);
+          column.appendChild(list);
+          dropdownMenu.appendChild(column);
+        });
+        
+        li.appendChild(dropdownMenu);
+      }
+      
+      menuComponent.appendChild(li);
+    });
+
+    leftNavbar.appendChild(menuComponent);
     this.target.appendChild(leftNavbar);
     this.target.appendChild(this.createActions());
   }

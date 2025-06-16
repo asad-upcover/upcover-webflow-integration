@@ -26,6 +26,11 @@
       //   ],
       //   svg: `<svg fill="currentColor" width="24" height="24" viewBox="0 0 24 24"><path d="M..."/></svg>`
       // }
+      themeColors: {
+        business: '#FF0000', 
+        tech: '#0000FF',    
+        motor: '#00FF00'   
+      }
     });
 
     new NavbarWidget({
@@ -34,7 +39,6 @@
         { label: "Company", href: "#company" },
         { label: "Resources", href: "#resources" }
       ],
-      themeColor: "#FF522D",
       loginText: "LOGIN",
       quoteText: "GET A QUOTE"
     }).mount(document.body);

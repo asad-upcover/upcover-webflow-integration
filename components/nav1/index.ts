@@ -5,6 +5,7 @@ import { ThemeManager } from "../../utils/theme";
 interface Tab {
   id: string;
   label: string;
+  themeColor?: string;
 }
 
 interface Branding {
@@ -16,6 +17,11 @@ interface Branding {
 interface TabBarWidgetConfig {
   tabs?: Tab[];
   branding?: Branding;
+  themeColors?: {
+    business?: string;
+    tech?: string;
+    motor?: string;
+  };
 }
 
 export class TabBarWidget {
@@ -40,6 +46,12 @@ export class TabBarWidget {
     };
 
     this.themeManager = ThemeManager.getInstance();
+    
+    // Set custom theme colors if provided
+    if (config.themeColors) {
+      this.themeManager.setCustomColors(config.themeColors);
+    }
+    
     this.render();
   }
 

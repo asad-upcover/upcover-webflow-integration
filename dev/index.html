@@ -10,13 +10,14 @@
 <body>
   <script type="module">
     import { TabBarWidget } from '../components/nav1/index.ts';
+    import { NavbarWidget } from '../components/nav2/index.ts';
 
     new TabBarWidget({
-      // tabs: [
-      //   { id: "business", label: "SMEs" },
-      //   { id: "tech", label: "Tech Industry" },
-      //   { id: "motor", label: "Fleet Services" },
-      // ],
+      tabs: [
+        { id: "business", label: "Business Sole" },
+        { id: "tech", label: "Tech Industry" },
+        { id: "motor", label: "Fleet Services" },
+      ],
       // branding: {
       //   contactPhone: "1800 999 111",
       //   contactRegion: [
@@ -26,9 +27,18 @@
       //   svg: `<svg fill="currentColor" width="24" height="24" viewBox="0 0 24 24"><path d="M..."/></svg>`
       // }
     });
+
+    new NavbarWidget({
+      menuItems: [
+        { label: "Coverages", href: "#coverages" },
+        { label: "Company", href: "#company" },
+        { label: "Resources", href: "#resources" }
+      ],
+      themeColor: "#FF522D",
+      loginText: "LOGIN",
+      quoteText: "GET A QUOTE"
+    }).mount(document.body);
   </script>
-
-
 </body>
 
 </html>

@@ -1,3 +1,7 @@
+import { callIcon } from "../../assets/svgicons";
+import { ThemeManager } from "../../utils/theme";
+
+
 interface Tab {
   id: string;
   label: string;
@@ -17,6 +21,7 @@ interface TabBarWidgetConfig {
 export class TabBarWidget {
   tabs: Tab[];
   branding: Branding;
+  private themeManager: ThemeManager;
 
   constructor(config: TabBarWidgetConfig = {}) {
     this.tabs = config.tabs || [
@@ -26,14 +31,15 @@ export class TabBarWidget {
     ];
 
     this.branding = config.branding || {
-      contactPhone: "1300 123 456",
+      contactPhone: "1300 872 683",
       contactRegion: [
         { label: "AU", code: "AU", url: "#" },
         { label: "NZ", code: "NZ", url: "#" },
       ],
-      svg: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" height="24" viewBox="0 0 24 24" width="24"><path fill="#333" d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1.003 1.003 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1v3.5a1 1 0 01-1 1C10.61 22 2 13.39 2 2a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1.003 1.003 0 01-.24 1.01l-2.2 2.2z"/></svg>`,
+      svg: callIcon,
     };
 
+    this.themeManager = ThemeManager.getInstance();
     this.render();
   }
 
@@ -98,6 +104,11 @@ export class TabBarWidget {
         .contact-region-switcher {
           font-weight: 700;
         }
+        .contact-phone-svg{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
       `;
     document.head.appendChild(style);
 
@@ -122,7 +133,10 @@ if (!appbar) {
         );
         button.classList.add("active");
         const tabId = button.dataset.tab;
-        console.log("Tab clicked:", tabId); // Replace with your `menu(tabId)` logic
+        if (tabId) {
+          this.themeManager.setTheme(tabId as any);
+        }
+        console.log("Tab clicked:", tabId);
       });
     });
 

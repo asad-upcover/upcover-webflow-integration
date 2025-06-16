@@ -31,9 +31,9 @@ export class TabBarWidget {
 
   constructor(config: TabBarWidgetConfig = {}) {
     this.tabs = config.tabs || [
-      { id: "business", label: "Businesses & Sole traders" },
-      { id: "tech", label: "Tech Startups & Enterprises" },
-      { id: "motor", label: "Motor & Fleet" },
+      { id: "business", label: "Business Sole" },
+      { id: "tech", label: "Tech Industry" },
+      { id: "motor", label: "Fleet Services" },
     ];
 
     this.branding = config.branding || {
@@ -46,12 +46,12 @@ export class TabBarWidget {
     };
 
     this.themeManager = ThemeManager.getInstance();
-    
+
     // Set custom theme colors if provided
     if (config.themeColors) {
       this.themeManager.setCustomColors(config.themeColors);
     }
-    
+
     this.render();
   }
 
@@ -77,6 +77,12 @@ export class TabBarWidget {
           position: relative;
           transition: color 0.3s ease, background-color 0.3s ease;
         }
+          @media screen and (max-width: 1010px){
+          .tabs button{
+          font-size: 13px
+          }
+          }
+
         .tabs button.active {
           background-color: #ffffff;
           color: #242826;
@@ -124,14 +130,14 @@ export class TabBarWidget {
       `;
     document.head.appendChild(style);
 
- let appbar = document.getElementById("appbar");
-if (!appbar) {
-  appbar = document.createElement("div");
-  appbar.id = "appbar";
-  document.body.insertBefore(appbar, document.body.firstChild);
-} else {
-  appbar.innerHTML = ""; // Clear existing content
-}
+    let appbar = document.getElementById("appbar");
+    if (!appbar) {
+      appbar = document.createElement("div");
+      appbar.id = "appbar";
+      document.body.insertBefore(appbar, document.body.firstChild);
+    } else {
+      appbar.innerHTML = ""; // Clear existing content
+    }
     const tabContainer = document.createElement("div");
     tabContainer.className = "tabs";
     tabContainer.innerHTML = this.tabs

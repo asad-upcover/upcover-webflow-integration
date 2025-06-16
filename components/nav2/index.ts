@@ -13,7 +13,11 @@ interface MenuItem {
 
 interface NavbarConfig {
   logo?: string;
-  menuItems?: MenuItem[];
+  menuItems?: {
+    business: MenuItem[];
+    tech: MenuItem[];
+    motor: MenuItem[];
+  };
   themeColor?: string;
   loginText?: string;
   quoteText?: string;
@@ -27,11 +31,23 @@ export class NavbarWidget {
   constructor(config: NavbarConfig = {}) {
     this.config = {
       logo: upcoverLogoBusiness,
-      menuItems: config.menuItems || [
-        { label: "Coverages", href: "#" },
-        { label: "Company", href: "#" },
-        { label: "Resources", href: "#" },
-      ],
+      menuItems: config.menuItems || {
+        business: [
+          { label: "Coverages", href: "#" },
+          { label: "Company", href: "#" },
+          { label: "Resources", href: "#" },
+        ],
+        tech: [
+          { label: "Coverages", href: "#" },
+          { label: "Company", href: "#" },
+          { label: "Resources", href: "#" },
+        ],
+        motor: [
+          { label: "Coverages", href: "#" },
+          { label: "Company", href: "#" },
+          { label: "Resources", href: "#" },
+        ]
+      } as NavbarConfig['menuItems'],
       themeColor: config.themeColor || "#FF522D",
       loginText: config.loginText || "LOGIN",
       quoteText: config.quoteText || "GET A QUOTE"
@@ -42,10 +58,6 @@ export class NavbarWidget {
     this.themeManager = ThemeManager.getInstance();
     this.createStyles();
 
-    // Set initial menu items based on current theme
-    const currentTheme = this.themeManager.getCurrentTheme();
-    this.config.menuItems = this.getMenuItemsForTheme(currentTheme);
-    
     // Subscribe to theme changes
     this.themeManager.subscribe((theme) => {
       this.updateLogo(theme);
@@ -56,153 +68,8 @@ export class NavbarWidget {
   }
 
   private getMenuItemsForTheme(theme: string): MenuItem[] {
-    switch (theme) {
-      case "business":
-        return [
-          {
-            label: "Coverages",
-            href: "#",
-            dropdown: [
-              {
-                title: "INDUSTRY",
-                items: ["Public Liability", "Professional Indemnity", "Business Insurance"]
-              },
-              {
-                title: "COVERS",
-                items: ["Healthcare Insurance", "Professional Indemnity", "Medical Malpractice"]
-              },
-              {
-                title: "INDUSTRIES",
-                items: ["Cyber Liability", "Portable Equipment", "Tax Audit"]
-              }
-            ]
-          },
-          {
-            label: "Company",
-            href: "#",
-            dropdown: [
-              {
-                title: "ABOUT",
-                items: ["Our Mission", "Careers", "Leadership"]
-              },
-              {
-                title: "TOOLS",
-                items: ["Blog", "Guides", "Case Studies"]
-              }
-            ]
-          },
-          {
-            label: "Resources",
-            href: "#",
-            dropdown: [
-              {
-                title: "LEARNING",
-                items: ["Blog", "Guides", "Case Studies"]
-              },
-              {
-                title: "SUPPORT",
-                items: ["Help Center", "Contact Us", "FAQ"]
-              }
-            ]
-          }
-        ];
-      case "tech":
-        return [
-          {
-            label: "Coverages",
-            href: "#",
-            dropdown: [
-              {
-                title: "TECH COVERAGE",
-                items: ["Cyber Insurance", "Tech E&O", "Data Breach"]
-              },
-              {
-                title: "PROTECTION",
-                items: ["Intellectual Property", "Product Liability", "Network Security"]
-              }
-            ]
-          },
-          {
-            label: "Company",
-            href: "#",
-            dropdown: [
-              {
-                title: "ABOUT",
-                items: ["Our Mission", "Careers", "Leadership"]
-              },
-              {
-                title: "TEAM",
-                items: ["Management", "Board", "Advisors"]
-              }
-            ]
-          },
-          {
-            label: "Resources",
-            href: "#",
-            dropdown: [
-              {
-                title: "DEVELOPER",
-                items: ["API Docs", "SDK", "Integration Guide"]
-              },
-              {
-                title: "LEARNING",
-                items: ["Blog", "Guides", "Case Studies"]
-              }
-            ]
-          },
-          {
-            label: "Solutions",
-            href: "#",
-            dropdown: [
-              {
-                title: "PRODUCTS",
-                items: ["Cloud Insurance", "Cyber Security", "Data Protection"]
-              },
-              {
-                title: "SERVICES",
-                items: ["Consulting", "Implementation", "Support"]
-              }
-            ]
-          }
-        ];
-      case "motor":
-        return [
-          {
-            label: "Fleet",
-            href: "#",
-            dropdown: [
-              {
-                title: "FLEET SOLUTIONS",
-                items: ["Fleet Management", "Vehicle Tracking", "Fleet Insurance"]
-              },
-              {
-                title: "SERVICES",
-                items: ["Fleet Maintenance", "Fuel Management", "Route Optimization"]
-              }
-            ]
-          },
-          {
-            label: "Motor",
-            href: "#",
-            dropdown: [
-              {
-                title: "MOTOR INSURANCE",
-                items: ["Comprehensive", "Third Party", "Third Party Fire & Theft"]
-              },
-              {
-                title: "SERVICES",
-                items: ["Claims", "Roadside Assistance", "Vehicle Valuation"]
-              }
-            ]
-          }
-        ];
-      default:
-        return [
-          { label: "Coverages", href: "#" },
-          { label: "Company", href: "#" },
-          { label: "Resources", href: "#" }
-        ];
-    }
+    if (!this.config.menuItems) return [];
+    return this.config.menuItems[theme as keyof typeof this.config.menuItems] || [];
   }
 
   private updateLogo(theme: string) {
@@ -230,46 +97,55 @@ export class NavbarWidget {
 
     const menuItems = this.getMenuItemsForTheme(theme);
     menuComponent.innerHTML = '';
-    
+
     menuItems.forEach(item => {
       const li = document.createElement('li');
       li.className = item.dropdown ? "menu-item dropdown" : "menu-item";
-      
+
       const a = document.createElement('a');
       a.href = item.href;
       a.innerHTML = `
         ${item.label}
         <span class="menu-icon">${arrowDownIcon}</span>
       `;
-      
+
       li.appendChild(a);
 
       if (item.dropdown) {
         const dropdownMenu = document.createElement('div');
         dropdownMenu.className = 'dropdown-menu three-column';
-        
+
         item.dropdown.forEach(section => {
           const column = document.createElement('div');
           column.className = 'dropdown-column';
-          
+
           const title = document.createElement('h4');
           title.textContent = section.title;
-          
+
           const list = document.createElement('ul');
           section.items.forEach(listItem => {
             const li = document.createElement('li');
             li.textContent = listItem;
+            // Style "View all" items with theme color
+            if (listItem.toLowerCase().includes('view all')) {
+              li.style.cssText = `
+                color: ${this.themeManager.getCurrentColor()};
+                text-decoration: underline;
+                font-weight: 700;
+                text-underline-offset: 4px;
+              `;
+            }
             list.appendChild(li);
           });
-          
+
           column.appendChild(title);
           column.appendChild(list);
           dropdownMenu.appendChild(column);
         });
-        
+
         li.appendChild(dropdownMenu);
       }
-      
+
       menuComponent.appendChild(li);
     });
   }
@@ -373,6 +249,25 @@ export class NavbarWidget {
         list-style: none;
       }
 
+      @media screen and (max-width: 1010px) {
+        .login {
+          font-size: 13px;
+        }
+        .quote {
+          padding: 15px;
+          font-size: 13px;
+        }
+        #menu-items {
+          margin-left: 0px;
+        } 
+        #upcover-logo {
+          width: 150px;
+        }
+        .menu-item {
+          padding: 40px 0px;
+        }
+      }
+
       /* Initially hidden dropdown */
       .dropdown-menu.three-column {
         display: none;
@@ -395,12 +290,14 @@ export class NavbarWidget {
       .dropdown-column {
         flex: 1;
         min-width: 150px;
+        max-width: 285px;
+        margin-right: 60px;
       }
 
       .dropdown-column h4 {
         font-size: 16px;
         font-weight: 700;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
         color: #242826;
       }
 
@@ -412,7 +309,7 @@ export class NavbarWidget {
       }
 
       .dropdown-column ul li {
-        margin-bottom: 20px;
+        margin-bottom: 30px;
         font-size: 14px;
         color: #555;
         cursor: pointer;
@@ -480,54 +377,63 @@ export class NavbarWidget {
     leftNavbar.className = "navbar-left";
 
     leftNavbar.appendChild(this.createLogo());
-    
+
     // Create menu container and items
     const menuComponent = document.createElement('ul');
     menuComponent.id = "menu-items";
-    
+
     // Get current theme and create menu items
     const currentTheme = this.themeManager.getCurrentTheme();
     const menuItems = this.getMenuItemsForTheme(currentTheme);
-    
+
     menuItems.forEach(item => {
       const li = document.createElement('li');
       li.className = item.dropdown ? "menu-item dropdown" : "menu-item";
-      
+
       const a = document.createElement('a');
       a.href = item.href;
       a.innerHTML = `
         ${item.label}
         <span class="menu-icon">${arrowDownIcon}</span>
       `;
-      
+
       li.appendChild(a);
 
       if (item.dropdown) {
         const dropdownMenu = document.createElement('div');
         dropdownMenu.className = 'dropdown-menu three-column';
-        
+
         item.dropdown.forEach(section => {
           const column = document.createElement('div');
           column.className = 'dropdown-column';
-          
+
           const title = document.createElement('h4');
           title.textContent = section.title;
-          
+
           const list = document.createElement('ul');
           section.items.forEach(listItem => {
             const li = document.createElement('li');
             li.textContent = listItem;
+            // Style "View all" items with theme color
+            if (listItem.toLowerCase().includes('view all')) {
+              li.style.cssText = `
+                color: ${this.themeManager.getCurrentColor()};
+                text-decoration: underline;
+                font-weight: 700;
+                text-underline-offset: 4px;
+              `;
+            }
             list.appendChild(li);
           });
-          
+
           column.appendChild(title);
           column.appendChild(list);
           dropdownMenu.appendChild(column);
         });
-        
+
         li.appendChild(dropdownMenu);
       }
-      
+
       menuComponent.appendChild(li);
     });
 

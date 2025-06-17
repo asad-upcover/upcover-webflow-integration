@@ -12,6 +12,7 @@
   <script type="module">
     import { TabBarWidget } from '../components/nav1/index.ts';
     import { NavbarWidget } from '../components/nav2/index.ts';
+    import { callIcon } from "../assets/svgicons.ts";
 
     new TabBarWidget({
       tabs: [
@@ -19,6 +20,14 @@
         { id: "tech", label: "Tech Startups & Enterprises" },
         { id: "motor", label: "Motor & Fleet" },
       ],
+      branding: {
+        contactPhone: "1300 872 683",
+        contactRegion: [
+          { label: "AU", code: "AU", url: "#" },
+          { label: "SG", code: "NZ", url: "#" }
+        ],
+        svg: callIcon
+      },
       themeColors: {
         business: '#FF0000',
         tech: '#0000FF',
@@ -39,12 +48,34 @@
               },
               {
                 title: "COVERS",
-                items: ["Healthcare Professionals Insurance", "Professional Indemnity Insurance", "Medical Malpractice Insurance",
-                  "Public Liability Insurance", "Products Liability Insurance", "Cyber and Privacy Liability Insurance",
-                  "Management Liability Insurance", "Business Package Insurance ", "Business Equipment Insurance", "Personal Accident & Sickness Insurance", "Employment Practices Liability Insurance", "Motor Insurance for Businesses", "View all coverages"
+                items: ["Healthcare Professionals Insurance", "Professional Indemnity Insurance", "Medical Malpractice Insurance", "Public Liability Insurance", "Products Liability Insurance", "Cyber and Privacy Liability Insurance", "Management Liability Insurance", "Business Package Insurance ", "Business Equipment Insurance", "Personal Accident & Sickness Insurance", "Employment Practices Liability Insurance", "Motor Insurance for Businesses", "View all coverages"]
+              }
+            ],
+            boxComponent: {
+              firstDiv: {
+                image: "https://storage.googleapis.com/upcover-webflow-integration/assets/images/bfb3d41184f6b9d53e820156bae9107d7cbd2da3.png",
+                heading: "NOT SURE?",
+                paragraph: "Talk to our small business insurance specialists to find a tailored cover that works for you and your unique business needs.",
+                buttons: [
+                  {
+                    label: "CHAT WITH A SPECIALIST",
+                    href: "#"
+                  },
+                  {
+                    label: "CALL 1300 872 683",
+                    href: "tel:1300872683"
+                  }
                 ]
               },
-            ]
+              secondDiv: {
+                heading: "GET INSTANT QUOTE",
+                paragraph: "Coverages across 1000+ industries",
+                button: {
+                  label: "GET A QUOTE",
+                  href: "#"
+                }
+              }
+            }
           },
           {
             label: "Company",

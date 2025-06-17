@@ -9,6 +9,25 @@ interface MenuItem {
     title: string;
     items: string[];
   }[];
+  boxComponent?: {
+    firstDiv: {
+      image: string;
+      heading: string;
+      paragraph: string;
+      buttons: {
+        label: string;
+        href: string;
+      }[];
+    };
+    secondDiv: {
+      heading: string;
+      paragraph: string;
+      button: {
+        label: string;
+        href: string;
+      };
+    };
+  };
 }
 
 interface NavbarConfig {
@@ -97,55 +116,142 @@ export class NavbarWidget {
 
     const menuItems = this.getMenuItemsForTheme(theme);
     menuComponent.innerHTML = '';
-
+    
     menuItems.forEach(item => {
       const li = document.createElement('li');
       li.className = item.dropdown ? "menu-item dropdown" : "menu-item";
-
+      
       const a = document.createElement('a');
       a.href = item.href;
       a.innerHTML = `
         ${item.label}
         <span class="menu-icon">${arrowDownIcon}</span>
       `;
-
+      
       li.appendChild(a);
 
-      if (item.dropdown) {
+      if (item.dropdown || item.boxComponent) {
         const dropdownMenu = document.createElement('div');
         dropdownMenu.className = 'dropdown-menu three-column';
+        
+        // Add dropdown columns if they exist
+        if (item.dropdown) {
+          item.dropdown.forEach(section => {
+            const column = document.createElement('div');
+            column.className = 'dropdown-column';
+            
+            const title = document.createElement('h4');
+            title.textContent = section.title;
+            
+            const list = document.createElement('ul');
+            section.items.forEach(listItem => {
+              const li = document.createElement('li');
+              li.textContent = listItem;
+              if (listItem.toLowerCase().includes('view all')) {
+                li.style.cssText = `
+                  color: ${this.themeManager.getCurrentColor()};
+                  text-decoration: underline;
+                  font-weight: 700;
+                  text-underline-offset: 4px;
+                `;
+              }
+              list.appendChild(li);
+            });
+            
+            column.appendChild(title);
+            column.appendChild(list);
+            dropdownMenu.appendChild(column);
+          });
+        }
 
-        item.dropdown.forEach(section => {
-          const column = document.createElement('div');
-          column.className = 'dropdown-column';
+        // Add box component if it exists
+        if (item.boxComponent) {
+          const boxContainer = document.createElement('div');
+          boxContainer.className = 'dropdown-box-container';
 
-          const title = document.createElement('h4');
-          title.textContent = section.title;
-
-          const list = document.createElement('ul');
-          section.items.forEach(listItem => {
-            const li = document.createElement('li');
-            li.textContent = listItem;
-            // Style "View all" items with theme color
-            if (listItem.toLowerCase().includes('view all')) {
-              li.style.cssText = `
-                color: ${this.themeManager.getCurrentColor()};
-                text-decoration: underline;
-                font-weight: 700;
-                text-underline-offset: 4px;
+          // First Div
+          const firstDiv = document.createElement('div');
+          firstDiv.className = 'box-first-div';
+          
+          const image = document.createElement('img');
+          image.src = item.boxComponent.firstDiv.image;
+          image.alt = item.boxComponent.firstDiv.heading;
+          
+          const heading1 = document.createElement('h3');
+          heading1.textContent = item.boxComponent.firstDiv.heading;
+          
+          const paragraph1 = document.createElement('p');
+          paragraph1.textContent = item.boxComponent.firstDiv.paragraph;
+          
+          const buttonContainer1 = document.createElement('div');
+          buttonContainer1.className = 'button-container';
+          item.boxComponent.firstDiv.buttons.forEach((button, index) => {
+            const btn = document.createElement('a');
+            btn.href = button.href;
+            btn.className = 'box-button';
+            btn.textContent = button.label;
+            
+            // Apply different background color for second button based on theme
+            if (index === 1) {
+              const currentTheme = this.themeManager.getCurrentTheme();
+              const themeColor = this.themeManager.getCurrentColor();
+              if (currentTheme === 'business') {
+                btn.style.cssText = `
+                  background-color: #FFCFC5;
+                  color: ${themeColor};
+                `;
+              } else if (currentTheme === 'motor') {
+                btn.style.cssText = `
+                  background-color: #F8FFAF;
+                  color: ${themeColor};
+                `;
+              }
+            } else {
+              btn.style.cssText = `
+                background-color: ${this.themeManager.getCurrentColor()};
+                color: white;
               `;
             }
-            list.appendChild(li);
+            
+            buttonContainer1.appendChild(btn);
           });
 
-          column.appendChild(title);
-          column.appendChild(list);
-          dropdownMenu.appendChild(column);
-        });
+          firstDiv.appendChild(image);
+          firstDiv.appendChild(heading1);
+          firstDiv.appendChild(paragraph1);
+          firstDiv.appendChild(buttonContainer1);
 
+          // Second Div
+          const secondDiv = document.createElement('div');
+          secondDiv.className = 'box-second-div';
+          
+          const heading2 = document.createElement('h3');
+          heading2.textContent = item.boxComponent.secondDiv.heading;
+          
+          const paragraph2 = document.createElement('p');
+          paragraph2.textContent = item.boxComponent.secondDiv.paragraph;
+          
+          const button2 = document.createElement('a');
+          button2.href = item.boxComponent.secondDiv.button.href;
+          button2.className = 'box-button';
+          button2.textContent = item.boxComponent.secondDiv.button.label;
+          button2.style.cssText = `
+            background-color: ${this.themeManager.getCurrentColor()};
+            color: white;
+          `;
+
+          secondDiv.appendChild(heading2);
+          secondDiv.appendChild(paragraph2);
+          secondDiv.appendChild(button2);
+
+          boxContainer.appendChild(firstDiv);
+          boxContainer.appendChild(secondDiv);
+          dropdownMenu.appendChild(boxContainer);
+        }
+        
         li.appendChild(dropdownMenu);
       }
-
+      
       menuComponent.appendChild(li);
     });
   }
@@ -236,7 +342,6 @@ export class NavbarWidget {
       }
 
       .menu-item:hover a {
-        text-decoration: underline;
         text-underline-offset: 4px;
       }
 
@@ -271,15 +376,37 @@ export class NavbarWidget {
       /* Initially hidden dropdown */
       .dropdown-menu.three-column {
         display: none;
-        position: fixed;
+        position: absolute;
         margin-top: 60px;
         left: 0;
-        width: 100vw;
+        right: 0;
+        width: 100%;
         padding: 40px 60px;
         transition: 0.4s ease all;
         background-color: white;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         flex-direction: row;
+        max-height: calc(100vh - 60px);
+        overflow-y: auto;
+        overflow-x: hidden;
+        box-sizing: border-box;
+      }
+
+      .dropdown-menu.three-column::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .dropdown-menu.three-column::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+
+      .dropdown-menu.three-column::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 4px;
+      }
+
+      .dropdown-menu.three-column::-webkit-scrollbar-thumb:hover {
+        background: #555;
       }
 
       /* Show on hover of menu item */
@@ -318,6 +445,106 @@ export class NavbarWidget {
 
       .dropdown-column ul li:hover {
         color: #000;
+      }
+
+      .dropdown-box-container {
+        flex: 0 0 800px;
+        margin-left: 300px;
+        // margin-right: 60px;
+      }
+
+      .box-first-div {
+        margin-bottom: 20px;
+        background: #F7F6F3;
+        padding: 20px;
+        border-radius: 20px;
+        width: 490px;
+        border: 1px solid rgba(206, 210, 217, 0.50);
+      }
+
+      .box-first-div img {
+        width: 100%;
+        height: 140px;
+        object-fit: cover;
+        object-position: 20% 30%;
+        border-radius: 10px;
+        margin-bottom: 30px;
+      }
+
+      .box-second-div {
+        background: #F7F6F3;
+        padding: 20px;
+        border-radius: 20px;
+        width: 490px;
+        border: 1px solid rgba(206, 210, 217, 0.50);
+
+      }
+
+      .box-first-div h3,
+      .box-second-div h3 {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #242826;
+      }
+
+      .box-first-div p,
+      .box-second-div p {
+        font-size: 14px;
+        line-height: 25px;
+        color: #555;
+        margin-bottom: 30px;
+        font-weight: 400;
+      }
+
+      .button-container {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        width: 100%;
+      }
+
+      .box-button {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 19px 20px;
+        background-color: ${this.themeManager.getCurrentColor()};
+        color: white;
+        text-decoration: none;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 14px;
+        transition: background-color 0.3s ease;
+        box-sizing: border-box;
+      }
+
+      .box-button:hover {
+        opacity: 0.9;
+      }
+
+      @media screen and (max-width: 1010px) {
+        .dropdown-box-container {
+          flex: 0 0 300px;
+          padding: 20px;
+          margin-left: 20px;
+        }
+
+        .box-first-div img {
+          height: 150px;
+        }
+
+        .box-first-div h3,
+        .box-second-div h3 {
+          font-size: 18px;
+        }
+
+        .box-button {
+          padding: 8px 16px;
+          font-size: 13px;
+        }
       }
     `;
     document.head.appendChild(style);
@@ -399,38 +626,125 @@ export class NavbarWidget {
 
       li.appendChild(a);
 
-      if (item.dropdown) {
+      if (item.dropdown || item.boxComponent) {
         const dropdownMenu = document.createElement('div');
         dropdownMenu.className = 'dropdown-menu three-column';
+        
+        // Add dropdown columns if they exist
+        if (item.dropdown) {
+          item.dropdown.forEach(section => {
+            const column = document.createElement('div');
+            column.className = 'dropdown-column';
+            
+            const title = document.createElement('h4');
+            title.textContent = section.title;
+            
+            const list = document.createElement('ul');
+            section.items.forEach(listItem => {
+              const li = document.createElement('li');
+              li.textContent = listItem;
+              if (listItem.toLowerCase().includes('view all')) {
+                li.style.cssText = `
+                  color: ${this.themeManager.getCurrentColor()};
+                  text-decoration: underline;
+                  font-weight: 700;
+                  text-underline-offset: 4px;
+                `;
+              }
+              list.appendChild(li);
+            });
+            
+            column.appendChild(title);
+            column.appendChild(list);
+            dropdownMenu.appendChild(column);
+          });
+        }
 
-        item.dropdown.forEach(section => {
-          const column = document.createElement('div');
-          column.className = 'dropdown-column';
+        // Add box component if it exists
+        if (item.boxComponent) {
+          const boxContainer = document.createElement('div');
+          boxContainer.className = 'dropdown-box-container';
 
-          const title = document.createElement('h4');
-          title.textContent = section.title;
-
-          const list = document.createElement('ul');
-          section.items.forEach(listItem => {
-            const li = document.createElement('li');
-            li.textContent = listItem;
-            // Style "View all" items with theme color
-            if (listItem.toLowerCase().includes('view all')) {
-              li.style.cssText = `
-                color: ${this.themeManager.getCurrentColor()};
-                text-decoration: underline;
-                font-weight: 700;
-                text-underline-offset: 4px;
+          // First Div
+          const firstDiv = document.createElement('div');
+          firstDiv.className = 'box-first-div';
+          
+          const image = document.createElement('img');
+          image.src = item.boxComponent.firstDiv.image;
+          image.alt = item.boxComponent.firstDiv.heading;
+          
+          const heading1 = document.createElement('h3');
+          heading1.textContent = item.boxComponent.firstDiv.heading;
+          
+          const paragraph1 = document.createElement('p');
+          paragraph1.textContent = item.boxComponent.firstDiv.paragraph;
+          
+          const buttonContainer1 = document.createElement('div');
+          buttonContainer1.className = 'button-container';
+          item.boxComponent.firstDiv.buttons.forEach((button, index) => {
+            const btn = document.createElement('a');
+            btn.href = button.href;
+            btn.className = 'box-button';
+            btn.textContent = button.label;
+            
+            // Apply different background color for second button based on theme
+            if (index === 1) {
+              const currentTheme = this.themeManager.getCurrentTheme();
+              const themeColor = this.themeManager.getCurrentColor();
+              if (currentTheme === 'business') {
+                btn.style.cssText = `
+                  background-color: #FFCFC5;
+                  color: ${themeColor};
+                `;
+              } else if (currentTheme === 'motor') {
+                btn.style.cssText = `
+                  background-color: #F8FFAF;
+                  color: ${themeColor};
+                `;
+              }
+            } else {
+              btn.style.cssText = `
+                background-color: ${this.themeManager.getCurrentColor()};
+                color: white;
               `;
             }
-            list.appendChild(li);
+            
+            buttonContainer1.appendChild(btn);
           });
 
-          column.appendChild(title);
-          column.appendChild(list);
-          dropdownMenu.appendChild(column);
-        });
+          firstDiv.appendChild(image);
+          firstDiv.appendChild(heading1);
+          firstDiv.appendChild(paragraph1);
+          firstDiv.appendChild(buttonContainer1);
 
+          // Second Div
+          const secondDiv = document.createElement('div');
+          secondDiv.className = 'box-second-div';
+          
+          const heading2 = document.createElement('h3');
+          heading2.textContent = item.boxComponent.secondDiv.heading;
+          
+          const paragraph2 = document.createElement('p');
+          paragraph2.textContent = item.boxComponent.secondDiv.paragraph;
+          
+          const button2 = document.createElement('a');
+          button2.href = item.boxComponent.secondDiv.button.href;
+          button2.className = 'box-button';
+          button2.textContent = item.boxComponent.secondDiv.button.label;
+          button2.style.cssText = `
+            background-color: ${this.themeManager.getCurrentColor()};
+            color: white;
+          `;
+
+          secondDiv.appendChild(heading2);
+          secondDiv.appendChild(paragraph2);
+          secondDiv.appendChild(button2);
+
+          boxContainer.appendChild(firstDiv);
+          boxContainer.appendChild(secondDiv);
+          dropdownMenu.appendChild(boxContainer);
+        }
+        
         li.appendChild(dropdownMenu);
       }
 

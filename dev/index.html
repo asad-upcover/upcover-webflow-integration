@@ -1,17 +1,252 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link
-      rel="stylesheet"
-      href="https://storage.googleapis.com/upcover-webflow-integration/assets/main.css"
-    />
-    <title>Upcover Webflow Integration Preview</title>
-  </head>
-  <body>
-    <div id="appbar"></div>
-    <nav id="navbar"></nav>
-    <script type="module" src="../components/appbar/index.ts"></script>
-    <script type="module" src="../components/navbar/index.ts"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="https://storage.googleapis.com/upcover-webflow-integration/assets/main.css" />
+  <link rel="shortcut icon" href="https://cdn.prod.website-files.com/606e64f026fe7430dfbd27c4/6254bd870d26cf7da61d07ee_upcover%20Logo%20_%20New%20(2).webp" type="image/x-icon">
+  <title>Upcover Webflow Integration Preview</title>
+</head>
+
+<body>
+  <script type="module">
+    import { TabBarWidget } from '../components/nav1/index.ts';
+    import { NavbarWidget } from '../components/nav2/index.ts';
+    import { callIcon } from "../assets/svgicons.ts";
+
+    new TabBarWidget({
+      tabs: [
+        { id: "business", label: "Businesses & Sole traders" },
+        { id: "tech", label: "Tech Startups & Enterprises" },
+        { id: "motor", label: "Motor & Fleet" },
+      ],
+      branding: {
+        contactPhone: "1300 872 683",
+        contactRegion: [
+          { label: "AU", code: "AU", url: "#" },
+          { label: "SG", code: "NZ", url: "#" }
+        ],
+        svg: callIcon
+      },
+      themeColors: {
+        business: '#FF0000',
+        tech: '#0000FF',
+        motor: '#00FF00'
+      }
+    });
+
+    new NavbarWidget({
+      menuItems: {
+        business: [
+          {
+            label: "Coverages",
+            href: "#coverages",
+            dropdown: [
+              {
+                title: "INDUSTRY",
+                items: ["Disability Support & Care", "Independent Living, STAs and SDAs", "Doctors, GPs and Clinics", "Beauty and Personal Care", "Therapists and Healing", "Hospitality, Pubs and Restaurants", "Tradespeople, Plumbers and Roofers", "Construction", "IT Contractors", "Retail", "Consultants", "Real Estate", "View all industries"]
+              },
+              {
+                title: "COVERS",
+                items: ["Healthcare Professionals Insurance", "Professional Indemnity Insurance", "Medical Malpractice Insurance", "Public Liability Insurance", "Products Liability Insurance", "Cyber and Privacy Liability Insurance", "Management Liability Insurance", "Business Package Insurance ", "Business Equipment Insurance", "Personal Accident & Sickness Insurance", "Employment Practices Liability Insurance", "Motor Insurance for Businesses", "View all coverages"]
+              }
+            ],
+            boxComponent: {
+              firstDiv: {
+                image: "https://storage.googleapis.com/upcover-webflow-integration/assets/images/bfb3d41184f6b9d53e820156bae9107d7cbd2da3.png",
+                heading: "NOT SURE?",
+                paragraph: "Talk to our small business insurance specialists to find a tailored cover that works for you and your unique business needs.",
+                buttons: [
+                  {
+                    label: "CHAT WITH A SPECIALIST",
+                    href: "#"
+                  },
+                  {
+                    label: "CALL 1300 872 683",
+                    href: "tel:1300872683"
+                  }
+                ]
+              },
+              secondDiv: {
+                heading: "GET INSTANT QUOTE",
+                paragraph: "Coverages across 1000+ industries",
+                button: {
+                  label: "GET A QUOTE",
+                  href: "#"
+                }
+              }
+            }
+          },
+          {
+            label: "Company",
+            href: "#coverages",
+            dropdown: [
+              {
+                title: "INDUSTRY",
+                items: ["Disability Support & Care", "Independent Living, STAs and SDAs", "Doctors, GPs and Clinics", "Beauty and Personal Care", "Therapists and Healing", "Hospitality, Pubs and Restaurants", "Tradespeople, Plumbers and Roofers", "Construction", "IT Contractors", "Retail", "Consultants", "Real Estate", "View all industries"]
+              },
+              {
+                title: "COVERS",
+                items: ["Healthcare Professionals Insurance", "Professional Indemnity Insurance", "Medical Malpractice Insurance",
+                  "Public Liability Insurance", "Products Liability Insurance", "Cyber and Privacy Liability Insurance",
+                  "Management Liability Insurance", "Business Package Insurance ", "Business Equipment Insurance", "Personal Accident & Sickness Insurance", "Employment Practices Liability Insurance", "Motor Insurance for Businesses", "View all coverages"
+                ]
+              }
+            ]
+          },
+          {
+            label: "Resources",
+            href: "#coverages",
+            dropdown: [
+              {
+                title: "INDUSTRY",
+                items: ["Disability Support & Care", "Independent Living, STAs and SDAs", "Doctors, GPs and Clinics", "Beauty and Personal Care", "Therapists and Healing", "Hospitality, Pubs and Restaurants", "Tradespeople, Plumbers and Roofers", "Construction", "IT Contractors", "Retail", "Consultants", "Real Estate", "View all industries"]
+              },
+              {
+                title: "COVERS",
+                items: ["Healthcare Professionals Insurance", "Professional Indemnity Insurance", "Medical Malpractice Insurance",
+                  "Public Liability Insurance", "Products Liability Insurance", "Cyber and Privacy Liability Insurance",
+                  "Management Liability Insurance", "Business Package Insurance ", "Business Equipment Insurance", "Personal Accident & Sickness Insurance", "Employment Practices Liability Insurance", "Motor Insurance for Businesses", "View all coverages"
+                ]
+              }
+            ]
+          },
+        ],
+        tech: [
+          {
+            label: "Coverages",
+            href: "#coverages",
+            dropdown: [
+              {
+                title: "COVER",
+                items: ["Cyber & Technology Liability", "Technology & Professional Indemnity", "Intellectual Property", "Business Property", "Directors & Officers Liability", "Medical Malpractice", "Media Liability", "Investment Managers Indemnity", "Employment Practices Liability"]
+              },
+              {
+                title: "",
+                items: ["Crime Cover", "Public and Product Liability", "View all covers"]
+              }
+            ]
+          },
+          {
+            label: "Company",
+            href: "#company",
+            dropdown: [
+              {
+                title: "COMPANY",
+                items: ["About Us", "Career", "Culture", "Newsroom"]
+              },
+              {
+                title: "PARTNERS",
+                items: ["Become a Partner", "Become an affiliate", "Partner Marketpalce"]
+              },
+              {
+                title: "CLAIMS",
+                items: ["Make a Claim", "Make a Complaint"]
+              },
+              {
+                title: "CONTACT US",
+                items: ["hello@upcover.com", "Level 8, 11 York Street, Sydney", "1300 872 683"]
+              }
+            ]
+          },
+          {
+            label: "Coverages",
+            href: "#coverages",
+            dropdown: [
+              {
+                title: "COVER",
+                items: ["Cyber & Technology Liability", "Technology & Professional Indemnity", "Intellectual Property", "Business Property", "Directors & Officers Liability", "Medical Malpractice", "Media Liability", "Investment Managers Indemnity", "Employment Practices Liability"]
+              },
+              {
+                title: "",
+                items: ["Crime Cover", "Public and Product Liability", "View all covers"]
+              }
+            ]
+          },
+          {
+            label: "Solutions",
+            href: "#solutions",
+            dropdown: [
+              {
+                title: "INDUSTRY",
+                items: ["Blockchain / Web3", "AI", "Robotics & Hardware", "Life sciences & Bioscience ", "Digital Health", "Consumer", "B2B Saas", "Media Tech", "EdTech", "E-commerce", "Fin Tech", "Reg Tech", "View all industries"]
+              },
+              {
+                title: "FUNDS",
+                items: ["Family Offices", "Venture Capital Funds", "Debt Funds", "Private Equity Vehicles", "Investment Managers", "View all Investment Vehicles"]
+              },
+              {
+                title: "NEEDS",
+                items: ["Getting Insured for the First Time", "Getting Insured for the First Time", "Fundraising Protection", "Protecting Your Team & Workplace", "Safeguarding Digital Assets", "Finding the Right Coverage Package", "Expanding Interstate"]
+              },
+              {
+                title: "STAGE",
+                items: ["Early Stage", "Growth & Late Stage", "Pre-IPO, IPO & Listing"]
+              }
+            ]
+          }
+        ],
+        motor: [
+          {
+            label: "Coverages",
+            href: "#coverages",
+            dropdown: [
+              {
+                title: "MOTOR INSURANCE",
+                items: ["For Sole Traders", "For Small Business", "For Rideshare", "Mobile, plant & Equipment"]
+              },
+              {
+                title: "FLEET MANAGERS & CORPORATES",
+                items: ["Courier Fleets", "Own Goods Fleets", "Rentals" , "Heavy Vehicles"]
+              },
+              {
+                title: "FLEET INSURANCE",
+                items: ["Courier Fleets", "Own Goods Fleets", "Rentals" , "Heavy Vehicles"]
+              }
+            ]
+          },
+          {
+            label: "Company",
+            href: "#company",
+            dropdown: [
+              {
+                title: "MOTOR INSURANCE",
+                items: ["For Sole Traders", "For Small Business", "For Rideshare", "Mobile, plant & Equipment"]
+              },
+              {
+                title: "FLEET MANAGERS & CORPORATES",
+                items: ["Courier Fleets", "Own Goods Fleets", "Rentals" , "Heavy Vehicles"]
+              },
+              {
+                title: "FLEET INSURANCE",
+                items: ["Courier Fleets", "Own Goods Fleets", "Rentals" , "Heavy Vehicles"]
+              }
+            ]
+          },,
+          {
+            label: "Resources",
+            href: "#resources",
+            dropdown: [
+              {
+                title: "MOTOR INSURANCE",
+                items: ["For Sole Traders", "For Small Business", "For Rideshare", "Mobile, plant & Equipment"]
+              },
+              {
+                title: "FLEET MANAGERS & CORPORATES",
+                items: ["Courier Fleets", "Own Goods Fleets", "Rentals" , "Heavy Vehicles"]
+              },
+              {
+                title: "FLEET INSURANCE",
+                items: ["Courier Fleets", "Own Goods Fleets", "Rentals" , "Heavy Vehicles"]
+              }
+            ]
+          },
+        ]
+      },
+      loginText: "LOGIN",
+      quoteText: "GET A QUOTE"
+    }).mount(document.body);
+  </script>
+</body>
+
 </html>

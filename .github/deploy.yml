@@ -7,7 +7,7 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    environment: production
+    environment: staging
 
     steps:
       - name: Checkout code
@@ -22,7 +22,7 @@ jobs:
         run: npm install
 
       - name: Build project
-        run: npm run build
+        run: NODE_ENV=production npm run build
 
       - name: Authenticate with Google Cloud
         uses: google-github-actions/auth@v2

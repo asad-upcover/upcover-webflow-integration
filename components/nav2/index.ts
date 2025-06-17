@@ -19,7 +19,7 @@ interface MenuItem {
         href: string;
       }[];
     };
-    secondDiv: {
+    secondDiv?: {
       heading: string;
       paragraph: string;
       button: {
@@ -181,7 +181,7 @@ export class NavbarWidget {
           heading1.textContent = item.boxComponent.firstDiv.heading;
           
           const paragraph1 = document.createElement('p');
-          paragraph1.textContent = item.boxComponent.firstDiv.paragraph;
+          paragraph1.innerHTML = item.boxComponent.firstDiv.paragraph;
           
           const buttonContainer1 = document.createElement('div');
           buttonContainer1.className = 'button-container';
@@ -203,13 +203,14 @@ export class NavbarWidget {
               } else if (currentTheme === 'motor') {
                 btn.style.cssText = `
                   background-color: #F8FFAF;
-                  color: ${themeColor};
+                  color: #000000;
                 `;
               }
             } else {
+              const currentTheme = this.themeManager.getCurrentTheme();
               btn.style.cssText = `
                 background-color: ${this.themeManager.getCurrentColor()};
-                color: white;
+                color: ${currentTheme === 'motor' ? '#000000' : 'white'};
               `;
             }
             
@@ -221,31 +222,36 @@ export class NavbarWidget {
           firstDiv.appendChild(paragraph1);
           firstDiv.appendChild(buttonContainer1);
 
-          // Second Div
-          const secondDiv = document.createElement('div');
-          secondDiv.className = 'box-second-div';
-          
-          const heading2 = document.createElement('h3');
-          heading2.textContent = item.boxComponent.secondDiv.heading;
-          
-          const paragraph2 = document.createElement('p');
-          paragraph2.textContent = item.boxComponent.secondDiv.paragraph;
-          
-          const button2 = document.createElement('a');
-          button2.href = item.boxComponent.secondDiv.button.href;
-          button2.className = 'box-button';
-          button2.textContent = item.boxComponent.secondDiv.button.label;
-          button2.style.cssText = `
-            background-color: ${this.themeManager.getCurrentColor()};
-            color: white;
-          `;
-
-          secondDiv.appendChild(heading2);
-          secondDiv.appendChild(paragraph2);
-          secondDiv.appendChild(button2);
-
           boxContainer.appendChild(firstDiv);
-          boxContainer.appendChild(secondDiv);
+
+          // Second Div (only if it exists)
+          if (item.boxComponent.secondDiv) {
+            const secondDiv = document.createElement('div');
+            secondDiv.className = 'box-second-div';
+            
+            const heading2 = document.createElement('h3');
+            heading2.textContent = item.boxComponent.secondDiv.heading;
+            
+            const paragraph2 = document.createElement('p');
+            paragraph2.innerHTML = item.boxComponent.secondDiv.paragraph;
+            
+            const button2 = document.createElement('a');
+            button2.href = item.boxComponent.secondDiv.button.href;
+            button2.className = 'box-button';
+            button2.textContent = item.boxComponent.secondDiv.button.label;
+            const currentTheme = this.themeManager.getCurrentTheme();
+            button2.style.cssText = `
+              background-color: ${this.themeManager.getCurrentColor()};
+              color: ${currentTheme === 'motor' ? '#000000' : 'white'};
+            `;
+
+            secondDiv.appendChild(heading2);
+            secondDiv.appendChild(paragraph2);
+            secondDiv.appendChild(button2);
+
+            boxContainer.appendChild(secondDiv);
+          }
+
           dropdownMenu.appendChild(boxContainer);
         }
         
@@ -386,10 +392,11 @@ export class NavbarWidget {
         background-color: white;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         flex-direction: row;
-        max-height: calc(100vh - 60px);
+        max-height: calc(100vh - 170px);
         overflow-y: auto;
         overflow-x: hidden;
         box-sizing: border-box;
+        justify-content: space-between;
       }
 
       .dropdown-menu.three-column::-webkit-scrollbar {
@@ -448,9 +455,8 @@ export class NavbarWidget {
       }
 
       .dropdown-box-container {
-        flex: 0 0 800px;
-        margin-left: 300px;
-        // margin-right: 60px;
+        flex: 0 0 490px;
+        margin-left: auto;
       }
 
       .box-first-div {
@@ -477,7 +483,6 @@ export class NavbarWidget {
         border-radius: 20px;
         width: 490px;
         border: 1px solid rgba(206, 210, 217, 0.50);
-
       }
 
       .box-first-div h3,
@@ -525,15 +530,31 @@ export class NavbarWidget {
         opacity: 0.9;
       }
 
-      @media screen and (max-width: 1010px) {
+      @media screen and (max-width: 1500px) {
+        .dropdown-menu.three-column {
+          flex-wrap: wrap;
+          justify-content: start;
+        }
+
         .dropdown-box-container {
-          flex: 0 0 300px;
-          padding: 20px;
-          margin-left: 20px;
+          flex: 0 0 100%;
+          margin-left: 0;
+          margin-top: 40px;
+        }
+
+        .box-first-div,
+        .box-second-div {
+          width: 100%;
+        }
+      }
+
+      @media screen and (max-width: 1500px) {
+        .dropdown-box-container {
+          padding: 0;
         }
 
         .box-first-div img {
-          height: 150px;
+          height: 240px;
         }
 
         .box-first-div h3,
@@ -541,10 +562,7 @@ export class NavbarWidget {
           font-size: 18px;
         }
 
-        .box-button {
-          padding: 8px 16px;
-          font-size: 13px;
-        }
+
       }
     `;
     document.head.appendChild(style);
@@ -677,7 +695,7 @@ export class NavbarWidget {
           heading1.textContent = item.boxComponent.firstDiv.heading;
           
           const paragraph1 = document.createElement('p');
-          paragraph1.textContent = item.boxComponent.firstDiv.paragraph;
+          paragraph1.innerHTML = item.boxComponent.firstDiv.paragraph;
           
           const buttonContainer1 = document.createElement('div');
           buttonContainer1.className = 'button-container';
@@ -699,13 +717,14 @@ export class NavbarWidget {
               } else if (currentTheme === 'motor') {
                 btn.style.cssText = `
                   background-color: #F8FFAF;
-                  color: ${themeColor};
+                  color: #000000;
                 `;
               }
             } else {
+              const currentTheme = this.themeManager.getCurrentTheme();
               btn.style.cssText = `
                 background-color: ${this.themeManager.getCurrentColor()};
-                color: white;
+                color: ${currentTheme === 'motor' ? '#000000' : 'white'};
               `;
             }
             
@@ -717,31 +736,36 @@ export class NavbarWidget {
           firstDiv.appendChild(paragraph1);
           firstDiv.appendChild(buttonContainer1);
 
-          // Second Div
-          const secondDiv = document.createElement('div');
-          secondDiv.className = 'box-second-div';
-          
-          const heading2 = document.createElement('h3');
-          heading2.textContent = item.boxComponent.secondDiv.heading;
-          
-          const paragraph2 = document.createElement('p');
-          paragraph2.textContent = item.boxComponent.secondDiv.paragraph;
-          
-          const button2 = document.createElement('a');
-          button2.href = item.boxComponent.secondDiv.button.href;
-          button2.className = 'box-button';
-          button2.textContent = item.boxComponent.secondDiv.button.label;
-          button2.style.cssText = `
-            background-color: ${this.themeManager.getCurrentColor()};
-            color: white;
-          `;
-
-          secondDiv.appendChild(heading2);
-          secondDiv.appendChild(paragraph2);
-          secondDiv.appendChild(button2);
-
           boxContainer.appendChild(firstDiv);
-          boxContainer.appendChild(secondDiv);
+
+          // Second Div (only if it exists)
+          if (item.boxComponent.secondDiv) {
+            const secondDiv = document.createElement('div');
+            secondDiv.className = 'box-second-div';
+            
+            const heading2 = document.createElement('h3');
+            heading2.textContent = item.boxComponent.secondDiv.heading;
+            
+            const paragraph2 = document.createElement('p');
+            paragraph2.innerHTML = item.boxComponent.secondDiv.paragraph;
+            
+            const button2 = document.createElement('a');
+            button2.href = item.boxComponent.secondDiv.button.href;
+            button2.className = 'box-button';
+            button2.textContent = item.boxComponent.secondDiv.button.label;
+            const currentTheme = this.themeManager.getCurrentTheme();
+            button2.style.cssText = `
+              background-color: ${this.themeManager.getCurrentColor()};
+              color: ${currentTheme === 'motor' ? '#000000' : 'white'};
+            `;
+
+            secondDiv.appendChild(heading2);
+            secondDiv.appendChild(paragraph2);
+            secondDiv.appendChild(button2);
+
+            boxContainer.appendChild(secondDiv);
+          }
+
           dropdownMenu.appendChild(boxContainer);
         }
         

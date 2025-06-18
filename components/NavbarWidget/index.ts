@@ -1,4 +1,3 @@
-// import "./style.css";
 import { upcoverLogoBusiness, upcoverLogoTech, upcoverLogoMotor, arrowDownIcon } from "../../assets/svgicons";
 import { ThemeManager } from "../../themes/theme";
 
@@ -30,7 +29,7 @@ interface MenuItem {
   };
 }
 
-interface NavbarConfig {
+export interface NavbarConfig {
   logo?: string;
   menuItems?: {
     business: MenuItem[];
@@ -60,6 +59,7 @@ export class NavbarWidget {
           { label: "Coverages", href: "#" },
           { label: "Company", href: "#" },
           { label: "Resources", href: "#" },
+          { label: "Solutions", href: "#" },
         ],
         motor: [
           { label: "Coverages", href: "#" },

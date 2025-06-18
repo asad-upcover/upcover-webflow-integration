@@ -16,6 +16,7 @@
 
   <body>
     <div id="appbar"></div>
+    <div id="navbar"></div>
     <script src="./index.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
@@ -43,6 +44,56 @@
             tech: "#0000FF",
             motor: "#D5E525",
           },
+        });
+
+        Upcover.NavbarWidget("navbar", {
+          menuItems: {
+            business: [
+              {
+                label: "Coverages",
+                href: "#",
+                dropdown: [
+                  {
+                    title: "Business Insurance",
+                    items: ["Professional Indemnity", "Public Liability", "View all"]
+                  }
+                ]
+              },
+              { label: "Company", href: "#" },
+              { label: "Resources", href: "#" }
+            ],
+            tech: [
+              {
+                label: "Coverages",
+                href: "#",
+                dropdown: [
+                  {
+                    title: "Tech Insurance",
+                    items: ["Cyber Insurance", "Tech E&O", "View all"]
+                  }
+                ]
+              },
+              { label: "Company", href: "#" },
+              { label: "Resources", href: "#" },
+              { label: "Solutions", href: "#" }
+            ],
+            motor: [
+              {
+                label: "Coverages",
+                href: "#",
+                dropdown: [
+                  {
+                    title: "Motor Insurance",
+                    items: ["Fleet Insurance", "Commercial Auto", "View all"]
+                  }
+                ]
+              },
+              { label: "Company", href: "#" },
+              { label: "Resources", href: "#" }
+            ]
+          },
+          loginText: "LOGIN",
+          quoteText: "GET A QUOTE"
         });
       });
     </script>

@@ -178,11 +178,10 @@ viewBox="0 0 162 28"
 }
 
 #navbar {
-  width:100%;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  align-content:center;
   margin: 0px 60px;
 }
 

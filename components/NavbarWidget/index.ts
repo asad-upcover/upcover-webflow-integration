@@ -378,6 +378,10 @@ export class NavbarWidget {
         text-underline-offset: 4px;
       }
 
+      .menu-item:hover .box-button {
+        text-decoration: none !important;
+      }
+
       #menu-items {
         display: flex;
         align-items: center;

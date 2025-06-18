@@ -128,6 +128,16 @@ export class NavbarWidget {
         <span class="menu-icon">${arrowDownIcon}</span>
       `;
       
+      // Add hover event listener to change color
+      li.addEventListener('mouseenter', () => {
+        const currentTheme = this.themeManager.getCurrentTheme();
+        a.style.color = currentTheme === 'motor' ? '#3B4125' : this.themeManager.getCurrentColor();
+      });
+      
+      li.addEventListener('mouseleave', () => {
+        a.style.color = '#242826';
+      });
+      
       li.appendChild(a);
 
       if (item.dropdown || item.boxComponent) {
@@ -336,6 +346,7 @@ export class NavbarWidget {
         display: flex;
         align-items: center;
         gap: 6px;
+        transition: color 0.3s ease;
       }
 
       .menu-icon {
@@ -349,6 +360,7 @@ export class NavbarWidget {
       }
 
       .menu-item:hover a {
+        text-decoration: underline;
         text-underline-offset: 4px;
       }
 
@@ -452,7 +464,7 @@ export class NavbarWidget {
       }
 
       .dropdown-column ul li:hover {
-        color: #000;
+        color: #ffffff;
       }
 
       .dropdown-box-container {
@@ -643,6 +655,16 @@ export class NavbarWidget {
         <span class="menu-icon">${arrowDownIcon}</span>
       `;
 
+      // Add hover event listener to change color
+      li.addEventListener('mouseenter', () => {
+        const currentTheme = this.themeManager.getCurrentTheme();
+        a.style.color = currentTheme === 'motor' ? '#3B4125' : this.themeManager.getCurrentColor();
+      });
+      
+      li.addEventListener('mouseleave', () => {
+        a.style.color = '#242826';
+      });
+      
       li.appendChild(a);
 
       if (item.dropdown || item.boxComponent) {

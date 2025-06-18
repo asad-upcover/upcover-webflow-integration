@@ -5,9 +5,9 @@ export const callIcon = `<svg width="20" height="20" viewBox="0 0 20 20" fill="n
 </svg>
 `
 
-export const arrowDownIcon = `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M13.2799 5.96643L8.93327 10.3131C8.41994 10.8264 7.57994 10.8264 7.06661 10.3131L2.71994 5.96643" stroke="#242826" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>    
+export const arrowDownIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="7" viewBox="0 0 14 7" fill="none">
+    <path d="M12.28 0.966553L7.9333 5.31322C7.41997 5.82655 6.57997 5.82655 6.06664 5.31322L1.71997 0.966553" stroke="#242826" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+  </svg>   
     `
 
 export const upcoverLogoBusiness = `

@@ -131,11 +131,24 @@ export class NavbarWidget {
       // Add hover event listener to change color
       li.addEventListener('mouseenter', () => {
         const currentTheme = this.themeManager.getCurrentTheme();
-        a.style.color = currentTheme === 'motor' ? '#3B4125' : this.themeManager.getCurrentColor();
+        const hoverColor = currentTheme === 'motor' ? '#3B4125' : this.themeManager.getCurrentColor();
+        a.style.color = hoverColor;
+        
+        // Update SVG color
+        const svgPath = a.querySelector('svg path');
+        if (svgPath) {
+          svgPath.setAttribute('stroke', hoverColor);
+        }
       });
       
       li.addEventListener('mouseleave', () => {
         a.style.color = '#242826';
+        
+        // Reset SVG color
+        const svgPath = a.querySelector('svg path');
+        if (svgPath) {
+          svgPath.setAttribute('stroke', '#242826');
+        }
       });
       
       li.appendChild(a);
@@ -658,11 +671,24 @@ export class NavbarWidget {
       // Add hover event listener to change color
       li.addEventListener('mouseenter', () => {
         const currentTheme = this.themeManager.getCurrentTheme();
-        a.style.color = currentTheme === 'motor' ? '#3B4125' : this.themeManager.getCurrentColor();
+        const hoverColor = currentTheme === 'motor' ? '#3B4125' : this.themeManager.getCurrentColor();
+        a.style.color = hoverColor;
+        
+        // Update SVG color
+        const svgPath = a.querySelector('svg path');
+        if (svgPath) {
+          svgPath.setAttribute('stroke', hoverColor);
+        }
       });
       
       li.addEventListener('mouseleave', () => {
         a.style.color = '#242826';
+        
+        // Reset SVG color
+        const svgPath = a.querySelector('svg path');
+        if (svgPath) {
+          svgPath.setAttribute('stroke', '#242826');
+        }
       });
       
       li.appendChild(a);

@@ -10,7 +10,6 @@ interface Tab {
 interface Branding {
   contactPhone: string;
   contactRegion: { label: string; code: string; url: string }[];
-  svg: string;
 }
 
 export interface AppBarWidgetConfig {
@@ -41,7 +40,6 @@ export class AppBarWidget {
         { label: "AU", code: "AU", url: "#" },
         { label: "NZ", code: "NZ", url: "#" },
       ],
-      svg: callIcon,
     };
 
     this.themeManager = ThemeManager.getInstance();
@@ -197,7 +195,7 @@ export class AppBarWidget {
     phoneContainer.className = "contact-phone-container";
     const phoneLink = document.createElement("a");
     phoneLink.href = `tel:${this.branding.contactPhone.replace(/\s+/g, "")}`;
-    phoneLink.innerHTML = this.branding.svg;
+    phoneLink.innerHTML = callIcon;
     phoneLink.className = "contact-phone-svg";
     const phoneText = document.createTextNode(this.branding.contactPhone);
     phoneContainer.appendChild(phoneLink);

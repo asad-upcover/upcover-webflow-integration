@@ -73,9 +73,9 @@
 <path d="M15.4167 7.5C15.4167 7 15.025 6.23333 14.4417 5.60833C13.9083 5.03333 13.2 4.58333 12.5 4.58333" stroke="#242826" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M18.3333 7.5C18.3333 4.275 15.725 1.66667 12.5 1.66667" stroke="#242826" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
-`,r=`<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M13.2799 5.96643L8.93327 10.3131C8.41994 10.8264 7.57994 10.8264 7.06661 10.3131L2.71994 5.96643" stroke="#242826" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>    
+`,r=`<svg xmlns="http://www.w3.org/2000/svg" width="14" height="7" viewBox="0 0 14 7" fill="none">
+<path d="M12.28 0.966553L7.9333 5.31322C7.41997 5.82655 6.57997 5.82655 6.06664 5.31322L1.71997 0.966553" stroke="#242826" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>   
 `,i=`
 <svg
 xmlns="http://www.w3.org/2000/svg"

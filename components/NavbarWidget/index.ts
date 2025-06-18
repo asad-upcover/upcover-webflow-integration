@@ -295,6 +295,7 @@ export class NavbarWidget {
       }
 
       #navbar {
+        background-color: #FFFFFF;
         width: 100%;
         display: flex;
         justify-content: space-between;

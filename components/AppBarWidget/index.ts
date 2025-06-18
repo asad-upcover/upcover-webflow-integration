@@ -1,6 +1,5 @@
 import { callIcon } from "../../assets/svgicons";
-import { ThemeManager } from "../../utils/theme";
-
+import { ThemeManager } from "../../themes/theme";
 
 interface Tab {
   id: string;
@@ -14,7 +13,7 @@ interface Branding {
   svg: string;
 }
 
-interface TabBarWidgetConfig {
+export interface AppBarWidgetConfig {
   tabs?: Tab[];
   branding?: Branding;
   themeColors?: {
@@ -24,12 +23,12 @@ interface TabBarWidgetConfig {
   };
 }
 
-export class TabBarWidget {
+export class AppBarWidget {
   tabs: Tab[];
   branding: Branding;
   private themeManager: ThemeManager;
 
-  constructor(config: TabBarWidgetConfig = {}) {
+  constructor(config: AppBarWidgetConfig = {}) {
     this.tabs = config.tabs || [
       { id: "business", label: "Business Sole" },
       { id: "tech", label: "Tech Industry" },
@@ -51,11 +50,9 @@ export class TabBarWidget {
     if (config.themeColors) {
       this.themeManager.setCustomColors(config.themeColors);
     }
-
-    this.render();
   }
 
-  render() {
+  mount(target: HTMLElement) {
     const style = document.createElement("style");
     style.innerHTML = `
         #appbar {
@@ -130,14 +127,14 @@ export class TabBarWidget {
       `;
     document.head.appendChild(style);
 
-    let appbar = document.getElementById("appbar");
-    if (!appbar) {
-      appbar = document.createElement("div");
-      appbar.id = "appbar";
-      document.body.insertBefore(appbar, document.body.firstChild);
-    } else {
-      appbar.innerHTML = ""; // Clear existing content
-    }
+    // if (!target) {
+    //   appbar = document.createElement("div");
+    //   appbar.id = "appbar";
+    //   document.body.insertBefore(appbar, document.body.firstChild);
+    // } else {
+    //   appbar.innerHTML = ""; // Clear existing content
+    // }
+
     const tabContainer = document.createElement("div");
     tabContainer.className = "tabs";
     tabContainer.innerHTML = this.tabs
@@ -146,9 +143,9 @@ export class TabBarWidget {
 
     tabContainer.querySelectorAll("button").forEach((button) => {
       button.addEventListener("click", () => {
-        tabContainer.querySelectorAll("button").forEach((b) =>
-          b.classList.remove("active")
-        );
+        tabContainer
+          .querySelectorAll("button")
+          .forEach((b) => b.classList.remove("active"));
         button.classList.add("active");
         const tabId = button.dataset.tab;
         if (tabId) {
@@ -202,18 +199,15 @@ export class TabBarWidget {
     phoneLink.href = `tel:${this.branding.contactPhone.replace(/\s+/g, "")}`;
     phoneLink.innerHTML = this.branding.svg;
     phoneLink.className = "contact-phone-svg";
-    const phoneText = document.createTextNode(
-      this.branding.contactPhone
-    );
+    const phoneText = document.createTextNode(this.branding.contactPhone);
     phoneContainer.appendChild(phoneLink);
     phoneContainer.appendChild(phoneText);
 
     contactContainer.appendChild(regionSwitcher);
     contactContainer.appendChild(phoneContainer);
 
-    appbar.appendChild(tabContainer);
-    appbar.appendChild(contactContainer);
-    document.body.insertBefore(appbar, document.body.firstChild);
+    target.appendChild(tabContainer);
+    target.appendChild(contactContainer);
+    document.body.insertBefore(target, document.body.firstChild);
   }
 }
-

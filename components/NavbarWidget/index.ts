@@ -1,6 +1,6 @@
 // import "./style.css";
 import { upcoverLogoBusiness, upcoverLogoTech, upcoverLogoMotor, arrowDownIcon } from "../../assets/svgicons";
-import { ThemeManager } from "../../utils/theme";
+import { ThemeManager } from "../../themes/theme";
 
 interface MenuItem {
   label: string;

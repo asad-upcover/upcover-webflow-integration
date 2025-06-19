@@ -206,6 +206,5 @@ export class AppBarWidget {
 
     target.appendChild(tabContainer);
     target.appendChild(contactContainer);
-    document.body.insertBefore(target, document.body.firstChild);
   }
 }

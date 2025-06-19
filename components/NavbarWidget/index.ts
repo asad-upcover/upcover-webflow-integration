@@ -41,6 +41,14 @@ export interface NavbarConfig {
   quoteText?: string;
 }
 
+
+function detectInitialTheme(): string {
+  const currentPath = window.location.pathname;
+  if (currentPath.includes("tech")) return "tech";
+  if (currentPath.includes("motor")) return "motor";
+  return "business";
+}
+
 export class NavbarWidget {
   private config: NavbarConfig;
   private target: HTMLElement;
@@ -48,7 +56,12 @@ export class NavbarWidget {
 
   constructor(config: NavbarConfig = {}) {
     this.config = {
-      logo: upcoverLogoBusiness,
+      logo:
+        detectInitialTheme() === "tech"
+          ? upcoverLogoTech
+          : detectInitialTheme() === "motor"
+          ? upcoverLogoMotor
+          : upcoverLogoBusiness,
       menuItems: config.menuItems || {
         business: [
           { label: "Coverages", href: "#" },

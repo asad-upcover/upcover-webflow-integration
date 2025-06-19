@@ -72,7 +72,7 @@ export class NavbarWidget {
       quoteText: config.quoteText || "GET A QUOTE"
     };
 
-    this.target = document.createElement("div");
+    this.target = document.createElement("nav");
     this.target.id = "navbar";
     this.themeManager = ThemeManager.getInstance();
     this.createStyles();
@@ -296,11 +296,10 @@ export class NavbarWidget {
 
       #navbar {
         background-color: #FFFFFF;
-        width: 100%;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin: 0px 60px;
+        padding: 0 60px 0 60px;
       }
 
       .navbar-left {

@@ -1,5 +1,6 @@
 import { callIcon } from "../../assets/svgicons";
 import { ThemeManager } from "../../themes/theme";
+import { upcoverLogoBusiness, upcoverLogoTech, upcoverLogoMotor } from "../../assets/svgicons";
 
 interface Tab {
   id: string;
@@ -48,6 +49,11 @@ export class AppBarWidget {
     if (config.themeColors) {
       this.themeManager.setCustomColors(config.themeColors);
     }
+
+    // Subscribe to theme changes for logo updates
+    this.themeManager.subscribe((theme) => {
+      this.updateLogo(theme);
+    });
   }
 
   mount(target: HTMLElement) {
@@ -125,21 +131,27 @@ export class AppBarWidget {
       `;
     document.head.appendChild(style);
 
-    // if (!target) {
-    //   appbar = document.createElement("div");
-    //   appbar.id = "appbar";
-    //   document.body.insertBefore(appbar, document.body.firstChild);
-    // } else {
-    //   appbar.innerHTML = ""; // Clear existing content
-    // }
-
     const tabContainer = document.createElement("div");
     tabContainer.className = "tabs";
     tabContainer.innerHTML = this.tabs
       .map((tab) => `<button data-tab="${tab.id}">${tab.label}</button>`)
       .join("");
 
+    // Set active tab based on current URL or default to business
+    const currentPath = window.location.pathname;
+    const pathToTab = {
+      "/tabs/business-sole-traders": "business",
+      "/tabs/tech-startups-enterprises": "tech",
+      "/tabs/motor-fleet": "motor"
+    };
+    const activeTabId = pathToTab[currentPath as keyof typeof pathToTab] || "business";
+
+    // Set the active tab and theme
     tabContainer.querySelectorAll("button").forEach((button) => {
+      if (button.dataset.tab === activeTabId) {
+        button.classList.add("active");
+        this.themeManager.setTheme(activeTabId as any);
+      }
       button.addEventListener("click", () => {
         tabContainer
           .querySelectorAll("button")
@@ -148,18 +160,16 @@ export class AppBarWidget {
         const tabId = button.dataset.tab;
         if (tabId) {
           this.themeManager.setTheme(tabId as any);
+          // Add page navigation based on tab
+          const routes = {
+            business: "/tabs/business-sole-traders",
+            tech: "/tabs/tech-startups-enterprises",
+            motor: "/tabs/motor-fleet"
+          };
+          window.location.href = routes[tabId as keyof typeof routes] || "/";
         }
-        console.log("Tab clicked:", tabId);
       });
     });
-
-    // Set first tab as active by default
-    if (this.tabs.length > 0) {
-      const firstButton = tabContainer.querySelector("button");
-      if (firstButton) {
-        firstButton.classList.add("active");
-      }
-    }
 
     const contactContainer = document.createElement("div");
     contactContainer.className = "contact";
@@ -207,5 +217,24 @@ export class AppBarWidget {
     target.appendChild(tabContainer);
     target.appendChild(contactContainer);
     document.body.insertBefore(target, document.body.firstChild);
+  }
+
+  updateLogo(theme: string) {
+    const logoDiv = document.querySelector("#upcover-logo") as HTMLElement;
+    if (!logoDiv) return;
+
+    switch (theme) {
+      case "business":
+        logoDiv.innerHTML = upcoverLogoBusiness;
+        break;
+      case "tech":
+        logoDiv.innerHTML = upcoverLogoTech;
+        break;
+      case "motor":
+        logoDiv.innerHTML = upcoverLogoMotor;
+        break;
+      default:
+        logoDiv.innerHTML = upcoverLogoBusiness;
+    }
   }
 }

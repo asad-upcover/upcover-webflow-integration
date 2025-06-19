@@ -131,11 +131,17 @@ export class AppBarWidget {
       `;
     document.head.appendChild(style);
 
-    const tabContainer = document.createElement("div");
-    tabContainer.className = "tabs";
-    tabContainer.innerHTML = this.tabs
+    const appbar = document.createElement("div");
+    appbar.id = "appbar";
+
+    // Create a div for tabs
+    const tabsDiv = document.createElement("div");
+    tabsDiv.className = "tabs";
+    tabsDiv.innerHTML = this.tabs
       .map((tab) => `<button data-tab="${tab.id}">${tab.label}</button>`)
       .join("");
+
+    appbar.appendChild(tabsDiv);
 
     // Set active tab based on current URL or default to business
     const currentPath = window.location.pathname;
@@ -147,13 +153,13 @@ export class AppBarWidget {
     const activeTabId = pathToTab[currentPath as keyof typeof pathToTab] || "business";
 
     // Set the active tab and theme
-    tabContainer.querySelectorAll("button").forEach((button) => {
+    tabsDiv.querySelectorAll("button").forEach((button) => {
       if (button.dataset.tab === activeTabId) {
         button.classList.add("active");
         this.themeManager.setTheme(activeTabId as any);
       }
       button.addEventListener("click", () => {
-        tabContainer
+        tabsDiv
           .querySelectorAll("button")
           .forEach((b) => b.classList.remove("active"));
         button.classList.add("active");
@@ -214,8 +220,8 @@ export class AppBarWidget {
     contactContainer.appendChild(regionSwitcher);
     contactContainer.appendChild(phoneContainer);
 
-    target.appendChild(tabContainer);
-    target.appendChild(contactContainer);
+    appbar.appendChild(contactContainer);
+    target.appendChild(appbar);
     document.body.insertBefore(target, document.body.firstChild);
   }
 

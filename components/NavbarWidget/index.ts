@@ -191,6 +191,19 @@ export class NavbarWidget {
                   text-underline-offset: 4px;
                 `;
               }
+              // Add theme-aware hover event listeners
+              li.addEventListener('mouseenter', () => {
+                const currentTheme = this.themeManager.getCurrentTheme();
+                const hoverColor = currentTheme === 'motor' ? '#3B4125' : this.themeManager.getCurrentColor();
+                li.style.color = hoverColor;
+              });
+              li.addEventListener('mouseleave', () => {
+                if (listItem.toLowerCase().includes('view all')) {
+                  li.style.color = this.themeManager.getCurrentColor();
+                } else {
+                  li.style.color = '#555';
+                }
+              });
               list.appendChild(li);
             });
             
@@ -737,6 +750,19 @@ export class NavbarWidget {
                   text-underline-offset: 4px;
                 `;
               }
+              // Add theme-aware hover event listeners
+              li.addEventListener('mouseenter', () => {
+                const currentTheme = this.themeManager.getCurrentTheme();
+                const hoverColor = currentTheme === 'motor' ? '#3B4125' : this.themeManager.getCurrentColor();
+                li.style.color = hoverColor;
+              });
+              li.addEventListener('mouseleave', () => {
+                if (listItem.toLowerCase().includes('view all')) {
+                  li.style.color = this.themeManager.getCurrentColor();
+                } else {
+                  li.style.color = '#555';
+                }
+              });
               list.appendChild(li);
             });
             

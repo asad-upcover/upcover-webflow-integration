@@ -20,4 +20,13 @@ import { NavbarWidget, NavbarConfig } from "../NavbarWidget/index";
       widget.mount(target);
     }
   },
+  CyberInsuranceSolutionsWidget: (targetId: string, options?: any) => {
+    import('../CyberInsuranceSolutions/index').then(mod => {
+      const mount = mod.mountCyberInsuranceSolutions;
+      if (mount) {
+        const target = document.getElementById(targetId);
+        if (target) mount(target, options);
+      }
+    });
+  }
 };

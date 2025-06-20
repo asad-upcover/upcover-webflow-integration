@@ -72,11 +72,12 @@ export class AppBarWidget {
           border: none;
           font-weight: bold;
           cursor: pointer;
-          padding: 30px 20px;
+          padding: 27px 31px;
           color: #545464;
           font-size: 1rem;
           position: relative;
           transition: color 0.3s ease, background-color 0.3s ease;
+          max-height: 70px;
         }
           @media screen and (max-width: 1010px){
           .tabs button{

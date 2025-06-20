@@ -28,5 +28,14 @@ import { NavbarWidget, NavbarConfig } from "../NavbarWidget/index";
         if (target) mount(target, options);
       }
     });
+  },
+  CyberCoversWidget: (targetId: string, options?: any) => {
+    import('../CyberCovers/index').then(mod => {
+      const mount = mod.mountCyberCovers;
+      if (mount) {
+        const target = document.getElementById(targetId);
+        if (target) mount(target, options);
+      }
+    });
   }
 };

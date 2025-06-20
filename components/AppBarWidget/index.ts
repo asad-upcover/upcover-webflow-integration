@@ -150,7 +150,16 @@ export class AppBarWidget {
       "/tabs/tech-startups-enterprises": "tech",
       "/tabs/motor-fleet": "motor"
     };
-    const activeTabId = pathToTab[currentPath as keyof typeof pathToTab] || "business";
+    let activeTabId;
+    if (currentPath.includes("product")) {
+      activeTabId = "tech";
+      // Set logo to tech if URL includes 'product'
+      setTimeout(() => {
+        this.updateLogo("tech");
+      }, 0);
+    } else {
+      activeTabId = pathToTab[currentPath as keyof typeof pathToTab] || "business";
+    }
 
     // Set the active tab and theme
     tabsDiv.querySelectorAll("button").forEach((button) => {

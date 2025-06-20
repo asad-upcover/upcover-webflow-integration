@@ -313,6 +313,7 @@ export class NavbarWidget {
         justify-content: space-between;
         align-items: center;
         padding: 0 60px 0 60px;
+        max-height: 90px;
       }
 
       .navbar-left {
@@ -342,10 +343,11 @@ export class NavbarWidget {
         border-radius: 10px;
       }
 
-      .UPCOVER-LOGO {
+      .brand-logo {
         display: flex;
         justify-content: center;
         align-items: center;
+        margin-top: 8px;
       }
 
       #upcover-logo path {
@@ -613,7 +615,7 @@ export class NavbarWidget {
 
   private createLogo(): HTMLElement {
     const logoDiv = document.createElement("div");
-    logoDiv.className = "UPCOVER-LOGO";
+    logoDiv.className = "brand-logo";
     logoDiv.id = "upcover-logo";
     logoDiv.innerHTML = this.config.logo!;
     return logoDiv;

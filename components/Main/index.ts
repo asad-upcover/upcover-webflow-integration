@@ -1,7 +1,8 @@
 import { AppBarWidget, AppBarWidgetConfig } from "../AppBarWidget/index";
 import { NavbarWidget, NavbarConfig } from "../NavbarWidget/index";
-// import PricingWidget from './PricingWidget';
-// import FooterWidget from './FooterWidget';
+import { mountCyberInsuranceSolutions } from "../CyberInsuranceSolutions/index";
+import { mountCyberCovers } from "../CyberCovers/index";
+
 
 
 
@@ -21,21 +22,11 @@ import { NavbarWidget, NavbarConfig } from "../NavbarWidget/index";
     }
   },
   CyberInsuranceSolutionsWidget: (targetId: string, options?: any) => {
-    import('../CyberInsuranceSolutions/index').then(mod => {
-      const mount = mod.mountCyberInsuranceSolutions;
-      if (mount) {
-        const target = document.getElementById(targetId);
-        if (target) mount(target, options);
-      }
-    });
+    const target = document.getElementById(targetId);
+    if (target) mountCyberInsuranceSolutions(target, options);
   },
   CyberCoversWidget: (targetId: string, options?: any) => {
-    import('../CyberCovers/index').then(mod => {
-      const mount = mod.mountCyberCovers;
-      if (mount) {
-        const target = document.getElementById(targetId);
-        if (target) mount(target, options);
-      }
-    });
+    const target = document.getElementById(targetId);
+    if (target) mountCyberCovers(target, options);
   }
 };

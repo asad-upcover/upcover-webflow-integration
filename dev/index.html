@@ -27,6 +27,8 @@
 
     <div id="cyber-insurance-solutions-root"></div>
     <div id="cyber-covers-root"></div>
+
+    <!-- script for INDUSTRY-SPECIFIC CYBER INSURANCE SOLUTIONS -->
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         if (window.Upcover && typeof window.Upcover.CyberInsuranceSolutionsWidget === 'function') {
@@ -35,7 +37,7 @@
               {
                 key: 'healthcare',
                 label: 'Healthcare & Medical',
-                image: 'https://images.unsplash.com/photo-1519494080410-f9aa8f52f1e1?auto=format&fit=crop&w=400&q=80',
+                image: 'https://storage.googleapis.com/upcover-webflow-integration/assets/images/Healthcare.png',
                 risks: [
                   'Patient data breaches (PH/PII)',
                   'Ransomware targeting medical systems',
@@ -58,7 +60,7 @@
               {
                 key: 'financial',
                 label: 'Financial Services',
-                image: '',
+                image: 'https://storage.googleapis.com/upcover-webflow-integration/assets/images/Healthcare.png',
                 risks: ['Dummy risk 1', 'Dummy risk 2'],
                 coverage: ['Dummy coverage 1', 'Dummy coverage 2'],
                 lossExample: { title: 'Real Loss Examples', text: 'Dummy loss example.' },
@@ -67,7 +69,7 @@
               {
                 key: 'retail',
                 label: 'Retail & E-commerce',
-                image: '',
+                image: 'https://storage.googleapis.com/upcover-webflow-integration/assets/images/Healthcare.png',
                 risks: ['Dummy risk 1', 'Dummy risk 2'],
                 coverage: ['Dummy coverage 1', 'Dummy coverage 2'],
                 lossExample: { title: 'Real Loss Examples', text: 'Dummy loss example.' },
@@ -76,7 +78,7 @@
               {
                 key: 'technology',
                 label: 'Technology & SaaS',
-                image: '',
+                image: 'https://storage.googleapis.com/upcover-webflow-integration/assets/images/Healthcare.png',
                 risks: ['Dummy risk 1', 'Dummy risk 2'],
                 coverage: ['Dummy coverage 1', 'Dummy coverage 2'],
                 lossExample: { title: 'Real Loss Examples', text: 'Dummy loss example.' },
@@ -87,6 +89,8 @@
         }
       });
     </script>
+
+    <!-- script for What it doesn’t cover -->
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         if (window.Upcover && typeof window.Upcover.CyberCoversWidget === 'function') {
@@ -95,6 +99,7 @@
       });
     </script>
 
+    <!-- script for header -->
     <script type="module">
       import "../components/Main/index.ts";
       document.addEventListener("DOMContentLoaded", function () {

@@ -2,6 +2,7 @@ import { AppBarWidget, AppBarWidgetConfig } from "../AppBarWidget/index";
 import { NavbarWidget, NavbarConfig } from "../NavbarWidget/index";
 import { mountCyberInsuranceSolutions } from "../CyberInsuranceSolutions/index";
 import { mountCyberCovers } from "../CyberCovers/index";
+import { mountCyberSteps, CyberStepsConfig } from "../CyberSteps/index";
 
 
 
@@ -28,5 +29,9 @@ import { mountCyberCovers } from "../CyberCovers/index";
   CyberCoversWidget: (targetId: string, options?: any) => {
     const target = document.getElementById(targetId);
     if (target) mountCyberCovers(target, options);
+  },
+  CyberStepsWidget: (targetId: string, options?: Partial<CyberStepsConfig>) => {
+    const target = document.getElementById(targetId);
+    if (target) mountCyberSteps(target, options);
   }
 };

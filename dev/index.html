@@ -27,6 +27,7 @@
 
     <div id="cyber-insurance-solutions-root"></div>
     <div id="cyber-covers-root"></div>
+    <div id="cyber-steps-root"></div>
 
     <!-- script for INDUSTRY-SPECIFIC CYBER INSURANCE SOLUTIONS -->
     <script>
@@ -90,11 +91,64 @@
       });
     </script>
 
-    <!-- script for What it doesn’t cover -->
+    <!-- script for What it doesn't cover -->
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         if (window.Upcover && typeof window.Upcover.CyberCoversWidget === 'function') {
           window.Upcover.CyberCoversWidget('cyber-covers-root');
+        }
+      });
+    </script>
+
+    <!-- script for Cyber Steps -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        if (window.Upcover && typeof window.Upcover.CyberStepsWidget === 'function') {
+          window.Upcover.CyberStepsWidget('cyber-steps-root', {
+            title: 'HOW TO GET CYBER INSURANCE: SIMPLE 5-STEPS PROCESS',
+            subtitle: 'Getting comprehensive cyber protection for your business is easier than you might think. Our streamlined application process takes just minutes.',
+            steps: [
+              {
+                name: 'Business',
+                key: 'business',
+                items: [
+                  'Industry and business activities',
+                  'Annual revenue figures',
+                  'Company website and domain details',
+                ],
+              },
+              {
+                name: 'Quote',
+                key: 'quote',
+                items: [
+                  'Instant pricing estimates',
+                  'Multiple coverage tier options',
+                  'Industry-specific package recommendations',
+                ],
+              },
+              {
+                name: 'Details',
+                key: 'details',
+                items: [
+                  'Security controls assessment',
+                  'Data collection and retention details',
+                  'Third-party service provider information',
+                ],
+              },
+              {
+                name: 'Full Quote',
+                key: 'fullquote',
+                items: [
+                  'Data breach coverage recommendations',
+                  'Custom policy options',
+                  'Specialized coverage recommendations',
+                ],
+              },
+            ],
+            cta: {
+              label: 'GET A QUOTE',
+            },
+          });
         }
       });
     </script>

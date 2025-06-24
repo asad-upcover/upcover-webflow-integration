@@ -66,7 +66,7 @@ function injectStyles() {
   const style = document.createElement('style');
   style.id = 'cyber-steps-styles';
   style.textContent = `
-  .cyber-steps-section { background: linear-gradient(135deg, #4285f4 0%, #1e40af 100%); padding: 20px; }
+  .cyber-steps-section { background: #005DFF; padding: 20px; }
   .cyber-steps-section .process-container { max-width: 1200px; margin: 0 auto; text-align: center; color: white; }
   .cyber-steps-section .process-header { margin-bottom: 40px; }
   .cyber-steps-section .process-title { font-size: 2.2rem; font-weight: 700; margin-bottom: 16px; letter-spacing: -0.02em; }

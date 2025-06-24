@@ -346,6 +346,11 @@ export class NavbarWidget {
         font-size: 16px;
       }
 
+      .login:hover {
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+
       .quote {
         color: white;
         border: none;
@@ -659,12 +664,28 @@ export class NavbarWidget {
       quoteButton.style.color = 'white';
     }
 
+    // Add hover underline with theme color
+    loginLink.addEventListener('mouseenter', () => {
+      const currentTheme = this.themeManager.getCurrentTheme();
+      const underlineColor = currentTheme === 'motor' ? '#3B4125' : this.themeManager.getCurrentColor();
+      loginLink.classList.add('underline');
+      loginLink.style.textDecorationColor = underlineColor;
+    });
+    loginLink.addEventListener('mouseleave', () => {
+      loginLink.classList.remove('underline');
+      loginLink.style.textDecorationColor = '';
+    });
+
     // Subscribe to theme changes
     this.themeManager.subscribe((theme) => {
       const newColor = this.themeManager.getCurrentColor();
       loginLink.style.color = theme === 'motor' ? '#3B4125' : newColor;
       quoteButton.style.backgroundColor = newColor;
       quoteButton.style.color = theme === 'motor' ? '#3B4125' : 'white';
+      // Update underline color if hovered
+      if (loginLink.classList.contains('underline')) {
+        loginLink.style.textDecorationColor = theme === 'motor' ? '#3B4125' : newColor;
+      }
     });
 
     actionsDiv.appendChild(loginLink);

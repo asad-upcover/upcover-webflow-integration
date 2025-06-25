@@ -48,7 +48,7 @@ function injectStyles() {
 //   box-shadow: 0 4px 32px rgba(0,0,0,0.04);
   font-family: 'Inter', Arial, sans-serif;
   margin: 0px auto;
-  max-width: 1100px;
+  max-width: 1200px;
   z-index: 1001;
 }
 .who-needs-cyber-header {
@@ -65,7 +65,7 @@ function injectStyles() {
   font-size: 1.5rem;
   color: #444;
   margin-bottom: 0;
-  line-height: 60px;
+  line-height: 40px;
 }
 .who-needs-cyber-main-row {
   display: flex;
@@ -137,6 +137,7 @@ function injectStyles() {
   font-size: 1.5rem;
   color: #232323;
   gap: 20px;
+  line-height: 20px;
 }
 .who-needs-cyber-list-item .icon {
   display: flex;

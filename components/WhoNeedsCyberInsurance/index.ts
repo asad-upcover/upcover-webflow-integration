@@ -44,7 +44,7 @@ function injectStyles() {
   gap: 0;
 //   background: #fff;
   border-radius: 18px;
-  padding: 70px 100px;
+  padding: 220px 100px;
 //   box-shadow: 0 4px 32px rgba(0,0,0,0.04);
   font-family: 'Inter', Arial, sans-serif;
   margin: 0px auto;

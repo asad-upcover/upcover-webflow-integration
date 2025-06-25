@@ -28,6 +28,7 @@
     <div id="cyber-insurance-solutions-root"></div>
     <div id="cyber-covers-root"></div>
     <div id="cyber-steps-root"></div>
+    <div id="who-needs-cyber-root"></div>
 
     <!-- script for INDUSTRY-SPECIFIC CYBER INSURANCE SOLUTIONS -->
     <script>
@@ -148,6 +149,60 @@
             cta: {
               label: 'GET A QUOTE',
             },
+          });
+        }
+      });
+    </script>
+
+    <!-- script for WHO NEEDS CYBER INSURANCE -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        if (window.Upcover && typeof window.Upcover.WhoNeedsCyberInsuranceWidget === 'function') {
+          window.Upcover.WhoNeedsCyberInsuranceWidget('who-needs-cyber-root', {
+            title: 'WHO NEEDS CYBER INSURANCE',
+            description: 'Any business that stores, processes, or transmits sensitive data, relies on digital systems for operations, or has an online presence should consider cyber insurance. Today, that includes nearly every business, regardless of size or industry.',
+            tabs: [
+              {
+                key: 'highrisk',
+                label: 'High-Risk Industries',
+                content: [
+                  'Healthcare providers and clinics',
+                  'Financial Services and fintech',
+                  'E-commerce and retails businesses',
+                  'Professional services firms',
+                ],
+              },
+              {
+                key: 'smb',
+                label: 'Small & Medium Businesses',
+                content: [
+                  'Startups and growing companies',
+                  'Family-owned businesses',
+                  'Local retailers and service providers',
+                  'Franchises',
+                ],
+              },
+              {
+                key: 'data',
+                label: 'Data-Rich Organisations',
+                content: [
+                  'Research institutions',
+                  'Marketing agencies',
+                  'Educational institutions',
+                  'Data analytics firms',
+                ],
+              },
+              {
+                key: 'tech',
+                label: 'Technology-Dependent Business',
+                content: [
+                  'SaaS providers',
+                  'IT consultancies',
+                  'Cloud service companies',
+                  'App developers',
+                ],
+              },
+            ]
           });
         }
       });

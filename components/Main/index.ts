@@ -3,6 +3,7 @@ import { NavbarWidget, NavbarConfig } from "../NavbarWidget/index";
 import { mountCyberInsuranceSolutions } from "../CyberInsuranceSolutions/index";
 import { mountCyberCovers } from "../CyberCovers/index";
 import { mountCyberSteps, CyberStepsConfig } from "../CyberSteps/index";
+import { mountWhoNeedsCyberInsurance } from "../WhoNeedsCyberInsurance/index";
 
 
 
@@ -33,5 +34,9 @@ import { mountCyberSteps, CyberStepsConfig } from "../CyberSteps/index";
   CyberStepsWidget: (targetId: string, options?: Partial<CyberStepsConfig>) => {
     const target = document.getElementById(targetId);
     if (target) mountCyberSteps(target, options);
+  },
+  WhoNeedsCyberInsuranceWidget: (targetId: string, options?: any) => {
+    const target = document.getElementById(targetId);
+    if (target) mountWhoNeedsCyberInsurance(target, options);
   }
 };

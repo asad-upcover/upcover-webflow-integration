@@ -65,7 +65,7 @@ function injectStyles() {
   font-size: 1.5rem;
   color: #444;
   margin-bottom: 0;
-  line-height: 1.6;
+  line-height: 60px;
 }
 .who-needs-cyber-main-row {
   display: flex;

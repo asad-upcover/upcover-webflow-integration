@@ -72,13 +72,13 @@ function injectStyles() {
   .cyber-steps-section .process-title { font-size: 2.2rem; font-weight: 900; margin-bottom: 40px; letter-spacing: -0.02em; }
   .cyber-steps-section .process-subtitle { font-size: 24px; font-weight: 400; line-height: 40px; opacity: 0.9; max-width: 900px; margin: 0 auto; }
   .cyber-steps-section .process-nav { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 0 0 4.375rem 0; }
-  .cyber-steps-section .nav-button { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.2); border: none; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
+  .cyber-steps-section .nav-button { width: 40px; height: 40px; border-radius: 50%;background: transparent; border: 1px solid #ffffff; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
   .cyber-steps-section .nav-button:hover { background: rgba(255,255,255,0.3); transform: scale(1.05); }
   .cyber-steps-section .nav-button:disabled { opacity: 0.5; cursor: not-allowed; }
   .cyber-steps-section .nav-indicator { display: flex; align-items: center; gap: 8px; }
-  .cyber-steps-section .nav-tab { padding: 8px 16px; border-radius: 20px; background: rgba(255,25e5,255,0.9); color: #1e40af; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: all 0.3s ease; }
+  .cyber-steps-section .nav-tab { padding: 13px 20px; border-radius: 25px; background: rgba(255,25e5,255,0.9); color: #1e40af; font-weight: 600; font-size: 1.25rem; cursor: pointer; transition: all 0.3s ease; }
   .cyber-steps-section .nav-tab.active { background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
-  .cyber-steps-section .nav-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.5); transition: all 0.3s ease; }
+  .cyber-steps-section .nav-dot { width: 14px; height: 14px; border-radius: 50%; background: rgba(255,255,255,0.5); transition: all 0.3s ease; }
   .cyber-steps-section .nav-dot.active { background: white; transform: scale(1.2); }
   .cyber-steps-section .process-steps { display: flex; gap: 20px; margin-bottom: 4.375rem; overflow-x: auto; scroll-behavior: smooth; padding: 0 20px; }
   /* Hide scrollbar for all browsers */

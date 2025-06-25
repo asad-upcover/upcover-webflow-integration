@@ -4,7 +4,7 @@ const DEFAULT_CONFIG = {
     {
       key: 'healthcare',
       label: 'Healthcare & Medical',
-      image: 'https://images.unsplash.com/photo-1519494080410-f9aa8f52f1e1?auto=format&fit=crop&w=400&q=80',
+      image: '',
       risks: [
         'Patient data breaches (PH/PII)',
         'Ransomware targeting medical systems',
@@ -87,7 +87,7 @@ function injectStyles() {
   border-radius: 8px 8px 0 0;
   color: #333;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 1.5rem;
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
   min-width: 160px;
@@ -95,6 +95,7 @@ function injectStyles() {
 .cis-tab-btn.active {
   background: #005DFF;
   color: #fff;
+  
 }
 .cis-tab-btn:last-child {
   border-radius: 10px 10px 10px 0px;
@@ -107,17 +108,16 @@ function injectStyles() {
 .cis-image-box {
   flex: 1 1 320px;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
   min-width: 0;
 }
 .cis-image {
   width: 100%;
-  max-width: 320px;
   border-radius: 12px;
   object-fit: cover;
   box-shadow: 0 2px 12px rgba(25, 118, 210, 0.08);
-  height: auto;
+  height: 100%;
 }
 .cis-info-box {
   flex: 2 1 0;
@@ -186,6 +186,9 @@ function injectStyles() {
   width: 100%;
 }
 @media (max-width: 1200px) {
+.cis-tab-btn{
+  font-size: 16px
+}
   .cyber-insurance-solutions {
     max-width: 100%;
     margin: 24px 0;
@@ -204,7 +207,6 @@ function injectStyles() {
     margin-right: 0;
   }
   .cis-tab-btn {
-    font-size: 20px;
     padding: 24px 0;
     min-width: 120px;
   }
@@ -217,6 +219,7 @@ function injectStyles() {
   }
 }
 @media (max-width: 700px) {
+
   .cyber-insurance-solutions {
     margin: 12px 0;
     padding: 0 2vw;

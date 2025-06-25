@@ -29,6 +29,7 @@
     <div id="cyber-covers-root"></div>
     <div id="cyber-steps-root"></div>
     <div id="who-needs-cyber-root"></div>
+    <div id="cyber-examples"></div>
 
     <!-- script for INDUSTRY-SPECIFIC CYBER INSURANCE SOLUTIONS -->
     <script>
@@ -199,6 +200,49 @@
                   'IT consultancies',
                   'Cloud service companies',
                   'App developers',
+                ],
+              },
+            ]
+          });
+        }
+      });
+    </script>
+
+        <!-- script for CYBER EXAMPLES -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        if (window.Upcover && typeof window.Upcover.CyberExamples === 'function') {
+          window.Upcover.CyberExamples('cyber-examples', {
+            title: 'CYBER INSURANCE CLAIM EXAMPLES',
+            description: 'Cyber threats are a growing risk for startups, making cyber insurance a vital safety net. At upcover, we’ve supported many companies through incidents like data breaches and ransomware. Our real-world claim examples show how coverage can help with legal fees, fines, system recovery, and more. Whether you’re handling sensitive data or scaling fast, these cases show how cyber insurance can protect your business from costly surprises',
+            checkmarkIcon: null,
+            tabs: [
+              {
+                key: 'highrisk',
+                label: 'High-Risk Industries',
+                content: [
+                  "An e-commerce platform, SellYouLater, hired a third-party service provider. A burglar stole two laptops from the provider, exposing data of over 800,000 SellYouLater clients. Under notification laws, SellYouLater—not the provider—was responsible for alerting those affected. The company spent nearly $5 million on notification and crisis management"
+                ],
+              },
+              {
+                key: 'extortion',
+                label: 'Cyber Extortion Threat',
+                content: [
+                  "An e-commerce platform, SellYouLater, hired a third-party service provider. A burglar stole two laptops from the provider, exposing data of over 800,000 SellYouLater clients. Under notification laws, SellYouLater—not the provider—was responsible for alerting those affected. The company spent nearly $5 million on notification and crisis management"
+                ],
+              },
+              {
+                key: 'codemalic',
+                label: 'Malicious Code',
+                content: [
+                  "An e-commerce platform, SellYouLater, hired a third-party service provider. A burglar stole two laptops from the provider, exposing data of over 800,000 SellYouLater clients. Under notification laws, SellYouLater—not the provider—was responsible for alerting those affected. The company spent nearly $5 million on notification and crisis management"
+                ],
+              },
+              {
+                key: 'records',
+                label: 'Exposed Records',
+                content: [
+                  "An e-commerce platform, SellYouLater, hired a third-party service provider. A burglar stole two laptops from the provider, exposing data of over 800,000 SellYouLater clients. Under notification laws, SellYouLater—not the provider—was responsible for alerting those affected. The company spent nearly $5 million on notification and crisis management"
                 ],
               },
             ]

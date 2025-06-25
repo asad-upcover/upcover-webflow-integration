@@ -4,6 +4,7 @@ import { mountCyberInsuranceSolutions } from "../CyberInsuranceSolutions/index";
 import { mountCyberCovers } from "../CyberCovers/index";
 import { mountCyberSteps, CyberStepsConfig } from "../CyberSteps/index";
 import { mountWhoNeedsCyberInsurance } from "../WhoNeedsCyberInsurance/index";
+import { mountCyberExamples } from "../CyberExamples";
 
 
 
@@ -38,5 +39,9 @@ import { mountWhoNeedsCyberInsurance } from "../WhoNeedsCyberInsurance/index";
   WhoNeedsCyberInsuranceWidget: (targetId: string, options?: any) => {
     const target = document.getElementById(targetId);
     if (target) mountWhoNeedsCyberInsurance(target, options);
+  },
+  CyberExamples: (targetId: string, options?: any) => {
+    const target = document.getElementById(targetId);
+    if (target) mountCyberExamples(target, options);
   }
 };

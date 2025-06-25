@@ -84,7 +84,7 @@ function injectStyles() {
   /* Hide scrollbar for all browsers */
   .cyber-steps-section .process-steps { scrollbar-width: none; -ms-overflow-style: none; }
   .cyber-steps-section .process-steps::-webkit-scrollbar { display: none; }
-  .cyber-steps-section .step-card { background: white; border-radius: 16px; padding: 40px 30px 80px 30px; text-align: left; box-shadow: 0 4px 20px rgba(0,0,0,0.1); transition: all 0.3s ease; min-width: 400px; max-width: 400px; flex-shrink: 0; color: #1f2937; z-index: 1000; }
+  .cyber-steps-section .step-card { background: white; border-radius: 16px; padding: 40px 30px; text-align: left; box-shadow: 0 4px 20px rgba(0,0,0,0.1); transition: all 0.3s ease; min-width: 400px; max-width: 400px; flex-shrink: 0; color: #1f2937; z-index: 1000; }
   .cyber-steps-section .step-card:nth-child(1) { animation-delay: 0.1s; }
   .cyber-steps-section .step-card:nth-child(2) { animation-delay: 0.2s; }
   .cyber-steps-section .step-card:nth-child(3) { animation-delay: 0.3s; }

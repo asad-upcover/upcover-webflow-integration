@@ -89,7 +89,7 @@ function injectStyles() {
   justify-content: flex-start;
   font-size: 1.5rem;
   font-weight: 600;
-  color: #232323;
+  color: #494949;
   background: none;
   border: none;
   border-bottom: 1px solid #e3e3e3;
@@ -120,7 +120,7 @@ function injectStyles() {
   padding: 40px;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+//   gap: 40px;
   transition: opacity 0.4s;
 }
 .who-needs-cyber-list {
@@ -135,7 +135,7 @@ function injectStyles() {
   display: flex;
   align-items: center;
   font-size: 1.5rem;
-  color: #232323;
+  color: #494949;
   gap: 20px;
   line-height: 20px;
 }
@@ -146,6 +146,24 @@ function injectStyles() {
 }
 .who-needs-cyber-tab:not(:first-child) {
   padding-top: 40px;
+}
+.who-needs-cyber-single-paragraph {
+  font-size: 1.5rem;
+  color: #494949;
+  margin: 0;
+  line-height: 40px;
+}
+.who-needs-cyber-content-heading {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 30px 0;
+  color: #494949;
+}
+.who-needs-cyber-content-paragraph {
+  font-size: 24px;
+  color: #494949;
+  margin: 0 0 40px 0;
+  line-height: 32px;
 }
 @media (max-width: 900px) {
   .who-needs-cyber-section {
@@ -232,15 +250,46 @@ export function mountWhoNeedsCyberInsurance(target: HTMLElement, configArg?: any
     }, 10);
     const activeTabObj = config.tabs.find((t: any) => t.key === activeTab);
     if (activeTabObj && activeTabObj.content && activeTabObj.content.length > 0) {
-      const list = document.createElement('div');
-      list.className = 'who-needs-cyber-list';
-      activeTabObj.content.forEach((item: string) => {
-        const li = document.createElement('div');
-        li.className = 'who-needs-cyber-list-item';
-        li.innerHTML = (showCheckmark ? `<span class="icon">${checkmarkSvg}</span>` : '') + item;
-        list.appendChild(li);
+      // Special case: if all items are heading/paragraph pairs (HTML tags)
+      const isHeadingParaPairs = activeTabObj.content.length > 1 && activeTabObj.content.every((item: string, idx: number) => {
+        if (idx % 2 === 0) return /<strong>|<b>|<h[1-6]>/i.test(item); // heading
+        return true; // allow any string for paragraph
       });
-      right.appendChild(list);
+      if (isHeadingParaPairs) {
+        // Render as heading/paragraph pairs
+        for (let i = 0; i < activeTabObj.content.length; i += 2) {
+          const heading = document.createElement('div');
+          heading.className = 'who-needs-cyber-content-heading';
+          heading.innerHTML = activeTabObj.content[i];
+          right.appendChild(heading);
+          if (activeTabObj.content[i + 1]) {
+            const para = document.createElement('div');
+            para.className = 'who-needs-cyber-content-paragraph';
+            para.textContent = activeTabObj.content[i + 1];
+            // If this is the last paragraph, remove bottom margin
+            if (i + 2 >= activeTabObj.content.length) {
+              para.style.marginBottom = '0';
+            }
+            right.appendChild(para);
+          }
+        }
+      } else if (activeTabObj.content.length === 1) {
+        // Render as a plain paragraph if only one item
+        const para = document.createElement('p');
+        para.className = 'who-needs-cyber-single-paragraph';
+        para.textContent = activeTabObj.content[0];
+        right.appendChild(para);
+      } else {
+        const list = document.createElement('div');
+        list.className = 'who-needs-cyber-list';
+        activeTabObj.content.forEach((item: string) => {
+          const li = document.createElement('div');
+          li.className = 'who-needs-cyber-list-item';
+          li.innerHTML = (showCheckmark ? `<span class=\"icon\">${checkmarkSvg}</span>` : '') + item;
+          list.appendChild(li);
+        });
+        right.appendChild(list);
+      }
     }
 
     mainRow.appendChild(left);

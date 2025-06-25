@@ -157,7 +157,7 @@ function injectStyles() {
   font-size: 24px;
   font-weight: 700;
   margin: 0 0 30px 0;
-  color: #494949;
+  color: #242826;
 }
 .who-needs-cyber-content-paragraph {
   font-size: 24px;

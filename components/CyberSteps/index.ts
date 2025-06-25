@@ -66,8 +66,8 @@ function injectStyles() {
   const style = document.createElement('style');
   style.id = 'cyber-steps-styles';
   style.textContent = `
-  .cyber-steps-section { background: #005DFF; padding: 70px 80px; }
-  .cyber-steps-section .process-container { max-width: 1200px; margin: 0 auto; text-align: center; color: white; }
+  .cyber-steps-section { background: #005DFF; padding: 70px 0 70px 80px; }
+  .cyber-steps-section .process-container {  margin: 0 auto; text-align: center; color: white; }
   .cyber-steps-section .process-header { margin-top: 70px; margin-bottom: 50px; }
   .cyber-steps-section .process-title { font-size: 2.2rem; font-weight: 900; margin-bottom: 40px; letter-spacing: -0.02em; }
   .cyber-steps-section .process-subtitle { font-size: 24px; font-weight: 400; line-height: 40px; opacity: 0.9; max-width: 900px; margin: 0 auto; }

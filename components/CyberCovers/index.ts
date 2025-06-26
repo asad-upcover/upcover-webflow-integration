@@ -61,7 +61,7 @@ function injectStyles() {
   // margin-bottom: 35px;
   border: none;
   background: none;
-  padding: 0 0 8px 0;
+  padding: 40px 0 70px 0;
   outline: none;
   position: relative;
   text-align: left;

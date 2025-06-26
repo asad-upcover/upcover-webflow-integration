@@ -20,7 +20,9 @@ function injectStyles() {
   z-index: -1000;
   // width: 100%;
   // max-width: 700px;
-  margin: 40px 0 0px 0px;
+  background: red;
+
+  // margin: 40px 0 0px 0px;
   // background: transparent;
   font-family: 'Inter', Arial, sans-serif;
   box-sizing: border-box;
@@ -57,7 +59,7 @@ function injectStyles() {
   color: #005DFF;
   font-weight: 700;
   font-size: 20px;
-  margin-bottom: 35px;
+  // margin-bottom: 35px;
   border: none;
   background: none;
   padding: 0 0 8px 0;

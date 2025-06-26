@@ -20,8 +20,7 @@ function injectStyles() {
   z-index: -1000;
   // width: 100%;
   // max-width: 700px;
-  background: red;
-
+  // background: red;
   // margin: 40px 0 0px 0px;
   // background: transparent;
   font-family: 'Inter', Arial, sans-serif;

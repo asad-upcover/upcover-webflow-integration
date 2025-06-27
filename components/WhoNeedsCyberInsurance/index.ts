@@ -184,6 +184,7 @@ function injectStyles() {
   }
   .who-needs-cyber-title {
     font-size: 1.3rem;
+    margin-bottom: 1rem;
   }
   .who-needs-cyber-tab {
     font-size: 16px;
@@ -191,6 +192,15 @@ function injectStyles() {
   }
   .who-needs-cyber-list-item {
     font-size: 16px;
+  }
+  .who-needs-cyber-desc, .who-needs-cyber-single-paragraph, .who-needs-cyber-content-paragraph, .who-needs-cyber-content-heading {
+    font-size: 16px;
+  }
+  .who-needs-cyber-content-heading {
+    margin-bottom: 0.5rem;
+  }
+  .who-needs-cyber-header{
+    margin-bottom: 1rem;
   }
 }
 `;

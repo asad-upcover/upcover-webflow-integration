@@ -61,11 +61,11 @@ function injectStyles() {
   // margin-bottom: 35px;
   border: none;
   background: none;
-  margin: 40px 0 0 0;
+  padding: 0 0 70px 0;
   outline: none;
+  margin-top: 40px;
   position: relative;
   text-align: left;
-  margin-bottom: 70px !important;
 }
 .cyber-covers-toggle span {
   text-decoration: underline;

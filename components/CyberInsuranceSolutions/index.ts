@@ -61,7 +61,7 @@ function injectStyles() {
   style.textContent = `
 .cyber-insurance-solutions {
   max-width: 1194px;
-  margin: 40px auto 0 auto;
+  margin: 0 auto;
   font-family: 'Inter', Arial, sans-serif;
   width: 100%;
   box-sizing: border-box;

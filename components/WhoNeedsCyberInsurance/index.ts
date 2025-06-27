@@ -104,6 +104,7 @@ function injectStyles() {
 .who-needs-cyber-tab.active {
   color: #005DFF;
   border-bottom: 1px solid #005DFF;
+  line-height: 60px;
 }
 .who-needs-cyber-tab .arrow {
   display: flex;

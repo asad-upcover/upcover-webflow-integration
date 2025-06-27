@@ -1,4 +1,4 @@
-import { arrowDownIcon, crossIcon } from '../../assets/svgicons';
+import { arrowDownCyber, crossIcon } from '../../assets/svgicons';
 
 const DEFAULT_CONFIG = {
   title: "What it doesn't cover",
@@ -69,9 +69,10 @@ function injectStyles() {
 .cyber-covers-toggle span {
   text-decoration: underline;
   text-underline-offset: 4px;
+  font-size: 24px;
 }
 .cyber-covers-toggle .cyber-covers-arrow {
-  margin-left: 6px;
+  margin-left: 10px;
   font-size: 18px;
   transition: transform 0.2s;
   color: #005DFF;
@@ -106,6 +107,10 @@ function injectStyles() {
   align-items: center;
   justify-content: center;
 }
+.cyber-covers-x svg {
+  width: 20px;
+  height: 20px;
+}
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-8px); }
   to { opacity: 1; transform: none; }
@@ -130,7 +135,7 @@ export function mountCyberCovers(target: HTMLElement, configArg?: any) {
     const toggle = document.createElement('button');
     toggle.type = 'button';
     toggle.className = 'cyber-covers-toggle' + (open ? ' open' : '');
-    toggle.innerHTML = `<span>${config.title}</span> <span class="cyber-covers-arrow">${arrowDownIcon}</span>`;
+    toggle.innerHTML = `<span>${config.title}</span> <span class="cyber-covers-arrow">${arrowDownCyber}</span>`;
     toggle.onclick = () => {
       open = !open;
       render();

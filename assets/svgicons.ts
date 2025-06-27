@@ -10,6 +10,11 @@ export const arrowDownIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="14"
   </svg>   
     `
 
+export const arrowDownCyber = `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M16.6 7.45801L11.1667 12.8913C10.525 13.533 9.47503 13.533 8.83336 12.8913L3.40002 7.45801" stroke="#005DFF" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`
+
 export const crossIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M9.17004 14.8299L14.83 9.16992" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

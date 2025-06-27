@@ -61,10 +61,11 @@ function injectStyles() {
   // margin-bottom: 35px;
   border: none;
   background: none;
-  margin: 40px 0 70px 0;
+  margin: 40px 0 0 0;
   outline: none;
   position: relative;
   text-align: left;
+  margin-bottom: 70px !important;
 }
 .cyber-covers-toggle span {
   text-decoration: underline;
@@ -117,6 +118,10 @@ function injectStyles() {
 }
 .cyber-covers-arrow svg path {
   stroke: #005DFF !important;
+}
+.cyber-covers-toggle-wrapper {
+  margin-bottom: 70px;
+  background: #F8F7F7;
 }
 `;
   document.head.appendChild(style);

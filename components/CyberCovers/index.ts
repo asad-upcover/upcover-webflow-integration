@@ -95,6 +95,9 @@ function injectStyles() {
   margin-bottom: 18px;
   line-height: 1.5;
 }
+.cyber-covers-list li:last-child {
+  margin-bottom: 0;
+}
 .cyber-covers-x {
   color: #A0A0A0;
   font-size: 20px;

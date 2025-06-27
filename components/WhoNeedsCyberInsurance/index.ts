@@ -108,9 +108,10 @@ function injectStyles() {
 .who-needs-cyber-tab .arrow {
   display: flex;
   align-items: center;
-  margin-left: 8px;
+  margin-left: 10px;
   vertical-align: middle;
-  height: 1.5em;
+  // height: 1.5em;
+  max-height: 20px;
 }
 .who-needs-cyber-right {
   flex: 1 1 320px;
@@ -163,7 +164,7 @@ function injectStyles() {
   font-size: 24px;
   color: #494949;
   margin: 0 0 40px 0;
-  line-height: 32px;
+  line-height: 40px;
 }
 @media (max-width: 900px) {
   .who-needs-cyber-section {

@@ -100,6 +100,7 @@ function injectStyles() {
   outline: none;
   transition: color 0.2s, border-color 0.2s;
   position: relative;
+  line-height: 60px;
 }
 .who-needs-cyber-tab.active {
   color: #005DFF;
@@ -111,7 +112,8 @@ function injectStyles() {
   align-items: center;
   margin-left: 8px;
   vertical-align: middle;
-  height: 1.5em;
+  // height: 1.5em;
+  max-height: 20px;
 }
 .who-needs-cyber-right {
   flex: 1 1 320px;

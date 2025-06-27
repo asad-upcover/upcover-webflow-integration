@@ -51,6 +51,9 @@ function injectStyles() {
     margin-right: 12px;
   }
 }
+.cyber-covers-toggle-wrapper {
+  margin-bottom: 70px;
+}
 .cyber-covers-toggle {
   display: flex;
   align-items: center;
@@ -61,7 +64,6 @@ function injectStyles() {
   // margin-bottom: 35px;
   border: none;
   background: none;
-  margin: 40px 0 70px 0;
   outline: none;
   position: relative;
   text-align: left;
@@ -83,7 +85,7 @@ function injectStyles() {
   transform: rotate(180deg);
 }
 .cyber-covers-list {
-  margin: -40px 0 0 0;
+  margin: -35px 0 0 0;
   padding: 0 0 70px 0;
   list-style: none;
   animation: fadeIn 0.2s;
@@ -132,6 +134,8 @@ export function mountCyberCovers(target: HTMLElement, configArg?: any) {
     target.className = 'cyber-covers';
 
     // Toggle button
+    const toggleWrapper = document.createElement('div');
+    toggleWrapper.className = 'cyber-covers-toggle-wrapper';
     const toggle = document.createElement('button');
     toggle.type = 'button';
     toggle.className = 'cyber-covers-toggle' + (open ? ' open' : '');
@@ -140,7 +144,8 @@ export function mountCyberCovers(target: HTMLElement, configArg?: any) {
       open = !open;
       render();
     };
-    target.appendChild(toggle);
+    toggleWrapper.appendChild(toggle);
+    target.appendChild(toggleWrapper);
 
     // List
     if (open) {

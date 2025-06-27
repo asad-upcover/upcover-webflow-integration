@@ -82,8 +82,8 @@ function injectStyles() {
   transform: rotate(180deg);
 }
 .cyber-covers-list {
-  margin: 0;
-  padding: 0;
+  margin: -40px 0 0 0;
+  padding: 0 0 70px 0;
   list-style: none;
   animation: fadeIn 0.2s;
 }

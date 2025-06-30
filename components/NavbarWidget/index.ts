@@ -196,6 +196,8 @@ export class NavbarWidget {
                 const currentTheme = this.themeManager.getCurrentTheme();
                 const hoverColor = currentTheme === 'motor' ? '#3B4125' : this.themeManager.getCurrentColor();
                 li.style.color = hoverColor;
+                li.style.textDecoration = 'underline';
+                li.style.textUnderlineOffset = '4px';
               });
               li.addEventListener('mouseleave', () => {
                 if (listItem.toLowerCase().includes('view all')) {
@@ -203,6 +205,7 @@ export class NavbarWidget {
                 } else {
                   li.style.color = '#555';
                 }
+                li.style.textDecoration = 'none';
               });
               list.appendChild(li);
             });
@@ -398,7 +401,7 @@ export class NavbarWidget {
       .menu-icon {
         display: flex;
         align-items: center;
-        transition: transform 0.3s ease;
+        transition: transform 0.5s ease;
       }
 
       .menu-item:hover .menu-icon {
@@ -776,6 +779,8 @@ export class NavbarWidget {
                 const currentTheme = this.themeManager.getCurrentTheme();
                 const hoverColor = currentTheme === 'motor' ? '#3B4125' : this.themeManager.getCurrentColor();
                 li.style.color = hoverColor;
+                li.style.textDecoration = 'underline';
+                li.style.textUnderlineOffset = '4px';
               });
               li.addEventListener('mouseleave', () => {
                 if (listItem.toLowerCase().includes('view all')) {
@@ -783,6 +788,7 @@ export class NavbarWidget {
                 } else {
                   li.style.color = '#555';
                 }
+                li.style.textDecoration = 'none';
               });
               list.appendChild(li);
             });

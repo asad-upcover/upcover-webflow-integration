@@ -449,7 +449,7 @@ export class NavbarWidget {
       .dropdown-menu.three-column {
         display: none;
         position: absolute;
-        margin-top: 58px;
+        margin-top: 50px;
         left: 0;
         right: 0;
         width: 100%;

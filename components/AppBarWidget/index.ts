@@ -63,21 +63,21 @@ export class AppBarWidget {
           display: flex;
           justify-content: space-between;
           align-content: center;
-          background-color: #f5f0eb;
+          background-color: #F8F7F7;
           font-size: 0.9rem;
           padding: 0 60px;
         }
         .tabs button {
           background: none;
           border: none;
-          font-weight: bold;
+          font-weight: 700;
           cursor: pointer;
-          padding: 27px 31px;
+          padding: 31px 20px 27px 20px;
           color: #545464;
           font-size: 1rem;
           position: relative;
           transition: color 0.3s ease, background-color 0.3s ease;
-          max-height: 70px;
+          // max-height: 70px;
         }
           @media screen and (max-width: 1010px){
           .tabs button{
@@ -104,12 +104,12 @@ export class AppBarWidget {
           gap: 1rem;
           align-items: center;
           font-weight: 600;
-          color: #333;
+          color: #242826;
           font-size: 16px;
         }
         .contact a {
           text-decoration: none;
-          color: #333;
+          color: #242826;
         }
         .contact-phone-container {
           background-color: white;
@@ -120,6 +120,7 @@ export class AppBarWidget {
           align-items: center;
           font-size: 16px;
           gap: 10px;
+          color: #242826;
         }
         .contact-region-switcher {
           font-weight: 700;
@@ -203,7 +204,7 @@ export class AppBarWidget {
         regionLink.href = region.url;
         regionLink.textContent = region.label;
         regionLink.style.fontWeight =
-          activeRegion === region.code ? "900" : "600";
+          activeRegion === region.code ? "900" : "700";
         regionLink.addEventListener("click", (e) => {
           localStorage.setItem("activeRegion", region.code);
           activeRegion = region.code;
@@ -223,7 +224,10 @@ export class AppBarWidget {
     phoneLink.href = `tel:${this.branding.contactPhone.replace(/\s+/g, "")}`;
     phoneLink.innerHTML = callIcon;
     phoneLink.className = "contact-phone-svg";
-    const phoneText = document.createTextNode(this.branding.contactPhone);
+    const phoneText = document.createElement("span");
+    phoneText.textContent = this.branding.contactPhone;
+    phoneText.style.fontWeight = "600";
+    phoneText.style.color = "#242826";
     phoneContainer.appendChild(phoneLink);
     phoneContainer.appendChild(phoneText);
 

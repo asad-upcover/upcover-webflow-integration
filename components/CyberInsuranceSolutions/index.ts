@@ -85,7 +85,7 @@ function injectStyles() {
   background: #f5f7fa;
   border: none;
   border-radius: 8px 8px 0 0;
-  color: #333;
+  color: #242826;
   font-weight: 600;
   font-size: 1.5rem;
   cursor: pointer;

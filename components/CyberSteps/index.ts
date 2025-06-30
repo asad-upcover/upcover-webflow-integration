@@ -131,7 +131,7 @@ export function mountCyberSteps(target: HTMLElement, configArg?: Partial<CyberSt
     // Header
     const header = document.createElement('div');
     header.className = 'process-header';
-    header.innerHTML = `<h1 class="process-title">${config.title}</h1><p class="process-subtitle">${config.subtitle}</p>`;
+    header.innerHTML = `<h2 class="process-title">${config.title}</h2><p class="process-subtitle">${config.subtitle}</p>`;
     section.appendChild(header);
     // Nav
     const nav = document.createElement('div');
@@ -182,7 +182,7 @@ export function mountCyberSteps(target: HTMLElement, configArg?: Partial<CyberSt
     config.steps!.forEach((step, idx) => {
       const card = document.createElement('div');
       card.className = 'step-card';
-      card.innerHTML = `<div class="step-number">${idx + 1}</div><h3 class="step-title">${step.name}</h3><ul class="step-list">${step.items.map(item => `<li class='step-item'><div class='step-bullet'></div><span>${item}</span></li>`).join('')}</ul>`;
+      card.innerHTML = `<div class="step-number">${idx + 1}</div><h4 class="step-title">${step.name}</h4><ul class="step-list">${step.items.map(item => `<li class='step-item'><div class='step-bullet'></div><span>${item}</span></li>`).join('')}</ul>`;
       stepsContainer!.appendChild(card);
     });
     section.appendChild(stepsContainer);
@@ -190,6 +190,7 @@ export function mountCyberSteps(target: HTMLElement, configArg?: Partial<CyberSt
     const ctaBtn = document.createElement('button');
     ctaBtn.className = 'cta-button';
     ctaBtn.textContent = config.cta?.label || 'GET A QUOTE';
+    ctaBtn.title = config.title || '';
     ctaBtn.onclick = () => {
       if (config.cta?.onClick) config.cta.onClick();
       else alert('Redirecting to quote form...');

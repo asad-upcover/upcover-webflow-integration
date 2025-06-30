@@ -96,7 +96,7 @@ function injectStyles() {
   .cyber-steps-section .step-item { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; color: #6b7280; line-height: 1.5; font-size: 1.25rem; }
   .cyber-steps-section .step-item:last-child { margin-bottom: 0; }
   .cyber-steps-section .step-bullet { width: 6px; height: 6px; background: #005DFF; border-radius: 50%; margin-top: 8px; flex-shrink: 0; }
-  .cyber-steps-section .cta-button { background: white; color: #005DFF; border: none; padding: 22px 60px; border-radius: 8px; font-size: 1.125rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+  .cyber-steps-section .cta-button { background: white; color: #005DFF; border: none; padding: 22px 60px; border-radius: 10px; font-size: 1.125rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
   .cyber-steps-section .cta-button:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
   .cyber-steps-section .cta-button:active { transform: translateY(0); }
   @media (max-width: 768px) {.cyber-steps-section{padding: 20px} .cyber-steps-section .process-title { font-size: 1.8rem; } .cyber-steps-section .process-subtitle { font-size: 1rem; } .cyber-steps-section .process-steps { grid-template-columns: 1fr; gap: 20px; } .cyber-steps-section .step-card { padding: 24px 20px; } }

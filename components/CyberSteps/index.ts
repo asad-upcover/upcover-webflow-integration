@@ -68,10 +68,10 @@ function injectStyles() {
   style.textContent = `
   .cyber-steps-section { background: #005DFF; padding: 70px 0 70px 80px; }
   .cyber-steps-section .process-container {  margin: 0 auto; text-align: center; color: white; }
-  .cyber-steps-section .process-header { margin-top: 70px; margin-bottom: 50px; }
-  .cyber-steps-section .process-title { font-size: 2.2rem; font-weight: 900; margin-bottom: 40px; letter-spacing: -0.02em; }
+  .cyber-steps-section .process-header { margin-top: 70px; margin-bottom: 30px; }
+  .cyber-steps-section .process-title { font-size: 2.2rem; font-weight: 900; margin-bottom: 25px; letter-spacing: -0.02em; }
   .cyber-steps-section .process-subtitle { font-size: 24px; font-weight: 400; line-height: 40px; opacity: 0.9; max-width: 900px; margin: 0 auto; }
-  .cyber-steps-section .process-nav { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 0 0 4.375rem 0; }
+  .cyber-steps-section .process-nav { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 0 0 70px 0; }
   .cyber-steps-section .nav-button { width: 40px; height: 40px; border-radius: 50%;background: transparent; border: 1px solid #ffffff; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
   .cyber-steps-section .nav-button:hover { background: rgba(255,255,255,0.3); transform: scale(1.05); }
   .cyber-steps-section .nav-button:disabled { opacity: 0.5; cursor: not-allowed; }
@@ -91,7 +91,7 @@ function injectStyles() {
   .cyber-steps-section .step-card:nth-child(4) { animation-delay: 0.4s; }
   .cyber-steps-section .step-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,0.15); }
   .cyber-steps-section .step-number { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; background: #F7F6F3; color: #005DFF; border-radius: 50%; font-weight: 700; font-size: 40px; margin-bottom: 20px; }
-  .cyber-steps-section .step-title { font-size: 1.5rem; font-weight: 700; color: #1f2937; margin-bottom: 2.5rem; }
+  .cyber-steps-section .step-title { font-size: 1.5rem; font-weight: 700; color: #1f2937; margin-bottom: 30px; }
   .cyber-steps-section .step-list { list-style: none; padding-left: 0; margin-left: 0; }
   .cyber-steps-section .step-item { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; color: #6b7280; line-height: 1.5; font-size: 1.25rem; }
   .cyber-steps-section .step-item:last-child { margin-bottom: 0; }

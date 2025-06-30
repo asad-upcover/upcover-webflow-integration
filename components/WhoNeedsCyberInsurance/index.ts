@@ -53,12 +53,12 @@ function injectStyles() {
 }
 .who-needs-cyber-header {
   width: 100%;
-  margin-bottom: 3.75rem;
+  margin-bottom: 50px;
 }
 .who-needs-cyber-title {
   font-size: 2.125rem;
   font-weight: 900;
-  margin-bottom: 2.5rem;
+  margin-bottom: 25px;
   color: #242826;
 }
 .who-needs-cyber-desc {
@@ -94,12 +94,15 @@ function injectStyles() {
   border: none;
   border-bottom: 1px solid #e3e3e3;
   border-radius: 10px;
-  padding: 26px 0;
+  padding: 26px 0 26px 0;
   text-align: left;
   cursor: pointer;
   outline: none;
   transition: color 0.2s, border-color 0.2s;
   position: relative;
+  line-height: 60px;
+  margin: 0;
+  padding: 0;
 }
 .who-needs-cyber-tab.active {
   color: #005DFF;
@@ -147,7 +150,7 @@ function injectStyles() {
   justify-content: center;
 }
 .who-needs-cyber-tab:not(:first-child) {
-  padding-top: 40px;
+  padding-top: 20px;
 }
 .who-needs-cyber-single-paragraph {
   font-size: 1.5rem;

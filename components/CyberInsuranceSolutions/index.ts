@@ -129,7 +129,7 @@ function injectStyles() {
 .cis-section h3 {
   color: #005DFF;
   font-size: 24px;
-  margin: 0 0 30px 0;
+  margin: 0 0 18px 0;
   font-weight: 600;
 }
 .cis-section ul {
@@ -140,7 +140,7 @@ function injectStyles() {
   line-height: 35px;
 }
 .cis-section li {
-  margin-bottom: 24px;
+  margin-bottom: 5px;
   list-style: disc;
   line-height: 35px;
 }

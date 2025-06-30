@@ -109,8 +109,8 @@ function injectStyles() {
   justify-content: center;
 }
 .cyber-covers-x svg {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
 }
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-8px); }

@@ -68,26 +68,26 @@ function injectStyles() {
 }
 .cis-tabs {
   display: flex;
-  gap: 12px;
+  gap: 16px;
   margin-bottom: 0;
   flex-wrap: wrap;
 }
 .cis-content-wrapper {
   border: 1.5px solid #005DFF;
-  border-radius: 0px 10px 10px 10px;
+  border-radius: 0px 0px 10px 10px;
   background: #fff;
   padding: 20px;
   box-sizing: border-box;
 }
 .cis-tab-btn {
   flex: 1;
-  padding: 35px 0px;
-  background: #f5f7fa;
+  padding: 22px 0px;
+  background: #F8F7F7;
   border: none;
-  border-radius: 8px 8px 0 0;
+  border-radius: 10px 10px 0 0;
   color: #242826;
   font-weight: 600;
-  font-size: 1.5rem;
+  font-size: 24px;
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
   min-width: 160px;
@@ -97,9 +97,7 @@ function injectStyles() {
   color: #fff;
   
 }
-.cis-tab-btn:last-child {
-  border-radius: 10px 10px 10px 0px;
-}
+
 .cis-main-box {
   display: flex;
   gap: 24px;

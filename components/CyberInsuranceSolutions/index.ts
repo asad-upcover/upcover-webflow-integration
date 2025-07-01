@@ -1,3 +1,5 @@
+import { arrowIcon } from '../../assets/svgicons';
+
 // Default config for fallback/demo
 const DEFAULT_CONFIG = {
   tabs: [
@@ -157,9 +159,9 @@ function injectStyles() {
   line-height: 35px;
 }
 .cis-quote-btn {
-  display: inline-block;
+  display: block;
   margin-top: 59px;
-  padding: 22px 150px;
+  padding: 22px 60px 22px 22px;
   background: #e3f0ff;
   color: #005DFF;
   border: none;
@@ -171,10 +173,47 @@ function injectStyles() {
   transition: background 0.2s, color 0.2s;
   width: 100%;
   box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+.cis-quote-btn-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.cis-quote-btn .cis-quote-btn-arrow {
+  opacity: 0;
+  width: 24px;
+  height: 24px;
+  margin-right: 0;
+  margin-left: 0;
+  transition: opacity 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cis-quote-btn .cis-quote-btn-text {
+  display: inline-block;
+  transition: transform 0.2s cubic-bezier(0.4,0,0.2,1);
+  margin-left: 0;
+}
+.cis-quote-btn:hover .cis-quote-btn-arrow {
+  opacity: 1;
+}
+.cis-quote-btn:hover .cis-quote-btn-arrow svg path {
+  stroke: #fff;
+}
+.cis-quote-btn:hover .cis-quote-btn-text {
+  transform: translateX(12px);
 }
 .cis-quote-btn:hover {
   background: #005DFF;
   color: #fff;
+  border-radius: 0;
 }
 .cis-divider {
   border: none;
@@ -301,7 +340,9 @@ export function mountCyberInsuranceSolutions(target: HTMLElement, configArg?: an
             <h3>${tab.lossExample.title}</h3>
             <p>${tab.lossExample.text}</p>
           </div>
-          <a href="${tab.button.href}" class="cis-quote-btn">${tab.button.label}</a>
+          <a href="${tab.button.href}" class="cis-quote-btn">
+            <span class="cis-quote-btn-inner"><span class="cis-quote-btn-arrow" aria-hidden="true" style="display:flex;">${arrowIcon}</span><span class="cis-quote-btn-text">${tab.button.label}</span></span>
+          </a>
         </div>
       </div>
     `;

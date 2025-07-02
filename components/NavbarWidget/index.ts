@@ -1,4 +1,4 @@
-import { upcoverLogoBusiness, upcoverLogoTech, upcoverLogoMotor, arrowDownIcon } from "../../assets/svgicons";
+import { upcoverLogoBusiness, upcoverLogoTech, upcoverLogoMotor, arrowDownIcon, arrowIcon } from "../../assets/svgicons";
 import { ThemeManager } from "../../themes/theme";
 
 interface MenuItem {
@@ -39,6 +39,7 @@ export interface NavbarConfig {
   themeColor?: string;
   loginText?: string;
   quoteText?: string;
+  themeColors?: Record<string, string>;
 }
 
 
@@ -82,7 +83,8 @@ export class NavbarWidget {
       } as NavbarConfig['menuItems'],
       themeColor: config.themeColor || "#FF522D",
       loginText: config.loginText || "LOGIN",
-      quoteText: config.quoteText || "GET A QUOTE"
+      quoteText: config.quoteText || "GET A QUOTE",
+      themeColors: config.themeColors || {}
     };
 
     this.target = document.createElement("nav");
@@ -141,6 +143,15 @@ export class NavbarWidget {
         <span class="menu-icon">${arrowDownIcon}</span>
       `;
       
+      // Set dynamic color based on theme
+      const currentTheme = this.themeManager.getCurrentTheme();
+      const themeColor = this.themeManager.getCurrentColor();
+      if (window.location.pathname.includes(item.label.toLowerCase())) {
+        a.style.color = themeColor;
+      } else {
+        a.style.color = '#242826';
+      }
+      
       // Add hover event listener to change color
       li.addEventListener('mouseenter', () => {
         const currentTheme = this.themeManager.getCurrentTheme();
@@ -155,7 +166,12 @@ export class NavbarWidget {
       });
       
       li.addEventListener('mouseleave', () => {
-        a.style.color = '#242826';
+        // Set color based on active tab
+        if (window.location.pathname.includes(item.label.toLowerCase())) {
+          a.style.color = themeColor;
+        } else {
+          a.style.color = '#242826';
+        }
         
         // Reset SVG color
         const svgPath = a.querySelector('svg path');
@@ -395,13 +411,13 @@ export class NavbarWidget {
         display: flex;
         align-items: center;
         gap: 6px;
-        transition: color 0.3s ease;
+        /* No transition for color, so color changes immediately on hover */
       }
 
       .menu-icon {
         display: flex;
         align-items: center;
-        transition: transform 0.5s ease;
+        transition: transform 0.2s ease;
       }
 
       .menu-item:hover .menu-icon {
@@ -628,7 +644,72 @@ export class NavbarWidget {
           font-size: 18px;
         }
 
+      }
 
+      .upcover-quote-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px 20px 20px 0px;
+        background: inherit;
+        color: inherit;
+        border: none;
+        border-radius: 10px;
+        font-weight: bold;
+        font-size: 16px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        transition: background 0.2s, color 0.2s, border-radius 160ms ease-out;
+        --upcover-quote-btn-bg: inherit;
+      }
+      .upcover-quote-btn-inner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+      .upcover-quote-btn-arrow {
+        opacity: 0;
+        width: 24px;
+        height: 24px;
+        margin-right: 0;
+        margin-left: 0;
+        transition: opacity 160ms ease-out, margin-right 160ms ease-out;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+        position: static;
+      }
+      .upcover-quote-btn-text {
+        display: inline-block;
+        transition: transform 160ms ease-out;
+        margin-left: 0;
+        width: auto;
+        text-align: center;
+      }
+      .upcover-quote-btn:hover {
+        background: var(--upcover-quote-btn-bg) !important;
+        border-radius: 0 !important;
+      }
+      .upcover-quote-btn:hover .upcover-quote-btn-arrow {
+        opacity: 1;
+        margin: 0 -5px 0 5px;
+      }
+      .upcover-quote-btn:hover .upcover-quote-btn-arrow svg path {
+        stroke: #fff;
+      }
+      .upcover-quote-btn:hover .upcover-quote-btn-text {
+        transform: translateX(12px);
+      }
+      .upcover-quote-btn.motor-theme:hover {
+        color: #3B4125 !important;
+      }
+      .upcover-quote-btn.motor-theme:hover .upcover-quote-btn-arrow svg path {
+        stroke: #3B4125 !important;
       }
     `;
     document.head.appendChild(style);
@@ -654,8 +735,32 @@ export class NavbarWidget {
 
     const quoteButton = document.createElement("button");
     quoteButton.style.backgroundColor = this.themeManager.getCurrentColor();
-    quoteButton.className = "quote";
-    quoteButton.innerText = this.config.quoteText || "GET A QUOTE";
+    quoteButton.className = "quote upcover-quote-btn";
+    const motorArrowIcon = `<svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.0625 13H21.9375" stroke="#3B4125" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M14.625 5.6875L21.9375 13L14.625 20.3125" stroke="#3B4125" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+    const isMotor = this.themeManager.getCurrentTheme() === 'motor';
+    const arrow = isMotor ? motorArrowIcon : arrowIcon;
+    quoteButton.innerHTML = `
+      <span class="upcover-quote-btn-inner">
+        <span class="upcover-quote-btn-arrow" aria-hidden="true">${arrow}</span>
+        <span class="upcover-quote-btn-text">${this.config.quoteText || "GET A QUOTE"}</span>
+      </span>
+    `;
+    if (isMotor) {
+      quoteButton.style.color = '#3B4125';
+      quoteButton.classList.add('motor-theme');
+    } else {
+      quoteButton.classList.remove('motor-theme');
+    }
+
+    // Set CSS variable for hover background color from config.themeColors
+    let themeColor = this.themeManager.getCurrentColor();
+    if (this.config.themeColors) {
+      const theme = this.themeManager.getCurrentTheme();
+      if (this.config.themeColors[theme]) {
+        themeColor = this.config.themeColors[theme];
+      }
+    }
+    quoteButton.style.setProperty('--upcover-quote-btn-bg', themeColor);
 
     // Set initial text color based on theme
     const currentTheme = this.themeManager.getCurrentTheme();
@@ -724,6 +829,14 @@ export class NavbarWidget {
         <span class="menu-icon">${arrowDownIcon}</span>
       `;
 
+      // Set dynamic color based on theme
+      const themeColor = this.themeManager.getCurrentColor();
+      if (window.location.pathname.includes(item.label.toLowerCase())) {
+        a.style.color = themeColor;
+      } else {
+        a.style.color = '#242826';
+      }
+      
       // Add hover event listener to change color
       li.addEventListener('mouseenter', () => {
         const currentTheme = this.themeManager.getCurrentTheme();
@@ -738,7 +851,12 @@ export class NavbarWidget {
       });
       
       li.addEventListener('mouseleave', () => {
-        a.style.color = '#242826';
+        // Set color based on active tab
+        if (window.location.pathname.includes(item.label.toLowerCase())) {
+          a.style.color = themeColor;
+        } else {
+          a.style.color = '#242826';
+        }
         
         // Reset SVG color
         const svgPath = a.querySelector('svg path');

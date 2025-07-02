@@ -257,33 +257,67 @@ export class NavbarWidget {
             const btn = document.createElement('a');
             btn.href = button.href;
             btn.className = 'box-button';
-            btn.textContent = button.label;
-            
+            // Insert arrow and text spans for animation
+            btn.innerHTML = `
+              <span class="box-btn-inner">
+                <span class="box-btn-arrow" aria-hidden="true" style="display:flex;">${arrowIcon}</span>
+                <span class="box-btn-text">${button.label}</span>
+              </span>
+            `;
             // Apply different background color for second button based on theme
+            const currentTheme = this.themeManager.getCurrentTheme();
             if (index === 1) {
-              const currentTheme = this.themeManager.getCurrentTheme();
               const themeColor = this.themeManager.getCurrentColor();
               if (currentTheme === 'business') {
                 btn.style.cssText = `
                   background-color: #FFCFC5;
                   color: ${themeColor};
                 `;
+                btn.classList.remove('motor-theme');
+                btn.classList.add('secondary-btn');
+                btn.style.setProperty('--secondary-btn-hover-bg', themeColor);
+                btn.style.setProperty('--secondary-btn-hover-color', '#fff');
               } else if (currentTheme === 'motor') {
                 btn.style.cssText = `
                   background-color: #F8FFAF;
                   color: #000000;
                 `;
+                btn.classList.add('motor-theme');
+                btn.classList.add('secondary-btn');
+                btn.style.setProperty('--secondary-btn-hover-bg', themeColor);
+                btn.style.setProperty('--secondary-btn-hover-color', '#3B4125');
+              } else {
+                btn.classList.remove('motor-theme');
+                btn.classList.add('secondary-btn');
+                btn.style.cssText = `
+                  background-color: #EAF2FF;
+                  color: ${themeColor};
+                `;
+                btn.style.setProperty('--secondary-btn-hover-bg', themeColor);
+                btn.style.setProperty('--secondary-btn-hover-color', '#fff');
               }
             } else {
-              const currentTheme = this.themeManager.getCurrentTheme();
               btn.style.cssText = `
                 background-color: ${this.themeManager.getCurrentColor()};
                 color: ${currentTheme === 'motor' ? '#000000' : 'white'};
               `;
+              if (currentTheme === 'motor') {
+                btn.classList.add('motor-theme');
+              } else {
+                btn.classList.remove('motor-theme');
+              }
+              btn.classList.remove('secondary-btn');
+              btn.style.removeProperty('--secondary-btn-hover-bg');
+              btn.style.removeProperty('--secondary-btn-hover-color');
             }
-            
             buttonContainer1.appendChild(btn);
           });
+
+          // After all buttons are appended to buttonContainer1
+          if (buttonContainer1.childElementCount === 2) {
+            buttonContainer1.classList.add('multi-btn-row');
+            Array.from(buttonContainer1.children).forEach(btn => btn.classList.add('multi-btn'));
+          }
 
           firstDiv.appendChild(image);
           firstDiv.appendChild(heading1);
@@ -306,12 +340,22 @@ export class NavbarWidget {
             const button2 = document.createElement('a');
             button2.href = item.boxComponent.secondDiv.button.href;
             button2.className = 'box-button';
-            button2.textContent = item.boxComponent.secondDiv.button.label;
+            button2.innerHTML = `
+              <span class="box-btn-inner">
+                <span class="box-btn-arrow" aria-hidden="true" style="display:flex;">${arrowIcon}</span>
+                <span class="box-btn-text">${item.boxComponent.secondDiv.button.label}</span>
+              </span>
+            `;
             const currentTheme = this.themeManager.getCurrentTheme();
             button2.style.cssText = `
               background-color: ${this.themeManager.getCurrentColor()};
               color: ${currentTheme === 'motor' ? '#000000' : 'white'};
             `;
+            if (currentTheme === 'motor') {
+              button2.classList.add('motor-theme');
+            } else {
+              button2.classList.remove('motor-theme');
+            }
 
             secondDiv.appendChild(heading2);
             secondDiv.appendChild(paragraph2);
@@ -598,52 +642,82 @@ export class NavbarWidget {
         align-items: center;
         justify-content: center;
         padding: 19px 20px;
+        position: relative;
         background-color: ${this.themeManager.getCurrentColor()};
         color: white;
         text-decoration: none;
         border-radius: 10px;
         font-weight: 600;
         font-size: 14px;
-        transition: background-color 0.3s ease;
+        transition: background-color 0.3s ease, width 160ms ease-out, border-radius 160ms ease-out;
         box-sizing: border-box;
+        overflow: hidden;
+        min-width: 120px;
+        max-width: 100%;
       }
-
+      .box-btn-inner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transition: width 160ms ease-out;
+        gap: 0;
+      }
+      .box-btn-arrow {
+        opacity: 0;
+        width: 0;
+        height: 24px;
+        margin-right: 0;
+        margin-left: 0;
+        transition: opacity 160ms ease-out, width 160ms ease-out;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+        overflow: hidden;
+      }
+      .box-btn-text {
+        display: inline-block;
+        transition: transform 160ms ease-out;
+        margin-left: 0;
+        width: auto;
+        text-align: center;
+        vertical-align: middle;
+      }
       .box-button:hover {
-        opacity: 0.9;
+        border-radius: 0 !important;
+        width: 110%;
+      }
+      .multi-btn-row .box-button:hover,
+      .box-button.multi-btn:hover {
+        width: 100%;
+      }
+      .box-button:hover .box-btn-arrow {
+        opacity: 1;
+        width: 24px;
+        margin-right: 8px;
+        margin-left: 0;
       }
 
-      @media screen and (max-width: 1500px) {
-        .dropdown-menu.three-column {
-          flex-wrap: wrap;
-          justify-content: start;
-        }
-
-        .dropdown-box-container {
-          flex: 0 0 100%;
-          margin-left: 0;
-          margin-top: 40px;
-        }
-
-        .box-first-div,
-        .box-second-div {
-          width: 100%;
-        }
+      .box-button:hover .box-btn-text {
+        transform: translateX(0);
       }
-
-      @media screen and (max-width: 1500px) {
-        .dropdown-box-container {
-          padding: 0;
-        }
-
-        .box-first-div img {
-          height: 240px;
-        }
-
-        .box-first-div h3,
-        .box-second-div h3 {
-          font-size: 18px;
-        }
-
+            .box-button:hover .box-btn-arrow svg path {
+        stroke: #fff;
+      }
+      .box-button.motor-theme:hover {
+        color: #3B4125 !important;
+      }
+      .box-button.motor-theme:hover .box-btn-arrow svg path {
+        stroke: #3B4125 !important;
+      }
+      .box-button .box-btn-arrow svg path {
+        stroke: #005DFF;
+      }
+      .box-button.motor-theme .box-btn-arrow svg path {
+        stroke: #3B4125;
       }
 
       .upcover-quote-btn {
@@ -710,6 +784,16 @@ export class NavbarWidget {
       }
       .upcover-quote-btn.motor-theme:hover .upcover-quote-btn-arrow svg path {
         stroke: #3B4125 !important;
+      }
+      .secondary-btn .box-btn-arrow svg path {
+        stroke: currentColor !important;
+      }
+      .secondary-btn:hover {
+        background-color: var(--secondary-btn-hover-bg, #005DFF) !important;
+        color: var(--secondary-btn-hover-color, #fff) !important;
+      }
+      .secondary-btn:hover .box-btn-arrow svg path {
+        stroke: var(--secondary-btn-hover-color, #fff) !important;
       }
     `;
     document.head.appendChild(style);
@@ -942,33 +1026,67 @@ export class NavbarWidget {
             const btn = document.createElement('a');
             btn.href = button.href;
             btn.className = 'box-button';
-            btn.textContent = button.label;
-            
+            // Insert arrow and text spans for animation
+            btn.innerHTML = `
+              <span class="box-btn-inner">
+                <span class="box-btn-arrow" aria-hidden="true" style="display:flex;">${arrowIcon}</span>
+                <span class="box-btn-text">${button.label}</span>
+              </span>
+            `;
             // Apply different background color for second button based on theme
+            const currentTheme = this.themeManager.getCurrentTheme();
             if (index === 1) {
-              const currentTheme = this.themeManager.getCurrentTheme();
               const themeColor = this.themeManager.getCurrentColor();
               if (currentTheme === 'business') {
                 btn.style.cssText = `
                   background-color: #FFCFC5;
                   color: ${themeColor};
                 `;
+                btn.classList.remove('motor-theme');
+                btn.classList.add('secondary-btn');
+                btn.style.setProperty('--secondary-btn-hover-bg', themeColor);
+                btn.style.setProperty('--secondary-btn-hover-color', '#fff');
               } else if (currentTheme === 'motor') {
                 btn.style.cssText = `
                   background-color: #F8FFAF;
                   color: #000000;
                 `;
+                btn.classList.add('motor-theme');
+                btn.classList.add('secondary-btn');
+                btn.style.setProperty('--secondary-btn-hover-bg', themeColor);
+                btn.style.setProperty('--secondary-btn-hover-color', '#3B4125');
+              } else {
+                btn.classList.remove('motor-theme');
+                btn.classList.add('secondary-btn');
+                btn.style.cssText = `
+                  background-color: #EAF2FF;
+                  color: ${themeColor};
+                `;
+                btn.style.setProperty('--secondary-btn-hover-bg', themeColor);
+                btn.style.setProperty('--secondary-btn-hover-color', '#fff');
               }
             } else {
-              const currentTheme = this.themeManager.getCurrentTheme();
               btn.style.cssText = `
                 background-color: ${this.themeManager.getCurrentColor()};
                 color: ${currentTheme === 'motor' ? '#000000' : 'white'};
               `;
+              if (currentTheme === 'motor') {
+                btn.classList.add('motor-theme');
+              } else {
+                btn.classList.remove('motor-theme');
+              }
+              btn.classList.remove('secondary-btn');
+              btn.style.removeProperty('--secondary-btn-hover-bg');
+              btn.style.removeProperty('--secondary-btn-hover-color');
             }
-            
             buttonContainer1.appendChild(btn);
           });
+
+          // After all buttons are appended to buttonContainer1
+          if (buttonContainer1.childElementCount === 2) {
+            buttonContainer1.classList.add('multi-btn-row');
+            Array.from(buttonContainer1.children).forEach(btn => btn.classList.add('multi-btn'));
+          }
 
           firstDiv.appendChild(image);
           firstDiv.appendChild(heading1);
@@ -991,12 +1109,22 @@ export class NavbarWidget {
             const button2 = document.createElement('a');
             button2.href = item.boxComponent.secondDiv.button.href;
             button2.className = 'box-button';
-            button2.textContent = item.boxComponent.secondDiv.button.label;
+            button2.innerHTML = `
+              <span class="box-btn-inner">
+                <span class="box-btn-arrow" aria-hidden="true" style="display:flex;">${arrowIcon}</span>
+                <span class="box-btn-text">${item.boxComponent.secondDiv.button.label}</span>
+              </span>
+            `;
             const currentTheme = this.themeManager.getCurrentTheme();
             button2.style.cssText = `
               background-color: ${this.themeManager.getCurrentColor()};
               color: ${currentTheme === 'motor' ? '#000000' : 'white'};
             `;
+            if (currentTheme === 'motor') {
+              button2.classList.add('motor-theme');
+            } else {
+              button2.classList.remove('motor-theme');
+            }
 
             secondDiv.appendChild(heading2);
             secondDiv.appendChild(paragraph2);

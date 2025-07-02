@@ -724,7 +724,7 @@ export class NavbarWidget {
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 20px 20px 20px 0px;
+        padding: 20px 25px 20px 0px;
         background: inherit;
         color: inherit;
         border: none;
@@ -744,6 +744,7 @@ export class NavbarWidget {
         width: 100%;
         height: 100%;
         position: relative;
+        gap: 0;
       }
       .upcover-quote-btn-arrow {
         opacity: 0;
@@ -771,13 +772,13 @@ export class NavbarWidget {
       }
       .upcover-quote-btn:hover .upcover-quote-btn-arrow {
         opacity: 1;
-        margin: 0 -5px 0 5px;
+        transform: translateX(7px);
       }
       .upcover-quote-btn:hover .upcover-quote-btn-arrow svg path {
         stroke: #fff;
       }
       .upcover-quote-btn:hover .upcover-quote-btn-text {
-        transform: translateX(12px);
+        transform: translateX(0.5625rem);
       }
       .upcover-quote-btn.motor-theme:hover {
         color: #3B4125 !important;

@@ -170,7 +170,7 @@ function injectStyles() {
   font-size: 18px;
   text-decoration: none;
   text-align: center;
-  transition: background 0.2s, color 0.2s;
+  transition: background 0.2s, color 0.2s, border-radius 160ms ease-out;
   width: 100%;
   box-sizing: border-box;
   position: relative;
@@ -184,6 +184,7 @@ function injectStyles() {
   width: 100%;
   height: 100%;
   pointer-events: none;
+  transition: transform 160ms ease-out;
 }
 .cis-quote-btn .cis-quote-btn-arrow {
   opacity: 0;
@@ -191,14 +192,14 @@ function injectStyles() {
   height: 24px;
   margin-right: 0;
   margin-left: 0;
-  transition: opacity 0.2s;
+  transition: opacity 160ms ease-out;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .cis-quote-btn .cis-quote-btn-text {
   display: inline-block;
-  transition: transform 0.2s cubic-bezier(0.4,0,0.2,1);
+  transition: transform 160ms ease-out;
   margin-left: 0;
 }
 .cis-quote-btn:hover .cis-quote-btn-arrow {
@@ -207,8 +208,11 @@ function injectStyles() {
 .cis-quote-btn:hover .cis-quote-btn-arrow svg path {
   stroke: #fff;
 }
-.cis-quote-btn:hover .cis-quote-btn-text {
+.cis-quote-btn:hover .cis-quote-btn-inner {
   transform: translateX(12px);
+}
+.cis-quote-btn:hover .cis-quote-btn-text {
+  transform: none;
 }
 .cis-quote-btn:hover {
   background: #005DFF;

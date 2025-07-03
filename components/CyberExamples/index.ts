@@ -159,13 +159,13 @@ function injectStyles() {
 .who-needs-cyber-content-heading {
   font-size: 24px;
   font-weight: 700;
-  margin: 0 0 30px 0;
+  margin: 0 0 15px 0;
   color: #242826;
 }
 .who-needs-cyber-content-paragraph {
   font-size: 24px;
   color: #494949;
-  margin: 0 0 40px 0;
+  margin: 0 0 30px 0;
   line-height: 40px !important;
 }
 @media (max-width: 900px) {

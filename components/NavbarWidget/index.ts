@@ -688,7 +688,7 @@ export class NavbarWidget {
       }
       .box-button:hover {
         border-radius: 0 !important;
-        width: 110%;
+        // width: 110%;
       }
       .multi-btn-row .box-button:hover,
       .box-button.multi-btn:hover {

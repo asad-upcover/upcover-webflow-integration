@@ -344,7 +344,7 @@ export function mountCyberInsuranceSolutions(target: HTMLElement, configArg?: an
             <h3>${tab.lossExample.title}</h3>
             <p>${tab.lossExample.text}</p>
           </div>
-          <a href="${tab.button.href}" class="cis-quote-btn">
+          <a href="${tab.button.href}" class="cis-quote-btn" title="INDUSTRY-SPECIFIC CYBER INSURANCE SOLUTIONS">
             <span class="cis-quote-btn-inner"><span class="cis-quote-btn-arrow" aria-hidden="true" style="display:flex;">${arrowIcon}</span><span class="cis-quote-btn-text">${tab.button.label}</span></span>
           </a>
         </div>

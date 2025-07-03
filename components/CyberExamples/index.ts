@@ -60,6 +60,7 @@ function injectStyles() {
   font-weight: 900;
   margin-bottom: 2.5rem;
   color: #242826;
+  line-height: 40px;
 }
 .who-needs-cyber-desc {
   font-size: 1.5rem;
@@ -88,7 +89,7 @@ function injectStyles() {
   align-items: center;
   justify-content: flex-start;
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 700;
   color: #494949;
   background: none;
   border: none;

@@ -55,6 +55,7 @@ function injectStyles() {
   font-weight: 900;
   margin-bottom: 25px;
   color: #242826;
+  line-height: 40px;
 }
 .who-needs-cyber-desc {
   font-size: 1.5rem;

@@ -148,9 +148,9 @@ export class AppBarWidget {
     // Set active tab based on current URL or default to business
     const currentPath = window.location.pathname;
     const pathToTab = {
-      "/tabs/business-sole-traders": "business",
-      "/tabs/tech-startups-enterprises": "tech",
-      "/tabs/motor-fleet": "motor"
+      "/business-sole-traders": "business",
+      "/tech-startups-enterprises": "tech",
+      "/motor-fleet": "motor"
     };
     let activeTabId;
     if (currentPath.includes("product")) {
@@ -177,11 +177,11 @@ export class AppBarWidget {
         const tabId = button.dataset.tab;
         if (tabId) {
           this.themeManager.setTheme(tabId as any);
-          // Add page navigation based on tab
+          // Add page navigation based on tab (without '/tabs' in the URL)
           const routes = {
-            business: "/tabs/business-sole-traders",
-            tech: "/tabs/tech-startups-enterprises",
-            motor: "/tabs/motor-fleet"
+            business: "/business-sole-traders",
+            tech: "/tech-startups-enterprises",
+            motor: "/motor-fleet"
           };
           window.location.href = routes[tabId as keyof typeof routes] || "/";
         }

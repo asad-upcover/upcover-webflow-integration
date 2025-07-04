@@ -40,6 +40,7 @@ export interface NavbarConfig {
   loginText?: string;
   quoteText?: string;
   themeColors?: Record<string, string>;
+  defaultTheme?: 'business' | 'tech' | 'motor';
 }
 
 
@@ -56,35 +57,15 @@ export class NavbarWidget {
   private themeManager: ThemeManager;
 
   constructor(config: NavbarConfig = {}) {
+    const initialTheme = config.defaultTheme || detectInitialTheme();
     this.config = {
+      ...config,
       logo:
-        detectInitialTheme() === "tech"
+        initialTheme === "tech"
           ? upcoverLogoTech
-          : detectInitialTheme() === "motor"
+          : initialTheme === "motor"
           ? upcoverLogoMotor
           : upcoverLogoBusiness,
-      menuItems: config.menuItems || {
-        business: [
-          { label: "Coverages", href: "#" },
-          { label: "Company", href: "#" },
-          { label: "Resources", href: "#" },
-        ],
-        tech: [
-          { label: "Coverages", href: "#" },
-          { label: "Company", href: "#" },
-          { label: "Resources", href: "#" },
-          { label: "Solutions", href: "#" },
-        ],
-        motor: [
-          { label: "Coverages", href: "#" },
-          { label: "Company", href: "#" },
-          { label: "Resources", href: "#" },
-        ]
-      } as NavbarConfig['menuItems'],
-      themeColor: config.themeColor || "#FF522D",
-      loginText: config.loginText || "LOGIN",
-      quoteText: config.quoteText || "GET A QUOTE",
-      themeColors: config.themeColors || {}
     };
 
     this.target = document.createElement("nav");

@@ -21,12 +21,14 @@ export interface AppBarWidgetConfig {
     tech?: string;
     motor?: string;
   };
+  defaultTab?: 'business' | 'tech' | 'motor';
 }
 
 export class AppBarWidget {
   tabs: Tab[];
   branding: Branding;
   private themeManager: ThemeManager;
+  private defaultTab: 'business' | 'tech' | 'motor';
 
   constructor(config: AppBarWidgetConfig = {}) {
     this.tabs = config.tabs || [
@@ -54,6 +56,9 @@ export class AppBarWidget {
     this.themeManager.subscribe((theme) => {
       this.updateLogo(theme);
     });
+
+    // Store defaultTab from config
+    this.defaultTab = config.defaultTab || 'business';
   }
 
   mount(target: HTMLElement) {
@@ -152,22 +157,14 @@ export class AppBarWidget {
       "/tech-startups-enterprises": "tech",
       "/motor-fleet": "motor"
     };
-    let activeTabId;
-    if (currentPath.includes("product")) {
-      activeTabId = "tech";
-      // Set logo to tech if URL includes 'product'
-      setTimeout(() => {
-        this.updateLogo("tech");
-      }, 0);
-    } else {
-      activeTabId = pathToTab[currentPath as keyof typeof pathToTab] || "business";
-    }
+    let activeTabId = pathToTab[currentPath as keyof typeof pathToTab] || this.defaultTab;
 
     // Set the active tab and theme
     tabsDiv.querySelectorAll("button").forEach((button) => {
       if (button.dataset.tab === activeTabId) {
         button.classList.add("active");
         this.themeManager.setTheme(activeTabId as any);
+        this.updateLogo(activeTabId);
       }
       button.addEventListener("click", () => {
         tabsDiv

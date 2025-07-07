@@ -221,9 +221,8 @@ function injectStyles() {
   font-size: 16px
 }
   .cyber-coverages-scale {
-    max-width: 100%;
-    margin: 24px 0;
-    padding: 0 20px;
+    // max-width: 100%;
+    padding: 0 50px;
   }
   .cis-main-box {
     flex-direction: column;
@@ -253,7 +252,7 @@ function injectStyles() {
 
   .cyber-coverages-scale {
     margin: 12px 0;
-    padding: 0 2vw;
+    padding: 0 20vw;
   }
   .cis-content-wrapper {
     padding: 10px;

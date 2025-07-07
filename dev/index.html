@@ -1,848 +1,893 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="./style.css" />
-    <link
-      rel="stylesheet"
-      href="https://storage.googleapis.com/upcover-webflow-integration/assets/main.css"
-    />
-    <link
-      rel="shortcut icon"
-      href="https://cdn.prod.website-files.com/606e64f026fe7430dfbd27c4/6254bd870d26cf7da61d07ee_upcover%20Logo%20_%20New%20(2).webp"
-      type="image/x-icon"
-    />
-    <title>Upcover Webflow Integration Preview</title>
-  </head>
 
-  <body>
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="https://storage.googleapis.com/upcover-webflow-integration/assets/main.css" />
+  <link rel="shortcut icon"
+    href="https://cdn.prod.website-files.com/606e64f026fe7430dfbd27c4/6254bd870d26cf7da61d07ee_upcover%20Logo%20_%20New%20(2).webp"
+    type="image/x-icon" />
+  <title>Upcover Webflow Integration Preview</title>
+</head>
 
-    <header id="header">
-      <!--
+<body>
+
+  <header id="header">
+    <!--
         This section is the main entry point for rendering the AppBar and Navbar widgets.
         The AppBar widget and Navbar widget will be rendered here.
       -->
-      <!--  -->
-    </header>
+    <!--  -->
+  </header>
 
-    <div id="cyber-insurance-solutions-root"></div>
-    <div id="cyber-covers-root"></div>
-    <div id="cyber-steps-root"></div>
-    <div id="who-needs-cyber-root"></div>
-    <div id="cyber-examples"></div>
+  <div id="cyber-insurance-solutions-root"></div>
+  <div id="cyber-covers-root"></div>
+  <div id="cyber-steps-root"></div>
+  <div id="who-needs-cyber-root"></div>
+  <div id="cyber-examples"></div>
+  <div id="cyber-coverages-scales"></div>
 
-    <!-- script for INDUSTRY-SPECIFIC CYBER INSURANCE SOLUTIONS -->
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        if (window.Upcover && typeof window.Upcover.CyberInsuranceSolutionsWidget === 'function') {
-          window.Upcover.CyberInsuranceSolutionsWidget('cyber-insurance-solutions-root', {
-            tabs: [
-              {
-                key: 'healthcare',
-                label: 'Healthcare & Medical',
-                image: 'https://storage.googleapis.com/upcover-webflow-integration/assets/images/Healthcare.png',
-                risks: [
-                  'Patient data breaches (PH/PII)',
-                  'Ransomware targeting medical systems',
-                  'HIPAA compliance violations',
-                ],
-                coverage: [
-                  'Regulatory defense & penalties coverage',
-                  'Patient notification services',
-                  'Medical systems recovery',
-                ],
-                lossExample: {
-                  title: 'Real Loss Examples',
-                  text: 'A metropolitan hospital paid $4.5M in ransom and spent $8.2M on system recovery after ransomware encrypted patient records and disabled appointment system for 11 days.'
-                },
-                button: {
-                  label: 'GET A QUOTE',
-                  href: '#',
-                },
-              },
-              {
-                key: 'financial',
-                label: 'Financial Services',
-                image: 'https://storage.googleapis.com/upcover-webflow-integration/assets/images/Healthcare.png',
-                risks: ['Dummy risk 1', 'Dummy risk 2'],
-                coverage: ['Dummy coverage 1', 'Dummy coverage 2'],
-                lossExample: { title: 'Real Loss Examples', text: 'Dummy loss example.' },
-                button: { label: 'GET A QUOTE', href: '#' },
-              },
-              {
-                key: 'retail',
-                label: 'Retail & E-commerce',
-                image: 'https://storage.googleapis.com/upcover-webflow-integration/assets/images/Healthcare.png',
-                risks: ['Dummy risk 1', 'Dummy risk 2'],
-                coverage: ['Dummy coverage 1', 'Dummy coverage 2'],
-                lossExample: { title: 'Real Loss Examples', text: 'Dummy loss example.' },
-                button: { label: 'GET A QUOTE', href: '#' },
-              },
-              {
-                key: 'technology',
-                label: 'Technology & SaaS',
-                image: 'https://storage.googleapis.com/upcover-webflow-integration/assets/images/Healthcare.png',
-                risks: ['Dummy risk 1', 'Dummy risk 2'],
-                coverage: ['Dummy coverage 1', 'Dummy coverage 2'],
-                lossExample: { title: 'Real Loss Examples', text: 'Dummy loss example.' },
-                button: { label: 'GET A QUOTE', href: '#' },
-              },
-            ]
-          });
-        }
-      });
-    </script>
-
-    <!-- script for What it doesn't cover -->
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        if (window.Upcover && typeof window.Upcover.CyberCoversWidget === 'function') {
-          window.Upcover.CyberCoversWidget('cyber-covers-root');
-        }
-      });
-    </script>
-
-    <!-- script for Cyber Steps -->
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        if (window.Upcover && typeof window.Upcover.CyberStepsWidget === 'function') {
-          window.Upcover.CyberStepsWidget('cyber-steps-root', {
-            title: 'HOW TO GET CYBER INSURANCE: SIMPLE 5-STEPS PROCESS',
-            subtitle: 'Getting comprehensive cyber protection for your business is easier than you might think. Our streamlined application process takes just minutes.',
-            steps: [
-              {
-                name: 'Business',
-                key: 'business',
-                items: [
-                  'Industry and business activities',
-                  'Annual revenue figures',
-                  'Company website and domain details',
-                ],
-              },
-              {
-                name: 'Quote',
-                key: 'quote',
-                items: [
-                  'Instant pricing estimates',
-                  'Multiple coverage tier options',
-                  'Industry-specific package recommendations',
-                ],
-              },
-              {
-                name: 'Details',
-                key: 'details',
-                items: [
-                  'Security controls assessment',
-                  'Data collection and retention details',
-                  'Third-party service provider information',
-                ],
-              },
-              {
-                name: 'Full Quote',
-                key: 'fullquote',
-                items: [
-                  'Data breach coverage recommendations',
-                  'Custom policy options',
-                  'Specialized coverage recommendations',
-                ],
-              },
-            ],
-            cta: {
-              label: 'GET A QUOTE',
-            },
-          });
-        }
-      });
-    </script>
-
-    <!-- script for WHO NEEDS CYBER INSURANCE -->
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        if (window.Upcover && typeof window.Upcover.WhoNeedsCyberInsuranceWidget === 'function') {
-          window.Upcover.WhoNeedsCyberInsuranceWidget('who-needs-cyber-root', {
-            title: 'WHO NEEDS CYBER INSURANCE',
-            description: 'Any business that stores, processes, or transmits sensitive data, relies on digital systems for operations, or has an online presence should consider cyber insurance. Today, that includes nearly every business, regardless of size or industry.',
-            tabs: [
-              {
-                key: 'highrisk',
-                label: 'High-Risk Industries',
-                content: [
-                  'Healthcare providers and clinics',
-                  'Financial Services and fintech',
-                  'E-commerce and retails businesses',
-                  'Professional services firms',
-                ],
-              },
-              {
-                key: 'smb',
-                label: 'Small & Medium Businesses',
-                content: [
-                  'An e-commerce platform, SellYouLater, hired a third-party service provider. A burglar stole two laptops from the provider, exposing data of over 800,000 SellYouLater clients. Under notification laws, SellYouLater—not the provider—was responsible for alerting those affected. The company spent nearly $5 million on notification and crisis management',
-
-                ],
-              },
-              {
-                key: 'data',
-                label: 'Data-Rich Organisations',
-                content: [
-                  '<strong>Incident</strong>',
-                  'A support worker gave a participant the wrong medication dose due to a mislabeled pillbox. The participant experienced severe drowsiness and dehydration, requiring overnight hospitalization.',
-                  '<strong>Resolution</strong>',
-                  'The total costs included $8,200 for hospital and rehabilitation, $12,500 for legal defence, and a $7,500 settlement to resolve the claim out of court.'
-                ],
-              },
-              {
-                key: 'tech',
-                label: 'Technology-Dependent Business',
-                content: [
-                  'SaaS providers',
-                  'IT consultancies',
-                  'Cloud service companies',
-                  'App developers',
-                ],
-              },
-            ]
-          });
-        }
-      });
-    </script>
-
-        <!-- script for CYBER EXAMPLES -->
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        if (window.Upcover && typeof window.Upcover.CyberExamples === 'function') {
-          window.Upcover.CyberExamples('cyber-examples', {
-            title: 'CYBER INSURANCE CLAIM EXAMPLES',
-            description: 'Cyber threats are a growing risk for startups, making cyber insurance a vital safety net. At upcover, we’ve supported many companies through incidents like data breaches and ransomware. Our real-world claim examples show how coverage can help with legal fees, fines, system recovery, and more. Whether you’re handling sensitive data or scaling fast, these cases show how cyber insurance can protect your business from costly surprises',
-            checkmarkIcon: null,
-            tabs: [
-              {
-                key: 'highrisk',
-                label: 'High-Risk Industries',
-                content: [
-                  "An e-commerce platform, SellYouLater, hired a third-party service provider. A burglar stole two laptops from the provider, exposing data of over 800,000 SellYouLater clients. Under notification laws, SellYouLater—not the provider—was responsible for alerting those affected. The company spent nearly $5 million on notification and crisis management"
-                ],
-              },
-              {
-                key: 'extortion',
-                label: 'Cyber Extortion Threat',
-                content: [
-                  "An e-commerce platform, SellYouLater, hired a third-party service provider. A burglar stole two laptops from the provider, exposing data of over 800,000 SellYouLater clients. Under notification laws, SellYouLater—not the provider—was responsible for alerting those affected. The company spent nearly $5 million on notification and crisis management"
-                ],
-              },
-              {
-                key: 'codemalic',
-                label: 'Malicious Code',
-                content: [
-                  "An e-commerce platform, SellYouLater, hired a third-party service provider. A burglar stole two laptops from the provider, exposing data of over 800,000 SellYouLater clients. Under notification laws, SellYouLater—not the provider—was responsible for alerting those affected. The company spent nearly $5 million on notification and crisis management"
-                ],
-              },
-              {
-                key: 'records',
-                label: 'Exposed Records',
-                content: [
-                  "An e-commerce platform, SellYouLater, hired a third-party service provider. A burglar stole two laptops from the provider, exposing data of over 800,000 SellYouLater clients. Under notification laws, SellYouLater—not the provider—was responsible for alerting those affected. The company spent nearly $5 million on notification and crisis management"
-                ],
-              },
-            ]
-          });
-        }
-      });
-    </script>
-
-
-    <!-- script for header -->
-    <script type="module">
-      import "../components/Main/index.ts";
-      document.addEventListener("DOMContentLoaded", function () {
-        Upcover.AppBarWidget("header", {
+  <!-- script for INDUSTRY-SPECIFIC CYBER INSURANCE SOLUTIONS -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      if (window.Upcover && typeof window.Upcover.CyberInsuranceSolutionsWidget === 'function') {
+        window.Upcover.CyberInsuranceSolutionsWidget('cyber-insurance-solutions-root', {
           tabs: [
-            { id: "business", label: "Businesses & Sole traders" },
-            { id: "tech", label: "Tech Startups & Enterprises" },
-            { id: "motor", label: "Motor & Fleet" },
-          ],
-          branding: {
-            contactPhone: "1300 872 683",
-            contactRegion: [
-              { label: "AU", code: "AU", url: "#" },
-              { label: "NZ", code: "NZ", url: "#" },
-            ],
-          },
-          themeColors: {
-            business: "#FF0000",
-            tech: "#0000FF",
-            motor: "#D5E525",
-          },
-          // defaultTab: "motor"
+            {
+              key: 'healthcare',
+              label: 'Healthcare & Medical',
+              image: 'https://storage.googleapis.com/upcover-webflow-integration/assets/images/Healthcare.png',
+              risks: [
+                'Patient data breaches (PH/PII)',
+                'Ransomware targeting medical systems',
+                'HIPAA compliance violations',
+              ],
+              coverage: [
+                'Regulatory defense & penalties coverage',
+                'Patient notification services',
+                'Medical systems recovery',
+              ],
+              lossExample: {
+                title: 'Real Loss Examples',
+                text: 'A metropolitan hospital paid $4.5M in ransom and spent $8.2M on system recovery after ransomware encrypted patient records and disabled appointment system for 11 days.'
+              },
+              button: {
+                label: 'GET A QUOTE',
+                href: '#',
+              },
+            },
+            {
+              key: 'financial',
+              label: 'Financial Services',
+              image: 'https://storage.googleapis.com/upcover-webflow-integration/assets/images/Healthcare.png',
+              risks: ['Dummy risk 1', 'Dummy risk 2'],
+              coverage: ['Dummy coverage 1', 'Dummy coverage 2'],
+              lossExample: { title: 'Real Loss Examples', text: 'Dummy loss example.' },
+              button: { label: 'GET A QUOTE', href: '#' },
+            },
+            {
+              key: 'retail',
+              label: 'Retail & E-commerce',
+              image: 'https://storage.googleapis.com/upcover-webflow-integration/assets/images/Healthcare.png',
+              risks: ['Dummy risk 1', 'Dummy risk 2'],
+              coverage: ['Dummy coverage 1', 'Dummy coverage 2'],
+              lossExample: { title: 'Real Loss Examples', text: 'Dummy loss example.' },
+              button: { label: 'GET A QUOTE', href: '#' },
+            },
+            {
+              key: 'technology',
+              label: 'Technology & SaaS',
+              image: 'https://storage.googleapis.com/upcover-webflow-integration/assets/images/Healthcare.png',
+              risks: ['Dummy risk 1', 'Dummy risk 2'],
+              coverage: ['Dummy coverage 1', 'Dummy coverage 2'],
+              lossExample: { title: 'Real Loss Examples', text: 'Dummy loss example.' },
+              button: { label: 'GET A QUOTE', href: '#' },
+            },
+          ]
         });
+      }
+    });
+  </script>
 
-        Upcover.NavbarWidget("header", {
-          menuItems: {
-            business: [
-              {
-                label: "Coverages",
-                href: "#coverages",
-                dropdown: [
-                  {
-                    title: "INDUSTRY",
-                    items: [
-                      "Disability Support & Care",
-                      "Independent Living, STAs and SDAs",
-                      "Doctors, GPs and Clinics",
-                      "Beauty and Personal Care",
-                      "Therapists and Healing",
-                      "Hospitality, Pubs and Restaurants",
-                      "Tradespeople, Plumbers and Roofers",
-                      "Construction",
-                      "IT Contractors",
-                      "Retail",
-                      "Consultants",
-                      "Real Estate",
-                      "View all industries",
-                    ],
-                  },
-                  {
-                    title: "COVERS",
-                    items: [
-                      "Healthcare Professionals Insurance",
-                      "Professional Indemnity Insurance",
-                      "Medical Malpractice Insurance",
-                      "Public Liability Insurance",
-                      "Products Liability Insurance",
-                      "Cyber and Privacy Liability Insurance",
-                      "Management Liability Insurance",
-                      "Business Package Insurance ",
-                      "Business Equipment Insurance",
-                      "Personal Accident & Sickness Insurance",
-                      "Employment Practices Liability Insurance",
-                      "Motor Insurance for Businesses",
-                      "View all coverages",
-                    ],
-                  },
-                ],
-                boxComponent: {
-                  firstDiv: {
-                    image:
-                      "https://storage.googleapis.com/upcover-webflow-integration/assets/images/bfb3d41184f6b9d53e820156bae9107d7cbd2da3.png",
-                    heading: "NOT SURE?",
-                    paragraph:
-                      "Talk to our small business insurance specialists to find a tailored cover that works for you and your unique business needs.",
-                    buttons: [
-                      {
-                        label: "CHAT WITH A SPECIALIST",
-                        href: "#",
-                      },
-                      {
-                        label: "CALL 1300 872 683",
-                        href: "tel:1300872683",
-                      },
-                    ],
-                  },
-                  secondDiv: {
-                    heading: "GET INSTANT QUOTE",
-                    paragraph: "Coverages across 1000+ industries",
-                    button: {
-                      label: "GET A QUOTE",
-                      href: "#",
-                    },
-                  },
-                },
-              },
-              {
-                label: "Company",
-                href: "#Company",
-                dropdown: [
-                  {
-                    title: "INDUSTRY",
-                    items: [
-                      "Disability Support & Care",
-                      "Independent Living, STAs and SDAs",
-                      "Doctors, GPs and Clinics",
-                      "Beauty and Personal Care",
-                      "Therapists and Healing",
-                      "Hospitality, Pubs and Restaurants",
-                      "Tradespeople, Plumbers and Roofers",
-                      "Construction",
-                      "IT Contractors",
-                      "Retail",
-                      "Consultants",
-                      "Real Estate",
-                      "View all industries",
-                    ],
-                  },
-                  {
-                    title: "COVERS",
-                    items: [
-                      "Healthcare Professionals Insurance",
-                      "Professional Indemnity Insurance",
-                      "Medical Malpractice Insurance",
-                      "Public Liability Insurance",
-                      "Products Liability Insurance",
-                      "Cyber and Privacy Liability Insurance",
-                      "Management Liability Insurance",
-                      "Business Package Insurance ",
-                      "Business Equipment Insurance",
-                      "Personal Accident & Sickness Insurance",
-                      "Employment Practices Liability Insurance",
-                      "Motor Insurance for Businesses",
-                      "View all coverages",
-                    ],
-                  },
-                ],
-                boxComponent: {
-                  firstDiv: {
-                    image:
-                      "https://storage.googleapis.com/upcover-webflow-integration/assets/images/bfb3d41184f6b9d53e820156bae9107d7cbd2da3.png",
-                    heading: "NOT SURE?",
-                    paragraph:
-                      "Talk to our small business insurance specialists to find a tailored cover that works for you and your unique business needs.",
-                    buttons: [
-                      {
-                        label: "CHAT WITH A SPECIALIST",
-                        href: "#",
-                      },
-                      {
-                        label: "CALL 1300 872 683",
-                        href: "tel:1300872683",
-                      },
-                    ],
-                  },
-                  secondDiv: {
-                    heading: "GET INSTANT QUOTE",
-                    paragraph: "Coverages across 1000+ industries",
-                    button: {
-                      label: "GET A QUOTE",
-                      href: "#",
-                    },
-                  },
-                },
-              },
-              {
-                label: "Resources",
-                href: "#Resources",
-                dropdown: [
-                  {
-                    title: "INDUSTRY",
-                    items: [
-                      "Disability Support & Care",
-                      "Independent Living, STAs and SDAs",
-                      "Doctors, GPs and Clinics",
-                      "Beauty and Personal Care",
-                      "Therapists and Healing",
-                      "Hospitality, Pubs and Restaurants",
-                      "Tradespeople, Plumbers and Roofers",
-                      "Construction",
-                      "IT Contractors",
-                      "Retail",
-                      "Consultants",
-                      "Real Estate",
-                      "View all industries",
-                    ],
-                  },
-                  {
-                    title: "COVERS",
-                    items: [
-                      "Healthcare Professionals Insurance",
-                      "Professional Indemnity Insurance",
-                      "Medical Malpractice Insurance",
-                      "Public Liability Insurance",
-                      "Products Liability Insurance",
-                      "Cyber and Privacy Liability Insurance",
-                      "Management Liability Insurance",
-                      "Business Package Insurance ",
-                      "Business Equipment Insurance",
-                      "Personal Accident & Sickness Insurance",
-                      "Employment Practices Liability Insurance",
-                      "Motor Insurance for Businesses",
-                      "View all coverages",
-                    ],
-                  },
-                ],
-                boxComponent: {
-                  firstDiv: {
-                    image:
-                      "https://storage.googleapis.com/upcover-webflow-integration/assets/images/bfb3d41184f6b9d53e820156bae9107d7cbd2da3.png",
-                    heading: "NOT SURE?",
-                    paragraph:
-                      "Talk to our small business insurance specialists to find a tailored cover that works for you and your unique business needs.",
-                    buttons: [
-                      {
-                        label: "CHAT WITH A SPECIALIST",
-                        href: "#",
-                      },
-                      {
-                        label: "CALL 1300 872 683",
-                        href: "tel:1300872683",
-                      },
-                    ],
-                  },
-                  secondDiv: {
-                    heading: "GET INSTANT QUOTE",
-                    paragraph: "Coverages across 1000+ industries",
-                    button: {
-                      label: "GET A QUOTE",
-                      href: "#",
-                    },
-                  },
-                },
-              },
-            ],
-            tech: [
-              {
-                label: "Coverages",
-                href: "#coverages",
-                dropdown: [
-                  {
-                    title: "COVER",
-                    items: [
-                      "Cyber & Technology Liability",
-                      "Technology & Professional Indemnity",
-                      "Intellectual Property",
-                      "Business Property",
-                      "Directors & Officers Liability",
-                      "Medical Malpractice",
-                      "Media Liability",
-                      "Investment Managers Indemnity",
-                      "Employment Practices Liability",
-                    ],
-                  },
-                  {
-                    title: "",
-                    items: [
-                      "Crime Cover",
-                      "Public and Product Liability",
-                      "View all covers",
-                    ],
-                  },
-                ],
-                boxComponent: {
-                  firstDiv: {
-                    image:
-                      "https://storage.googleapis.com/upcover-webflow-integration/assets/images/2a1339faabda847f116061ee305805ee8c3cd7bf.png",
-                    heading: "COMPLEX RISK",
-                    paragraph:
-                      "Our tech-specialist brokerage team provide custom cover for high-growth companies with complex risks, web3, startups and scaleups in any stage of fundraising.",
-                    buttons: [
-                      {
-                        label: "TALK TO A SPECIALIST ",
-                        href: "#",
-                      },
-                    ],
-                  },
-                },
-              },
-              {
-                label: "Company",
-                href: "#company",
-                dropdown: [
-                  {
-                    title: "COMPANY",
-                    items: ["About Us", "Career", "Culture", "Newsroom"],
-                  },
-                  {
-                    title: "PARTNERS",
-                    items: [
-                      "Become a Partner",
-                      "Become an affiliate",
-                      "Partner Marketpalce",
-                    ],
-                  },
-                  {
-                    title: "CLAIMS",
-                    items: ["Make a Claim", "Make a Complaint"],
-                  },
-                  {
-                    title: "CONTACT US",
-                    items: [
-                      "hello@upcover.com",
-                      "Level 8, 11 York Street, Sydney",
-                      "1300 872 683",
-                    ],
-                  },
-                ],
-              },
-              {
-                label: "Resources",
-                href: "#Resources",
-                dropdown: [
-                  {
-                    title: "COVER",
-                    items: [
-                      "Cyber & Technology Liability",
-                      "Technology & Professional Indemnity",
-                      "Intellectual Property",
-                      "Business Property",
-                      "Directors & Officers Liability",
-                      "Medical Malpractice",
-                      "Media Liability",
-                      "Investment Managers Indemnity",
-                      "Employment Practices Liability",
-                    ],
-                  },
-                  {
-                    title: "",
-                    items: [
-                      "Crime Cover",
-                      "Public and Product Liability",
-                      "View all covers",
-                    ],
-                  },
-                ],
-                boxComponent: {
-                  firstDiv: {
-                    image:
-                      "https://storage.googleapis.com/upcover-webflow-integration/assets/images/2a1339faabda847f116061ee305805ee8c3cd7bf.png",
-                    heading: "COMPLEX RISK",
-                    paragraph:
-                      "Our tech-specialist brokerage team provide custom cover for high-growth companies with complex risks, web3, startups and scaleups in any stage of fundraising.",
-                    buttons: [
-                      {
-                        label: "TALK TO A SPECIALIST ",
-                        href: "#",
-                      },
-                    ],
-                  },
-                },
-              },
-              {
-                label: "Solutions",
-                href: "#solutions",
-                dropdown: [
-                  {
-                    title: "INDUSTRY",
-                    items: [
-                      "Blockchain / Web3",
-                      "AI",
-                      "Robotics & Hardware",
-                      "Life sciences & Bioscience ",
-                      "Digital Health",
-                      "Consumer",
-                      "B2B Saas",
-                      "Media Tech",
-                      "EdTech",
-                      "E-commerce",
-                      "Fin Tech",
-                      "Reg Tech",
-                      "View all industries",
-                    ],
-                  },
-                  {
-                    title: "FUNDS",
-                    items: [
-                      "Family Offices",
-                      "Venture Capital Funds",
-                      "Debt Funds",
-                      "Private Equity Vehicles",
-                      "Investment Managers",
-                      "View all Investment Vehicles",
-                    ],
-                  },
-                  {
-                    title: "NEEDS",
-                    items: [
-                      "Getting Insured for the First Time",
-                      "Getting Insured for the First Time",
-                      "Fundraising Protection",
-                      "Protecting Your Team & Workplace",
-                      "Safeguarding Digital Assets",
-                      "Finding the Right Coverage Package",
-                      "Expanding Interstate",
-                    ],
-                  },
-                  {
-                    title: "STAGE",
-                    items: [
-                      "Early Stage",
-                      "Growth & Late Stage",
-                      "Pre-IPO, IPO & Listing",
-                    ],
-                  },
-                ],
-                boxComponent: {
-                  firstDiv: {
-                    image:
-                      "https://storage.googleapis.com/upcover-webflow-integration/assets/images/09411e48480d4f5e6bd098e8468eed848dd7d454.png",
-                    heading: "OTHER SITUATION",
-                    paragraph: `Not quite sure of your stage? <br/><br/>
-                Bootstrapping or prefer not say?`,
-                    buttons: [
-                      {
-                        label: "TALK TO US",
-                        href: "#",
-                      },
-                    ],
-                  },
-                },
-              },
-            ],
-            motor: [
-              {
-                label: "Coverages",
-                href: "#coverages",
-                dropdown: [
-                  {
-                    title: "MOTOR INSURANCE",
-                    items: [
-                      "For Sole Traders",
-                      "For Small Business",
-                      "For Rideshare",
-                      "Mobile, plant & Equipment",
-                    ],
-                  },
-                  {
-                    title: "FLEET MANAGERS & CORPORATES",
-                    items: [
-                      "Courier Fleets",
-                      "Own Goods Fleets",
-                      "Rentals",
-                      "Heavy Vehicles",
-                    ],
-                  },
-                  {
-                    title: "FLEET INSURANCE",
-                    items: [
-                      "Courier Fleets",
-                      "Own Goods Fleets",
-                      "Rentals",
-                      "Heavy Vehicles",
-                    ],
-                  },
-                ],
-                boxComponent: {
-                  firstDiv: {
-                    image:
-                      "https://storage.googleapis.com/upcover-webflow-integration/assets/images/bfb3d41184f6b9d53e820156bae9107d7cbd2da3.png",
-                    heading: "MAKE A CLAIM",
-                    paragraph: `If you're a fleet manager, driver, or you have been involved in an accident it's crucial to report this as soon as possoble
-                  <br/>
-                  Takes less than 5 mins Via e-form or up to 45 mins via call`,
-                    buttons: [
-                      {
-                        label: "REPORT CLAIM VIA E-FORM ",
-                        href: "#",
-                      },
-                      {
-                        label: "CALL 1300 872 683",
-                        href: "tel:1300872683",
-                      },
-                    ],
-                  },
-                },
-              },
-              {
-                label: "Company",
-                href: "#company",
-                dropdown: [
-                  {
-                    title: "MOTOR INSURANCE",
-                    items: [
-                      "For Sole Traders",
-                      "For Small Business",
-                      "For Rideshare",
-                      "Mobile, plant & Equipment",
-                    ],
-                  },
-                  {
-                    title: "FLEET MANAGERS & CORPORATES",
-                    items: [
-                      "Courier Fleets",
-                      "Own Goods Fleets",
-                      "Rentals",
-                      "Heavy Vehicles",
-                    ],
-                  },
-                  {
-                    title: "FLEET INSURANCE",
-                    items: [
-                      "Courier Fleets",
-                      "Own Goods Fleets",
-                      "Rentals",
-                      "Heavy Vehicles",
-                    ],
-                  },
-                ],
-                boxComponent: {
-                  firstDiv: {
-                    image:
-                      "https://storage.googleapis.com/upcover-webflow-integration/assets/images/bfb3d41184f6b9d53e820156bae9107d7cbd2da3.png",
-                    heading: "MAKE A CLAIM",
-                    paragraph: `If you're a fleet manager, driver, or you have been involved in an accident it's crucial to report this as soon as possoble
-                  <br/>
-                  Takes less than 5 mins Via e-form or up to 45 mins via call`,
-                    buttons: [
-                      {
-                        label: "REPORT CLAIM VIA E-FORM ",
-                        href: "#",
-                      },
-                      {
-                        label: "CALL 1300 872 683",
-                        href: "tel:1300872683",
-                      },
-                    ],
-                  },
-                },
-              },
-              {
-                label: "Resources",
-                href: "#resources",
-                dropdown: [
-                  {
-                    title: "MOTOR INSURANCE",
-                    items: [
-                      "For Sole Traders",
-                      "For Small Business",
-                      "For Rideshare",
-                      "Mobile, plant & Equipment",
-                    ],
-                  },
-                  {
-                    title: "FLEET MANAGERS & CORPORATES",
-                    items: [
-                      "Courier Fleets",
-                      "Own Goods Fleets",
-                      "Rentals",
-                      "Heavy Vehicles",
-                    ],
-                  },
-                  {
-                    title: "FLEET INSURANCE",
-                    items: [
-                      "Courier Fleets",
-                      "Own Goods Fleets",
-                      "Rentals",
-                      "Heavy Vehicles",
-                    ],
-                  },
-                ],
-                boxComponent: {
-                  firstDiv: {
-                    image:
-                      "https://storage.googleapis.com/upcover-webflow-integration/assets/images/bfb3d41184f6b9d53e820156bae9107d7cbd2da3.png",
-                    heading: "MAKE A CLAIM",
-                    paragraph: `If you're a fleet manager, driver, or you have been involved in an accident it's crucial to report this as soon as possoble
-                  <br/>
-                  Takes less than 5 mins Via e-form or up to 45 mins via call`,
-                    buttons: [
-                      {
-                        label: "REPORT CLAIM VIA E-FORM ",
-                        href: "#",
-                      },
-                      {
-                        label: "CALL 1300 872 683",
-                        href: "tel:1300872683",
-                      },
-                    ],
-                  },
-                },
-              },
-            ],
+  <!-- script for COVERAGE THAT SCALES WITH YOUR GROWTH-->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      if (window.Upcover && typeof window.Upcover.CyberCoveragesScale === 'function') {
+        window.Upcover.CyberCoveragesScale('cyber-coverages-scales');
+      }
+    });
+  </script>
+
+ <!-- {
+  tabs: [
+    {
+      key: 'healthcare',
+      label: 'Healthcare & Medical',
+      image: 'https://storage.googleapis.com/upcover-webflow-integration/assets/images/Healthcare.png',
+      lossExample: {
+        title: 'Pre-seed & Early Seed',
+        text: 'A metropolitan hospital paid $4.5M in ransom and spent $8.2M on system recovery after ransomware encrypted patient records and disabled appointment system for 11 days.'
+      },
+      button: {
+        label: 'GET A QUOTE',
+        href: '#'
+      }
+    },
+    {
+      key: 'financial',
+      label: 'Financial Services',
+      image: 'https://storage.googleapis.com/upcover-webflow-integration/assets/images/Healthcare.png',
+      lossExample: { title: 'Real Loss Examples', text: 'Dummy loss example.' },
+      button: { label: 'GET A QUOTE', href: '#' }
+    },
+    {
+      key: 'retail',
+      label: 'Retail & E-commerce',
+      image: 'https://storage.googleapis.com/upcover-webflow-integration/assets/images/Healthcare.png',
+      lossExample: { title: 'Real Loss Examples', text: 'Dummy loss example.' },
+      button: { label: 'GET A QUOTE', href: '#' }
+    },
+    {
+      key: 'technology',
+      label: 'Technology & SaaS',
+      image: 'https://storage.googleapis.com/upcover-webflow-integration/assets/images/Healthcare.png',
+      lossExample: { title: 'Real Loss Examples', text: 'Dummy loss example.' },
+      button: { label: 'GET A QUOTE', href: '#' }
+    }
+  ]
+} -->
+
+  <!-- script for What it doesn't cover -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      if (window.Upcover && typeof window.Upcover.CyberCoversWidget === 'function') {
+        window.Upcover.CyberCoversWidget('cyber-covers-root');
+      }
+    });
+  </script>
+
+  <!-- script for Cyber Steps -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      if (window.Upcover && typeof window.Upcover.CyberStepsWidget === 'function') {
+        window.Upcover.CyberStepsWidget('cyber-steps-root', {
+          title: 'HOW TO GET CYBER INSURANCE: SIMPLE 5-STEPS PROCESS',
+          subtitle: 'Getting comprehensive cyber protection for your business is easier than you might think. Our streamlined application process takes just minutes.',
+          steps: [
+            {
+              name: 'Business',
+              key: 'business',
+              items: [
+                'Industry and business activities',
+                'Annual revenue figures',
+                'Company website and domain details',
+              ],
+            },
+            {
+              name: 'Quote',
+              key: 'quote',
+              items: [
+                'Instant pricing estimates',
+                'Multiple coverage tier options',
+                'Industry-specific package recommendations',
+              ],
+            },
+            {
+              name: 'Details',
+              key: 'details',
+              items: [
+                'Security controls assessment',
+                'Data collection and retention details',
+                'Third-party service provider information',
+              ],
+            },
+            {
+              name: 'Full Quote',
+              key: 'fullquote',
+              items: [
+                'Data breach coverage recommendations',
+                'Custom policy options',
+                'Specialized coverage recommendations',
+              ],
+            },
+          ],
+          cta: {
+            label: 'GET A QUOTE',
           },
-          loginText: "LOGIN",
-          quoteText: "GET A QUOTE",
-          // defaultTheme: "motor"
         });
-        
+      }
+    });
+  </script>
+
+  <!-- script for WHO NEEDS CYBER INSURANCE -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      if (window.Upcover && typeof window.Upcover.WhoNeedsCyberInsuranceWidget === 'function') {
+        window.Upcover.WhoNeedsCyberInsuranceWidget('who-needs-cyber-root', {
+          title: 'WHO NEEDS CYBER INSURANCE',
+          description: 'Any business that stores, processes, or transmits sensitive data, relies on digital systems for operations, or has an online presence should consider cyber insurance. Today, that includes nearly every business, regardless of size or industry.',
+          tabs: [
+            {
+              key: 'highrisk',
+              label: 'High-Risk Industries',
+              content: [
+                'Healthcare providers and clinics',
+                'Financial Services and fintech',
+                'E-commerce and retails businesses',
+                'Professional services firms',
+              ],
+            },
+            {
+              key: 'smb',
+              label: 'Small & Medium Businesses',
+              content: [
+                'An e-commerce platform, SellYouLater, hired a third-party service provider. A burglar stole two laptops from the provider, exposing data of over 800,000 SellYouLater clients. Under notification laws, SellYouLater—not the provider—was responsible for alerting those affected. The company spent nearly $5 million on notification and crisis management',
+
+              ],
+            },
+            {
+              key: 'data',
+              label: 'Data-Rich Organisations',
+              content: [
+                '<strong>Incident</strong>',
+                'A support worker gave a participant the wrong medication dose due to a mislabeled pillbox. The participant experienced severe drowsiness and dehydration, requiring overnight hospitalization.',
+                '<strong>Resolution</strong>',
+                'The total costs included $8,200 for hospital and rehabilitation, $12,500 for legal defence, and a $7,500 settlement to resolve the claim out of court.'
+              ],
+            },
+            {
+              key: 'tech',
+              label: 'Technology-Dependent Business',
+              content: [
+                'SaaS providers',
+                'IT consultancies',
+                'Cloud service companies',
+                'App developers',
+              ],
+            },
+          ]
+        });
+      }
+    });
+  </script>
+
+  <!-- script for CYBER EXAMPLES -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      if (window.Upcover && typeof window.Upcover.CyberExamples === 'function') {
+        window.Upcover.CyberExamples('cyber-examples', {
+          title: 'CYBER INSURANCE CLAIM EXAMPLES',
+          description: 'Cyber threats are a growing risk for startups, making cyber insurance a vital safety net. At upcover, we’ve supported many companies through incidents like data breaches and ransomware. Our real-world claim examples show how coverage can help with legal fees, fines, system recovery, and more. Whether you’re handling sensitive data or scaling fast, these cases show how cyber insurance can protect your business from costly surprises',
+          checkmarkIcon: null,
+          tabs: [
+            {
+              key: 'highrisk',
+              label: 'High-Risk Industries',
+              content: [
+                "An e-commerce platform, SellYouLater, hired a third-party service provider. A burglar stole two laptops from the provider, exposing data of over 800,000 SellYouLater clients. Under notification laws, SellYouLater—not the provider—was responsible for alerting those affected. The company spent nearly $5 million on notification and crisis management"
+              ],
+            },
+            {
+              key: 'extortion',
+              label: 'Cyber Extortion Threat',
+              content: [
+                "An e-commerce platform, SellYouLater, hired a third-party service provider. A burglar stole two laptops from the provider, exposing data of over 800,000 SellYouLater clients. Under notification laws, SellYouLater—not the provider—was responsible for alerting those affected. The company spent nearly $5 million on notification and crisis management"
+              ],
+            },
+            {
+              key: 'codemalic',
+              label: 'Malicious Code',
+              content: [
+                "An e-commerce platform, SellYouLater, hired a third-party service provider. A burglar stole two laptops from the provider, exposing data of over 800,000 SellYouLater clients. Under notification laws, SellYouLater—not the provider—was responsible for alerting those affected. The company spent nearly $5 million on notification and crisis management"
+              ],
+            },
+            {
+              key: 'records',
+              label: 'Exposed Records',
+              content: [
+                "An e-commerce platform, SellYouLater, hired a third-party service provider. A burglar stole two laptops from the provider, exposing data of over 800,000 SellYouLater clients. Under notification laws, SellYouLater—not the provider—was responsible for alerting those affected. The company spent nearly $5 million on notification and crisis management"
+              ],
+            },
+          ]
+        });
+      }
+    });
+  </script>
+
+  <!-- script for header -->
+  <script type="module">
+    import "../components/Main/index.ts";
+    document.addEventListener("DOMContentLoaded", function () {
+      Upcover.AppBarWidget("header", {
+        tabs: [
+          { id: "business", label: "Businesses & Sole traders" },
+          { id: "tech", label: "Tech Startups & Enterprises" },
+          { id: "motor", label: "Motor & Fleet" },
+        ],
+        branding: {
+          contactPhone: "1300 872 683",
+          contactRegion: [
+            { label: "AU", code: "AU", url: "#" },
+            { label: "NZ", code: "NZ", url: "#" },
+          ],
+        },
+        themeColors: {
+          business: "#FF0000",
+          tech: "#0000FF",
+          motor: "#D5E525",
+        },
+        // defaultTab: "motor"
       });
-    </script>
-  </body>
+
+      Upcover.NavbarWidget("header", {
+        menuItems: {
+          business: [
+            {
+              label: "Coverages",
+              href: "#coverages",
+              dropdown: [
+                {
+                  title: "INDUSTRY",
+                  items: [
+                    "Disability Support & Care",
+                    "Independent Living, STAs and SDAs",
+                    "Doctors, GPs and Clinics",
+                    "Beauty and Personal Care",
+                    "Therapists and Healing",
+                    "Hospitality, Pubs and Restaurants",
+                    "Tradespeople, Plumbers and Roofers",
+                    "Construction",
+                    "IT Contractors",
+                    "Retail",
+                    "Consultants",
+                    "Real Estate",
+                    "View all industries",
+                  ],
+                },
+                {
+                  title: "COVERS",
+                  items: [
+                    "Healthcare Professionals Insurance",
+                    "Professional Indemnity Insurance",
+                    "Medical Malpractice Insurance",
+                    "Public Liability Insurance",
+                    "Products Liability Insurance",
+                    "Cyber and Privacy Liability Insurance",
+                    "Management Liability Insurance",
+                    "Business Package Insurance ",
+                    "Business Equipment Insurance",
+                    "Personal Accident & Sickness Insurance",
+                    "Employment Practices Liability Insurance",
+                    "Motor Insurance for Businesses",
+                    "View all coverages",
+                  ],
+                },
+              ],
+              boxComponent: {
+                firstDiv: {
+                  image:
+                    "https://storage.googleapis.com/upcover-webflow-integration/assets/images/bfb3d41184f6b9d53e820156bae9107d7cbd2da3.png",
+                  heading: "NOT SURE?",
+                  paragraph:
+                    "Talk to our small business insurance specialists to find a tailored cover that works for you and your unique business needs.",
+                  buttons: [
+                    {
+                      label: "CHAT WITH A SPECIALIST",
+                      href: "#",
+                    },
+                    {
+                      label: "CALL 1300 872 683",
+                      href: "tel:1300872683",
+                    },
+                  ],
+                },
+                secondDiv: {
+                  heading: "GET INSTANT QUOTE",
+                  paragraph: "Coverages across 1000+ industries",
+                  button: {
+                    label: "GET A QUOTE",
+                    href: "#",
+                  },
+                },
+              },
+            },
+            {
+              label: "Company",
+              href: "#Company",
+              dropdown: [
+                {
+                  title: "INDUSTRY",
+                  items: [
+                    "Disability Support & Care",
+                    "Independent Living, STAs and SDAs",
+                    "Doctors, GPs and Clinics",
+                    "Beauty and Personal Care",
+                    "Therapists and Healing",
+                    "Hospitality, Pubs and Restaurants",
+                    "Tradespeople, Plumbers and Roofers",
+                    "Construction",
+                    "IT Contractors",
+                    "Retail",
+                    "Consultants",
+                    "Real Estate",
+                    "View all industries",
+                  ],
+                },
+                {
+                  title: "COVERS",
+                  items: [
+                    "Healthcare Professionals Insurance",
+                    "Professional Indemnity Insurance",
+                    "Medical Malpractice Insurance",
+                    "Public Liability Insurance",
+                    "Products Liability Insurance",
+                    "Cyber and Privacy Liability Insurance",
+                    "Management Liability Insurance",
+                    "Business Package Insurance ",
+                    "Business Equipment Insurance",
+                    "Personal Accident & Sickness Insurance",
+                    "Employment Practices Liability Insurance",
+                    "Motor Insurance for Businesses",
+                    "View all coverages",
+                  ],
+                },
+              ],
+              boxComponent: {
+                firstDiv: {
+                  image:
+                    "https://storage.googleapis.com/upcover-webflow-integration/assets/images/bfb3d41184f6b9d53e820156bae9107d7cbd2da3.png",
+                  heading: "NOT SURE?",
+                  paragraph:
+                    "Talk to our small business insurance specialists to find a tailored cover that works for you and your unique business needs.",
+                  buttons: [
+                    {
+                      label: "CHAT WITH A SPECIALIST",
+                      href: "#",
+                    },
+                    {
+                      label: "CALL 1300 872 683",
+                      href: "tel:1300872683",
+                    },
+                  ],
+                },
+                secondDiv: {
+                  heading: "GET INSTANT QUOTE",
+                  paragraph: "Coverages across 1000+ industries",
+                  button: {
+                    label: "GET A QUOTE",
+                    href: "#",
+                  },
+                },
+              },
+            },
+            {
+              label: "Resources",
+              href: "#Resources",
+              dropdown: [
+                {
+                  title: "INDUSTRY",
+                  items: [
+                    "Disability Support & Care",
+                    "Independent Living, STAs and SDAs",
+                    "Doctors, GPs and Clinics",
+                    "Beauty and Personal Care",
+                    "Therapists and Healing",
+                    "Hospitality, Pubs and Restaurants",
+                    "Tradespeople, Plumbers and Roofers",
+                    "Construction",
+                    "IT Contractors",
+                    "Retail",
+                    "Consultants",
+                    "Real Estate",
+                    "View all industries",
+                  ],
+                },
+                {
+                  title: "COVERS",
+                  items: [
+                    "Healthcare Professionals Insurance",
+                    "Professional Indemnity Insurance",
+                    "Medical Malpractice Insurance",
+                    "Public Liability Insurance",
+                    "Products Liability Insurance",
+                    "Cyber and Privacy Liability Insurance",
+                    "Management Liability Insurance",
+                    "Business Package Insurance ",
+                    "Business Equipment Insurance",
+                    "Personal Accident & Sickness Insurance",
+                    "Employment Practices Liability Insurance",
+                    "Motor Insurance for Businesses",
+                    "View all coverages",
+                  ],
+                },
+              ],
+              boxComponent: {
+                firstDiv: {
+                  image:
+                    "https://storage.googleapis.com/upcover-webflow-integration/assets/images/bfb3d41184f6b9d53e820156bae9107d7cbd2da3.png",
+                  heading: "NOT SURE?",
+                  paragraph:
+                    "Talk to our small business insurance specialists to find a tailored cover that works for you and your unique business needs.",
+                  buttons: [
+                    {
+                      label: "CHAT WITH A SPECIALIST",
+                      href: "#",
+                    },
+                    {
+                      label: "CALL 1300 872 683",
+                      href: "tel:1300872683",
+                    },
+                  ],
+                },
+                secondDiv: {
+                  heading: "GET INSTANT QUOTE",
+                  paragraph: "Coverages across 1000+ industries",
+                  button: {
+                    label: "GET A QUOTE",
+                    href: "#",
+                  },
+                },
+              },
+            },
+          ],
+          tech: [
+            {
+              label: "Coverages",
+              href: "#coverages",
+              dropdown: [
+                {
+                  title: "COVER",
+                  items: [
+                    "Cyber & Technology Liability",
+                    "Technology & Professional Indemnity",
+                    "Intellectual Property",
+                    "Business Property",
+                    "Directors & Officers Liability",
+                    "Medical Malpractice",
+                    "Media Liability",
+                    "Investment Managers Indemnity",
+                    "Employment Practices Liability",
+                  ],
+                },
+                {
+                  title: "",
+                  items: [
+                    "Crime Cover",
+                    "Public and Product Liability",
+                    "View all covers",
+                  ],
+                },
+              ],
+              boxComponent: {
+                firstDiv: {
+                  image:
+                    "https://storage.googleapis.com/upcover-webflow-integration/assets/images/2a1339faabda847f116061ee305805ee8c3cd7bf.png",
+                  heading: "COMPLEX RISK",
+                  paragraph:
+                    "Our tech-specialist brokerage team provide custom cover for high-growth companies with complex risks, web3, startups and scaleups in any stage of fundraising.",
+                  buttons: [
+                    {
+                      label: "TALK TO A SPECIALIST ",
+                      href: "#",
+                    },
+                  ],
+                },
+              },
+            },
+            {
+              label: "Company",
+              href: "#company",
+              dropdown: [
+                {
+                  title: "COMPANY",
+                  items: ["About Us", "Career", "Culture", "Newsroom"],
+                },
+                {
+                  title: "PARTNERS",
+                  items: [
+                    "Become a Partner",
+                    "Become an affiliate",
+                    "Partner Marketpalce",
+                  ],
+                },
+                {
+                  title: "CLAIMS",
+                  items: ["Make a Claim", "Make a Complaint"],
+                },
+                {
+                  title: "CONTACT US",
+                  items: [
+                    "hello@upcover.com",
+                    "Level 8, 11 York Street, Sydney",
+                    "1300 872 683",
+                  ],
+                },
+              ],
+            },
+            {
+              label: "Resources",
+              href: "#Resources",
+              dropdown: [
+                {
+                  title: "COVER",
+                  items: [
+                    "Cyber & Technology Liability",
+                    "Technology & Professional Indemnity",
+                    "Intellectual Property",
+                    "Business Property",
+                    "Directors & Officers Liability",
+                    "Medical Malpractice",
+                    "Media Liability",
+                    "Investment Managers Indemnity",
+                    "Employment Practices Liability",
+                  ],
+                },
+                {
+                  title: "",
+                  items: [
+                    "Crime Cover",
+                    "Public and Product Liability",
+                    "View all covers",
+                  ],
+                },
+              ],
+              boxComponent: {
+                firstDiv: {
+                  image:
+                    "https://storage.googleapis.com/upcover-webflow-integration/assets/images/2a1339faabda847f116061ee305805ee8c3cd7bf.png",
+                  heading: "COMPLEX RISK",
+                  paragraph:
+                    "Our tech-specialist brokerage team provide custom cover for high-growth companies with complex risks, web3, startups and scaleups in any stage of fundraising.",
+                  buttons: [
+                    {
+                      label: "TALK TO A SPECIALIST ",
+                      href: "#",
+                    },
+                  ],
+                },
+              },
+            },
+            {
+              label: "Solutions",
+              href: "#solutions",
+              dropdown: [
+                {
+                  title: "INDUSTRY",
+                  items: [
+                    "Blockchain / Web3",
+                    "AI",
+                    "Robotics & Hardware",
+                    "Life sciences & Bioscience ",
+                    "Digital Health",
+                    "Consumer",
+                    "B2B Saas",
+                    "Media Tech",
+                    "EdTech",
+                    "E-commerce",
+                    "Fin Tech",
+                    "Reg Tech",
+                    "View all industries",
+                  ],
+                },
+                {
+                  title: "FUNDS",
+                  items: [
+                    "Family Offices",
+                    "Venture Capital Funds",
+                    "Debt Funds",
+                    "Private Equity Vehicles",
+                    "Investment Managers",
+                    "View all Investment Vehicles",
+                  ],
+                },
+                {
+                  title: "NEEDS",
+                  items: [
+                    "Getting Insured for the First Time",
+                    "Getting Insured for the First Time",
+                    "Fundraising Protection",
+                    "Protecting Your Team & Workplace",
+                    "Safeguarding Digital Assets",
+                    "Finding the Right Coverage Package",
+                    "Expanding Interstate",
+                  ],
+                },
+                {
+                  title: "STAGE",
+                  items: [
+                    "Early Stage",
+                    "Growth & Late Stage",
+                    "Pre-IPO, IPO & Listing",
+                  ],
+                },
+              ],
+              boxComponent: {
+                firstDiv: {
+                  image:
+                    "https://storage.googleapis.com/upcover-webflow-integration/assets/images/09411e48480d4f5e6bd098e8468eed848dd7d454.png",
+                  heading: "OTHER SITUATION",
+                  paragraph: `Not quite sure of your stage? <br/><br/>
+                Bootstrapping or prefer not say?`,
+                  buttons: [
+                    {
+                      label: "TALK TO US",
+                      href: "#",
+                    },
+                  ],
+                },
+              },
+            },
+          ],
+          motor: [
+            {
+              label: "Coverages",
+              href: "#coverages",
+              dropdown: [
+                {
+                  title: "MOTOR INSURANCE",
+                  items: [
+                    "For Sole Traders",
+                    "For Small Business",
+                    "For Rideshare",
+                    "Mobile, plant & Equipment",
+                  ],
+                },
+                {
+                  title: "FLEET MANAGERS & CORPORATES",
+                  items: [
+                    "Courier Fleets",
+                    "Own Goods Fleets",
+                    "Rentals",
+                    "Heavy Vehicles",
+                  ],
+                },
+                {
+                  title: "FLEET INSURANCE",
+                  items: [
+                    "Courier Fleets",
+                    "Own Goods Fleets",
+                    "Rentals",
+                    "Heavy Vehicles",
+                  ],
+                },
+              ],
+              boxComponent: {
+                firstDiv: {
+                  image:
+                    "https://storage.googleapis.com/upcover-webflow-integration/assets/images/bfb3d41184f6b9d53e820156bae9107d7cbd2da3.png",
+                  heading: "MAKE A CLAIM",
+                  paragraph: `If you're a fleet manager, driver, or you have been involved in an accident it's crucial to report this as soon as possoble
+                  <br/>
+                  Takes less than 5 mins Via e-form or up to 45 mins via call`,
+                  buttons: [
+                    {
+                      label: "REPORT CLAIM VIA E-FORM ",
+                      href: "#",
+                    },
+                    {
+                      label: "CALL 1300 872 683",
+                      href: "tel:1300872683",
+                    },
+                  ],
+                },
+              },
+            },
+            {
+              label: "Company",
+              href: "#company",
+              dropdown: [
+                {
+                  title: "MOTOR INSURANCE",
+                  items: [
+                    "For Sole Traders",
+                    "For Small Business",
+                    "For Rideshare",
+                    "Mobile, plant & Equipment",
+                  ],
+                },
+                {
+                  title: "FLEET MANAGERS & CORPORATES",
+                  items: [
+                    "Courier Fleets",
+                    "Own Goods Fleets",
+                    "Rentals",
+                    "Heavy Vehicles",
+                  ],
+                },
+                {
+                  title: "FLEET INSURANCE",
+                  items: [
+                    "Courier Fleets",
+                    "Own Goods Fleets",
+                    "Rentals",
+                    "Heavy Vehicles",
+                  ],
+                },
+              ],
+              boxComponent: {
+                firstDiv: {
+                  image:
+                    "https://storage.googleapis.com/upcover-webflow-integration/assets/images/bfb3d41184f6b9d53e820156bae9107d7cbd2da3.png",
+                  heading: "MAKE A CLAIM",
+                  paragraph: `If you're a fleet manager, driver, or you have been involved in an accident it's crucial to report this as soon as possoble
+                  <br/>
+                  Takes less than 5 mins Via e-form or up to 45 mins via call`,
+                  buttons: [
+                    {
+                      label: "REPORT CLAIM VIA E-FORM ",
+                      href: "#",
+                    },
+                    {
+                      label: "CALL 1300 872 683",
+                      href: "tel:1300872683",
+                    },
+                  ],
+                },
+              },
+            },
+            {
+              label: "Resources",
+              href: "#resources",
+              dropdown: [
+                {
+                  title: "MOTOR INSURANCE",
+                  items: [
+                    "For Sole Traders",
+                    "For Small Business",
+                    "For Rideshare",
+                    "Mobile, plant & Equipment",
+                  ],
+                },
+                {
+                  title: "FLEET MANAGERS & CORPORATES",
+                  items: [
+                    "Courier Fleets",
+                    "Own Goods Fleets",
+                    "Rentals",
+                    "Heavy Vehicles",
+                  ],
+                },
+                {
+                  title: "FLEET INSURANCE",
+                  items: [
+                    "Courier Fleets",
+                    "Own Goods Fleets",
+                    "Rentals",
+                    "Heavy Vehicles",
+                  ],
+                },
+              ],
+              boxComponent: {
+                firstDiv: {
+                  image:
+                    "https://storage.googleapis.com/upcover-webflow-integration/assets/images/bfb3d41184f6b9d53e820156bae9107d7cbd2da3.png",
+                  heading: "MAKE A CLAIM",
+                  paragraph: `If you're a fleet manager, driver, or you have been involved in an accident it's crucial to report this as soon as possoble
+                  <br/>
+                  Takes less than 5 mins Via e-form or up to 45 mins via call`,
+                  buttons: [
+                    {
+                      label: "REPORT CLAIM VIA E-FORM ",
+                      href: "#",
+                    },
+                    {
+                      label: "CALL 1300 872 683",
+                      href: "tel:1300872683",
+                    },
+                  ],
+                },
+              },
+            },
+          ],
+        },
+        loginText: "LOGIN",
+        quoteText: "GET A QUOTE",
+        // defaultTheme: "motor"
+      });
+
+    });
+  </script>
+</body>
+
 </html>

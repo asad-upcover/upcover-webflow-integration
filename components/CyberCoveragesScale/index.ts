@@ -82,7 +82,7 @@ function injectStyles() {
   font-size: 24px;
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
-  /* min-width: 160px; */
+  line-height: normal;
 }
 .cis-tab-btn.active {
   background: #005DFF;

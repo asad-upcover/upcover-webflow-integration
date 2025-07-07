@@ -24,26 +24,52 @@ const DEFAULT_CONFIG = {
     {
       key: 'growth',
       label: 'Growth & Scaling',
-      image: '',
-      lossExample: { title: 'Real Loss Examples', text: 'Dummy loss example.' },
+      image: 'https://cdn.prod.website-files.com/684c2562066471bab0d1b300/686baebeec98bec0062f7e23_Rectangle%201354.png',
+      lossExample: {
+        title: 'Pre-seed & Early Seed',
+        points: [
+          'Basic general liability coverage',
+          'Starter tech E&O protection',
+          'MVP cyber security coverage',
+          'Founder personal protection',
+        ]
+      },
       button: { label: 'GET A QUOTE', href: '#' },
     },
     {
       key: 'expansion',
       label: 'Expansion & Maturity',
-      image: '',
-      lossExample: { title: 'Real Loss Examples', text: 'Dummy loss example.' },
+      image: 'https://cdn.prod.website-files.com/684c2562066471bab0d1b300/686baebeec98bec0062f7e23_Rectangle%201354.png',
+      lossExample: {
+        title: 'Pre-seed & Early Seed',
+        points: [
+          'Basic general liability coverage',
+          'Starter tech E&O protection',
+          'MVP cyber security coverage',
+          'Founder personal protection',
+        ]
+      },
       button: { label: 'GET A QUOTE', href: '#' },
     },
     {
       key: 'preExit',
       label: 'Pre-Exit',
-      image: '',
-      lossExample: { title: 'Real Loss Examples', text: 'Dummy loss example.' },
+      image: 'https://cdn.prod.website-files.com/684c2562066471bab0d1b300/686baebeec98bec0062f7e23_Rectangle%201354.png',
+      lossExample: {
+        title: 'Pre-seed & Early Seed',
+        points: [
+          'Basic general liability coverage',
+          'Starter tech E&O protection',
+          'MVP cyber security coverage',
+          'Founder personal protection',
+        ]
+      },
       button: { label: 'GET A QUOTE', href: '#' },
     },
   ]
 };
+
+
 
 function injectStyles() {
   if (document.getElementById('cyber-coverages-scale-styles')) return;
@@ -252,7 +278,7 @@ function injectStyles() {
 
   .cyber-coverages-scale {
     margin: 12px 0;
-    padding: 0 20vw;
+    padding: 0 2vw;
   }
   .cis-content-wrapper {
     padding: 10px;

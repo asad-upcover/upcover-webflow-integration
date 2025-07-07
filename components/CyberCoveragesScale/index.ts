@@ -122,7 +122,7 @@ function injectStyles() {
   color: #005DFF;
   font-size: 24px;
   margin: 0 0 30px 0;
-  font-weight: 600;
+  font-weight: 700;
 }
 .cis-section ul {
   margin: 0 0 0 18px;
@@ -156,7 +156,7 @@ function injectStyles() {
   color: #005DFF;
   border: none;
   border-radius: 10px;
-  font-weight: 600 !important;
+  font-weight: 700 !important;
   font-size: 18px;
   text-decoration: none;
   text-align: center;
@@ -165,6 +165,7 @@ function injectStyles() {
   box-sizing: border-box;
   position: relative;
   overflow: hidden;
+  // line-height: normal;
 }
 .cis-quote-btn-inner {
   display: flex;

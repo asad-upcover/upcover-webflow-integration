@@ -64,8 +64,8 @@ export class NavbarWidget {
         initialTheme === "tech"
           ? upcoverLogoTech
           : initialTheme === "motor"
-          ? upcoverLogoMotor
-          : upcoverLogoBusiness,
+            ? upcoverLogoMotor
+            : upcoverLogoBusiness,
     };
 
     this.target = document.createElement("nav");
@@ -112,18 +112,18 @@ export class NavbarWidget {
 
     const menuItems = this.getMenuItemsForTheme(theme);
     menuComponent.innerHTML = '';
-    
+
     menuItems.forEach(item => {
       const li = document.createElement('li');
       li.className = item.dropdown ? "menu-item dropdown" : "menu-item";
-      
+
       const a = document.createElement('a');
       a.href = item.href;
       a.innerHTML = `
         ${item.label}
         <span class="menu-icon">${arrowDownIcon}</span>
       `;
-      
+
       // Set dynamic color based on theme
       const currentTheme = this.themeManager.getCurrentTheme();
       const themeColor = this.themeManager.getCurrentColor();
@@ -132,20 +132,20 @@ export class NavbarWidget {
       } else {
         a.style.color = '#242826';
       }
-      
+
       // Add hover event listener to change color
       li.addEventListener('mouseenter', () => {
         const currentTheme = this.themeManager.getCurrentTheme();
         const hoverColor = currentTheme === 'motor' ? '#3B4125' : this.themeManager.getCurrentColor();
         a.style.color = hoverColor;
-        
+
         // Update SVG color
         const svgPath = a.querySelector('svg path');
         if (svgPath) {
           svgPath.setAttribute('stroke', hoverColor);
         }
       });
-      
+
       li.addEventListener('mouseleave', () => {
         // Set color based on active tab
         if (window.location.pathname.includes(item.label.toLowerCase())) {
@@ -153,29 +153,29 @@ export class NavbarWidget {
         } else {
           a.style.color = '#242826';
         }
-        
+
         // Reset SVG color
         const svgPath = a.querySelector('svg path');
         if (svgPath) {
           svgPath.setAttribute('stroke', '#242826');
         }
       });
-      
+
       li.appendChild(a);
 
       if (item.dropdown || item.boxComponent) {
         const dropdownMenu = document.createElement('div');
         dropdownMenu.className = 'dropdown-menu three-column';
-        
+
         // Add dropdown columns if they exist
         if (item.dropdown) {
           item.dropdown.forEach(section => {
             const column = document.createElement('div');
             column.className = 'dropdown-column';
-            
+
             const title = document.createElement('h4');
             title.textContent = section.title;
-            
+
             const list = document.createElement('ul');
             section.items.forEach(listItem => {
               const li = document.createElement('li');
@@ -206,7 +206,7 @@ export class NavbarWidget {
               });
               list.appendChild(li);
             });
-            
+
             column.appendChild(title);
             column.appendChild(list);
             dropdownMenu.appendChild(column);
@@ -221,17 +221,17 @@ export class NavbarWidget {
           // First Div
           const firstDiv = document.createElement('div');
           firstDiv.className = 'box-first-div';
-          
+
           const image = document.createElement('img');
           image.src = item.boxComponent.firstDiv.image;
           image.alt = item.boxComponent.firstDiv.heading;
-          
+
           const heading1 = document.createElement('h3');
           heading1.textContent = item.boxComponent.firstDiv.heading;
-          
+
           const paragraph1 = document.createElement('p');
           paragraph1.innerHTML = item.boxComponent.firstDiv.paragraph;
-          
+
           const buttonContainer1 = document.createElement('div');
           buttonContainer1.className = 'button-container';
           item.boxComponent.firstDiv.buttons.forEach((button, index) => {
@@ -311,13 +311,13 @@ export class NavbarWidget {
           if (item.boxComponent.secondDiv) {
             const secondDiv = document.createElement('div');
             secondDiv.className = 'box-second-div';
-            
+
             const heading2 = document.createElement('h3');
             heading2.textContent = item.boxComponent.secondDiv.heading;
-            
+
             const paragraph2 = document.createElement('p');
             paragraph2.innerHTML = item.boxComponent.secondDiv.paragraph;
-            
+
             const button2 = document.createElement('a');
             button2.href = item.boxComponent.secondDiv.button.href;
             button2.className = 'box-button';
@@ -347,10 +347,10 @@ export class NavbarWidget {
 
           dropdownMenu.appendChild(boxContainer);
         }
-        
+
         li.appendChild(dropdownMenu);
       }
-      
+
       menuComponent.appendChild(li);
     });
   }
@@ -465,6 +465,12 @@ export class NavbarWidget {
         padding: 0;
         margin-left: 20px;
         list-style: none;
+      }
+
+      @media (max-width: 900px) {
+        #navbar {
+          display: none !important;
+        }
       }
 
       @media screen and (max-width: 1010px) {
@@ -902,20 +908,20 @@ export class NavbarWidget {
       } else {
         a.style.color = '#242826';
       }
-      
+
       // Add hover event listener to change color
       li.addEventListener('mouseenter', () => {
         const currentTheme = this.themeManager.getCurrentTheme();
         const hoverColor = currentTheme === 'motor' ? '#3B4125' : this.themeManager.getCurrentColor();
         a.style.color = hoverColor;
-        
+
         // Update SVG color
         const svgPath = a.querySelector('svg path');
         if (svgPath) {
           svgPath.setAttribute('stroke', hoverColor);
         }
       });
-      
+
       li.addEventListener('mouseleave', () => {
         // Set color based on active tab
         if (window.location.pathname.includes(item.label.toLowerCase())) {
@@ -923,29 +929,29 @@ export class NavbarWidget {
         } else {
           a.style.color = '#242826';
         }
-        
+
         // Reset SVG color
         const svgPath = a.querySelector('svg path');
         if (svgPath) {
           svgPath.setAttribute('stroke', '#242826');
         }
       });
-      
+
       li.appendChild(a);
 
       if (item.dropdown || item.boxComponent) {
         const dropdownMenu = document.createElement('div');
         dropdownMenu.className = 'dropdown-menu three-column';
-        
+
         // Add dropdown columns if they exist
         if (item.dropdown) {
           item.dropdown.forEach(section => {
             const column = document.createElement('div');
             column.className = 'dropdown-column';
-            
+
             const title = document.createElement('h4');
             title.textContent = section.title;
-            
+
             const list = document.createElement('ul');
             section.items.forEach(listItem => {
               const li = document.createElement('li');
@@ -976,7 +982,7 @@ export class NavbarWidget {
               });
               list.appendChild(li);
             });
-            
+
             column.appendChild(title);
             column.appendChild(list);
             dropdownMenu.appendChild(column);
@@ -991,17 +997,17 @@ export class NavbarWidget {
           // First Div
           const firstDiv = document.createElement('div');
           firstDiv.className = 'box-first-div';
-          
+
           const image = document.createElement('img');
           image.src = item.boxComponent.firstDiv.image;
           image.alt = item.boxComponent.firstDiv.heading;
-          
+
           const heading1 = document.createElement('h3');
           heading1.textContent = item.boxComponent.firstDiv.heading;
-          
+
           const paragraph1 = document.createElement('p');
           paragraph1.innerHTML = item.boxComponent.firstDiv.paragraph;
-          
+
           const buttonContainer1 = document.createElement('div');
           buttonContainer1.className = 'button-container';
           item.boxComponent.firstDiv.buttons.forEach((button, index) => {
@@ -1081,13 +1087,13 @@ export class NavbarWidget {
           if (item.boxComponent.secondDiv) {
             const secondDiv = document.createElement('div');
             secondDiv.className = 'box-second-div';
-            
+
             const heading2 = document.createElement('h3');
             heading2.textContent = item.boxComponent.secondDiv.heading;
-            
+
             const paragraph2 = document.createElement('p');
             paragraph2.innerHTML = item.boxComponent.secondDiv.paragraph;
-            
+
             const button2 = document.createElement('a');
             button2.href = item.boxComponent.secondDiv.button.href;
             button2.className = 'box-button';
@@ -1117,7 +1123,7 @@ export class NavbarWidget {
 
           dropdownMenu.appendChild(boxContainer);
         }
-        
+
         li.appendChild(dropdownMenu);
       }
 

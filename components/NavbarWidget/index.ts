@@ -238,6 +238,13 @@ export class NavbarWidget {
             const btn = document.createElement('a');
             btn.href = button.href;
             btn.className = 'box-button';
+            // Add no-hover-effect class for call buttons or pure phone numbers
+            const label = button.label ? button.label.trim() : '';
+            const isCall = label.toUpperCase().startsWith('CALL ');
+            const isPhoneNumber = /^\+?\d[\d\s-]*\d$/.test(label.replace(/[^\d\s\+\-]/g, '')) && label.replace(/[^\d]/g, '').length >= 6;
+            if (isCall || isPhoneNumber) {
+              btn.classList.add('no-hover-effect');
+            }
             // Insert arrow and text spans for animation
             btn.innerHTML = `
               <span class="box-btn-inner">
@@ -783,6 +790,34 @@ export class NavbarWidget {
       .secondary-btn:hover .box-btn-arrow svg path {
         stroke: var(--secondary-btn-hover-color, #fff) !important;
       }
+      .box-button.no-hover-effect:hover,
+      .box-button.no-hover-effect:hover .box-btn-arrow,
+      .box-button.no-hover-effect:hover .box-btn-text {
+        border-radius: 10px !important;
+        width: 100%;
+        opacity: 1;
+        margin-right: 0;
+        margin-left: 0;
+        transform: none;
+        color: inherit;
+        background: inherit;
+        text-decoration: none;
+      }
+      .box-button.no-hover-effect:hover .box-btn-arrow {
+        opacity: 0 !important;
+        width: 0 !important;
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+      }
+      .box-button.no-hover-effect .box-btn-arrow {
+        opacity: 0 !important;
+        width: 0 !important;
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+      }
+      .box-button.no-hover-effect:hover .box-btn-text {
+        transform: none !important;
+      }
     `;
     document.head.appendChild(style);
   }
@@ -1014,6 +1049,13 @@ export class NavbarWidget {
             const btn = document.createElement('a');
             btn.href = button.href;
             btn.className = 'box-button';
+            // Add no-hover-effect class for call buttons or pure phone numbers
+            const label = button.label ? button.label.trim() : '';
+            const isCall = label.toUpperCase().startsWith('CALL ');
+            const isPhoneNumber = /^\+?\d[\d\s-]*\d$/.test(label.replace(/[^\d\s\+\-]/g, '')) && label.replace(/[^\d]/g, '').length >= 6;
+            if (isCall || isPhoneNumber) {
+              btn.classList.add('no-hover-effect');
+            }
             // Insert arrow and text spans for animation
             btn.innerHTML = `
               <span class="box-btn-inner">

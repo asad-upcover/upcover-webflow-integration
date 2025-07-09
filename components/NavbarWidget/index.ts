@@ -707,8 +707,9 @@ export class NavbarWidget {
       .box-button.motor-theme:hover .box-btn-arrow svg path {
         stroke: #3B4125 !important;
       }
+      /* Always use white arrow for business theme */
       .box-button .box-btn-arrow svg path {
-        stroke: #005DFF;
+        stroke: #fff !important;
       }
       .box-button.motor-theme .box-btn-arrow svg path {
         stroke: #3B4125;
@@ -768,7 +769,7 @@ export class NavbarWidget {
         opacity: 1;
         transform: translateX(7px);
       }
-      .upcover-quote-btn:hover .upcover-quote-btn-arrow svg path {
+      .upcover-quote-btn .upcover-quote-btn-arrow svg path {
         stroke: #fff;
       }
       .upcover-quote-btn:hover .upcover-quote-btn-text {

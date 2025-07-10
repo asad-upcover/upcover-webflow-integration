@@ -177,9 +177,7 @@ function injectStyles() {
   }
 }
 @media (max-width: 600px) {
-  .who-needs-cyber-section {
-    padding: 12px 2vw;
-  }
+
   .who-needs-cyber-right {
     padding: 16px 2vw;
   }

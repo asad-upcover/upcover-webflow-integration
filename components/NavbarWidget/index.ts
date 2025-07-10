@@ -648,6 +648,7 @@ export class NavbarWidget {
         overflow: hidden;
         min-width: 120px;
         max-width: 100%;
+        max-height: 50px;
       }
       .box-btn-inner {
         display: flex;
@@ -707,7 +708,6 @@ export class NavbarWidget {
       .box-button.motor-theme:hover .box-btn-arrow svg path {
         stroke: #3B4125 !important;
       }
-      /* Always use white arrow for business theme */
       .box-button .box-btn-arrow svg path {
         stroke: #fff !important;
       }
@@ -731,6 +731,7 @@ export class NavbarWidget {
         overflow: hidden;
         transition: background 0.2s, color 0.2s, border-radius 160ms ease-out;
         --upcover-quote-btn-bg: inherit;
+        max-height: 60px;
       }
       .upcover-quote-btn-inner {
         display: flex;
@@ -818,6 +819,12 @@ export class NavbarWidget {
       }
       .box-button.no-hover-effect:hover .box-btn-text {
         transform: none !important;
+      }
+      .box-button.no-hover-effect {
+        transition: border-radius 160ms ease-out;
+      }
+      .box-button.no-hover-effect:hover {
+        border-radius: 0 !important;
       }
     `;
     document.head.appendChild(style);

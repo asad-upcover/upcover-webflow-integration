@@ -165,6 +165,16 @@ function injectStyles() {
   grid-template-columns: repeat(3, 1fr);
   gap: 40px;
 }
+@media (max-width: 1200px) {
+  .cyber-blogs-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 700px) {
+  .cyber-blogs-cards {
+    grid-template-columns: 1fr;
+  }
+}
 .cyber-blogs-card {
   background: #fff;
   border-radius: 10px;

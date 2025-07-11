@@ -175,7 +175,7 @@ function injectStyles() {
     grid-template-columns: 1fr;
   }
   .cyber-blogs-main {
-    padding: 15px 8px 15px 8px;
+    padding: 15px 40px 15px 100px;
   }
   .cyber-blogs-card-title {
     font-size: 16px;

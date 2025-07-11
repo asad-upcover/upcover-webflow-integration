@@ -6,6 +6,7 @@ import { mountCyberSteps, CyberStepsConfig } from "../CyberSteps/index";
 import { mountWhoNeedsCyberInsurance } from "../WhoNeedsCyberInsurance/index";
 import { mountCyberExamples } from "../CyberExamples/index";
 import { mountCyberCoveragesScale } from "../CyberCoveragesScale";
+import { mountCyberBlogs } from "../CyberBlogs/index";
 
 (window as any).Upcover = {
   AppBarWidget: (targetId: string, options: AppBarWidgetConfig) => {
@@ -45,5 +46,9 @@ import { mountCyberCoveragesScale } from "../CyberCoveragesScale";
   CyberCoveragesScale: (targetId: string, options?: any) => {
     const target = document.getElementById(targetId);
     if (target) mountCyberCoveragesScale(target, options);
+  },
+  CyberBlogsWidget: (targetId: string, options?: any) => {
+    const target = document.getElementById(targetId);
+    if (target) mountCyberBlogs(target, options);
   }
 };

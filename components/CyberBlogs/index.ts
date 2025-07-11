@@ -72,12 +72,12 @@ function injectStyles() {
   style.id = 'cyber-blogs-styles';
   style.textContent = `
 .cyber-blogs-section {
-//   max-width: 1200px;
   margin: 0 auto;
   font-family: 'Inter', Arial, sans-serif;
-  width: 100%;
+  width: 100vw;
+  max-width: 100vw;
   box-sizing: border-box;
-//   padding: 70px 102px 0 100px;
+  overflow-x: hidden;
 }
 .cyber-blogs-header {
   display: flex;
@@ -175,7 +175,20 @@ function injectStyles() {
     grid-template-columns: 1fr;
   }
   .cyber-blogs-main {
-    padding: 25px 25px 40px 25px;
+    padding: 15px 8px 25px 8px;
+  }
+  .cyber-blogs-card-title {
+    font-size: 16px;
+    line-height: 22px;
+  }
+  .cyber-blogs-card-excerpt {
+    font-size: 15px;
+    line-height: 22px;
+    margin-bottom: 18px;
+  }
+  .cyber-blogs-card-link {
+    font-size: 15px;
+    padding: 0 8px;
   }
 }
 .cyber-blogs-card {

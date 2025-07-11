@@ -174,6 +174,9 @@ function injectStyles() {
   .cyber-blogs-cards {
     grid-template-columns: 1fr;
   }
+  .cyber-blogs-main {
+    padding: 25px 25px 40px 25px;
+  }
 }
 .cyber-blogs-card {
   background: #fff;

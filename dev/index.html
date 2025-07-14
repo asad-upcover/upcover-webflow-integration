@@ -28,6 +28,7 @@
   <div id="cyber-examples"></div>
   <div id="cyber-coverages-scales"></div>
   <div id="cyber-blogs-root"></div>
+  <div id="cyber-top-articles"></div>
 
   <!-- script for INDUSTRY-SPECIFIC CYBER INSURANCE SOLUTIONS -->
   <script>
@@ -141,45 +142,6 @@
       }
     });
   </script>
-
-  <!-- {
-  tabs: [
-    {
-      key: 'healthcare',
-      label: 'Healthcare & Medical',
-      image: 'https://storage.googleapis.com/upcover-webflow-integration/assets/images/Healthcare.png',
-      lossExample: {
-        title: 'Pre-seed & Early Seed',
-        text: 'A metropolitan hospital paid $4.5M in ransom and spent $8.2M on system recovery after ransomware encrypted patient records and disabled appointment system for 11 days.'
-      },
-      button: {
-        label: 'GET A QUOTE',
-        href: '#'
-      }
-    },
-    {
-      key: 'financial',
-      label: 'Financial Services',
-      image: 'https://storage.googleapis.com/upcover-webflow-integration/assets/images/Healthcare.png',
-      lossExample: { title: 'Real Loss Examples', text: 'Dummy loss example.' },
-      button: { label: 'GET A QUOTE', href: '#' }
-    },
-    {
-      key: 'retail',
-      label: 'Retail & E-commerce',
-      image: 'https://storage.googleapis.com/upcover-webflow-integration/assets/images/Healthcare.png',
-      lossExample: { title: 'Real Loss Examples', text: 'Dummy loss example.' },
-      button: { label: 'GET A QUOTE', href: '#' }
-    },
-    {
-      key: 'technology',
-      label: 'Technology & SaaS',
-      image: 'https://storage.googleapis.com/upcover-webflow-integration/assets/images/Healthcare.png',
-      lossExample: { title: 'Real Loss Examples', text: 'Dummy loss example.' },
-      button: { label: 'GET A QUOTE', href: '#' }
-    }
-  ]
-} -->
 
   <!-- script for What it doesn't cover -->
   <script>
@@ -395,6 +357,77 @@
             {
               image: 'https://cdn.prod.website-files.com/684c2562066471bab0d1b300/6871160c1e57edbb5434af59_Rectangle%201353.png',
               date: 'Jan 16',
+              category: 'Announcement',
+              title: `upcover's second Finnies win!`,
+              excerpt: 'We won the Best Workplace Diversity award at FinTech Australia Awards last night. The upcover team is 41 brilliant individ...',
+              fullUrl: '#',
+            },
+          ],
+          pagination: {
+            currentPage: 1,
+          },
+        });
+      }
+    });
+  </script>
+
+  <!-- script for TOP ARTICLES -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      if (window.Upcover && typeof window.Upcover.CyberBlogsWidget === 'function') {
+        window.Upcover.CyberBlogsWidget('cyber-top-articles', {
+          blogs: [
+            {
+              image: 'https://cdn.prod.website-files.com/684c2562066471bab0d1b300/6874b0716aa822964e91465a_Rectangle%201354%20(1).png',
+              date: 'June 15',
+              category: 'Announcement',
+              title: `Co-Founder & COO Anish breaks down the 2025-2026 Federal Budget in Forbes Australia`,
+              excerpt: 'Australia has delivered a budget that does not mention AI once.',
+              fullUrl: '#',
+            },
+            {
+              image: 'https://cdn.prod.website-files.com/684c2562066471bab0d1b300/6874b07c2c80ea2fc4a1377c_Rectangle%201353%20(2).png',
+              date: 'June 15',
+              category: 'Announcement',
+              title: 'upcover has raised $19 Million',
+              excerpt: `We started with a mission to digitise the commercial insurance industry and help business owners across Australia, get.`,
+              fullUrl: '#',
+            },
+            {
+              image: 'https://cdn.prod.website-files.com/684c2562066471bab0d1b300/6874b0716aa822964e91465a_Rectangle%201354%20(1).png',
+              date: 'June 15',
+              category: 'Announcement',
+              title: `Co-Founder & COO Anish breaks down the 2025-2026 Federal Budget in Forbes Australia`,
+              excerpt: 'Australia has delivered a budget that does not mention AI once. ',
+              fullUrl: '#',
+            },
+            {
+              image: 'https://cdn.prod.website-files.com/684c2562066471bab0d1b300/6874b07c2c80ea2fc4a1377c_Rectangle%201353%20(2).png',
+              date: 'June 15',
+              category: 'Announcement',
+              title: `Co-Founder & COO Anish breaks down the 2025-2026 Federal Budget in Forbes Australia`,
+              excerpt: 'Australia has delivered a budget that does not mention AI once. ',
+              fullUrl: '#',
+            },
+            {
+              image: 'https://cdn.prod.website-files.com/684c2562066471bab0d1b300/6874b0716aa822964e91465a_Rectangle%201354%20(1).png',
+              date: 'June 15',
+              category: 'Announcement',
+              title: `upcover has raised $19 Million`,
+              excerpt: 'We started with a mission to digitise the commercial insurance industry and help business owners across Australia, get.',
+              fullUrl: '#',
+            },
+            {
+              image: 'https://cdn.prod.website-files.com/684c2562066471bab0d1b300/6874b07c2c80ea2fc4a1377c_Rectangle%201353%20(2).png',
+              date: 'June 15',
+              category: 'Announcement',
+              title: `Co-Founder & COO Anish breaks down the 2025-2026 Federal Budget in Forbes Australia`,
+              excerpt: 'Australia has delivered a budget that does not mention AI once.  ',
+              fullUrl: '#',
+            },
+            {
+              image: 'https://cdn.prod.website-files.com/684c2562066471bab0d1b300/6874b0716aa822964e91465a_Rectangle%201354%20(1).png',
+              date: 'Jan 15',
               category: 'Announcement',
               title: `upcover's second Finnies win!`,
               excerpt: 'We won the Best Workplace Diversity award at FinTech Australia Awards last night. The upcover team is 41 brilliant individ...',

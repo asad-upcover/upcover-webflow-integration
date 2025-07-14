@@ -7,6 +7,7 @@ import { mountWhoNeedsCyberInsurance } from "../WhoNeedsCyberInsurance/index";
 import { mountCyberExamples } from "../CyberExamples/index";
 import { mountCyberCoveragesScale } from "../CyberCoveragesScale";
 import { mountCyberBlogs } from "../CyberBlogs/index";
+import { mountCyberTopArticles } from "../CyberTopArticles";
 
 (window as any).Upcover = {
   AppBarWidget: (targetId: string, options: AppBarWidgetConfig) => {
@@ -50,5 +51,9 @@ import { mountCyberBlogs } from "../CyberBlogs/index";
   CyberBlogsWidget: (targetId: string, options?: any) => {
     const target = document.getElementById(targetId);
     if (target) mountCyberBlogs(target, options);
+  },
+  CyberTopArticles: (targetId: string, options?: any) => {
+    const target = document.getElementById(targetId);
+    if (target) mountCyberTopArticles(target, options);
   }
 };

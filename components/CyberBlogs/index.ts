@@ -276,9 +276,9 @@ border: 1px solid #242826;
   transition: background 0.2s, color 0.2s;
   // margin: 0 2px;
 }
-.cyber-blogs-pagination-btn:disabled {
-  opacity: 0.5;
-}
+// .cyber-blogs-pagination-btn:disabled {
+//   opacity: 0.5;
+// }
 .cyber-blogs-pagination {
   display: flex;
   align-items: center;

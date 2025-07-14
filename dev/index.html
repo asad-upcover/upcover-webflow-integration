@@ -21,14 +21,15 @@
     <!--  -->
   </header>
 
-  <div id="cyber-insurance-solutions-root"></div>
+  <!-- <div id="cyber-insurance-solutions-root"></div>
   <div id="cyber-covers-root"></div>
   <div id="cyber-steps-root"></div>
   <div id="who-needs-cyber-root"></div>
   <div id="cyber-examples"></div>
   <div id="cyber-coverages-scales"></div>
   <div id="cyber-blogs-root"></div>
-  <div id="cyber-top-articles"></div>
+  <div id="cyber-top-articles"></div> -->
+  <div id="cyber-latest-insights-root"></div>
 
   <!-- script for INDUSTRY-SPECIFIC CYBER INSURANCE SOLUTIONS -->
   <script>
@@ -362,6 +363,14 @@
               excerpt: 'We won the Best Workplace Diversity award at FinTech Australia Awards last night. The upcover team is 41 brilliant individ...',
               fullUrl: '#',
             },
+            {
+              image: 'https://cdn.prod.website-files.com/684c2562066471bab0d1b300/6871160c1e57edbb5434af59_Rectangle%201353.png',
+              date: 'Jan 16',
+              category: 'Announcement',
+              title: `upcover's second Finnies win!`,
+              excerpt: 'We won the Best Workplace Diversity award at FinTech Australia Awards last night. The upcover team is 41 brilliant individ...',
+              fullUrl: '#',
+            },
           ],
           pagination: {
             currentPage: 1,
@@ -436,6 +445,96 @@
           ],
           pagination: {
             currentPage: 1,
+          },
+        });
+      }
+    });
+  </script>
+
+  <!-- script for CYBER LATEST INSIGHTS with config -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      if (window.Upcover && typeof window.Upcover.CyberLatestInsightsWidget === 'function') {
+        window.Upcover.CyberLatestInsightsWidget('cyber-latest-insights-root', {
+          blogsByTab: {
+            business: [
+              {
+                image: 'https://cdn.prod.website-files.com/684c2562066471bab0d1b300/6871160c1e57edbb5434af59_Rectangle%201353.png',
+                date: 'May 29',
+                category: 'Business Insurance',
+                title: 'Business Cybersecurity: What You Need to Know',
+                excerpt: 'A quick guide for businesses to understand the essentials of cybersecurity and insurance.',
+                fullUrl: '#',
+              },
+            ],
+            tech: [
+              {
+                image: 'https://cdn.prod.website-files.com/684c2562066471bab0d1b300/687510d91df4f74526266093_Image%20about%20cyber%20insurance%20(6).png',
+                date: 'May 29',
+                category: 'Cyber Insurance',
+                title: 'Cybersecurity Awareness Month 2025 — Data, Data, Goose!',
+                excerpt: 'As the leaves turn golden and the wind blows colder, cybersecurity awareness month is upon us! Here’s what it’s all ...',
+                fullUrl: '#',
+              },
+              {
+                image: 'https://cdn.prod.website-files.com/684c2562066471bab0d1b300/6875113c164ba7223e3110f7_Image%20about%20cyber%20insurance%20(7).png',
+                date: 'Jun 28',
+                category: 'Cyber Insurance',
+                title: `Cyber Attacks & Supply Chain Disruptions: Startup’s Worst Enemy?`,
+                excerpt: 'Explore the evolving threat landscape for supply chain disruptions, mitigation strategies, and the importance of risk ... ',
+                fullUrl: '#',
+              },
+              {
+                image: 'https://cdn.prod.website-files.com/684c2562066471bab0d1b300/687511958e7dfaf38c48c380_Image%20about%20cyber%20insurance%20(8).png',
+                date: 'Jul 10',
+                category: 'Cyber Insurance',
+                title: 'Cyber Attacks & Supply Chain Disruptions: Startup’s Worst Enemy?',
+                excerpt: 'Explore the evolving threat landscape for supply chain disruptions, mitigation strategies, and the importance of risk ... ',
+                fullUrl: '#',
+              },
+              {
+                image: 'https://cdn.prod.website-files.com/684c2562066471bab0d1b300/687511a9fea03c2c7a8aa3a6_Image%20about%20cyber%20insurance%20(9).png',
+                date: 'Aug 15',
+                category: 'Cyber Insurance',
+                title: 'Cybersecurity Awareness Month 2025 — Data, Data, Goose!',
+                excerpt: 'As the leaves turn golden and the wind blows colder, cybersecurity awareness month is upon us! Here’s what it’s all ...',
+                fullUrl: '#',
+              },
+              {
+                image: 'https://cdn.prod.website-files.com/684c2562066471bab0d1b300/687511ad3ed5d0e07135ab90_Image%20about%20cyber%20insurance%20(10).png',
+                date: 'Sep 01',
+                category: 'Cyber Insurance',
+                title: 'Cybersecurity Awareness Month 2025 — Data, Data, Goose!',
+                excerpt: 'As the leaves turn golden and the wind blows colder, cybersecurity awareness month is upon us! Here’s what it’s all ...',
+                fullUrl: '#',
+              },
+              {
+                image: 'https://cdn.prod.website-files.com/684c2562066471bab0d1b300/687511b71da786d0c78d2409_Image%20about%20cyber%20insurance%20(11).png',
+                date: 'Oct 05',
+                category: 'Cyber Insurance',
+                title: 'Cyber Attacks & Supply Chain Disruptions: Startup’s Worst Enemy?',
+                excerpt: 'Stay ahead of the curve with the latest cybersecurity trends and predictions for 2025.',
+                fullUrl: '#',
+              },
+              {
+                image: 'https://cdn.prod.website-files.com/684c2562066471bab0d1b300/6871160c1e57edbb5434af59_Rectangle%201353.png',
+                date: 'Nov 20',
+                category: 'Cyber Insurance',
+                title: 'How to Train Employees for Cybersecurity',
+                excerpt: 'Employees are your first line of defense. Learn how to train your team to recognize and prevent cyber threats.',
+                fullUrl: '#',
+              },
+            ],
+            motor: [
+              {
+                image: 'https://cdn.prod.website-files.com/684c2562066471bab0d1b300/687116ba2ee82f0e5856f3a6_Rectangle%201353%20(1).png',
+                date: 'Dec 01',
+                category: 'Motor Insurance',
+                title: 'Fleet Cybersecurity: Protecting Your Vehicles',
+                excerpt: 'How to keep your business vehicles and fleet data safe from cyber threats in 2025.',
+                fullUrl: '#',
+              },
+            ],
           },
         });
       }

@@ -292,7 +292,6 @@ function injectStyles() {
   }
 
   .cyber-blogs-arrow-btn svg {
-    padding: 5px;
     display: block;
   }
   .cyber-blogs-pagination {

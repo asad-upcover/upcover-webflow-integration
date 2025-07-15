@@ -83,7 +83,7 @@ export class AppBarWidget {
           position: relative;
           transition: color 0.3s ease, background-color 0.3s ease;
           line-height: 12px;
-          // max-height: 60px;
+          max-height: 60px;
         }
           @media screen and (max-width: 1010px){
           .tabs button{

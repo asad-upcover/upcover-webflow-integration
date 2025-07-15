@@ -195,7 +195,7 @@ function injectStyles() {
   .cyber-blogs-sidebar-list li {
     font-size: 18px;
     color: #545464;
-    font-weight: 400;
+    font-weight: 600;
     cursor: pointer;
     transition: color 0.2s, font-weight 0.2s;
   }
@@ -205,7 +205,7 @@ function injectStyles() {
   }
   .cyber-blogs-sidebar-list li.active {
     color: #005DFF;
-    font-weight: 700;
+    font-weight: 900;
     cursor: default;
   }
   .cyber-blogs-content {

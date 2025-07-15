@@ -195,6 +195,11 @@ function injectStyles() {
     font-size: 16px;
   }
 }
+@media (min-width: 1280px) {
+  .who-needs-cyber-section {
+    padding: 220px 164px;
+  }
+}
 `;
   document.head.appendChild(style);
 }

@@ -202,6 +202,11 @@ function injectStyles() {
     margin-bottom: 1rem;
   }
 }
+@media (min-width: 1280px) {
+  .who-needs-cyber-section {
+    padding: 220px 164px;
+  }
+}
 `;
   document.head.appendChild(style);
 }

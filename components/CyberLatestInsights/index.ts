@@ -178,13 +178,14 @@ function injectStyles() {
     max-width: 288px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    // gap: 15px;
   }
   .cyber-blogs-sidebar-title {
-    font-size: 20px;
-    font-weight: 700;
+    line-height: 18px;
+    font-size: 22px;
+    font-weight: 600;
     color: #242826;
-    margin-bottom: 20px;
+    margin-bottom: 48px;
   }
   .cyber-blogs-sidebar-list {
     list-style: none;
@@ -196,7 +197,6 @@ function injectStyles() {
     color: #545464;
     font-weight: 400;
     cursor: pointer;
-    padding: 10px 0;
     transition: color 0.2s, font-weight 0.2s;
   }
   .cyber-blogs-sidebar-list li:hover {

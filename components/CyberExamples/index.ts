@@ -89,7 +89,7 @@ function injectStyles() {
   align-items: center;
   justify-content: flex-start;
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 600;
   color: #494949;
   background: none;
   border: none;

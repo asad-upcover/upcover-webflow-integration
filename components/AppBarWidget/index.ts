@@ -101,10 +101,9 @@ export class AppBarWidget {
           position: absolute;
           bottom: 0;
           left: 0;
-          height: 2px;
+          height: 1px;
           width: 100%;
           background-color: #242826;
-          border-radius: 2px;
         }
         .contact {
           display: flex;

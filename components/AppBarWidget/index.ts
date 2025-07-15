@@ -75,14 +75,14 @@ export class AppBarWidget {
         .tabs button {
           background: none;
           border: none;
-          font-weight: 700;
           cursor: pointer;
-          padding: 31px 20px 27px 20px;
+          padding: 24px 20px;
+          font-weight: 600;
           color: #545464;
           font-size: 1rem;
           position: relative;
           transition: color 0.3s ease, background-color 0.3s ease;
-          // max-height: 70px;
+          max-height: 60px;
         }
           @media screen and (max-width: 1010px){
           .tabs button{
@@ -93,6 +93,7 @@ export class AppBarWidget {
         .tabs button.active {
           background-color: #ffffff;
           color: #242826;
+          font-weight: 700;
         }
         .tabs button.active::after {
           content: "";
@@ -106,7 +107,6 @@ export class AppBarWidget {
         }
         .contact {
           display: flex;
-          gap: 1rem;
           align-items: center;
           font-weight: 600;
           color: #242826;
@@ -120,7 +120,7 @@ export class AppBarWidget {
           background-color: white;
           padding: 10px 14px;
           border-radius: 10px;
-          margin-left: 10px;
+          margin-left: 20px;
           display: flex;
           align-items: center;
           font-size: 16px;

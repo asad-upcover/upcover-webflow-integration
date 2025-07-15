@@ -377,7 +377,7 @@ export class NavbarWidget {
         justify-content: space-between;
         align-items: center;
         padding: 0 60px 0 60px;
-        max-height: 90px;
+        max-height: 70px;
       }
 
       .navbar-left {

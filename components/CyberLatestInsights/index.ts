@@ -1,6 +1,3 @@
-import { arrowIcon } from '../../assets/svgicons';
-
-// Tab config
 const TABS = [
     { id: 'business', label: 'Businesses & Sole traders' },
     { id: 'tech', label: 'Tech Startups & Enterprises' },
@@ -113,9 +110,9 @@ const COVERAGE_LIST = [
 ];
 
 function injectStyles() {
-    if (document.getElementById('cyber-blogs-styles')) return;
+    if (document.getElementById('cyber-latest-insights')) return;
     const style = document.createElement('style');
-    style.id = 'cyber-blogs-styles';
+    style.id = 'cyber-latest-insights';
     style.textContent = `
   .cyber-blogs-section {
     margin: 0 auto;
@@ -178,6 +175,7 @@ function injectStyles() {
     padding: 70px 102px 150px 102px;
   }
   .cyber-blogs-sidebar {
+    max-width: 288px;
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -252,7 +250,7 @@ function injectStyles() {
   }
   .cyber-blogs-card-title {
     color: #242826;
-    font-size: 20px;
+    font-size: 22px;
     font-style: normal;
     font-weight: 700;
     line-height: 30px;
@@ -261,7 +259,7 @@ function injectStyles() {
     margin-top: 10px;
     margin-bottom: 30px;
     color: #494949;
-    font-size: 20px;
+    font-size: 22px;
     font-style: normal;
     font-weight: 400;
     line-height: 35px;
@@ -278,23 +276,23 @@ function injectStyles() {
     transition: color 0.2s;
     padding: 0;
   }
+  .cyber-blogs-card-links {
+    margin-top: auto;
+  }
   .cyber-blogs-arrow-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background: #005DFF;
-    margin-left: 10px;
+    // margin-left: 10px;
     transition: background 0.2s;
   }
-  .cyber-blogs-card-link:hover .cyber-blogs-arrow-btn {
-    background: #003EA6;
-  }
+
   .cyber-blogs-arrow-btn svg {
-    width: 22px;
-    height: 22px;
+    padding: 5px;
     display: block;
   }
   .cyber-blogs-pagination {

@@ -71,61 +71,6 @@ function injectStyles() {
   const style = document.createElement('style');
   style.id = 'cyber-blogs-styles';
   style.textContent = `
-.cyber-blogs-section {
-  margin: 0 auto;
-  font-family: 'Inter', Arial, sans-serif;
-  width: 100vw;
-  max-width: 100vw;
-  box-sizing: border-box;
-  overflow-x: hidden;
-}
-.cyber-blogs-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 70px;
-  background: #F8F7F7;
-  padding: 20px 100px;
-}
-.cyber-blogs-title {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: #242826;
-  letter-spacing: 0.04em;
-}
-.cyber-blogs-tabs {
-  display: flex;
-  gap: 14px;
-}
-.cyber-blogs-tab-btn {
-  background: #FFF;
-  border: none;
-  border-radius: 6px;
-  color: #545464;
-  font-weight: 700;
-  font-size: 18px;
-  padding: 19px 16px;
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s;
-}
-.cyber-blogs-tab-btn.active {
-  background: #005DFF;
-  color: #fff;
-  font-weight: 600;
-}
-.cyber-blogs-search {
-  margin-left: 24px;
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-}
-.cyber-blogs-search input {
-  padding: 8px;
-  border-radius: 6px;
-  border: 1px solid #242826;
-  font-size: 18px;
-  width: 220px;
-}
 .cyber-blogs-main {
   display: flex;
   gap: 30px;

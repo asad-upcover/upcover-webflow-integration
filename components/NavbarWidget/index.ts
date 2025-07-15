@@ -392,9 +392,9 @@ export class NavbarWidget {
       }
 
       .login {
-        font-weight: bold;
         text-decoration: none;
         font-size: 16px;
+        font-weight: 700;
       }
 
       .login:hover {
@@ -416,7 +416,7 @@ export class NavbarWidget {
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-top: 8px;
+        // margin-top: 8px;
       }
 
       #upcover-logo path {
@@ -427,7 +427,7 @@ export class NavbarWidget {
       /* Menu item */
       .menu-item {
         margin-left: 20px;
-        padding: 45px 0px 40px 0px;
+        padding: 28px 0px 30px 0px;
         display: flex;
         justify-content: center;
         align-content: center;
@@ -719,7 +719,7 @@ export class NavbarWidget {
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 20px 25px 20px 0px;
+        padding: 20px 22px 20px 0;
         background: inherit;
         color: inherit;
         border: none;
@@ -731,7 +731,7 @@ export class NavbarWidget {
         overflow: hidden;
         transition: background 0.2s, color 0.2s, border-radius 160ms ease-out;
         --upcover-quote-btn-bg: inherit;
-        max-height: 60px;
+        max-height: 50px;
       }
       .upcover-quote-btn-inner {
         display: flex;

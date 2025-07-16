@@ -175,7 +175,7 @@ function injectStyles() {
     padding: 70px 102px 150px 102px;
   }
   .cyber-blogs-sidebar {
-    max-width: 288px;
+    min-width: 288px;
     display: flex;
     flex-direction: column;
     // gap: 15px;
@@ -216,11 +216,24 @@ function injectStyles() {
     grid-template-columns: repeat(2, 1fr);
     gap: 40px;
   }
-  @media (max-width: 1200px) {
+    
+  @media (max-width: 1400px) {
     .cyber-blogs-cards {
       grid-template-columns: 1fr;
     }
   }
+  @media (max-width: 960px) {
+    .cyber-blogs-main {
+      flex-direction: column;
+      gap: 40px;
+      padding: 70px 50px 150px 50px;
+    }
+      .cyber-blogs-header{
+        padding: 20px 50px;
+      }
+  }
+
+
   .cyber-blogs-card {
     background: #fff;
     border-radius: 10px;
@@ -228,6 +241,7 @@ function injectStyles() {
     display: flex;
     flex-direction: column;
     min-height: 320px;
+    min-width: 410px;
   }
   .cyber-blogs-card-image {
     width: 100%;

@@ -94,7 +94,7 @@ function injectStyles() {
   align-items: center;
   color: #494949;
   font-size: 24px;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
   line-height: 1.5;
 }
 .cyber-covers-list li:last-child {

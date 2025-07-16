@@ -77,6 +77,12 @@ function injectStyles() {
   padding: 60px 102px 150px 102px;
   background: #F8F7F7;
 }
+@media (min-width: 1281px) {
+  .cyber-blogs-main {
+    padding-left: 166px;
+    padding-right: 166px;
+  }
+}
 .cyber-blogs-sidebar {
   min-width: 220px;
   max-width: 260px;

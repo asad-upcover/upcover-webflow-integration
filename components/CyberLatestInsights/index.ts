@@ -107,6 +107,7 @@ const COVERAGE_LIST = [
     'Business Package Insurance',
     'Business Equipment Insurance',
     'Motor Insurance for Businesses',
+    'Cyber Insurance'
 ];
 
 function injectStyles() {
@@ -470,6 +471,10 @@ export function mountCyberLatestInsights(target: HTMLElement, configArg?: any) {
 
         // Filter blogs by tab
         let filteredBlogs = config.blogsByTab[activeTab] || [];
+        // Filter by coverage (category)
+        if (activeCoverage !== 'All') {
+            filteredBlogs = filteredBlogs.filter((b: Blog) => b.category === activeCoverage);
+        }
         if (searchValue) {
             filteredBlogs = filteredBlogs.filter((b: Blog) =>
                 b.title.toLowerCase().includes(searchValue.toLowerCase()) ||

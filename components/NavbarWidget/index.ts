@@ -505,7 +505,7 @@ export class NavbarWidget {
       .dropdown-menu.three-column {
         display: none;
         position: absolute;
-        margin-top: 46px;
+        margin-top: 42px;
         left: 0;
         right: 0;
         width: 100%;

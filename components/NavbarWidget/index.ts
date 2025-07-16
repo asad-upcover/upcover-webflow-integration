@@ -383,6 +383,7 @@ export class NavbarWidget {
       .navbar-left {
         display: flex;
         align-items: center;
+        max-height: 70px;
       }
 
       .actions {
@@ -417,6 +418,7 @@ export class NavbarWidget {
         justify-content: center;
         align-items: center;
         // margin-top: 8px;
+        width: 161.576px;
       }
 
       #upcover-logo path {
@@ -719,7 +721,7 @@ export class NavbarWidget {
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 22px 20px 22px 0;
+        padding: 22px 22px 22px 0;
         background: inherit;
         color: inherit;
         border: none;

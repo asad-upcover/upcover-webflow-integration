@@ -228,9 +228,12 @@ function injectStyles() {
       gap: 40px;
       padding: 70px 50px 150px 50px;
     }
-      .cyber-blogs-header{
+   .cyber-blogs-header{
         padding: 20px 50px;
       }
+    .cyber-blogs-card {
+      min-width: 0 !important;
+    }
   }
 
 

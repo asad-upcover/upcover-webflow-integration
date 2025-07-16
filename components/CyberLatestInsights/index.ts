@@ -186,6 +186,9 @@ function injectStyles() {
     font-weight: 600;
     color: #242826;
     margin-bottom: 48px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
   }
   .cyber-blogs-sidebar-list {
     list-style: none;
@@ -198,7 +201,7 @@ function injectStyles() {
     font-weight: 600;
     cursor: pointer;
     transition: color 0.2s, font-weight 0.2s;
-    margin-bottom: 32px;
+    margin-bottom: 30px;
   }
   .cyber-blogs-sidebar-list li:hover {
     color: #005DFF;

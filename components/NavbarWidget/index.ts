@@ -719,7 +719,7 @@ export class NavbarWidget {
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 20px 22px 20px 0;
+        padding: 22px 20px 22px 0;
         background: inherit;
         color: inherit;
         border: none;

@@ -116,7 +116,7 @@ function injectStyles() {
 .who-needs-cyber-right {
   flex: 1 1 320px;
   min-width: 320px;
-  background: #F8F9FB;
+  background: #F8F7F7;
   border-radius: 20px;
   padding: 40px;
   display: flex;

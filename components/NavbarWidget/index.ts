@@ -445,7 +445,7 @@ export class NavbarWidget {
         display: flex;
         align-items: center;
         gap: 6px;
-        /* No transition for color, so color changes immediately on hover */
+        line-height: 12px;
       }
 
       .menu-icon {

@@ -231,7 +231,7 @@ function injectStyles() {
    .cyber-blogs-header{
         padding: 20px 50px;
       }
-    .cyber-blogs-card {
+    .cyber-blogs-card, .cyber-blogs-sidebar {
       min-width: 0 !important;
     }
   }

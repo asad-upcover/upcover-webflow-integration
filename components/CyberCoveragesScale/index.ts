@@ -84,6 +84,12 @@ function injectStyles() {
   width: 100%;
   box-sizing: border-box;
 }
+@media (min-width: 1281px) {
+  .cyber-coverages-scale {
+    padding-left: 187px;
+    padding-right: 187px;
+  }
+}
 .cis-tabs {
   display: flex;
   gap: 16px;

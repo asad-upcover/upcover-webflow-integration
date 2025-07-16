@@ -193,11 +193,12 @@ function injectStyles() {
     margin: 0;
   }
   .cyber-blogs-sidebar-list li {
-    font-size: 18px;
-    color: #545464;
+    font-size: 16px;
+    color: #242826;
     font-weight: 600;
     cursor: pointer;
     transition: color 0.2s, font-weight 0.2s;
+    margin-bottom: 32px;
   }
   .cyber-blogs-sidebar-list li:hover {
     color: #005DFF;
@@ -228,11 +229,39 @@ function injectStyles() {
       gap: 40px;
       padding: 70px 50px 150px 50px;
     }
-   .cyber-blogs-header{
-        padding: 20px 50px;
-      }
+    .cyber-blogs-header{
+      padding: 20px 20px;
+    }
     .cyber-blogs-card, .cyber-blogs-sidebar {
       min-width: 0 !important;
+    }
+    .cyber-blogs-search input {
+      width: 100%;
+      min-width: 0;
+    }
+  }
+  @media (max-width: 600px) {
+    .cyber-blogs-header {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 16px;
+      padding: 16px 8px;
+    }
+    .cyber-blogs-tabs {
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .cyber-blogs-search {
+      margin-left: 0;
+      width: 100%;
+      justify-content: flex-start;
+    }
+    .cyber-blogs-search input {
+      width: 100%;
+      min-width: 0;
+      font-size: 16px;
+      padding: 14px 14px 14px 44px;
     }
   }
 
@@ -408,7 +437,10 @@ export function mountCyberLatestInsights(target: HTMLElement, configArg?: any) {
         sidebar.className = 'cyber-blogs-sidebar';
         const sidebarTitle = document.createElement('div');
         sidebarTitle.className = 'cyber-blogs-sidebar-title';
-        sidebarTitle.textContent = 'COVERAGE';
+        // Add COVERAGE text and SVG icon
+        sidebarTitle.innerHTML = `COVERAGE<span class="cyber-blogs-sidebar-icon" style="vertical-align: middle; display: inline-block; margin-left: 10px; cursor: pointer;">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19.9201 8.94995L13.4001 15.47C12.6301 16.24 11.3701 16.24 10.6001 15.47L4.08008 8.94995" stroke="#242826" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</span>`;
         sidebar.appendChild(sidebarTitle);
         const sidebarList = document.createElement('ul');
         sidebarList.className = 'cyber-blogs-sidebar-list';

@@ -176,7 +176,7 @@ function injectStyles() {
     padding: 24px 8vw;
   }
 }
-@media (max-width: 600px) {
+@media (max-width: 670px) {
 
   .who-needs-cyber-right {
     padding: 16px 2vw;

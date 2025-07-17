@@ -60,7 +60,7 @@ function injectStyles() {
   font-weight: 900;
   margin-bottom: 2.5rem;
   color: #242826;
-  line-height: 40px;
+  line-height: 25px;
 }
 .who-needs-cyber-desc {
   font-size: 1.5rem;
@@ -186,6 +186,7 @@ function injectStyles() {
   }
   .who-needs-cyber-title {
     font-size: 1.3rem;
+    line-height: 30px;
   }
   .who-needs-cyber-tab {
     font-size: 16px;

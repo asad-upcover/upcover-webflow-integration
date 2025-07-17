@@ -130,6 +130,22 @@ function injectStyles() {
     background: #F8F7F7;
     padding: 20px 100px;
   }
+
+  @media (min-width: 1281px) {
+    .cyber-blogs-main {
+      padding: 70px 166px 150px 166px !important;
+    }
+
+    .cyber-blogs-header {
+      padding: 20px 164px;
+    }
+
+    .cyber-blogs-search input {
+      width: auto !important;
+    }
+
+  }
+
   .cyber-blogs-tabs {
     display: flex;
     gap: 14px;

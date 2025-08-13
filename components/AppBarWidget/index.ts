@@ -72,6 +72,126 @@ export class AppBarWidget {
           font-size: 0.9rem;
           padding: 0 60px;
         }
+
+        /* Responsive breakpoints to prevent overflow */
+        @media screen and (max-width: 1200px) {
+          #appbar {
+            padding: 0 40px;
+          }
+        }
+
+        @media screen and (max-width: 1024px) {
+          #appbar {
+            padding: 0 30px;
+          }
+          
+          .tabs button {
+            padding: 20px 15px;
+            font-size: 0.9rem;
+          }
+          
+          .contact {
+            font-size: 14px;
+          }
+          
+          .contact-phone-container {
+            padding: 8px 12px;
+            font-size: 14px;
+            margin-left: 15px;
+          }
+        }
+
+        @media screen and (max-width: 768px) {
+          #appbar {
+            padding: 0 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+          }
+          
+          .tabs {
+            order: 2;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+          }
+          
+          .tabs button {
+            padding: 15px 10px;
+            font-size: 0.85rem;
+            min-width: auto;
+            flex: 1;
+            text-align: center;
+          }
+          
+          .contact {
+            order: 1;
+            width: 100%;
+            justify-content: center;
+            font-size: 13px;
+          }
+          
+          .contact-phone-container {
+            margin-left: 10px;
+            padding: 6px 10px;
+            font-size: 13px;
+          }
+          
+          .contact-region-switcher {
+            font-size: 13px;
+          }
+        }
+
+        @media screen and (max-width: 480px) {
+          #appbar {
+            padding: 10px 10px;
+          }
+          
+          .tabs button {
+            padding: 5px !important;
+            font-size: 0.8rem;
+          }
+          
+          .contact {
+            font-size: 12px;
+          }
+          
+          .contact-phone-container {
+            padding: 5px 8px;
+            font-size: 12px;
+            margin-left: 8px;
+          }
+          
+          .contact-region-switcher {
+            font-size: 12px;
+          }
+        }
+
+        @media screen and (max-width: 360px) {
+          #appbar {
+            padding: 0 10px;
+          }
+          
+          .tabs button {
+            padding: 10px 6px;
+            font-size: 0.75rem;
+          }
+          
+          .contact {
+            font-size: 11px;
+          }
+          
+          .contact-phone-container {
+            padding: 4px 6px;
+            font-size: 11px;
+            margin-left: 6px;
+          }
+          
+          .contact-region-switcher {
+            font-size: 11px;
+          }
+        }
+
         .tabs button {
           background: none;
           border: none;

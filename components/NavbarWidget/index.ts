@@ -1031,7 +1031,7 @@ export class NavbarWidget {
        
        .mobile-menu-items .dropdown-box-container {
          margin-top: 20px;
-         padding: 20px;
+        //  padding: 20px;
          background-color: #f8f9fa;
          border-radius: 8px;
        }
@@ -1043,6 +1043,7 @@ export class NavbarWidget {
          border-radius: 8px;
          margin-bottom: 15px;
          border: 1px solid #e9ecef;
+         width: auto;
        }
        
        .mobile-menu-items .box-first-div img {

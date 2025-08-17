@@ -478,7 +478,38 @@ export class NavbarWidget {
 
       @media (max-width: 900px) {
         #navbar {
+          // display: none !important;
+          position: relative;
+        }
+        
+        /* Show mobile menu toggle */
+        .mobile-menu-toggle {
+          display: flex !important;
+        }
+        
+        /* Hide desktop menu on mobile */
+        #menu-items {
           display: none !important;
+        }
+        
+        /* Hide login and quote buttons on mobile */
+        .login,
+        .quote {
+          display: none !important;
+        }
+        
+        /* Adjust navbar for mobile */
+        #navbar {
+          padding: 0 20px;
+          max-height: 60px;
+        }
+        
+        .navbar-left {
+          max-height: 60px;
+        }
+        
+        #upcover-logo {
+          width: 120px;
         }
       }
 
@@ -828,6 +859,297 @@ export class NavbarWidget {
       .box-button.no-hover-effect:hover {
         border-radius: 0 !important;
       }
+
+      /* Mobile menu styles */
+      .mobile-menu-toggle {
+        display: none; /* Hidden by default */
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 8px;
+        box-sizing: border-box;
+        color: #242826;
+        transition: color 0.2s ease;
+      }
+
+      .mobile-menu-toggle:hover {
+        color: #666;
+      }
+
+      .mobile-menu-toggle svg {
+        width: 24px;
+        height: 24px;
+        transition: transform 0.3s ease;
+      }
+
+      .mobile-menu-toggle.open svg {
+        transform: rotate(90deg);
+      }
+
+      /* Mobile menu overlay and content */
+      .mobile-menu-overlay {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: #FFFFFF;
+        z-index: 1001;
+        display: none;
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        min-height: 100vh;
+      }
+      
+      .mobile-menu-overlay.active {
+        display: block;
+        opacity: 1;
+        transform: translateY(0);
+        background-color: #FFFFFF;
+      }
+      
+      .mobile-menu-content {
+        width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        background-color: #FFFFFF;
+        min-height: 100vh;
+      }
+       
+       .mobile-menu-items {
+         flex-grow: 1;
+       }
+       
+      .mobile-menu-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 0;
+        border-bottom: 1px solid #F0F0F0;
+        position: relative;
+      }
+      
+      .mobile-menu-item:last-child {
+        border-bottom: none;
+      }
+      
+      .mobile-menu-item.active {
+        border-bottom: none;
+      }
+      
+      .mobile-menu-item.active + .dropdown-menu {
+        border-top: 1px solid #F0F0F0;
+        margin-top: 0;
+      }
+      
+      .mobile-menu-link {
+        text-decoration: none;
+        color: #242826;
+        font-size: 18px;
+        font-weight: 600;
+        flex-grow: 1;
+      }
+      
+      .mobile-menu-arrow {
+        display: flex;
+        align-items: center;
+        margin-left: 15px;
+      }
+       
+       .mobile-menu-arrow svg {
+         width: 16px;
+         height: 16px;
+         color: #FF6B6B;
+       }
+       
+       /* Mobile dropdown styles */
+       .mobile-menu-items .dropdown-menu.three-column {
+         display: none;
+         width: 100%;
+         background-color: #f8f9fa;
+         border-radius: 8px;
+         margin: 10px 0;
+         padding: 20px;
+         box-sizing: border-box;
+         animation: slideDown 0.3s ease-out;
+       }
+       
+       @keyframes slideDown {
+         from {
+           opacity: 0;
+           transform: translateY(-10px);
+         }
+         to {
+           opacity: 1;
+           transform: translateY(0);
+         }
+       }
+       
+       .mobile-menu-items .dropdown-menu.three-column.active {
+         display: block;
+         margin-top: 0;
+       }
+       
+       /* Ensure main menu items are properly hidden when dropdown is active */
+       .mobile-menu-item.active {
+         display: none !important;
+       }
+       
+       .mobile-menu-items .dropdown-column {
+         margin-bottom: 20px;
+       }
+       
+       .mobile-menu-items .dropdown-column h4 {
+         font-size: 16px;
+         font-weight: 700;
+         margin-bottom: 15px;
+         color: #242826;
+       }
+       
+       .mobile-menu-items .dropdown-column ul {
+         list-style: none;
+         padding: 0;
+         margin: 0;
+       }
+       
+       .mobile-menu-items .dropdown-column ul li {
+         margin-bottom: 12px;
+         font-size: 14px;
+         color: #555;
+         cursor: pointer;
+         transition: color 0.3s;
+       }
+       
+       .mobile-menu-items .dropdown-column ul li:hover {
+         color: #FF6B6B;
+         text-decoration: underline;
+         text-underline-offset: 4px;
+       }
+       
+       .mobile-menu-items .dropdown-box-container {
+         margin-top: 20px;
+         padding: 20px;
+         background-color: #f8f9fa;
+         border-radius: 8px;
+       }
+       
+       .mobile-menu-items .box-first-div,
+       .mobile-menu-items .box-second-div {
+         background: #FFFFFF;
+         padding: 15px;
+         border-radius: 8px;
+         margin-bottom: 15px;
+         border: 1px solid #e9ecef;
+       }
+       
+       .mobile-menu-items .box-first-div img {
+         width: 100%;
+         height: 120px;
+         object-fit: cover;
+         border-radius: 6px;
+         margin-bottom: 15px;
+       }
+       
+       .mobile-menu-items .box-first-div h3,
+       .mobile-menu-items .box-second-div h3 {
+         font-size: 18px;
+         font-weight: 700;
+         margin-bottom: 10px;
+         color: #242826;
+       }
+       
+       .mobile-menu-items .box-first-div p,
+       .mobile-menu-items .box-second-div p {
+         font-size: 14px;
+         line-height: 1.5;
+         color: #555;
+         margin-bottom: 15px;
+       }
+       
+       .mobile-menu-items .button-container {
+         display: flex;
+         flex-direction: column;
+         gap: 10px;
+       }
+       
+       .mobile-menu-items .box-button {
+         padding: 12px 16px;
+         border-radius: 6px;
+         font-size: 14px;
+         font-weight: 600;
+         text-decoration: none;
+         text-align: center;
+         transition: all 0.2s ease;
+       }
+       
+       /* Back navigation header styles */
+       .mobile-back-header {
+         display: flex;
+         align-items: center;
+         padding: 15px 0;
+         border-bottom: 1px solid #E0E0E0;
+         margin-bottom: 20px;
+         cursor: pointer;
+       }
+       
+       .mobile-back-arrow {
+         margin-right: 10px;
+         display: flex;
+         align-items: center;
+       }
+       
+       .mobile-back-arrow svg {
+         width: 20px;
+         height: 20px;
+         color: #000000;
+       }
+       
+       .mobile-back-text {
+         font-size: 18px;
+         font-weight: 600;
+         color: #242826;
+       }
+
+      @media screen and (max-width: 480px) {
+        #navbar {
+          padding: 0 15px;
+        }
+        
+        #upcover-logo {
+          width: 100px;
+        }
+        
+        .mobile-menu-content {
+          padding: 15px;
+          padding-top: 20px;
+        }
+        
+        .mobile-menu-item {
+          padding: 15px 0;
+        }
+        
+        .mobile-menu-link {
+          font-size: 16px;
+        }
+      }
+
+      @media screen and (max-width: 360px) {
+        #navbar {
+          padding: 0 10px;
+        }
+        
+        #upcover-logo {
+          width: 90px;
+        }
+        
+        .mobile-menu-content {
+          padding: 10px;
+          padding-top: 20px;
+        }
+      }
     `;
     document.head.appendChild(style);
   }
@@ -843,6 +1165,21 @@ export class NavbarWidget {
   private createActions(): HTMLElement {
     const actionsDiv = document.createElement("div");
     actionsDiv.className = "actions";
+
+    // Add mobile hamburger menu button
+    const mobileMenuButton = document.createElement("button");
+    mobileMenuButton.className = "mobile-menu-toggle";
+    mobileMenuButton.innerHTML = `
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+           role="img" aria-label="Menu">
+        <title>Menu</title>
+        <path d="M3 6.5h18M3 12h18M3 17.5h18"/>
+      </svg>
+    `;
+    mobileMenuButton.addEventListener("click", () => {
+      this.toggleMobileMenu();
+    });
 
     const loginLink = document.createElement("a");
     loginLink.href = "#";
@@ -913,10 +1250,452 @@ export class NavbarWidget {
       }
     });
 
+    actionsDiv.appendChild(mobileMenuButton);
     actionsDiv.appendChild(loginLink);
     actionsDiv.appendChild(quoteButton);
 
     return actionsDiv;
+  }
+
+  private toggleMobileMenu(): void {
+    const mobileMenu = document.querySelector('.mobile-menu-overlay');
+    const mobileMenuButton = document.querySelector('.mobile-menu-toggle');
+    
+    if (mobileMenu) {
+      if (mobileMenu.classList.contains('active')) {
+        mobileMenu.classList.remove('active');
+        mobileMenuButton?.classList.remove('open');
+        // Switch back to hamburger icon
+        if (mobileMenuButton) {
+          mobileMenuButton.innerHTML = `
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                 role="img" aria-label="Menu">
+              <title>Menu</title>
+              <path d="M3 6.5h18M3 12h18M3 17.5h18"/>
+            </svg>
+          `;
+        }
+      } else {
+        mobileMenu.classList.add('active');
+        mobileMenuButton?.classList.add('open');
+        // Switch to close icon
+        if (mobileMenuButton) {
+          mobileMenuButton.innerHTML = `
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                 role="img" aria-label="Close">
+              <title>Close</title>
+              <path d="M6 6l12 12M6 18L18 6"/>
+            </svg>
+          `;
+        }
+        
+        // Add click outside listener
+        setTimeout(() => {
+          const handleClickOutside = (event: Event) => {
+            const target = event.target as HTMLElement;
+            
+            // Check if clicking on dropdown content or mobile menu items
+            const isClickingDropdown = target.closest('.dropdown-menu');
+            const isClickingMobileMenu = target.closest('.mobile-menu-overlay');
+            const isClickingHamburger = mobileMenuButton?.contains(target);
+            
+            // Only close if clicking completely outside the mobile menu system
+            if (!isClickingMobileMenu && !isClickingHamburger) {
+              this.closeMobileMenu();
+              document.removeEventListener('click', handleClickOutside);
+            }
+          };
+          document.addEventListener('click', handleClickOutside);
+        }, 100);
+      }
+    }
+  }
+
+  private closeMobileMenu(): void {
+    const mobileMenu = document.querySelector('.mobile-menu-overlay');
+    const mobileMenuButton = document.querySelector('.mobile-menu-toggle');
+    
+    if (mobileMenu) {
+      mobileMenu.classList.remove('active');
+      mobileMenuButton?.classList.remove('open');
+      // Switch back to hamburger icon
+      if (mobileMenuButton) {
+        mobileMenuButton.innerHTML = `
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+               role="img" aria-label="Menu">
+            <title>Menu</title>
+            <path d="M3 6.5h18M3 12h18M3 17.5h18"/>
+          </svg>
+        `;
+      }
+    }
+  }
+
+  private createMobileMenu(): HTMLElement {
+    const mobileMenu = document.createElement("div");
+    mobileMenu.className = "mobile-menu-overlay";
+    
+    const mobileMenuContent = document.createElement("div");
+    mobileMenuContent.className = "mobile-menu-content";
+    
+    // Mobile menu items only (no close button needed)
+    const mobileMenuItems = document.createElement("div");
+    mobileMenuItems.className = "mobile-menu-items";
+    
+    // Get current theme and create mobile menu items
+    const currentTheme = this.themeManager.getCurrentTheme();
+    const menuItems = this.getMenuItemsForTheme(currentTheme);
+    
+    menuItems.forEach(item => {
+      const mobileMenuItem = document.createElement("div");
+      mobileMenuItem.className = "mobile-menu-item";
+      
+      const link = document.createElement("a");
+      link.href = item.href;
+      link.textContent = item.label;
+      link.className = "mobile-menu-link";
+      
+      // Add arrow icon
+      const arrowIcon = document.createElement("span");
+      arrowIcon.className = "mobile-menu-arrow";
+      arrowIcon.innerHTML = `
+        <svg data-v-0c3b2dd6="" xmlns="http://www.w3.org/2000/svg" viewBox="-0.75 -0.75 24 24" fill="currentColor" class="inline-block align-baseline w-4 h-4 text-pink-500" svg="arrow-right" scale="">
+          <path d="M5.156.703l10.05 10.05a.702.702 0 010 .994l-10.05 10.05" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+        </svg>
+      `;
+      arrowIcon.style.color = "#FF6B6B";
+      
+      // Add click handler to arrow for dropdown
+      if (item.dropdown || item.boxComponent) {
+        arrowIcon.style.cursor = "pointer";
+        arrowIcon.addEventListener("click", (e) => {
+          e.preventDefault();
+          this.toggleMobileDropdown(mobileMenuItem, item);
+        });
+      }
+      
+      mobileMenuItem.appendChild(link);
+      mobileMenuItem.appendChild(arrowIcon);
+      mobileMenuItems.appendChild(mobileMenuItem);
+      
+      // Add dropdown content if item has dropdown or boxComponent
+      if (item.dropdown || item.boxComponent) {
+        const mobileDropdown = this.createMobileDropdown(item);
+        mobileMenuItems.appendChild(mobileDropdown);
+      }
+    });
+    
+    mobileMenuContent.appendChild(mobileMenuItems);
+    mobileMenu.appendChild(mobileMenuContent);
+    
+    return mobileMenu;
+  }
+
+  private createMobileDropdown(item: MenuItem): HTMLElement {
+    const dropdownMenu = document.createElement('div');
+    dropdownMenu.className = 'dropdown-menu three-column';
+
+    // Add dropdown columns if they exist
+    if (item.dropdown) {
+      item.dropdown.forEach(section => {
+        const column = document.createElement('div');
+        column.className = 'dropdown-column';
+
+        const title = document.createElement('h4');
+        title.textContent = section.title;
+
+        const list = document.createElement('ul');
+        section.items.forEach(listItem => {
+          const li = document.createElement('li');
+          li.textContent = listItem;
+          if (listItem.toLowerCase().includes('view all')) {
+            li.style.cssText = `
+              color: ${this.themeManager.getCurrentColor()};
+              text-decoration: underline;
+              font-weight: 700;
+              text-underline-offset: 4px;
+            `;
+          }
+          // Add theme-aware hover event listeners
+          li.addEventListener('mouseenter', () => {
+            const currentTheme = this.themeManager.getCurrentTheme();
+            const hoverColor = currentTheme === 'motor' ? '#3B4125' : this.themeManager.getCurrentColor();
+            li.style.color = hoverColor;
+            li.style.textDecoration = 'underline';
+            li.style.textUnderlineOffset = '4px';
+          });
+          li.addEventListener('mouseleave', () => {
+            if (listItem.toLowerCase().includes('view all')) {
+              li.style.color = this.themeManager.getCurrentColor();
+            } else {
+              li.style.color = '#555';
+            }
+            li.style.textDecoration = 'none';
+          });
+          list.appendChild(li);
+        });
+
+        column.appendChild(title);
+        column.appendChild(list);
+        dropdownMenu.appendChild(column);
+      });
+    }
+
+    // Add box component if it exists
+    if (item.boxComponent) {
+      const boxContainer = document.createElement('div');
+      boxContainer.className = 'dropdown-box-container';
+
+      // First Div
+      const firstDiv = document.createElement('div');
+      firstDiv.className = 'box-first-div';
+
+      const image = document.createElement('img');
+      image.src = item.boxComponent.firstDiv.image;
+      image.alt = item.boxComponent.firstDiv.heading;
+
+      const heading1 = document.createElement('h3');
+      heading1.textContent = item.boxComponent.firstDiv.heading;
+
+      const paragraph1 = document.createElement('p');
+      paragraph1.innerHTML = item.boxComponent.firstDiv.paragraph;
+
+      const buttonContainer1 = document.createElement('div');
+      buttonContainer1.className = 'button-container';
+      item.boxComponent.firstDiv.buttons.forEach((button, index) => {
+        const btn = document.createElement('a');
+        btn.href = button.href;
+        btn.className = 'box-button';
+        // Add no-hover-effect class for call buttons or pure phone numbers
+        const label = button.label ? button.label.trim() : '';
+        const isCall = label.toUpperCase().startsWith('CALL ');
+        const isPhoneNumber = /^\+?\d[\d\s-]*\d$/.test(label.replace(/[^\d\s\+\-]/g, '')) && label.replace(/[^\d]/g, '').length >= 6;
+        if (isCall || isPhoneNumber) {
+          btn.classList.add('no-hover-effect');
+        }
+        // Insert arrow and text spans for animation
+        btn.innerHTML = `
+          <span class="box-btn-inner">
+            <span class="box-btn-arrow" aria-hidden="true" style="display:flex;">${arrowIcon}</span>
+            <span class="box-btn-text">${button.label}</span>
+          </span>
+        `;
+        // Apply different background color for second button based on theme
+        const currentTheme = this.themeManager.getCurrentTheme();
+        if (index === 1) {
+          const themeColor = this.themeManager.getCurrentColor();
+          if (currentTheme === 'business') {
+            btn.style.cssText = `
+              background-color: #FFCFC5;
+              color: ${themeColor};
+            `;
+            btn.classList.remove('motor-theme');
+            btn.classList.add('secondary-btn');
+            btn.style.setProperty('--secondary-btn-hover-bg', themeColor);
+            btn.style.setProperty('--secondary-btn-hover-color', '#fff');
+          } else if (currentTheme === 'motor') {
+            btn.style.cssText = `
+              background-color: #F8FFAF;
+              color: #000000;
+            `;
+            btn.classList.add('motor-theme');
+            btn.classList.add('secondary-btn');
+            btn.style.setProperty('--secondary-btn-hover-bg', themeColor);
+            btn.style.setProperty('--secondary-btn-hover-color', '#3B4125');
+          } else {
+            btn.classList.remove('motor-theme');
+            btn.classList.add('secondary-btn');
+            btn.style.cssText = `
+              background-color: #EAF2FF;
+              color: ${themeColor};
+            `;
+            btn.style.setProperty('--secondary-btn-hover-bg', themeColor);
+            btn.style.setProperty('--secondary-btn-hover-color', '#fff');
+          }
+        } else {
+          btn.style.cssText = `
+            background-color: ${this.themeManager.getCurrentColor()};
+            color: ${currentTheme === 'motor' ? '#000000' : 'white'};
+          `;
+          if (currentTheme === 'motor') {
+            btn.classList.add('motor-theme');
+          } else {
+            btn.classList.remove('motor-theme');
+          }
+          btn.classList.remove('secondary-btn');
+          btn.style.removeProperty('--secondary-btn-hover-bg');
+          btn.style.removeProperty('--secondary-btn-hover-color');
+        }
+        buttonContainer1.appendChild(btn);
+      });
+
+      // After all buttons are appended to buttonContainer1
+      if (buttonContainer1.childElementCount === 2) {
+        buttonContainer1.classList.add('multi-btn-row');
+        Array.from(buttonContainer1.children).forEach(btn => btn.classList.add('multi-btn'));
+      }
+
+      firstDiv.appendChild(image);
+      firstDiv.appendChild(heading1);
+      firstDiv.appendChild(paragraph1);
+      firstDiv.appendChild(buttonContainer1);
+
+      boxContainer.appendChild(firstDiv);
+
+      // Second Div (only if it exists)
+      if (item.boxComponent.secondDiv) {
+        const secondDiv = document.createElement('div');
+        secondDiv.className = 'box-second-div';
+
+        const heading2 = document.createElement('h3');
+        heading2.textContent = item.boxComponent.secondDiv.heading;
+
+        const paragraph2 = document.createElement('p');
+        paragraph2.innerHTML = item.boxComponent.secondDiv.paragraph;
+
+        const button2 = document.createElement('a');
+        button2.href = item.boxComponent.secondDiv.button.href;
+        button2.className = 'box-button';
+        button2.innerHTML = `
+          <span class="box-btn-inner">
+            <span class="box-btn-arrow" aria-hidden="true" style="display:flex;">${arrowIcon}</span>
+            <span class="box-btn-text">${item.boxComponent.secondDiv.button.label}</span>
+          </span>
+        `;
+        const currentTheme = this.themeManager.getCurrentTheme();
+        button2.style.cssText = `
+          background-color: ${this.themeManager.getCurrentColor()};
+          color: ${currentTheme === 'motor' ? '#000000' : 'white'};
+        `;
+        if (currentTheme === 'motor') {
+          button2.classList.add('motor-theme');
+        } else {
+          button2.classList.remove('motor-theme');
+        }
+
+        secondDiv.appendChild(heading2);
+        secondDiv.appendChild(paragraph2);
+        secondDiv.appendChild(button2);
+
+        boxContainer.appendChild(secondDiv);
+      }
+
+      dropdownMenu.appendChild(boxContainer);
+    }
+
+    return dropdownMenu;
+  }
+
+  private toggleMobileDropdown(mobileMenuItem: HTMLElement, item: MenuItem): void {
+    // Prevent event bubbling to avoid closing mobile menu
+    event?.stopPropagation();
+    
+    const dropdownMenu = mobileMenuItem.nextElementSibling;
+    if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
+      // Close all other dropdowns first (accordion behavior)
+      const allDropdowns = document.querySelectorAll('.mobile-menu-items .dropdown-menu');
+      const allMenuItems = document.querySelectorAll('.mobile-menu-items .mobile-menu-item');
+      
+      allDropdowns.forEach(dropdown => {
+        if (dropdown !== dropdownMenu) {
+          dropdown.classList.remove('active');
+        }
+      });
+      
+      allMenuItems.forEach(menuItem => {
+        if (menuItem !== mobileMenuItem) {
+          menuItem.classList.remove('active');
+          // Hide other menu items when one is expanded
+          (menuItem as HTMLElement).style.display = 'none';
+          const arrowElement = menuItem.querySelector('.mobile-menu-arrow');
+          if (arrowElement) {
+            arrowElement.classList.remove('open');
+            arrowElement.innerHTML = `
+              <svg data-v-0c3b2dd6="" xmlns="http://www.w3.org/2000/svg" viewBox="-0.75 -0.75 24 24" fill="currentColor" class="inline-block align-baseline w-4 h-4 text-pink-500" svg="arrow-right" scale="">
+                <path d="M5.156.703l10.05 10.05a.702.702 0 010 .994l-10.05 10.05" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+              </svg>
+            `;
+          }
+        }
+      });
+      
+      if (dropdownMenu.classList.contains('active')) {
+        // Closing dropdown - show all menu items again
+        dropdownMenu.classList.remove('active');
+        mobileMenuItem.classList.remove('active');
+        allMenuItems.forEach(menuItem => {
+          (menuItem as HTMLElement).style.display = 'flex';
+        });
+        
+        // Remove back header when closing dropdown
+        const existingBackHeader = document.querySelector('.mobile-back-header');
+        if (existingBackHeader) {
+          existingBackHeader.remove();
+        }
+        
+        const arrowElement = mobileMenuItem.querySelector('.mobile-menu-arrow');
+        if (arrowElement) {
+          arrowElement.classList.remove('open');
+          arrowElement.innerHTML = `
+            <svg data-v-0c3b2dd6="" xmlns="http://www.w3.org/2000/svg" viewBox="-0.75 -0.75 24 24" fill="currentColor" class="inline-block align-baseline w-4 h-4 text-pink-500" svg="arrow-right" scale="">
+              <path d="M5.156.703l10.05 10.05a.702.702 0 010 .994l-10.05 10.05" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+            </svg>
+          `;
+        }
+      } else {
+        // Opening dropdown - hide other menu items and show back navigation
+        dropdownMenu.classList.add('active');
+        mobileMenuItem.classList.add('active');
+        
+        // Hide the main menu item when dropdown is expanded
+        mobileMenuItem.style.display = 'none';
+        
+        // Add back navigation header
+        const backHeader = document.createElement("div");
+        backHeader.className = "mobile-back-header";
+        backHeader.innerHTML = `
+          <span class="mobile-back-arrow">
+            <svg data-v-0c3b2dd6="" xmlns="http://www.w3.org/2000/svg" viewBox="-0.75 -0.75 24 24" fill="currentColor" class="inline-block align-baseline w-4 h-4 text-black" svg="arrow-left" scale="">
+              <path d="M15.234 21.797l-10.05-10.05a.702.702 0 010-.994L15.234.703" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+            </svg>
+          </span>
+          <span class="mobile-back-text">${item.label}</span>
+        `;
+        
+        // Insert back header at the beginning of mobile menu content
+        const mobileMenuContent = document.querySelector('.mobile-menu-content');
+        if (mobileMenuContent) {
+          // Remove existing back header if any
+          const existingBackHeader = mobileMenuContent.querySelector('.mobile-back-header');
+          if (existingBackHeader) {
+            existingBackHeader.remove();
+          }
+          mobileMenuContent.insertBefore(backHeader, mobileMenuContent.firstChild);
+          
+          // Add click handler for back navigation
+          const backArrow = backHeader.querySelector('.mobile-back-arrow');
+          if (backArrow) {
+            backArrow.addEventListener('click', () => {
+              this.toggleMobileDropdown(mobileMenuItem, item);
+            });
+          }
+        }
+        
+        const arrowElement = mobileMenuItem.querySelector('.mobile-menu-arrow');
+        if (arrowElement) {
+          arrowElement.classList.add('open');
+          arrowElement.innerHTML = `
+            <svg data-v-0c3b2dd6="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Close">
+              <title>Close</title>
+              <path d="M6 6l12 12M6 18L18 6"/>
+            </svg>
+          `;
+        }
+      }
+    }
   }
 
   public render(): void {
@@ -1185,11 +1964,19 @@ export class NavbarWidget {
     leftNavbar.appendChild(menuComponent);
     this.target.appendChild(leftNavbar);
     this.target.appendChild(this.createActions());
+    
+    // Add mobile menu to the navbar (below it) - only if it doesn't exist
+    if (!this.target.querySelector('.mobile-menu-overlay')) {
+      const mobileMenu = this.createMobileMenu();
+      this.target.appendChild(mobileMenu);
+    }
   }
 
   public updateConfig(newConfig: Partial<NavbarConfig>): void {
     this.config = { ...this.config, ...newConfig };
-    this.render();
+    // Don't call render() to avoid recreating mobile menu
+    // Instead, just update the logo if needed
+    this.updateLogo(this.themeManager.getCurrentTheme());
   }
 
   public mount(container: HTMLElement): void {

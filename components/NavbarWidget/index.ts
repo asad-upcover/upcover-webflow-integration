@@ -556,10 +556,6 @@ export class NavbarWidget {
   color: inherit;
 }
 
-.mobile-locale-sep {
-  opacity: 0.4;
-}
-
 .mobile-locale-au {
   font-weight: 900; /* default active */
 }

@@ -500,7 +500,7 @@ export class NavbarWidget {
         
         /* Adjust navbar for mobile */
         #navbar {
-          padding: 0 20px;
+          padding: 1rem;
           max-height: 60px;
         }
         
@@ -866,7 +866,7 @@ export class NavbarWidget {
         background: transparent;
         border: none;
         cursor: pointer;
-        padding: 8px;
+        // padding: 8px;
         box-sizing: border-box;
         color: #242826;
         transition: color 0.2s ease;
@@ -1103,8 +1103,8 @@ export class NavbarWidget {
        }
        
        .mobile-back-arrow svg {
-         width: 20px;
-         height: 20px;
+         width: 1rem;
+         height: 1rem;
          color: #000000;
        }
        
@@ -1113,15 +1113,13 @@ export class NavbarWidget {
          font-weight: 600;
          color: #242826;
        }
+         
 
       @media screen and (max-width: 480px) {
         #navbar {
-          padding: 0 15px;
+          padding: 1rem;
         }
         
-        #upcover-logo {
-          width: 100px;
-        }
         
         .mobile-menu-content {
           padding: 15px;

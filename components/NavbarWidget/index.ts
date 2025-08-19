@@ -539,8 +539,8 @@ export class NavbarWidget {
 }
 
 .mobile-quick-call svg {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
 }
 
 .mobile-locale-switch {
@@ -1321,7 +1321,7 @@ export class NavbarWidget {
   private toggleMobileMenu(): void {
     const mobileMenu = document.querySelector('.mobile-menu-overlay');
     const mobileMenuButton = document.querySelector('.mobile-menu-toggle');
-    
+
     if (mobileMenu) {
       if (mobileMenu.classList.contains('active')) {
         mobileMenu.classList.remove('active');
@@ -1351,17 +1351,17 @@ export class NavbarWidget {
             </svg>
           `;
         }
-        
+
         // Add click outside listener
         setTimeout(() => {
           const handleClickOutside = (event: Event) => {
             const target = event.target as HTMLElement;
-            
+
             // Check if clicking on dropdown content or mobile menu items
             const isClickingDropdown = target.closest('.dropdown-menu');
             const isClickingMobileMenu = target.closest('.mobile-menu-overlay');
             const isClickingHamburger = mobileMenuButton?.contains(target);
-            
+
             // Only close if clicking completely outside the mobile menu system
             if (!isClickingMobileMenu && !isClickingHamburger) {
               this.closeMobileMenu();
@@ -1377,7 +1377,7 @@ export class NavbarWidget {
   private closeMobileMenu(): void {
     const mobileMenu = document.querySelector('.mobile-menu-overlay');
     const mobileMenuButton = document.querySelector('.mobile-menu-toggle');
-    
+
     if (mobileMenu) {
       mobileMenu.classList.remove('active');
       mobileMenuButton?.classList.remove('open');
@@ -1398,27 +1398,27 @@ export class NavbarWidget {
   private createMobileMenu(): HTMLElement {
     const mobileMenu = document.createElement("div");
     mobileMenu.className = "mobile-menu-overlay";
-    
+
     const mobileMenuContent = document.createElement("div");
     mobileMenuContent.className = "mobile-menu-content";
-    
+
     // Mobile menu items only (no close button needed)
     const mobileMenuItems = document.createElement("div");
     mobileMenuItems.className = "mobile-menu-items";
-    
+
     // Get current theme and create mobile menu items
     const currentTheme = this.themeManager.getCurrentTheme();
     const menuItems = this.getMenuItemsForTheme(currentTheme);
-    
+
     menuItems.forEach(item => {
       const mobileMenuItem = document.createElement("div");
       mobileMenuItem.className = "mobile-menu-item";
-      
+
       const link = document.createElement("a");
       link.href = item.href;
       link.textContent = item.label;
       link.className = "mobile-menu-link";
-      
+
       // Add arrow icon
       const arrowIconWrap = document.createElement("span");
       arrowIconWrap.className = "mobile-menu-arrow";
@@ -1428,7 +1428,7 @@ export class NavbarWidget {
         </svg>
       `;
       (arrowIconWrap as HTMLElement).style.color = "#FF6B6B";
-      
+
       // Add click handler to arrow for dropdown
       if (item.dropdown || item.boxComponent) {
         arrowIconWrap.style.cursor = "pointer";
@@ -1437,80 +1437,74 @@ export class NavbarWidget {
           this.toggleMobileDropdown(mobileMenuItem, item);
         });
       }
-      
+
       mobileMenuItem.appendChild(link);
       mobileMenuItem.appendChild(arrowIconWrap);
       mobileMenuItems.appendChild(mobileMenuItem);
-      
+
       // Add dropdown content if item has dropdown or boxComponent
       if (item.dropdown || item.boxComponent) {
         const mobileDropdown = this.createMobileDropdown(item);
         mobileMenuItems.appendChild(mobileDropdown);
       }
     });
-    
+
     mobileMenuContent.appendChild(mobileMenuItems);
-  
+
     // ---------------------------
     // Quick links under the items
     // ---------------------------
     const quickLinks = document.createElement("div");
     quickLinks.className = "mobile-quick-links";
-  
+
     // 1) Login
     const qlLogin = document.createElement("a");
     qlLogin.href = "#";
     qlLogin.className = "mobile-quick-link";
     qlLogin.textContent = "Login";
     quickLinks.appendChild(qlLogin);
-  
+
     // 2) Get a quote
     const qlQuote = document.createElement("a");
     qlQuote.href = "#";
     qlQuote.className = "mobile-quick-link";
     qlQuote.textContent = "Get a quote";
     quickLinks.appendChild(qlQuote);
-  
+
     // 3) Call button (icon + number)
     const qlCall = document.createElement("a");
     qlCall.href = "tel:1300872683";
     qlCall.className = "mobile-quick-link mobile-quick-call";
     qlCall.innerHTML = `
-      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" width="16" height="16">
-        <path d="M22 16.92v2a2 2 0 0 1-2.18 2
-          19.86 19.86 0 0 1-8.63-3.07
-          19.5 19.5 0 0 1-6-6
-          A19.86 19.86 0 0 1 2.1 4.18
-          2 2 0 0 1 4.11 2h2a2 2 0 0 1 2 1.72
-          c.12.9.33 1.77.62 2.6a2 2 0 0 1-.45 2.11L7.1 9.9a16 16 0 0 0 6 6l1.47-1.17
-          a2 2 0 0 1 2.11-.45c.83.29 1.7.5 2.6.62
-          A2 2 0 0 1 22 16.92z"
-          stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-      </svg>
+<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M18.3082 15.275C18.3082 15.575 18.2415 15.8833 18.0998 16.1833C17.9582 16.4833 17.7748 16.7667 17.5332 17.0333C17.1248 17.4833 16.6748 17.8083 16.1665 18.0167C15.6665 18.225 15.1248 18.3333 14.5415 18.3333C13.6915 18.3333 12.7832 18.1333 11.8248 17.725C10.8665 17.3167 9.90817 16.7667 8.95817 16.075C7.99984 15.375 7.0915 14.6 6.22484 13.7417C5.3665 12.875 4.5915 11.9667 3.89984 11.0167C3.2165 10.0667 2.6665 9.11667 2.2665 8.175C1.8665 7.225 1.6665 6.31667 1.6665 5.45C1.6665 4.88333 1.7665 4.34167 1.9665 3.84167C2.1665 3.33333 2.48317 2.86667 2.92484 2.45C3.45817 1.925 4.0415 1.66667 4.65817 1.66667C4.8915 1.66667 5.12484 1.71667 5.33317 1.81667C5.54984 1.91667 5.7415 2.06667 5.8915 2.28333L7.82484 5.00833C7.97484 5.21667 8.08317 5.40833 8.15817 5.59167C8.23317 5.76667 8.27484 5.94167 8.27484 6.1C8.27484 6.3 8.2165 6.5 8.09984 6.69167C7.9915 6.88333 7.83317 7.08333 7.63317 7.28333L6.99984 7.94167C6.90817 8.03333 6.8665 8.14167 6.8665 8.275C6.8665 8.34167 6.87484 8.4 6.8915 8.46667C6.9165 8.53333 6.9415 8.58333 6.95817 8.63333C7.10817 8.90833 7.3665 9.26667 7.73317 9.7C8.10817 10.1333 8.50817 10.575 8.9415 11.0167C9.3915 11.4583 9.82484 11.8667 10.2665 12.2417C10.6998 12.6083 11.0582 12.8583 11.3415 13.0083C11.3832 13.025 11.4332 13.05 11.4915 13.075C11.5582 13.1 11.6248 13.1083 11.6998 13.1083C11.8415 13.1083 11.9498 13.0583 12.0415 12.9667L12.6748 12.3417C12.8832 12.1333 13.0832 11.975 13.2748 11.875C13.4665 11.7583 13.6582 11.7 13.8665 11.7C14.0248 11.7 14.1915 11.7333 14.3748 11.8083C14.5582 11.8833 14.7498 11.9917 14.9582 12.1333L17.7165 14.0917C17.9332 14.2417 18.0832 14.4167 18.1748 14.625C18.2582 14.8333 18.3082 15.0417 18.3082 15.275Z" stroke="#242826" stroke-width="1.5" stroke-miterlimit="10"></path>
+<path d="M15.4167 7.5C15.4167 7 15.025 6.23333 14.4417 5.60833C13.9083 5.03333 13.2 4.58333 12.5 4.58333" stroke="#242826" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M18.3333 7.5C18.3333 4.275 15.725 1.66667 12.5 1.66667" stroke="#242826" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
       <span>1300 872 683</span>
     `;
     quickLinks.appendChild(qlCall);
-  
+
     // 4) AU | NZ switcher
     const localeWrap = document.createElement("div");
     localeWrap.className = "mobile-locale-switch";
-  
+
     const auLink = document.createElement("a");
     auLink.href = "#";
     auLink.className = "mobile-locale-link mobile-locale-au";
     auLink.textContent = "AU";
     auLink.style.fontWeight = "900"; // default active
-  
+
     const sep = document.createElement("span");
     sep.className = "mobile-locale-sep";
     sep.textContent = " | ";
-  
+
     const nzLink = document.createElement("a");
     nzLink.href = "#";
     nzLink.className = "mobile-locale-link mobile-locale-nz";
     nzLink.textContent = "NZ";
     nzLink.style.fontWeight = "600";
-  
+
     const applyLocaleWeights = (active: "AU" | "NZ") => {
       if (active === "AU") {
         auLink.style.fontWeight = "900";
@@ -1520,31 +1514,31 @@ export class NavbarWidget {
         nzLink.style.fontWeight = "900";
       }
     };
-  
+
     auLink.addEventListener("click", (e) => {
       e.preventDefault();
       applyLocaleWeights("AU");
       // Hook real locale switching here if needed
     });
-  
+
     nzLink.addEventListener("click", (e) => {
       e.preventDefault();
       applyLocaleWeights("NZ");
       // Hook real locale switching here if needed
     });
-  
+
     localeWrap.appendChild(auLink);
     localeWrap.appendChild(sep);
     localeWrap.appendChild(nzLink);
     quickLinks.appendChild(localeWrap);
-  
+
     // Append quick links to the content
     mobileMenuContent.appendChild(quickLinks);
-  
+
     mobileMenu.appendChild(mobileMenuContent);
     return mobileMenu;
   }
-  
+
 
   private createMobileDropdown(item: MenuItem): HTMLElement {
     const dropdownMenu = document.createElement('div');
@@ -1744,19 +1738,19 @@ export class NavbarWidget {
   private toggleMobileDropdown(mobileMenuItem: HTMLElement, item: MenuItem): void {
     // Prevent event bubbling to avoid closing mobile menu
     event?.stopPropagation();
-    
+
     const dropdownMenu = mobileMenuItem.nextElementSibling;
     if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
       // Close all other dropdowns first (accordion behavior)
       const allDropdowns = document.querySelectorAll('.mobile-menu-items .dropdown-menu');
       const allMenuItems = document.querySelectorAll('.mobile-menu-items .mobile-menu-item');
-      
+
       allDropdowns.forEach(dropdown => {
         if (dropdown !== dropdownMenu) {
           dropdown.classList.remove('active');
         }
       });
-      
+
       allMenuItems.forEach(menuItem => {
         if (menuItem !== mobileMenuItem) {
           menuItem.classList.remove('active');
@@ -1773,7 +1767,7 @@ export class NavbarWidget {
           }
         }
       });
-      
+
       if (dropdownMenu.classList.contains('active')) {
         // Closing dropdown - show all menu items again
         dropdownMenu.classList.remove('active');
@@ -1781,13 +1775,13 @@ export class NavbarWidget {
         allMenuItems.forEach(menuItem => {
           (menuItem as HTMLElement).style.display = 'flex';
         });
-        
+
         // Remove back header when closing dropdown
         const existingBackHeader = document.querySelector('.mobile-back-header');
         if (existingBackHeader) {
           existingBackHeader.remove();
         }
-        
+
         const arrowElement = mobileMenuItem.querySelector('.mobile-menu-arrow');
         if (arrowElement) {
           arrowElement.classList.remove('open');
@@ -1801,10 +1795,10 @@ export class NavbarWidget {
         // Opening dropdown - hide other menu items and show back navigation
         dropdownMenu.classList.add('active');
         mobileMenuItem.classList.add('active');
-        
+
         // Hide the main menu item when dropdown is expanded
         mobileMenuItem.style.display = 'none';
-        
+
         // Add back navigation header
         const backHeader = document.createElement("div");
         backHeader.className = "mobile-back-header";
@@ -1816,7 +1810,7 @@ export class NavbarWidget {
           </span>
           <span class="mobile-back-text">${item.label}</span>
         `;
-        
+
         // Insert back header at the beginning of mobile menu content
         const mobileMenuContent = document.querySelector('.mobile-menu-content');
         if (mobileMenuContent) {
@@ -1826,7 +1820,7 @@ export class NavbarWidget {
             existingBackHeader.remove();
           }
           mobileMenuContent.insertBefore(backHeader, mobileMenuContent.firstChild);
-          
+
           // Add click handler for back navigation
           const backArrow = backHeader.querySelector('.mobile-back-arrow');
           if (backArrow) {
@@ -1835,7 +1829,7 @@ export class NavbarWidget {
             });
           }
         }
-        
+
         const arrowElement = mobileMenuItem.querySelector('.mobile-menu-arrow');
         if (arrowElement) {
           arrowElement.classList.add('open');
@@ -2116,7 +2110,7 @@ export class NavbarWidget {
     leftNavbar.appendChild(menuComponent);
     this.target.appendChild(leftNavbar);
     this.target.appendChild(this.createActions());
-    
+
     // Add mobile menu to the navbar (below it) - only if it doesn't exist
     if (!this.target.querySelector('.mobile-menu-overlay')) {
       const mobileMenu = this.createMobileMenu();

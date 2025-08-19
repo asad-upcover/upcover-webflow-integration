@@ -1257,20 +1257,6 @@ export class NavbarWidget {
         }
       }
 
-      @media screen and (max-width: 360px) {
-        #navbar {
-          padding: 0 10px;
-        }
-        
-        #upcover-logo {
-          width: 90px;
-        }
-        
-        .mobile-menu-content {
-          padding: 10px;
-          padding-top: 20px;
-        }
-      }
     `;
     document.head.appendChild(style);
   }

@@ -239,7 +239,7 @@ export class AppBarWidget {
           border-bottom: 1px solid #F0F0F0;
         }
         .mobile-business-item:last-child {
-          // border-bottom: none;
+          border-bottom: none;
         }
 
         @media screen and (max-width: 900px) {

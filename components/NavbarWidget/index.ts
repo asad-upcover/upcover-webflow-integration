@@ -1,4 +1,4 @@
-import { upcoverLogoBusiness, upcoverLogoTech, upcoverLogoMotor, arrowDownIcon, arrowIcon, arrowRightSmallIcon } from "../../assets/svgicons";
+import { upcoverLogoBusiness, upcoverLogoTech, upcoverLogoMotor, arrowDownIcon, arrowIcon, plusIcon } from "../../assets/svgicons";
 import { ThemeManager } from "../../themes/theme";
 
 interface MenuItem {
@@ -520,7 +520,6 @@ export class NavbarWidget {
   display: flex;
   flex-wrap: wrap;  
   gap: 22px;
-  padding: 0 20px;
 }
 
 .mobile-quick-link {
@@ -973,7 +972,7 @@ export class NavbarWidget {
       
       .mobile-menu-content {
         width: 100%;
-        // padding: 20px;
+        padding: 20px;
         box-sizing: border-box;
         display: flex;
         flex-direction: column;
@@ -988,6 +987,7 @@ export class NavbarWidget {
        /* Businesses section (inside navbar mobile overlay) */
        .mobile-business-section {
          background-color: #f8f7f7;
+         margin: 0 -20px;
          padding: 0 20px;
        }
        .mobile-business-toggle {
@@ -1033,7 +1033,7 @@ export class NavbarWidget {
          background: none;
          border: none;
          text-align: left;
-         padding: 14px 10px;
+         padding: 14px 0px;
          color: #242826;
          font-weight: 600;
          font-size: 15px;
@@ -1045,7 +1045,7 @@ export class NavbarWidget {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 20px 20px;
+        padding: 20px 0;
         border-bottom: 1px solid #F0F0F0;
         position: relative;
       }
@@ -1131,6 +1131,7 @@ export class NavbarWidget {
          list-style: none;
          padding: 0;
          margin: 0;
+  border-top: 1px solid #F0F0F0;
        }
        
        .mobile-menu-items .dropdown-column ul li {
@@ -1460,7 +1461,7 @@ export class NavbarWidget {
     bizToggle.className = "mobile-business-toggle";
     bizToggle.innerHTML = `
       <span>Businesses</span>
-      <span class="mb-arrow">${arrowRightSmallIcon}</span>
+      <span class="mb-arrow">${plusIcon}</span>
     `;
 
     const bizDropdown = document.createElement("div");

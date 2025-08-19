@@ -115,5 +115,18 @@ export const arrowRightSmallIcon = `<svg xmlns="http://www.w3.org/2000/svg" view
 export const checkmarkIcon = `<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M15 27.5C21.875 27.5 27.5 21.875 27.5 15C27.5 8.125 21.875 2.5 15 2.5C8.125 2.5 2.5 8.125 2.5 15C2.5 21.875 8.125 27.5 15 27.5Z" stroke="#005DFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M9.6875 15.0004L13.225 18.5379L20.3125 11.4629" stroke="#005DFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-`;
+</svg>`;
+
+export const plusIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+     stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+     role="img" aria-label="Plus">
+  <title>Plus</title>
+  <path d="M12 5v14M5 12h14"/>
+</svg>`;
+
+export const minusIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+     stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+     role="img" aria-label="Minus">
+  <title>Minus</title>
+  <path d="M5 12h14"/>
+</svg>`;

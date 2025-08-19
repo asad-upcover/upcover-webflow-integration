@@ -219,7 +219,7 @@ export class AppBarWidget {
         .mobile-business-dropdown {
           display: none;
           width: 100%;
-          background: #ffffff;
+          // background: #ffffff;
           border-top: 1px solid #E6E6E6;
           padding: 8px 0 0 0;
         }

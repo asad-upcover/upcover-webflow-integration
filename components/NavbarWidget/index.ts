@@ -973,7 +973,7 @@ export class NavbarWidget {
       
       .mobile-menu-content {
         width: 100%;
-        padding: 20px;
+        // padding: 20px;
         box-sizing: border-box;
         display: flex;
         flex-direction: column;
@@ -986,6 +986,10 @@ export class NavbarWidget {
        }
 
        /* Businesses section (inside navbar mobile overlay) */
+       .mobile-business-section {
+         background-color: #f8f7f7;
+         padding: 0 20px;
+       }
        .mobile-business-toggle {
          display: flex;
          width: 100%;
@@ -1010,7 +1014,6 @@ export class NavbarWidget {
        .mobile-business-dropdown {
          display: block;
          width: 100%;
-         background: #ffffff;
          border-top: 1px solid #E6E6E6;
          padding: 0;
          max-height: 0;
@@ -1036,20 +1039,13 @@ export class NavbarWidget {
          font-size: 15px;
          cursor: pointer;
          border-bottom: 1px solid #F0F0F0;
-         margin-left: 10px;
-       }
-       .mobile-business-item.active {
-         background-color: #f8f7f7;
-       }
-       .mobile-business-item:last-child {
-        //  border-bottom: none;
        }
        
       .mobile-menu-item {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 20px 0;
+        padding: 20px 20px;
         border-bottom: 1px solid #F0F0F0;
         position: relative;
       }
@@ -1237,25 +1233,25 @@ export class NavbarWidget {
        }
          
 
-      @media screen and (max-width: 480px) {
-        #navbar {
-          padding: 1rem;
-        }
+      // @media screen and (max-width: 480px) {
+      //   #navbar {
+      //     padding: 1rem;
+      //   }
         
         
-        .mobile-menu-content {
-          padding: 15px;
-          padding-top: 20px;
-        }
+      //   .mobile-menu-content {
+      //     padding: 15px;
+      //     padding-top: 20px;
+      //   }
         
-        .mobile-menu-item {
-          padding: 15px 0;
-        }
+      //   .mobile-menu-item {
+      //     padding: 15px 0;
+      //   }
         
-        .mobile-menu-link {
-          font-size: 16px;
-        }
-      }
+      //   .mobile-menu-link {
+      //     font-size: 16px;
+      //   }
+      // }
 
     `;
     document.head.appendChild(style);

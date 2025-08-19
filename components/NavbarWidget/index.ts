@@ -1,4 +1,4 @@
-import { upcoverLogoBusiness, upcoverLogoTech, upcoverLogoMotor, arrowDownIcon, arrowIcon, plusIcon } from "../../assets/svgicons";
+import { upcoverLogoBusiness, upcoverLogoTech, upcoverLogoMotor, arrowDownIcon, arrowIcon, plusIcon, minusIcon } from "../../assets/svgicons";
 import { ThemeManager } from "../../themes/theme";
 
 interface MenuItem {
@@ -955,18 +955,21 @@ export class NavbarWidget {
         width: 100%;
         background-color: #FFFFFF;
         z-index: 1001;
-        display: none;
+        /* Always in flow for smoother animation */
         opacity: 0;
-        transform: translateY(-20px);
-        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        transform: translateY(-12px);
+        pointer-events: none;
+        max-height: 0;
+        overflow: hidden;
+        transition: opacity 0.25s ease, transform 0.25s ease, max-height 0.35s ease;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        min-height: 100vh;
       }
       
       .mobile-menu-overlay.active {
-        display: block;
         opacity: 1;
         transform: translateY(0);
+        pointer-events: auto;
+        max-height: 100vh;
         background-color: #FFFFFF;
       }
       
@@ -1008,9 +1011,11 @@ export class NavbarWidget {
          height: 1rem;
          transition: transform 0.2s ease;
        }
-       .mobile-business-toggle.open .mb-arrow svg {
-         transform: rotate(90deg);
+       .mb-arrow svg {
+         width: 1rem;
+         height: 1rem;
        }
+
        .mobile-business-dropdown {
          display: block;
          width: 100%;
@@ -1404,9 +1409,10 @@ export class NavbarWidget {
             const isClickingDropdown = target.closest('.dropdown-menu');
             const isClickingMobileMenu = target.closest('.mobile-menu-overlay');
             const isClickingHamburger = mobileMenuButton?.contains(target);
+            const isClickingBizToggle = !!target.closest('.mobile-business-toggle');
 
             // Only close if clicking completely outside the mobile menu system
-            if (!isClickingMobileMenu && !isClickingHamburger) {
+            if (!isClickingMobileMenu && !isClickingHamburger && !isClickingBizToggle) {
               this.closeMobileMenu();
               document.removeEventListener('click', handleClickOutside);
             }
@@ -1443,6 +1449,8 @@ export class NavbarWidget {
       if (bizSection) bizSection.style.display = '';
       bizDropdown?.classList.remove('open');
       bizToggle?.classList.remove('open');
+      const bizArrowWrap = document.querySelector('.mobile-business-toggle .mb-arrow') as HTMLElement | null;
+      if (bizArrowWrap) bizArrowWrap.innerHTML = `${plusIcon}`;
     }
   }
 
@@ -1522,13 +1530,18 @@ export class NavbarWidget {
 
     bizToggle.addEventListener('click', (e) => {
       e.preventDefault();
+      e.stopPropagation();
       const isOpen = bizDropdown.classList.contains('open');
       if (isOpen) {
         bizDropdown.classList.remove('open');
         bizToggle.classList.remove('open');
+        const arrowWrap = bizToggle.querySelector('.mb-arrow') as HTMLElement | null;
+        if (arrowWrap) arrowWrap.innerHTML = `${plusIcon}`;
       } else {
         bizDropdown.classList.add('open');
         bizToggle.classList.add('open');
+        const arrowWrap = bizToggle.querySelector('.mb-arrow') as HTMLElement | null;
+        if (arrowWrap) arrowWrap.innerHTML = `${minusIcon}`;
       }
     });
 
@@ -1919,6 +1932,9 @@ export class NavbarWidget {
         // Show businesses toggle section again
         const bizSection = document.querySelector('.mobile-business-section') as HTMLElement | null;
         if (bizSection) bizSection.style.display = '';
+        // Reset businesses icon to plus when closing another dropdown
+        const bizArrowWrap = document.querySelector('.mobile-business-toggle .mb-arrow') as HTMLElement | null;
+        if (bizArrowWrap) bizArrowWrap.innerHTML = `${plusIcon}`;
 
         const arrowElement = mobileMenuItem.querySelector('.mobile-menu-arrow');
         if (arrowElement) {

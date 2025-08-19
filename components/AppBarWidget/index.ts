@@ -213,9 +213,6 @@ export class AppBarWidget {
           height: 1rem;
           transition: transform 0.2s ease;
         }
-        .mobile-business-toggle.open .mb-arrow svg {
-          transform: rotate(90deg);
-        }
         .mobile-business-dropdown {
           display: none;
           width: 100%;

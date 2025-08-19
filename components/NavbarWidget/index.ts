@@ -1030,12 +1030,16 @@ export class NavbarWidget {
          background: none;
          border: none;
          text-align: left;
-         padding: 14px 0;
+         padding: 14px 10px;
          color: #242826;
          font-weight: 600;
          font-size: 15px;
          cursor: pointer;
          border-bottom: 1px solid #F0F0F0;
+         margin-left: 10px;
+       }
+       .mobile-business-item.active {
+         background-color: #f8f7f7;
        }
        .mobile-business-item:last-child {
         //  border-bottom: none;
@@ -1493,6 +1497,8 @@ export class NavbarWidget {
       motor: "/motor-fleet",
     };
 
+    const bizButtonsById: Record<string, HTMLButtonElement> = {};
+
     mobileItemsList.forEach((item) => {
       const btn = document.createElement('button');
       btn.className = 'mobile-business-item';
@@ -1502,7 +1508,33 @@ export class NavbarWidget {
         this.themeManager.setTheme(item.id as any);
         window.location.href = routesMap[item.id];
       });
+      bizButtonsById[item.id] = btn as HTMLButtonElement;
       bizDropdown.appendChild(btn);
+    });
+
+    // Set initial active based on current theme
+    const currentBizTheme = this.themeManager.getCurrentTheme();
+    for (const id in bizButtonsById) {
+      const button: HTMLButtonElement = bizButtonsById[id];
+      if (!button) continue;
+      if (id === currentBizTheme) {
+        button.classList.add('active');
+      } else {
+        button.classList.remove('active');
+      }
+    }
+
+    // Update active state when theme changes
+    this.themeManager.subscribe((theme: string) => {
+      for (const id in bizButtonsById) {
+        const button: HTMLButtonElement = bizButtonsById[id];
+        if (!button) continue;
+        if (id === theme) {
+          button.classList.add('active');
+        } else {
+          button.classList.remove('active');
+        }
+      }
     });
 
     bizToggle.addEventListener('click', (e) => {

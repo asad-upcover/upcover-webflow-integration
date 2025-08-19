@@ -101,7 +101,7 @@ export class AppBarWidget {
           }
         }
 
-        @media screen and (max-width: 768px) {
+        @media screen and (max-width: 900px) {
           #appbar {
             padding: 0 20px;
             flex-wrap: wrap;
@@ -112,7 +112,8 @@ export class AppBarWidget {
             order: 2;
             width: 100%;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            justify-content: start;
             flex-wrap: wrap;
           }
           
@@ -129,6 +130,7 @@ export class AppBarWidget {
             width: 100%;
             justify-content: center;
             font-size: 13px;
+            display: none !important;
           }
           
           .contact-phone-container {

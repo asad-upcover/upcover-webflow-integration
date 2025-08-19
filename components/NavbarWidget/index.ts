@@ -513,6 +513,68 @@ export class NavbarWidget {
         }
       }
 
+      /* Mobile quick links under the menu list */
+.mobile-quick-links {
+  border-top: 1px solid #F0F0F0;
+  margin-top: 10px;
+  padding-top: 16px;
+  display: flex;
+  flex-wrap: wrap;  
+  gap: 25px;
+}
+
+.mobile-quick-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #242826;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.mobile-quick-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.mobile-quick-call svg {
+  width: 16px;
+  height: 16px;
+}
+
+.mobile-locale-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #242826;
+  font-size: 16px;
+}
+
+.mobile-locale-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.mobile-locale-sep {
+  opacity: 0.4;
+}
+
+.mobile-locale-au {
+  font-weight: 900; /* default active */
+}
+
+.mobile-locale-nz {
+  font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  .mobile-quick-links {
+    padding-bottom: 24px;
+  }
+}
+
+
       @media screen and (max-width: 1010px) {
         .login {
           font-size: 13px;
@@ -920,7 +982,7 @@ export class NavbarWidget {
       }
        
        .mobile-menu-items {
-         flex-grow: 1;
+        //  flex-grow: 1;
        }
        
       .mobile-menu-item {
@@ -1358,26 +1420,26 @@ export class NavbarWidget {
       link.className = "mobile-menu-link";
       
       // Add arrow icon
-      const arrowIcon = document.createElement("span");
-      arrowIcon.className = "mobile-menu-arrow";
-      arrowIcon.innerHTML = `
+      const arrowIconWrap = document.createElement("span");
+      arrowIconWrap.className = "mobile-menu-arrow";
+      arrowIconWrap.innerHTML = `
         <svg data-v-0c3b2dd6="" xmlns="http://www.w3.org/2000/svg" viewBox="-0.75 -0.75 24 24" fill="currentColor" class="inline-block align-baseline w-4 h-4 text-pink-500" svg="arrow-right" scale="">
           <path d="M5.156.703l10.05 10.05a.702.702 0 010 .994l-10.05 10.05" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
         </svg>
       `;
-      arrowIcon.style.color = "#FF6B6B";
+      (arrowIconWrap as HTMLElement).style.color = "#FF6B6B";
       
       // Add click handler to arrow for dropdown
       if (item.dropdown || item.boxComponent) {
-        arrowIcon.style.cursor = "pointer";
-        arrowIcon.addEventListener("click", (e) => {
+        arrowIconWrap.style.cursor = "pointer";
+        arrowIconWrap.addEventListener("click", (e) => {
           e.preventDefault();
           this.toggleMobileDropdown(mobileMenuItem, item);
         });
       }
       
       mobileMenuItem.appendChild(link);
-      mobileMenuItem.appendChild(arrowIcon);
+      mobileMenuItem.appendChild(arrowIconWrap);
       mobileMenuItems.appendChild(mobileMenuItem);
       
       // Add dropdown content if item has dropdown or boxComponent
@@ -1388,10 +1450,101 @@ export class NavbarWidget {
     });
     
     mobileMenuContent.appendChild(mobileMenuItems);
+  
+    // ---------------------------
+    // Quick links under the items
+    // ---------------------------
+    const quickLinks = document.createElement("div");
+    quickLinks.className = "mobile-quick-links";
+  
+    // 1) Login
+    const qlLogin = document.createElement("a");
+    qlLogin.href = "#";
+    qlLogin.className = "mobile-quick-link";
+    qlLogin.textContent = "Login";
+    quickLinks.appendChild(qlLogin);
+  
+    // 2) Get a quote
+    const qlQuote = document.createElement("a");
+    qlQuote.href = "#";
+    qlQuote.className = "mobile-quick-link";
+    qlQuote.textContent = "Get a quote";
+    quickLinks.appendChild(qlQuote);
+  
+    // 3) Call button (icon + number)
+    const qlCall = document.createElement("a");
+    qlCall.href = "tel:1300872683";
+    qlCall.className = "mobile-quick-link mobile-quick-call";
+    qlCall.innerHTML = `
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" width="16" height="16">
+        <path d="M22 16.92v2a2 2 0 0 1-2.18 2
+          19.86 19.86 0 0 1-8.63-3.07
+          19.5 19.5 0 0 1-6-6
+          A19.86 19.86 0 0 1 2.1 4.18
+          2 2 0 0 1 4.11 2h2a2 2 0 0 1 2 1.72
+          c.12.9.33 1.77.62 2.6a2 2 0 0 1-.45 2.11L7.1 9.9a16 16 0 0 0 6 6l1.47-1.17
+          a2 2 0 0 1 2.11-.45c.83.29 1.7.5 2.6.62
+          A2 2 0 0 1 22 16.92z"
+          stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+      <span>1300 872 683</span>
+    `;
+    quickLinks.appendChild(qlCall);
+  
+    // 4) AU | NZ switcher
+    const localeWrap = document.createElement("div");
+    localeWrap.className = "mobile-locale-switch";
+  
+    const auLink = document.createElement("a");
+    auLink.href = "#";
+    auLink.className = "mobile-locale-link mobile-locale-au";
+    auLink.textContent = "AU";
+    auLink.style.fontWeight = "900"; // default active
+  
+    const sep = document.createElement("span");
+    sep.className = "mobile-locale-sep";
+    sep.textContent = " | ";
+  
+    const nzLink = document.createElement("a");
+    nzLink.href = "#";
+    nzLink.className = "mobile-locale-link mobile-locale-nz";
+    nzLink.textContent = "NZ";
+    nzLink.style.fontWeight = "600";
+  
+    const applyLocaleWeights = (active: "AU" | "NZ") => {
+      if (active === "AU") {
+        auLink.style.fontWeight = "900";
+        nzLink.style.fontWeight = "600";
+      } else {
+        auLink.style.fontWeight = "600";
+        nzLink.style.fontWeight = "900";
+      }
+    };
+  
+    auLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      applyLocaleWeights("AU");
+      // Hook real locale switching here if needed
+    });
+  
+    nzLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      applyLocaleWeights("NZ");
+      // Hook real locale switching here if needed
+    });
+  
+    localeWrap.appendChild(auLink);
+    localeWrap.appendChild(sep);
+    localeWrap.appendChild(nzLink);
+    quickLinks.appendChild(localeWrap);
+  
+    // Append quick links to the content
+    mobileMenuContent.appendChild(quickLinks);
+  
     mobileMenu.appendChild(mobileMenuContent);
-    
     return mobileMenu;
   }
+  
 
   private createMobileDropdown(item: MenuItem): HTMLElement {
     const dropdownMenu = document.createElement('div');

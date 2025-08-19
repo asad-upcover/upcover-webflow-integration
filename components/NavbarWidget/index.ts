@@ -1024,7 +1024,7 @@ export class NavbarWidget {
        .mobile-menu-arrow svg {
          width: 16px;
          height: 16px;
-         color: #FF6B6B;
+         color: #000000;
        }
        
        /* Mobile dropdown styles */

@@ -515,12 +515,12 @@ export class NavbarWidget {
 
       /* Mobile quick links under the menu list */
 .mobile-quick-links {
-  border-top: 1px solid #F0F0F0;
   margin-top: 10px;
   padding-top: 16px;
   display: flex;
   flex-wrap: wrap;  
   gap: 22px;
+  padding: 0 20px;
 }
 
 .mobile-quick-link {

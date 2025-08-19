@@ -1041,8 +1041,8 @@ export class NavbarWidget {
          text-align: left;
          padding: 14px 0px;
          color: #242826;
-         font-weight: 600;
-         font-size: 15px;
+         font-weight: 500;
+         font-size: 14px;
          cursor: pointer;
          border-bottom: 1px solid #F0F0F0;
        }

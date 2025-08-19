@@ -1,4 +1,4 @@
-import { upcoverLogoBusiness, upcoverLogoTech, upcoverLogoMotor, arrowDownIcon, arrowIcon } from "../../assets/svgicons";
+import { upcoverLogoBusiness, upcoverLogoTech, upcoverLogoMotor, arrowDownIcon, arrowIcon, arrowRightSmallIcon } from "../../assets/svgicons";
 import { ThemeManager } from "../../themes/theme";
 
 interface MenuItem {
@@ -520,7 +520,7 @@ export class NavbarWidget {
   padding-top: 16px;
   display: flex;
   flex-wrap: wrap;  
-  gap: 25px;
+  gap: 22px;
 }
 
 .mobile-quick-link {
@@ -529,7 +529,7 @@ export class NavbarWidget {
   gap: 8px;
   text-decoration: none;
   color: #242826;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400;
 }
 
@@ -548,7 +548,7 @@ export class NavbarWidget {
   align-items: center;
   gap: 8px;
   color: #242826;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .mobile-locale-link {
@@ -984,6 +984,54 @@ export class NavbarWidget {
        .mobile-menu-items {
         //  flex-grow: 1;
        }
+
+       /* Businesses section (inside navbar mobile overlay) */
+       .mobile-business-toggle {
+         display: flex;
+         width: 100%;
+         background: none;
+         border: none;
+         padding: 16px 0;
+         cursor: pointer;
+         align-items: center;
+         justify-content: space-between;
+         font-weight: 700;
+         color: #242826;
+         font-size: 16px;
+       }
+       .mobile-business-toggle .mb-arrow svg {
+         width: 1rem;
+         height: 1rem;
+         transition: transform 0.2s ease;
+       }
+       .mobile-business-toggle.open .mb-arrow svg {
+         transform: rotate(90deg);
+       }
+       .mobile-business-dropdown {
+         display: none;
+         width: 100%;
+         background: #ffffff;
+         border-top: 1px solid #E6E6E6;
+         padding: 8px 0 0 0;
+       }
+       .mobile-business-dropdown.open {
+         display: block;
+       }
+       .mobile-business-item {
+         width: 100%;
+         background: none;
+         border: none;
+         text-align: left;
+         padding: 14px 0;
+         color: #242826;
+         font-weight: 600;
+         font-size: 15px;
+         cursor: pointer;
+         border-bottom: 1px solid #F0F0F0;
+       }
+       .mobile-business-item:last-child {
+         border-bottom: none;
+       }
        
       .mobile-menu-item {
         display: flex;
@@ -1392,6 +1440,14 @@ export class NavbarWidget {
           </svg>
         `;
       }
+
+      // Reset businesses section visibility and state when closing overlay
+      const bizSection = document.querySelector('.mobile-business-section') as HTMLElement | null;
+      const bizDropdown = document.querySelector('.mobile-business-dropdown');
+      const bizToggle = document.querySelector('.mobile-business-toggle');
+      if (bizSection) bizSection.style.display = '';
+      bizDropdown?.classList.remove('open');
+      bizToggle?.classList.remove('open');
     }
   }
 
@@ -1401,6 +1457,61 @@ export class NavbarWidget {
 
     const mobileMenuContent = document.createElement("div");
     mobileMenuContent.className = "mobile-menu-content";
+
+    // Businesses section (toggle + list)
+    const bizSection = document.createElement("div");
+    bizSection.className = "mobile-business-section";
+
+    const bizToggle = document.createElement("button");
+    bizToggle.className = "mobile-business-toggle";
+    bizToggle.innerHTML = `
+      <span>Businesses</span>
+      <span class="mb-arrow">${arrowRightSmallIcon}</span>
+    `;
+
+    const bizDropdown = document.createElement("div");
+    bizDropdown.className = "mobile-business-dropdown";
+
+    type MobileItem = { id: 'business' | 'tech' | 'motor'; label: string };
+    const mobileItemsList: MobileItem[] = [
+      { id: 'business', label: 'Business & Sole Traders' },
+      { id: 'tech', label: 'Tech Startup & Enterprises' },
+      { id: 'motor', label: 'Motor & Fleet' },
+    ];
+
+    const routesMap: Record<string, string> = {
+      business: "/business-sole-traders",
+      tech: "/tech-startups-enterprises",
+      motor: "/motor-fleet",
+    };
+
+    mobileItemsList.forEach((item) => {
+      const btn = document.createElement('button');
+      btn.className = 'mobile-business-item';
+      btn.textContent = item.label;
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.themeManager.setTheme(item.id as any);
+        window.location.href = routesMap[item.id];
+      });
+      bizDropdown.appendChild(btn);
+    });
+
+    bizToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      const isOpen = bizDropdown.classList.contains('open');
+      if (isOpen) {
+        bizDropdown.classList.remove('open');
+        bizToggle.classList.remove('open');
+      } else {
+        bizDropdown.classList.add('open');
+        bizToggle.classList.add('open');
+      }
+    });
+
+    bizSection.appendChild(bizToggle);
+    bizSection.appendChild(bizDropdown);
+    mobileMenuContent.appendChild(bizSection);
 
     // Mobile menu items only (no close button needed)
     const mobileMenuItems = document.createElement("div");
@@ -1782,6 +1893,10 @@ export class NavbarWidget {
           existingBackHeader.remove();
         }
 
+        // Show businesses toggle section again
+        const bizSection = document.querySelector('.mobile-business-section') as HTMLElement | null;
+        if (bizSection) bizSection.style.display = '';
+
         const arrowElement = mobileMenuItem.querySelector('.mobile-menu-arrow');
         if (arrowElement) {
           arrowElement.classList.remove('open');
@@ -1798,6 +1913,14 @@ export class NavbarWidget {
 
         // Hide the main menu item when dropdown is expanded
         mobileMenuItem.style.display = 'none';
+
+        // Hide businesses toggle section and ensure its dropdown is closed
+        const bizSection = document.querySelector('.mobile-business-section') as HTMLElement | null;
+        const bizDropdown = document.querySelector('.mobile-business-dropdown');
+        const bizToggle = document.querySelector('.mobile-business-toggle');
+        if (bizSection) bizSection.style.display = 'none';
+        bizDropdown?.classList.remove('open');
+        bizToggle?.classList.remove('open');
 
         // Add back navigation header
         const backHeader = document.createElement("div");

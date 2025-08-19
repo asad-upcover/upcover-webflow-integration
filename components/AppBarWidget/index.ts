@@ -1,4 +1,5 @@
 import { callIcon } from "../../assets/svgicons";
+import { arrowRightSmallIcon } from "../../assets/svgicons";
 import { ThemeManager } from "../../themes/theme";
 import { upcoverLogoBusiness, upcoverLogoTech, upcoverLogoMotor } from "../../assets/svgicons";
 
@@ -103,18 +104,16 @@ export class AppBarWidget {
 
         @media screen and (max-width: 900px) {
           #appbar {
-            padding: 0 20px;
+            padding: 6px 20px;
             flex-wrap: wrap;
-            gap: 10px;
+            display: none;
           }
           
+          /* Hide desktop tabs in mobile and show mobile business toggle */
           .tabs {
             order: 2;
             width: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: start;
-            flex-wrap: wrap;
+            display: none !important;
           }
           
           .tabs button {
@@ -191,6 +190,61 @@ export class AppBarWidget {
           
           .contact-region-switcher {
             font-size: 11px;
+          }
+        }
+
+        /* Mobile business toggle (hidden by default, visible on <=900px) */
+        .mobile-business-toggle {
+          display: none;
+          width: 100%;
+          background: none;
+          border: none;
+          padding: 16px 0;
+          cursor: pointer;
+          display: none;
+          align-items: center;
+          justify-content: space-between;
+          font-weight: 700;
+          color: #242826;
+          font-size: 16px;
+        }
+        .mobile-business-toggle .mb-arrow svg {
+          width: 1rem;
+          height: 1rem;
+          transition: transform 0.2s ease;
+        }
+        .mobile-business-toggle.open .mb-arrow svg {
+          transform: rotate(90deg);
+        }
+        .mobile-business-dropdown {
+          display: none;
+          width: 100%;
+          background: #ffffff;
+          border-top: 1px solid #E6E6E6;
+          padding: 8px 0 0 0;
+        }
+        .mobile-business-dropdown.open {
+          display: block;
+        }
+        .mobile-business-item {
+          width: 100%;
+          background: none;
+          border: none;
+          text-align: left;
+          padding: 14px 0;
+          color: #242826;
+          font-weight: 600;
+          font-size: 15px;
+          cursor: pointer;
+          border-bottom: 1px solid #F0F0F0;
+        }
+        .mobile-business-item:last-child {
+          border-bottom: none;
+        }
+
+        @media screen and (max-width: 900px) {
+          .mobile-business-toggle {
+            display: flex;
           }
         }
 
@@ -271,6 +325,8 @@ export class AppBarWidget {
       .join("");
 
     appbar.appendChild(tabsDiv);
+
+    // Mobile Businesses toggle removed to avoid duplication with Navbar mobile overlay
 
     // Set active tab based on current URL or default to business
     const currentPath = window.location.pathname;

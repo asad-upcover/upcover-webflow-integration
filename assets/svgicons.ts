@@ -108,6 +108,10 @@ export const arrowIcon = `<svg width="30" height="30" viewBox="0 0 30 30" fill="
 </svg>
 `;
 
+export const arrowRightSmallIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-0.75 -0.75 24 24" fill="currentColor" svg="arrow-right">
+  <path d="M5.156.703l10.05 10.05a.702.702 0 010 .994l-10.05 10.05" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+ </svg>`;
+
 export const checkmarkIcon = `<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M15 27.5C21.875 27.5 27.5 21.875 27.5 15C27.5 8.125 21.875 2.5 15 2.5C8.125 2.5 2.5 8.125 2.5 15C2.5 21.875 8.125 27.5 15 27.5Z" stroke="#005DFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M9.6875 15.0004L13.225 18.5379L20.3125 11.4629" stroke="#005DFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

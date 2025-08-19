@@ -518,6 +518,7 @@ export class NavbarWidget {
   margin-top: 10px;
   padding-top: 16px;
   display: flex;
+  align-items: center;
   flex-wrap: wrap;  
   gap: 22px;
 }

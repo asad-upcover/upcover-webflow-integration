@@ -997,7 +997,7 @@ export class NavbarWidget {
          justify-content: space-between;
          font-weight: 700;
          color: #242826;
-         font-size: 16px;
+         font-size: 18px;
        }
        .mobile-business-toggle .mb-arrow svg {
          width: 1rem;
@@ -1008,14 +1008,22 @@ export class NavbarWidget {
          transform: rotate(90deg);
        }
        .mobile-business-dropdown {
-         display: none;
+         display: block;
          width: 100%;
          background: #ffffff;
          border-top: 1px solid #E6E6E6;
-         padding: 8px 0 0 0;
+         padding: 0;
+         max-height: 0;
+         overflow: hidden;
+         opacity: 0;
+         transform: translateY(-6px);
+         transition: max-height 0.3s ease, opacity 0.3s ease, transform 0.3s ease, padding 0.3s ease;
        }
        .mobile-business-dropdown.open {
-         display: block;
+         max-height: 500px;
+         opacity: 1;
+         transform: translateY(0);
+         padding: 0;
        }
        .mobile-business-item {
          width: 100%;
@@ -1030,7 +1038,7 @@ export class NavbarWidget {
          border-bottom: 1px solid #F0F0F0;
        }
        .mobile-business-item:last-child {
-         border-bottom: none;
+        //  border-bottom: none;
        }
        
       .mobile-menu-item {

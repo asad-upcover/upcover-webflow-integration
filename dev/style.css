@@ -13,3 +13,18 @@ body {
   position: sticky;
   top: 0;
 }
+
+
+header {
+  position: sticky;
+  top: 0;
+  transition: transform 0.3s ease;
+  z-index: 1000;
+}
+
+/* hide effect only for mobile */
+@media (max-width: 900px) {
+  header.hide {
+    transform: translateY(-100%);
+  }
+}

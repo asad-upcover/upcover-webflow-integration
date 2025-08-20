@@ -1268,7 +1268,7 @@ export class NavbarWidget {
   }
 
   // Smoothly hide an element with a left translate + fade, then set display:none
-  private hideSmooth(element: HTMLElement, distance: number = 20, duration: number = 200, easing: string = 'ease-in'): void {
+  private hideSmooth(element: HTMLElement, distance: number = 100, duration: number = 200, easing: string = 'ease-in'): void {
     const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (!element.getAttribute('data-prev-display')) {
       element.setAttribute('data-prev-display', getComputedStyle(element).display || '');

@@ -1248,7 +1248,6 @@ export class NavbarWidget {
       .burger {
         position: relative;
         width: 24px;
-        height: 18px;          /* space for 3 lines */
         display: inline-block;
       }
 
@@ -1288,7 +1287,7 @@ export class NavbarWidget {
 
       /* Better tap target on mobile */
       @media (max-width: 900px) {
-        .mobile-menu-toggle { display: flex !important; padding: 8px; }
+        .mobile-menu-toggle { display: flex !important; }
       }
 
       /* Respect reduced motion (optional) */

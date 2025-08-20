@@ -380,6 +380,11 @@ export class NavbarWidget {
         max-height: 70px;
       }
 
+      /* Remove mobile tap highlight within navbar only */
+      #navbar, #navbar * {
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+      }
+
       .navbar-left {
         display: flex;
         align-items: center;
@@ -1002,6 +1007,7 @@ export class NavbarWidget {
          font-weight: 700;
          color: #242826;
          font-size: 18px;
+         -webkit-tap-highlight-color: transparent;
        }
        .mobile-business-toggle .mb-arrow svg {
          width: 1rem;
@@ -1071,6 +1077,7 @@ export class NavbarWidget {
         font-size: 18px;
         font-weight: 600;
         flex-grow: 1;
+        -webkit-tap-highlight-color: transparent;
       }
       
       .mobile-menu-arrow {
@@ -1993,51 +2000,72 @@ export class NavbarWidget {
       // Note: hide other menu items ONLY when opening (handled below)
 
       if (dropdownMenu.classList.contains('active')) {
-        // Closing dropdown - show all menu items again
-        dropdownMenu.classList.remove('active');
-        mobileMenuItem.classList.remove('active');
-        allMenuItems.forEach(menuItem => {
-          this.showSmooth(menuItem as HTMLElement, 'flex');
-        });
+        // Closing dropdown – animate slide down then clean up
+        const dropdownEl = dropdownMenu as HTMLElement;
+        const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        // Animate and remove back header when closing dropdown
-        const existingBackHeader = document.querySelector('.mobile-back-header') as HTMLElement | null;
-        if (existingBackHeader) {
-          const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-          if (!prefersReduced && existingBackHeader.animate) {
-            const animation = existingBackHeader.animate(
-              [
-                { opacity: 1, transform: 'translateX(0)' },
-                { opacity: 0, transform: 'translateX(-20px)' }
-              ],
-              { duration: 220, easing: 'ease-in', fill: 'forwards' }
-            );
-            animation.onfinish = () => existingBackHeader.remove();
-          } else {
-            existingBackHeader.remove();
+        const finishClose = () => {
+          dropdownEl.classList.remove('active');
+          mobileMenuItem.classList.remove('active');
+          allMenuItems.forEach(menuItem => {
+            this.showSmooth(menuItem as HTMLElement, 'flex');
+          });
+
+          // Animate and remove back header when closing dropdown
+          const existingBackHeader = document.querySelector('.mobile-back-header') as HTMLElement | null;
+          if (existingBackHeader) {
+            if (!prefersReduced && existingBackHeader.animate) {
+              const animation = existingBackHeader.animate(
+                [
+                  { opacity: 1, transform: 'translateX(0)' },
+                  { opacity: 0, transform: 'translateX(-20px)' }
+                ],
+                { duration: 220, easing: 'ease-in', fill: 'forwards' }
+              );
+              animation.onfinish = () => existingBackHeader.remove();
+            } else {
+              existingBackHeader.remove();
+            }
           }
-        }
 
-        // Show businesses toggle section again (smooth)
-        const bizSection = document.querySelector('.mobile-business-section') as HTMLElement | null;
-        if (bizSection) this.showSmooth(bizSection);
-        // Show quick links again
-        const quickLinksClosing = document.querySelector('.mobile-quick-links') as HTMLElement | null;
-        if (quickLinksClosing) {
-          quickLinksClosing.style.display = '';
-        }
-        // Reset businesses icon to plus when closing another dropdown
-        const bizArrowWrap = document.querySelector('.mobile-business-toggle .mb-arrow') as HTMLElement | null;
-        if (bizArrowWrap) bizArrowWrap.innerHTML = `${plusIcon}`;
+          // Show businesses toggle section again (smooth)
+          const bizSection = document.querySelector('.mobile-business-section') as HTMLElement | null;
+          if (bizSection) this.showSmooth(bizSection);
+          // Show quick links again
+          const quickLinksClosing = document.querySelector('.mobile-quick-links') as HTMLElement | null;
+          if (quickLinksClosing) {
+            quickLinksClosing.style.display = '';
+          }
+          // Reset businesses icon to plus when closing another dropdown
+          const bizArrowWrap = document.querySelector('.mobile-business-toggle .mb-arrow') as HTMLElement | null;
+          if (bizArrowWrap) bizArrowWrap.innerHTML = `${plusIcon}`;
 
-        const arrowElement = mobileMenuItem.querySelector('.mobile-menu-arrow');
-        if (arrowElement) {
-          arrowElement.classList.remove('open');
-          arrowElement.innerHTML = `
-            <svg data-v-0c3b2dd6="" xmlns="http://www.w3.org/2000/svg" viewBox="-0.75 -0.75 24 24" fill="currentColor" class="inline-block align-baseline w-4 h-4 text-pink-500" svg="arrow-right" scale="">
-              <path d="M5.156.703l10.05 10.05a.702.702 0 010 .994l-10.05 10.05" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
-            </svg>
-          `;
+          const arrowElement = mobileMenuItem.querySelector('.mobile-menu-arrow');
+          if (arrowElement) {
+            arrowElement.classList.remove('open');
+            arrowElement.innerHTML = `
+              <svg data-v-0c3b2dd6="" xmlns="http://www.w3.org/2000/svg" viewBox="-0.75 -0.75 24 24" fill="currentColor" class="inline-block align-baseline w-4 h-4 text-pink-500" svg="arrow-right" scale="">
+                <path d="M5.156.703l10.05 10.05a.702.702 0 010 .994l-10.05 10.05" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+              </svg>
+            `;
+          }
+        };
+
+        if (!prefersReduced && (dropdownEl as any).animate) {
+          const anim = (dropdownEl as any).animate(
+            [
+              { opacity: 1, transform: 'translateY(0)' },
+              { opacity: 0, transform: 'translateY(100px)' }
+            ],
+            { duration: 500, easing: 'ease-in', fill: 'forwards' }
+          );
+          anim.onfinish = () => {
+            dropdownEl.style.opacity = '';
+            dropdownEl.style.transform = '';
+            finishClose();
+          };
+        } else {
+          finishClose();
         }
       } else {
         // Opening dropdown - hide other menu items and show back navigation

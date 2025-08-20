@@ -1022,7 +1022,7 @@ export class NavbarWidget {
          overflow: hidden;
          opacity: 0;
          transform: translateY(-6px);
-         transition: max-height 0.3s ease, opacity 0.3s ease, transform 0.3s ease, padding 0.3s ease;
+         transition: max-height 1s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), padding 0.3s ease;
        }
        .mobile-business-dropdown.open {
          max-height: 500px;
@@ -1092,15 +1092,15 @@ export class NavbarWidget {
          background-color: #f8f9fa;
          border-radius: 8px;
          margin: 10px 0;
-         padding: 20px;
+         padding: 10px 20px;
          box-sizing: border-box;
-         animation: slideDown 0.3s ease-out;
+         animation: slideUp 1s ease-out;
        }
        
-       @keyframes slideDown {
+       @keyframes slideUp {
          from {
            opacity: 0;
-           transform: translateY(-10px);
+           transform: translateY(100px);
          }
          to {
            opacity: 1;
@@ -1110,7 +1110,7 @@ export class NavbarWidget {
        
        .mobile-menu-items .dropdown-menu.three-column.active {
          display: block;
-         margin-top: 0;
+         margin-top: 10px;
        }
        
        /* Ensure main menu items are properly hidden when dropdown is active */
@@ -1213,7 +1213,6 @@ export class NavbarWidget {
          align-items: center;
          padding: 15px 0;
          border-bottom: 1px solid #E0E0E0;
-         margin-bottom: 20px;
          cursor: pointer;
        }
        
@@ -1266,6 +1265,49 @@ export class NavbarWidget {
     logoDiv.id = "upcover-logo";
     logoDiv.innerHTML = this.config.logo!;
     return logoDiv;
+  }
+
+  // Smoothly hide an element with a left translate + fade, then set display:none
+  private hideSmooth(element: HTMLElement, distance: number = 20, duration: number = 200, easing: string = 'ease-in'): void {
+    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!element.getAttribute('data-prev-display')) {
+      element.setAttribute('data-prev-display', getComputedStyle(element).display || '');
+    }
+    if (prefersReduced || !(element as any).animate) {
+      element.style.display = 'none';
+      return;
+    }
+    const animation = (element as any).animate(
+      [
+        { opacity: 1, transform: 'translateX(0)' },
+        { opacity: 0, transform: `translateX(-${distance}px)` }
+      ],
+      { duration, easing, fill: 'forwards' }
+    );
+    animation.onfinish = () => {
+      element.style.display = 'none';
+    };
+  }
+
+  // Smoothly show an element restoring its previous display (or provided), from left translate + fade
+  private showSmooth(element: HTMLElement, displayValue?: string, distance: number = 20, duration: number = 260, easing: string = 'ease-out'): void {
+    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const prevDisplay = element.getAttribute('data-prev-display') || '';
+    const isMobileItem = element.classList.contains('mobile-menu-item');
+    const targetDisplay = displayValue || prevDisplay || (isMobileItem ? 'flex' : '');
+    element.style.display = targetDisplay;
+    if (prefersReduced || !(element as any).animate) {
+      element.style.opacity = '';
+      element.style.transform = '';
+      return;
+    }
+    (element as any).animate(
+      [
+        { opacity: 0, transform: `translateX(-${distance}px)` },
+        { opacity: 1, transform: 'translateX(0)' }
+      ],
+      { duration, easing, fill: 'forwards' }
+    );
   }
 
   private createActions(): HTMLElement {
@@ -1448,6 +1490,10 @@ export class NavbarWidget {
       bizToggle?.classList.remove('open');
       const bizArrowWrap = document.querySelector('.mobile-business-toggle .mb-arrow') as HTMLElement | null;
       if (bizArrowWrap) bizArrowWrap.innerHTML = `${plusIcon}`;
+
+      // Restore quick links visibility when overlay closes
+      const quickLinks = document.querySelector('.mobile-quick-links') as HTMLElement | null;
+      if (quickLinks) quickLinks.style.display = '';
     }
   }
 
@@ -1529,16 +1575,65 @@ export class NavbarWidget {
       e.preventDefault();
       e.stopPropagation();
       const isOpen = bizDropdown.classList.contains('open');
+      const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const arrowWrap = bizToggle.querySelector('.mb-arrow') as HTMLElement | null;
+
       if (isOpen) {
-        bizDropdown.classList.remove('open');
+        // Close with smooth height animation
+        const startHeight = bizDropdown.scrollHeight;
+        bizDropdown.style.maxHeight = `${startHeight}px`; // set current height as start
+        // next frame: set to 0 to animate
+        requestAnimationFrame(() => {
+          bizDropdown.classList.remove('open');
+          bizDropdown.style.maxHeight = '0px';
+        });
+        if (!prefersReduced && 'animate' in bizDropdown) {
+          bizDropdown.animate(
+            [
+              { opacity: 1, transform: 'translateY(0)' },
+              { opacity: 0, transform: 'translateY(-6px)' }
+            ],
+            { duration: 250, easing: 'ease-in', fill: 'forwards' }
+          );
+        }
         bizToggle.classList.remove('open');
-        const arrowWrap = bizToggle.querySelector('.mb-arrow') as HTMLElement | null;
         if (arrowWrap) arrowWrap.innerHTML = `${plusIcon}`;
+        // Clean the inline style after transition so CSS can control future opens
+        const onTransitionEnd = (ev: TransitionEvent) => {
+          if (ev.propertyName === 'max-height') {
+            bizDropdown.style.removeProperty('max-height');
+            bizDropdown.removeEventListener('transitionend', onTransitionEnd as any);
+          }
+        };
+        bizDropdown.addEventListener('transitionend', onTransitionEnd as any);
       } else {
+        // Open with smooth height animation
         bizDropdown.classList.add('open');
+        // Temporarily set max-height to content height to allow transition
+        const targetHeight = bizDropdown.scrollHeight;
+        bizDropdown.style.maxHeight = '0px';
+        requestAnimationFrame(() => {
+          bizDropdown.style.maxHeight = `${targetHeight}px`;
+        });
+        if (!prefersReduced && 'animate' in bizDropdown) {
+          bizDropdown.animate(
+            [
+              { opacity: 0, transform: 'translateY(-6px)' },
+              { opacity: 1, transform: 'translateY(0)' }
+            ],
+            { duration: 320, easing: 'ease-out', fill: 'forwards' }
+          );
+        }
         bizToggle.classList.add('open');
-        const arrowWrap = bizToggle.querySelector('.mb-arrow') as HTMLElement | null;
         if (arrowWrap) arrowWrap.innerHTML = `${minusIcon}`;
+        // After transition completes, clear inline height so CSS class can handle
+        const onTransitionEnd = (ev: TransitionEvent) => {
+          if (ev.propertyName === 'max-height') {
+            bizDropdown.style.removeProperty('max-height');
+            bizDropdown.removeEventListener('transitionend', onTransitionEnd as any);
+          }
+        };
+        bizDropdown.addEventListener('transitionend', onTransitionEnd as any);
       }
     });
 
@@ -1895,40 +1990,42 @@ export class NavbarWidget {
         }
       });
 
-      allMenuItems.forEach(menuItem => {
-        if (menuItem !== mobileMenuItem) {
-          menuItem.classList.remove('active');
-          // Hide other menu items when one is expanded
-          (menuItem as HTMLElement).style.display = 'none';
-          const arrowElement = menuItem.querySelector('.mobile-menu-arrow');
-          if (arrowElement) {
-            arrowElement.classList.remove('open');
-            arrowElement.innerHTML = `
-              <svg data-v-0c3b2dd6="" xmlns="http://www.w3.org/2000/svg" viewBox="-0.75 -0.75 24 24" fill="currentColor" class="inline-block align-baseline w-4 h-4 text-pink-500" svg="arrow-right" scale="">
-                <path d="M5.156.703l10.05 10.05a.702.702 0 010 .994l-10.05 10.05" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
-              </svg>
-            `;
-          }
-        }
-      });
+      // Note: hide other menu items ONLY when opening (handled below)
 
       if (dropdownMenu.classList.contains('active')) {
         // Closing dropdown - show all menu items again
         dropdownMenu.classList.remove('active');
         mobileMenuItem.classList.remove('active');
         allMenuItems.forEach(menuItem => {
-          (menuItem as HTMLElement).style.display = 'flex';
+          this.showSmooth(menuItem as HTMLElement, 'flex');
         });
 
-        // Remove back header when closing dropdown
-        const existingBackHeader = document.querySelector('.mobile-back-header');
+        // Animate and remove back header when closing dropdown
+        const existingBackHeader = document.querySelector('.mobile-back-header') as HTMLElement | null;
         if (existingBackHeader) {
-          existingBackHeader.remove();
+          const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          if (!prefersReduced && existingBackHeader.animate) {
+            const animation = existingBackHeader.animate(
+              [
+                { opacity: 1, transform: 'translateX(0)' },
+                { opacity: 0, transform: 'translateX(-20px)' }
+              ],
+              { duration: 220, easing: 'ease-in', fill: 'forwards' }
+            );
+            animation.onfinish = () => existingBackHeader.remove();
+          } else {
+            existingBackHeader.remove();
+          }
         }
 
-        // Show businesses toggle section again
+        // Show businesses toggle section again (smooth)
         const bizSection = document.querySelector('.mobile-business-section') as HTMLElement | null;
-        if (bizSection) bizSection.style.display = '';
+        if (bizSection) this.showSmooth(bizSection);
+        // Show quick links again
+        const quickLinksClosing = document.querySelector('.mobile-quick-links') as HTMLElement | null;
+        if (quickLinksClosing) {
+          quickLinksClosing.style.display = '';
+        }
         // Reset businesses icon to plus when closing another dropdown
         const bizArrowWrap = document.querySelector('.mobile-business-toggle .mb-arrow') as HTMLElement | null;
         if (bizArrowWrap) bizArrowWrap.innerHTML = `${plusIcon}`;
@@ -1950,13 +2047,34 @@ export class NavbarWidget {
         // Hide the main menu item when dropdown is expanded
         mobileMenuItem.style.display = 'none';
 
-        // Hide businesses toggle section and ensure its dropdown is closed
+        // Smoothly hide other mobile menu items (not the one opened)
+        allMenuItems.forEach(menuItem => {
+          if (menuItem !== mobileMenuItem) {
+            this.hideSmooth(menuItem as HTMLElement);
+            const arrowElement = menuItem.querySelector('.mobile-menu-arrow');
+            if (arrowElement) {
+              arrowElement.classList.remove('open');
+              arrowElement.innerHTML = `
+                <svg data-v-0c3b2dd6="" xmlns="http://www.w3.org/2000/svg" viewBox="-0.75 -0.75 24 24" fill="currentColor" class="inline-block align-baseline w-4 h-4 text-pink-500" svg="arrow-right" scale="">
+                  <path d="M5.156.703l10.05 10.05a.702.702 0 010 .994l-10.05 10.05" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+                </svg>
+              `;
+            }
+          }
+        });
+
+        // Hide businesses toggle section and ensure its dropdown is closed (smooth)
         const bizSection = document.querySelector('.mobile-business-section') as HTMLElement | null;
         const bizDropdown = document.querySelector('.mobile-business-dropdown');
         const bizToggle = document.querySelector('.mobile-business-toggle');
-        if (bizSection) bizSection.style.display = 'none';
+        if (bizSection) this.hideSmooth(bizSection);
         bizDropdown?.classList.remove('open');
         bizToggle?.classList.remove('open');
+        // Immediately hide quick links under the items
+        const quickLinksOpening = document.querySelector('.mobile-quick-links') as HTMLElement | null;
+        if (quickLinksOpening) {
+          quickLinksOpening.style.display = 'none';
+        }
 
         // Add back navigation header
         const backHeader = document.createElement("div");
@@ -1980,6 +2098,18 @@ export class NavbarWidget {
           }
           mobileMenuContent.insertBefore(backHeader, mobileMenuContent.firstChild);
 
+          // Animate the back header sliding in from left to right (Web Animations API)
+          const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          if (!prefersReduced && backHeader.animate) {
+            backHeader.animate(
+              [
+                { opacity: 0, transform: 'translateX(-20px)' },
+                { opacity: 1, transform: 'translateX(0)' }
+              ],
+              { duration: 280, easing: 'ease-out', fill: 'forwards' }
+            );
+          }
+
           // Add click handler for back navigation
           const backArrow = backHeader.querySelector('.mobile-back-arrow');
           if (backArrow) {
@@ -1999,6 +2129,8 @@ export class NavbarWidget {
             </svg>
           `;
         }
+
+        // Removed smooth reposition of dropdown per request
       }
     }
   }

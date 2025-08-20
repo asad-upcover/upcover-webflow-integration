@@ -1553,27 +1553,39 @@ export class NavbarWidget {
       bizDropdown.appendChild(btn);
     });
 
-    // Set initial active based on current theme
+    // Set initial active based on current theme and apply colors
     const currentBizTheme = this.themeManager.getCurrentTheme();
+    const activeColorInit = currentBizTheme === 'motor' ? '#3B4125' : this.themeManager.getCurrentColor();
     for (const id in bizButtonsById) {
       const button: HTMLButtonElement = bizButtonsById[id];
       if (!button) continue;
-      if (id === currentBizTheme) {
+      const isActive = id === currentBizTheme;
+      if (isActive) {
         button.classList.add('active');
+        button.style.color = activeColorInit;
+        button.style.fontWeight = '700';
       } else {
         button.classList.remove('active');
+        button.style.color = '#242826';
+        button.style.fontWeight = '500';
       }
     }
 
     // Update active state when theme changes
     this.themeManager.subscribe((theme: string) => {
+      const activeColor = theme === 'motor' ? '#3B4125' : this.themeManager.getCurrentColor();
       for (const id in bizButtonsById) {
         const button: HTMLButtonElement = bizButtonsById[id];
         if (!button) continue;
-        if (id === theme) {
+        const isActive = id === theme;
+        if (isActive) {
           button.classList.add('active');
+          button.style.color = activeColor;
+          button.style.fontWeight = '700';
         } else {
           button.classList.remove('active');
+          button.style.color = '#242826';
+          button.style.fontWeight = '500';
         }
       }
     });
@@ -1675,11 +1687,22 @@ export class NavbarWidget {
       `;
       (arrowIconWrap as HTMLElement).style.color = "#FF6B6B";
 
-      // Add click handler to arrow for dropdown
+      // Add click handlers so the WHOLE item opens the dropdown if available
       if (item.dropdown || item.boxComponent) {
         arrowIconWrap.style.cursor = "pointer";
         arrowIconWrap.addEventListener("click", (e) => {
           e.preventDefault();
+          e.stopPropagation();
+          this.toggleMobileDropdown(mobileMenuItem, item);
+        });
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          this.toggleMobileDropdown(mobileMenuItem, item);
+        });
+        mobileMenuItem.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
           this.toggleMobileDropdown(mobileMenuItem, item);
         });
       }
@@ -2141,10 +2164,18 @@ export class NavbarWidget {
           // Add click handler for back navigation
           const backArrow = backHeader.querySelector('.mobile-back-arrow');
           if (backArrow) {
-            backArrow.addEventListener('click', () => {
+            backArrow.addEventListener('click', (e) => {
+              e.preventDefault();
+              e.stopPropagation();
               this.toggleMobileDropdown(mobileMenuItem, item);
             });
           }
+          // Make the entire back header clickable to close
+          backHeader.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            this.toggleMobileDropdown(mobileMenuItem, item);
+          });
         }
 
         const arrowElement = mobileMenuItem.querySelector('.mobile-menu-arrow');

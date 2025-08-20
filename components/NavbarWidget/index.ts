@@ -2008,7 +2008,7 @@ export class NavbarWidget {
     // Prevent event bubbling to avoid closing mobile menu
     event?.stopPropagation();
 
-    const dropdownMenu = mobileMenuItem.nextElementSibling;
+    const dropdownMenu = mobileMenuItem.nextElementSibling as HTMLElement | null;
     if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
       // Close all other dropdowns first (accordion behavior)
       const allDropdowns = document.querySelectorAll('.mobile-menu-items .dropdown-menu');
@@ -2021,6 +2021,16 @@ export class NavbarWidget {
       });
 
       // Note: hide other menu items ONLY when opening (handled below)
+
+      // If a close animation is in progress, cancel it and keep dropdown open (prevents stuck state)
+      if (dropdownMenu.hasAttribute('data-closing')) {
+        (dropdownMenu as any).getAnimations?.().forEach((a: Animation) => a.cancel());
+        dropdownMenu.removeAttribute('data-closing');
+        dropdownMenu.style.opacity = '';
+        dropdownMenu.style.transform = '';
+        dropdownMenu.classList.add('active');
+        return;
+      }
 
       if (dropdownMenu.classList.contains('active')) {
         // Closing dropdown – animate slide down then clean up
@@ -2075,6 +2085,7 @@ export class NavbarWidget {
         };
 
         if (!prefersReduced && (dropdownEl as any).animate) {
+          dropdownEl.setAttribute('data-closing', '1');
           const anim = (dropdownEl as any).animate(
             [
               { opacity: 1, transform: 'translateY(0)' },
@@ -2085,6 +2096,7 @@ export class NavbarWidget {
           anim.onfinish = () => {
             dropdownEl.style.opacity = '';
             dropdownEl.style.transform = '';
+            dropdownEl.removeAttribute('data-closing');
             finishClose();
           };
         } else {
@@ -2092,6 +2104,16 @@ export class NavbarWidget {
         }
       } else {
         // Opening dropdown - hide other menu items and show back navigation
+        // Cancel any leftover animations and clear inline styles
+        (dropdownMenu as any).getAnimations?.().forEach((a: Animation) => a.cancel());
+        dropdownMenu.style.opacity = '';
+        dropdownMenu.style.transform = '';
+        // Force CSS animation restart by toggling animation property
+        const prevAnim = dropdownMenu.style.animation;
+        dropdownMenu.style.animation = 'none';
+        // Force reflow
+        void dropdownMenu.offsetWidth;
+        dropdownMenu.style.animation = prevAnim || '';
         dropdownMenu.classList.add('active');
         mobileMenuItem.classList.add('active');
 

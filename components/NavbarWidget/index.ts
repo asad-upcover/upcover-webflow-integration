@@ -1240,6 +1240,90 @@ export class NavbarWidget {
          font-weight: 600;
          color: #242826;
        }
+
+         /* === Hamburger / Close animated icon === */
+.mobile-menu-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #242826;
+  transition: color 0.2s ease;
+  /* remove old svg-specific rules below if present */
+}
+
+.burger {
+  position: relative;
+  width: 24px;
+  // height: 18px; 
+  display: inline-block;
+}
+
+.burger .line {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  /* inherit color from button so themes work automatically */
+  background: currentColor;
+  border-radius: 2px;
+  /* Phase 1 (merge) transition */
+  transition: transform 200ms cubic-bezier(.22,1,.36,1);
+  will-change: transform;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.burger .line .line-inner {
+  width: 100%;
+  height: 100%;
+  background: currentColor;
+  border-radius: 2px;
+  /* Phase 2 (morph) transition; starts after merge */
+  transition: transform 200ms cubic-bezier(.22,1,.36,1) 200ms,
+              opacity 200ms ease 200ms;
+  will-change: transform, opacity;
+  transform-origin: 50% 50%;
+}
+
+/* Initial positions (three bars) */
+.burger .l1 { transform: translateY(-6px); }
+.burger .l2 { transform: translateY( 0px); }
+.burger .l3 { transform: translateY( 6px); }
+
+/* When menu is open, run the 2-phase effect:
+   1) lines slide to center (outer .line translateY -> 0)
+   2) top/bottom rotate, middle fades out (inner .line-inner) */
+.mobile-menu-toggle.open .burger .l1 { transform: translateY(0); }
+.mobile-menu-toggle.open .burger .l3 { transform: translateY(0); }
+
+/* Cross rotation after delay (handled on inner spans) */
+.mobile-menu-toggle.open .burger .l1 .line-inner { transform: rotate(45deg); }
+.mobile-menu-toggle.open .burger .l3 .line-inner { transform: rotate(-45deg); }
+
+/* Middle bar fades out after delay */
+.mobile-menu-toggle.open .burger .l2 .line-inner { opacity: 0 !important; display: none !important; }
+
+.mobile-menu-toggle.open .burger .l2 {
+  opacity: 0 !important;
+  transform: translateY(0); /* make sure it's centered while invisible */
+  transition: opacity 150ms ease;
+}
+
+/* Reverse: removing .open reverses transitions:
+   - rotation resets (inner), then
+   - translateY returns to -6/0/6 (outer)
+   The built-in delays ensure it looks like: cross -> single line -> hamburger. */
+
+/* Optional: improve hit area on mobile */
+@media (max-width: 900px) {
+  .mobile-menu-toggle {
+    display: flex !important;
+    padding: 8px;
+  }
+}
+
          
 
       // @media screen and (max-width: 480px) {
@@ -1325,13 +1409,22 @@ export class NavbarWidget {
     const mobileMenuButton = document.createElement("button");
     mobileMenuButton.className = "mobile-menu-toggle";
     mobileMenuButton.innerHTML = `
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-           stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-           role="img" aria-label="Menu">
-        <title>Menu</title>
-        <path d="M3 6.5h18M3 12h18M3 17.5h18"/>
-      </svg>
-    `;
+  <span class="burger" aria-hidden="true">
+    <span class="line l1"><span class="line-inner"></span></span>
+    <span class="line l2"><span class="line-inner"></span></span>
+    <span class="line l3"><span class="line-inner"></span></span>
+  </span>
+`;
+mobileMenuButton.setAttribute('aria-expanded', 'false');
+mobileMenuButton.setAttribute('aria-label', 'Menu');
+    // mobileMenuButton.innerHTML = `
+    //   <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+    //        stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+    //        role="img" aria-label="Menu">
+    //     <title>Menu</title>
+    //     <path d="M3 6.5h18M3 12h18M3 17.5h18"/>
+    //   </svg>
+    // `;
     mobileMenuButton.addEventListener("click", () => {
       this.toggleMobileMenu();
     });
@@ -1413,96 +1506,74 @@ export class NavbarWidget {
   }
 
   private toggleMobileMenu(): void {
-    const mobileMenu = document.querySelector('.mobile-menu-overlay');
-    const mobileMenuButton = document.querySelector('.mobile-menu-toggle');
-
-    if (mobileMenu) {
-      if (mobileMenu.classList.contains('active')) {
-        mobileMenu.classList.remove('active');
-        mobileMenuButton?.classList.remove('open');
-        // Switch back to hamburger icon
-        if (mobileMenuButton) {
-          mobileMenuButton.innerHTML = `
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                 stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-                 role="img" aria-label="Menu">
-              <title>Menu</title>
-              <path d="M3 6.5h18M3 12h18M3 17.5h18"/>
-            </svg>
-          `;
-        }
-      } else {
-        mobileMenu.classList.add('active');
-        mobileMenuButton?.classList.add('open');
-        // Switch to close icon
-        if (mobileMenuButton) {
-          mobileMenuButton.innerHTML = `
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                 stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-                 role="img" aria-label="Close">
-              <title>Close</title>
-              <path d="M6 6l12 12M6 18L18 6"/>
-            </svg>
-          `;
-        }
-
-        // Add click outside listener
-        setTimeout(() => {
-          const handleClickOutside = (event: Event) => {
-            const target = event.target as HTMLElement;
-
-            // Check if clicking on dropdown content or mobile menu items
-            const isClickingDropdown = target.closest('.dropdown-menu');
-            const isClickingMobileMenu = target.closest('.mobile-menu-overlay');
-            const isClickingHamburger = mobileMenuButton?.contains(target);
-            const isClickingBizToggle = !!target.closest('.mobile-business-toggle');
-
-            // Only close if clicking completely outside the mobile menu system
-            if (!isClickingMobileMenu && !isClickingHamburger && !isClickingBizToggle) {
-              this.closeMobileMenu();
-              document.removeEventListener('click', handleClickOutside);
-            }
-          };
-          document.addEventListener('click', handleClickOutside);
-        }, 100);
-      }
+    const mobileMenu = document.querySelector('.mobile-menu-overlay') as HTMLElement | null;
+    const mobileMenuButton = document.querySelector('.mobile-menu-toggle') as HTMLButtonElement | null;
+  
+    if (!mobileMenu || !mobileMenuButton) return;
+  
+    const willOpen = !mobileMenu.classList.contains('active');
+  
+    if (!willOpen) {
+      this.closeMobileMenu();
+      return;
     }
+  
+    // Open
+    mobileMenu.classList.add('active');
+    mobileMenuButton.classList.add('open');
+    mobileMenuButton.setAttribute('aria-expanded', 'true');
+    mobileMenuButton.setAttribute('aria-label', 'Close');
+  
+    // Add click-outside listener
+    setTimeout(() => {
+      const handleClickOutside = (event: Event) => {
+        const target = event.target as HTMLElement;
+  
+        // Check if clicking on dropdown content or mobile menu items
+        const isClickingDropdown = !!target.closest('.dropdown-menu');
+        const isClickingMobileMenu = !!target.closest('.mobile-menu-overlay');
+        const isClickingHamburger = !!mobileMenuButton.contains(target);
+        const isClickingBizToggle = !!target.closest('.mobile-business-toggle');
+  
+        // Only close if clicking completely outside the mobile menu system
+        if (!isClickingMobileMenu && !isClickingHamburger && !isClickingBizToggle) {
+          this.closeMobileMenu();
+          document.removeEventListener('click', handleClickOutside);
+        }
+      };
+      document.addEventListener('click', handleClickOutside);
+    }, 100);
   }
+  
 
   private closeMobileMenu(): void {
-    const mobileMenu = document.querySelector('.mobile-menu-overlay');
-    const mobileMenuButton = document.querySelector('.mobile-menu-toggle');
-
+    const mobileMenu = document.querySelector('.mobile-menu-overlay') as HTMLElement | null;
+    const mobileMenuButton = document.querySelector('.mobile-menu-toggle') as HTMLButtonElement | null;
+  
     if (mobileMenu) {
       mobileMenu.classList.remove('active');
-      mobileMenuButton?.classList.remove('open');
-      // Switch back to hamburger icon
-      if (mobileMenuButton) {
-        mobileMenuButton.innerHTML = `
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-               stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-               role="img" aria-label="Menu">
-            <title>Menu</title>
-            <path d="M3 6.5h18M3 12h18M3 17.5h18"/>
-          </svg>
-        `;
-      }
-
-      // Reset businesses section visibility and state when closing overlay
-      const bizSection = document.querySelector('.mobile-business-section') as HTMLElement | null;
-      const bizDropdown = document.querySelector('.mobile-business-dropdown');
-      const bizToggle = document.querySelector('.mobile-business-toggle');
-      if (bizSection) bizSection.style.display = '';
-      bizDropdown?.classList.remove('open');
-      bizToggle?.classList.remove('open');
-      const bizArrowWrap = document.querySelector('.mobile-business-toggle .mb-arrow') as HTMLElement | null;
-      if (bizArrowWrap) bizArrowWrap.innerHTML = `${plusIcon}`;
-
-      // Restore quick links visibility when overlay closes
-      const quickLinks = document.querySelector('.mobile-quick-links') as HTMLElement | null;
-      if (quickLinks) quickLinks.style.display = '';
     }
+    if (mobileMenuButton) {
+      mobileMenuButton.classList.remove('open');
+      mobileMenuButton.setAttribute('aria-expanded', 'false');
+      mobileMenuButton.setAttribute('aria-label', 'Menu');
+    }
+  
+    // Reset businesses section visibility and state when closing overlay
+    const bizSection = document.querySelector('.mobile-business-section') as HTMLElement | null;
+    const bizDropdown = document.querySelector('.mobile-business-dropdown');
+    const bizToggle = document.querySelector('.mobile-business-toggle');
+    if (bizSection) bizSection.style.display = '';
+    bizDropdown?.classList.remove('open');
+    bizToggle?.classList.remove('open');
+    const bizArrowWrap = document.querySelector('.mobile-business-toggle .mb-arrow') as HTMLElement | null;
+    if (bizArrowWrap) bizArrowWrap.innerHTML = `${plusIcon}`;
+  
+    // Restore quick links visibility when overlay closes
+    const quickLinks = document.querySelector('.mobile-quick-links') as HTMLElement | null;
+    if (quickLinks) quickLinks.style.display = '';
   }
+  
 
   private createMobileMenu(): HTMLElement {
     const mobileMenu = document.createElement("div");

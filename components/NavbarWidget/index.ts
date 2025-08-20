@@ -1241,90 +1241,61 @@ export class NavbarWidget {
          color: #242826;
        }
 
-         /* === Hamburger / Close animated icon === */
-.mobile-menu-toggle {
-  display: none;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  color: #242826;
-  transition: color 0.2s ease;
-  /* remove old svg-specific rules below if present */
-}
+      /* Kill any leftover SVG inside the toggle, just in case */
+      .mobile-menu-toggle svg { display: none !important; }
 
-.burger {
-  position: relative;
-  width: 24px;
-  // height: 18px; 
-  display: inline-block;
-}
+      /* Animated hamburger -> cross */
+      .burger {
+        position: relative;
+        width: 24px;
+        height: 18px;          /* space for 3 lines */
+        display: inline-block;
+      }
 
-.burger .line {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  /* inherit color from button so themes work automatically */
-  background: currentColor;
-  border-radius: 2px;
-  /* Phase 1 (merge) transition */
-  transition: transform 200ms cubic-bezier(.22,1,.36,1);
-  will-change: transform;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
+      .burger .line {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: currentColor;   /* picks up theme color */
+        border-radius: 2px;
+        transform: translateY(0) rotate(0deg);
+        transition: transform 200ms cubic-bezier(.22,1,.36,1),
+                    opacity 150ms ease;
+        will-change: transform, opacity;
+      }
 
-.burger .line .line-inner {
-  width: 100%;
-  height: 100%;
-  background: currentColor;
-  border-radius: 2px;
-  /* Phase 2 (morph) transition; starts after merge */
-  transition: transform 200ms cubic-bezier(.22,1,.36,1) 200ms,
-              opacity 200ms ease 200ms;
-  will-change: transform, opacity;
-  transform-origin: 50% 50%;
-}
+      /* Initial positions (three bars) */
+      .burger .line:nth-of-type(1) { transform: translateY(-6px); }
+      .burger .line:nth-of-type(2) { transform: translateY( 0px); }
+      .burger .line:nth-of-type(3) { transform: translateY( 6px); }
 
-/* Initial positions (three bars) */
-.burger .l1 { transform: translateY(-6px); }
-.burger .l2 { transform: translateY( 0px); }
-.burger .l3 { transform: translateY( 6px); }
+      /* OPEN: merge then rotate to cross, and remove the middle bar */
+      .mobile-menu-toggle.open .burger .line:nth-of-type(1) {
+        transform: translateY(0) rotate(45deg);
+      }
+      .mobile-menu-toggle.open .burger .line:nth-of-type(3) {
+        transform: translateY(0) rotate(-45deg);
+      }
 
-/* When menu is open, run the 2-phase effect:
-   1) lines slide to center (outer .line translateY -> 0)
-   2) top/bottom rotate, middle fades out (inner .line-inner) */
-.mobile-menu-toggle.open .burger .l1 { transform: translateY(0); }
-.mobile-menu-toggle.open .burger .l3 { transform: translateY(0); }
+      /* HARD HIDE the middle bar — no more asterisk */
+      .mobile-menu-toggle.open .burger .line:nth-of-type(2) {
+        opacity: 0 !important;
+        pointer-events: none !important;
+        /* If something else still paints it, nuke it: */
+        background: transparent !important;
+      }
 
-/* Cross rotation after delay (handled on inner spans) */
-.mobile-menu-toggle.open .burger .l1 .line-inner { transform: rotate(45deg); }
-.mobile-menu-toggle.open .burger .l3 .line-inner { transform: rotate(-45deg); }
+      /* Better tap target on mobile */
+      @media (max-width: 900px) {
+        .mobile-menu-toggle { display: flex !important; padding: 8px; }
+      }
 
-/* Middle bar fades out after delay */
-.mobile-menu-toggle.open .burger .l2 .line-inner { opacity: 0 !important; display: none !important; }
+      /* Respect reduced motion (optional) */
+      @media (prefers-reduced-motion: reduce) {
+        .burger .line { transition: none !important; }
+      }
 
-.mobile-menu-toggle.open .burger .l2 {
-  opacity: 0 !important;
-  transform: translateY(0); /* make sure it's centered while invisible */
-  transition: opacity 150ms ease;
-}
-
-/* Reverse: removing .open reverses transitions:
-   - rotation resets (inner), then
-   - translateY returns to -6/0/6 (outer)
-   The built-in delays ensure it looks like: cross -> single line -> hamburger. */
-
-/* Optional: improve hit area on mobile */
-@media (max-width: 900px) {
-  .mobile-menu-toggle {
-    display: flex !important;
-    padding: 8px;
-  }
-}
-
-         
 
       // @media screen and (max-width: 480px) {
       //   #navbar {
@@ -1409,14 +1380,15 @@ export class NavbarWidget {
     const mobileMenuButton = document.createElement("button");
     mobileMenuButton.className = "mobile-menu-toggle";
     mobileMenuButton.innerHTML = `
-  <span class="burger" aria-hidden="true">
-    <span class="line l1"><span class="line-inner"></span></span>
-    <span class="line l2"><span class="line-inner"></span></span>
-    <span class="line l3"><span class="line-inner"></span></span>
-  </span>
-`;
-mobileMenuButton.setAttribute('aria-expanded', 'false');
-mobileMenuButton.setAttribute('aria-label', 'Menu');
+        <span class="burger" aria-hidden="true">
+          <span class="line"></span>
+          <span class="line"></span>
+          <span class="line"></span>
+        </span>
+      `;
+      mobileMenuButton.setAttribute('aria-expanded', 'false');
+      mobileMenuButton.setAttribute('aria-label', 'Menu');
+    
     // mobileMenuButton.innerHTML = `
     //   <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
     //        stroke="currentColor" stroke-width="1.8" stroke-linecap="round"

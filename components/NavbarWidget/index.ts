@@ -2104,8 +2104,8 @@ export class NavbarWidget {
           }
 
           // Show businesses toggle section again (smooth)
-          const bizSection = document.querySelector('.mobile-business-section') as HTMLElement | null;
-          if (bizSection) this.showSmooth(bizSection);
+                // const bizSection = document.querySelector('.mobile-business-section') as HTMLElement | null;
+                // if (bizSection) this.showSmooth(bizSection);
           // Show quick links again
           const quickLinksClosing = document.querySelector('.mobile-quick-links') as HTMLElement | null;
           if (quickLinksClosing) {
@@ -2179,12 +2179,12 @@ export class NavbarWidget {
         });
 
         // Hide businesses toggle section and ensure its dropdown is closed (smooth)
-        const bizSection = document.querySelector('.mobile-business-section') as HTMLElement | null;
-        const bizDropdown = document.querySelector('.mobile-business-dropdown');
-        const bizToggle = document.querySelector('.mobile-business-toggle');
-        if (bizSection) this.hideSmooth(bizSection);
-        bizDropdown?.classList.remove('open');
-        bizToggle?.classList.remove('open');
+                  // const bizSection = document.querySelector('.mobile-business-section') as HTMLElement | null;
+                  // const bizDropdown = document.querySelector('.mobile-business-dropdown');
+                  // const bizToggle = document.querySelector('.mobile-business-toggle');
+                  // if (bizSection) this.hideSmooth(bizSection);
+                  // bizDropdown?.classList.remove('open');
+                  // bizToggle?.classList.remove('open');
         // Immediately hide quick links under the items
         const quickLinksOpening = document.querySelector('.mobile-quick-links') as HTMLElement | null;
         if (quickLinksOpening) {
@@ -2208,10 +2208,16 @@ export class NavbarWidget {
         if (mobileMenuContent) {
           // Remove existing back header if any
           const existingBackHeader = mobileMenuContent.querySelector('.mobile-back-header');
-          if (existingBackHeader) {
-            existingBackHeader.remove();
+          if (existingBackHeader) existingBackHeader.remove();
+        
+          // 👉 Insert the back header right AFTER the Businesses section, not at the top
+          const bizSection = mobileMenuContent.querySelector('.mobile-business-section');
+          if (bizSection && bizSection.parentNode) {
+            bizSection.parentNode.insertBefore(backHeader, bizSection.nextSibling);
+          } else {
+            // Fallback: keep previous behavior if section isn't found
+            mobileMenuContent.insertBefore(backHeader, mobileMenuContent.firstChild);
           }
-          mobileMenuContent.insertBefore(backHeader, mobileMenuContent.firstChild);
 
           // Animate the back header sliding in from left to right (Web Animations API)
           const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;

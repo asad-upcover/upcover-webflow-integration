@@ -1101,7 +1101,7 @@ export class NavbarWidget {
          margin: 10px 0;
          padding: 10px 20px;
          box-sizing: border-box;
-         animation: slideUp 1s ease-out;
+         animation: slideUp 0.5s ease-out;
        }
        
        @keyframes slideUp {
@@ -1732,21 +1732,23 @@ export class NavbarWidget {
       // Add click handlers so the WHOLE item opens the dropdown if available
       if (item.dropdown || item.boxComponent) {
         arrowIconWrap.style.cursor = "pointer";
+        // after
         arrowIconWrap.addEventListener("click", (e) => {
           e.preventDefault();
           e.stopPropagation();
-          this.toggleMobileDropdown(mobileMenuItem, item);
+          this.toggleMobileDropdown(mobileMenuItem, item, e);
         });
         link.addEventListener("click", (e) => {
           e.preventDefault();
           e.stopPropagation();
-          this.toggleMobileDropdown(mobileMenuItem, item);
+          this.toggleMobileDropdown(mobileMenuItem, item, e);
         });
         mobileMenuItem.addEventListener("click", (e) => {
           e.preventDefault();
           e.stopPropagation();
-          this.toggleMobileDropdown(mobileMenuItem, item);
+          this.toggleMobileDropdown(mobileMenuItem, item, e);
         });
+
       }
 
       mobileMenuItem.appendChild(link);
@@ -1849,6 +1851,47 @@ export class NavbarWidget {
     mobileMenu.appendChild(mobileMenuContent);
     return mobileMenu;
   }
+
+  // Smoothly animate the back header back to where the mobileMenuItem sits (FLIP)
+private animateBackHeaderReturn(backHeader: HTMLElement, mobileMenuItem: HTMLElement, onFinish: () => void) {
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Ensure we can measure both positions (briefly reveal the item to get its rect)
+  const prevDisplay = mobileMenuItem.style.display;
+  mobileMenuItem.style.display = 'flex';
+
+  const firstRect = backHeader.getBoundingClientRect();
+  const lastRect  = mobileMenuItem.getBoundingClientRect();
+
+  // Restore hidden (we’ll show properly after animation completes)
+  mobileMenuItem.style.display = prevDisplay;
+
+  const dx = lastRect.left - firstRect.left;
+  const dy = lastRect.top  - firstRect.top;
+
+  if (prefersReduced || !(backHeader as any).animate) {
+    // No motion: just remove and finish
+    backHeader.remove();
+    onFinish();
+    return;
+  }
+
+  backHeader.style.willChange = 'transform, opacity';
+
+  const anim = (backHeader as any).animate(
+    [
+      { transform: 'translate(0,0)',           opacity: 1 },
+      { transform: `translate(${dx}px, ${dy}px)`, opacity: 0.001 }
+    ],
+    { duration: 320, easing: 'cubic-bezier(.22,1,.36,1)', fill: 'forwards' }
+  );
+
+  anim.onfinish = () => {
+    backHeader.remove();
+    onFinish();
+  };
+}
+
 
 
   private createMobileDropdown(item: MenuItem): HTMLElement {
@@ -2046,9 +2089,12 @@ export class NavbarWidget {
     return dropdownMenu;
   }
 
-  private toggleMobileDropdown(mobileMenuItem: HTMLElement, item: MenuItem): void {
-    // Prevent event bubbling to avoid closing mobile menu
-    event?.stopPropagation();
+  private toggleMobileDropdown(
+    mobileMenuItem: HTMLElement,
+    item: MenuItem,
+    ev?: Event
+  ): void {
+    ev?.stopPropagation();
 
     const dropdownMenu = mobileMenuItem.nextElementSibling as HTMLElement | null;
     if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
@@ -2089,19 +2135,20 @@ export class NavbarWidget {
           // Animate and remove back header when closing dropdown
           const existingBackHeader = document.querySelector('.mobile-back-header') as HTMLElement | null;
           if (existingBackHeader) {
-            if (!prefersReduced && existingBackHeader.animate) {
-              const animation = existingBackHeader.animate(
-                [
-                  { opacity: 1, transform: 'translateX(0)' },
-                  { opacity: 0, transform: 'translateX(-20px)' }
-                ],
-                { duration: 220, easing: 'ease-in', fill: 'forwards' }
-              );
-              animation.onfinish = () => existingBackHeader.remove();
-            } else {
-              existingBackHeader.remove();
-            }
+            // Animate the back header “flying back” to the hidden menu item, THEN show all items
+            this.animateBackHeaderReturn(existingBackHeader, mobileMenuItem, () => {
+              // After back header returns, restore items with your existing smooth show
+              allMenuItems.forEach(menuItem => {
+                this.showSmooth(menuItem as HTMLElement, 'flex');
+              });
+            });
+          } else {
+            // Fallback: if no back header, just restore items
+            allMenuItems.forEach(menuItem => {
+              this.showSmooth(menuItem as HTMLElement, 'flex');
+            });
           }
+          
 
           // Show businesses toggle section again (smooth)
                 // const bizSection = document.querySelector('.mobile-business-section') as HTMLElement | null;
@@ -2219,17 +2266,18 @@ export class NavbarWidget {
             mobileMenuContent.insertBefore(backHeader, mobileMenuContent.firstChild);
           }
 
-          // Animate the back header sliding in from left to right (Web Animations API)
+          // Animate the back header vertically (match dropdown)
           const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
           if (!prefersReduced && backHeader.animate) {
             backHeader.animate(
               [
-                { opacity: 0, transform: 'translateX(-20px)' },
-                { opacity: 1, transform: 'translateX(0)' }
+                { opacity: 0, transform: 'translateY(100px)' },
+                { opacity: 1, transform: 'translateY(0)' }
               ],
-              { duration: 280, easing: 'ease-out', fill: 'forwards' }
+              { duration: 500, easing: 'ease-out', fill: 'forwards' }
             );
           }
+
 
           // Add click handler for back navigation
           const backArrow = backHeader.querySelector('.mobile-back-arrow');

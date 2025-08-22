@@ -1371,6 +1371,54 @@ export class NavbarWidget {
     );
   }
 
+  // Smoothly reveal a list of elements with a small translate and staggered delays
+  private revealSmoothStagger(elements: HTMLElement[], options?: { display?: string; translateY?: number; duration?: number; easing?: string; baseDelay?: number }): void {
+    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const display = options?.display ?? 'flex';
+    const translateY = options?.translateY ?? 12;
+    const duration = options?.duration ?? 260;
+    const easing = options?.easing ?? 'cubic-bezier(.22,1,.36,1)';
+    const baseDelay = options?.baseDelay ?? 60;
+
+    elements.forEach((el, idx) => {
+      // Ensure we know previous display
+      if (!el.getAttribute('data-prev-display')) {
+        el.setAttribute('data-prev-display', getComputedStyle(el).display || '');
+      }
+      el.style.display = display;
+
+      if (prefersReduced || !(el as any).animate) {
+        el.style.opacity = '';
+        el.style.transform = '';
+        return;
+      }
+
+      // Prime initial state
+      el.style.opacity = '0';
+      el.style.transform = `translateY(${translateY}px)`;
+      el.style.willChange = 'opacity, transform';
+
+      const delay = idx * baseDelay;
+      // Next frame, animate to final
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          const anim = (el as any).animate(
+            [
+              { opacity: 0, transform: `translateY(${translateY}px)` },
+              { opacity: 1, transform: 'translateY(0)' }
+            ],
+            { duration, easing, fill: 'forwards' }
+          );
+          anim.onfinish = () => {
+            el.style.opacity = '';
+            el.style.transform = '';
+            el.style.willChange = '';
+          };
+        }, delay);
+      });
+    });
+  }
+
   private createActions(): HTMLElement {
     const actionsDiv = document.createElement("div");
     actionsDiv.className = "actions";
@@ -1852,44 +1900,58 @@ export class NavbarWidget {
     return mobileMenu;
   }
 
-  // Smoothly animate the back header back to where the mobileMenuItem sits (FLIP)
-private animateBackHeaderReturn(backHeader: HTMLElement, mobileMenuItem: HTMLElement, onFinish: () => void) {
+  // Smoothly animate the back header back to a target element's position (FLIP)
+private animateBackHeaderReturn(backHeader: HTMLElement, targetElement: HTMLElement, onFinish: () => void) {
   const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Ensure we can measure both positions (briefly reveal the item to get its rect)
-  const prevDisplay = mobileMenuItem.style.display;
-  mobileMenuItem.style.display = 'flex';
-
   const firstRect = backHeader.getBoundingClientRect();
-  const lastRect  = mobileMenuItem.getBoundingClientRect();
 
-  // Restore hidden (we’ll show properly after animation completes)
-  mobileMenuItem.style.display = prevDisplay;
+  const run = () => {
+    // Ensure we can measure the target even if hidden
+    const computed = getComputedStyle(targetElement);
+    const wasHidden = computed.display === 'none';
+    const prevDisplay = targetElement.style.display;
+    const prevVisibility = targetElement.style.visibility;
+    if (wasHidden) {
+      targetElement.style.display = 'flex';
+      targetElement.style.visibility = 'hidden';
+    }
 
-  const dx = lastRect.left - firstRect.left;
-  const dy = lastRect.top  - firstRect.top;
+    const lastRect = targetElement.getBoundingClientRect();
 
-  if (prefersReduced || !(backHeader as any).animate) {
-    // No motion: just remove and finish
-    backHeader.remove();
-    onFinish();
-    return;
-  }
+    // Restore if we revealed for measurement
+    if (wasHidden) {
+      targetElement.style.display = prevDisplay;
+      targetElement.style.visibility = prevVisibility;
+    }
 
-  backHeader.style.willChange = 'transform, opacity';
+    const dx = lastRect.left - firstRect.left;
+    const dy = lastRect.top  - firstRect.top;
 
-  const anim = (backHeader as any).animate(
-    [
-      { transform: 'translate(0,0)',           opacity: 1 },
-      { transform: `translate(${dx}px, ${dy}px)`, opacity: 0.001 }
-    ],
-    { duration: 320, easing: 'cubic-bezier(.22,1,.36,1)', fill: 'forwards' }
-  );
+    if (prefersReduced || !(backHeader as any).animate) {
+      backHeader.remove();
+      onFinish();
+      return;
+    }
 
-  anim.onfinish = () => {
-    backHeader.remove();
-    onFinish();
+    backHeader.style.willChange = 'transform, opacity';
+
+    const anim = (backHeader as any).animate(
+      [
+        { transform: 'translate(0,0)',           opacity: 1 },
+        { transform: `translate(${dx}px, ${dy}px)`, opacity: 0.001 }
+      ],
+      { duration: 360, easing: 'cubic-bezier(.22,1,.36,1)', fill: 'forwards' }
+    );
+
+    anim.onfinish = () => {
+      backHeader.remove();
+      onFinish();
+    };
   };
+
+  // Wait a frame so any layout changes (revealed siblings) are applied before measuring
+  requestAnimationFrame(() => run());
 }
 
 
@@ -2121,38 +2183,42 @@ private animateBackHeaderReturn(backHeader: HTMLElement, mobileMenuItem: HTMLEle
       }
 
       if (dropdownMenu.classList.contains('active')) {
-        // Closing dropdown – animate slide down then clean up
+        // Closing dropdown – immediately hide dropdown content and then restore list smoothly
         const dropdownEl = dropdownMenu as HTMLElement;
         const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
         const finishClose = () => {
           dropdownEl.classList.remove('active');
           mobileMenuItem.classList.remove('active');
-          allMenuItems.forEach(menuItem => {
-            this.showSmooth(menuItem as HTMLElement, 'flex');
-          });
+
+          // Prepare lists
+          const itemsArray = Array.from(allMenuItems) as HTMLElement[];
+          const otherItems = itemsArray.filter((el) => el !== mobileMenuItem);
+
+          const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
           // Animate and remove back header when closing dropdown
           const existingBackHeader = document.querySelector('.mobile-back-header') as HTMLElement | null;
           if (existingBackHeader) {
-            // Animate the back header “flying back” to the hidden menu item, THEN show all items
+            // While the back header flies back, reveal non-active items with a smooth stagger
+            this.revealSmoothStagger(otherItems, { baseDelay: 60, translateY: 12, duration: 260 });
+
+            // After header returns, reveal the active item in its place
             this.animateBackHeaderReturn(existingBackHeader, mobileMenuItem, () => {
-              // After back header returns, restore items with your existing smooth show
-              allMenuItems.forEach(menuItem => {
-                this.showSmooth(menuItem as HTMLElement, 'flex');
-              });
+              // Ensure active item occupies its slot; reveal smoothly with a subtle lift
+              this.revealSmoothStagger([mobileMenuItem as HTMLElement], { baseDelay: 0, translateY: 8, duration: 220 });
             });
           } else {
-            // Fallback: if no back header, just restore items
-            allMenuItems.forEach(menuItem => {
-              this.showSmooth(menuItem as HTMLElement, 'flex');
-            });
+            // No back header: smooth stagger others first, then the active item
+            this.revealSmoothStagger(otherItems, { baseDelay: 60, translateY: 12, duration: 260 });
+            const lastDelay = (otherItems.length - 1) * 60;
+            if (prefersReduced) {
+              this.revealSmoothStagger([mobileMenuItem as HTMLElement], { baseDelay: 0, translateY: 8, duration: 220 });
+            } else {
+              setTimeout(() => this.revealSmoothStagger([mobileMenuItem as HTMLElement], { baseDelay: 0, translateY: 8, duration: 220 }), Math.max(0, lastDelay));
+            }
           }
-          
 
-          // Show businesses toggle section again (smooth)
-                // const bizSection = document.querySelector('.mobile-business-section') as HTMLElement | null;
-                // if (bizSection) this.showSmooth(bizSection);
           // Show quick links again
           const quickLinksClosing = document.querySelector('.mobile-quick-links') as HTMLElement | null;
           if (quickLinksClosing) {
@@ -2173,30 +2239,24 @@ private animateBackHeaderReturn(backHeader: HTMLElement, mobileMenuItem: HTMLEle
           }
         };
 
-        if (!prefersReduced && (dropdownEl as any).animate) {
-          dropdownEl.setAttribute('data-closing', '1');
-          const anim = (dropdownEl as any).animate(
-            [
-              { opacity: 1, transform: 'translateY(0)' },
-              { opacity: 0, transform: 'translateY(100px)' }
-            ],
-            { duration: 500, easing: 'ease-in', fill: 'forwards' }
-          );
-          anim.onfinish = () => {
-            dropdownEl.style.opacity = '';
-            dropdownEl.style.transform = '';
-            dropdownEl.removeAttribute('data-closing');
-            finishClose();
-          };
-        } else {
-          finishClose();
-        }
+        // Cancel any in-flight animations and immediately hide dropdown content
+        (dropdownEl as any).getAnimations?.().forEach((a: Animation) => a.cancel());
+        dropdownEl.removeAttribute('data-closing');
+        dropdownEl.style.opacity = '';
+        dropdownEl.style.transform = '';
+        dropdownEl.classList.remove('active');
+        dropdownEl.style.display = 'none';
+        // proceed to restore list
+        finishClose();
       } else {
         // Opening dropdown - hide other menu items and show back navigation
         // Cancel any leftover animations and clear inline styles
         (dropdownMenu as any).getAnimations?.().forEach((a: Animation) => a.cancel());
         dropdownMenu.style.opacity = '';
         dropdownMenu.style.transform = '';
+        // Ensure any inline display:none from previous close is cleared so CSS can show it
+        dropdownMenu.style.removeProperty('display');
+
         // Force CSS animation restart by toggling animation property
         const prevAnim = dropdownMenu.style.animation;
         dropdownMenu.style.animation = 'none';

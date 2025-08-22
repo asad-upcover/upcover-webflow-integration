@@ -1218,7 +1218,7 @@ export class NavbarWidget {
        .mobile-back-header {
          display: flex;
          align-items: center;
-         padding: 15px 0;
+         padding: 20px 0;
          border-bottom: 1px solid #E0E0E0;
          cursor: pointer;
        }
@@ -1955,6 +1955,69 @@ private animateBackHeaderReturn(backHeader: HTMLElement, targetElement: HTMLElem
 }
 
 
+  // For first menu item: fade out the left arrow and slide the back-header text horizontally into the target slot
+  private animateBackHeaderTextReturn(backHeader: HTMLElement, targetElement: HTMLElement, onFinish: () => void) {
+    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const arrowEl = backHeader.querySelector('.mobile-back-arrow') as HTMLElement | null;
+    const textEl = backHeader.querySelector('.mobile-back-text') as HTMLElement | null;
+    if (!textEl) {
+      backHeader.remove();
+      onFinish();
+      return;
+    }
+
+    // Measure current text position and target slot position
+    const textRect = textEl.getBoundingClientRect();
+    const wasHidden = getComputedStyle(targetElement).display === 'none';
+    const prevDisplay = targetElement.style.display;
+    const prevVisibility = targetElement.style.visibility;
+    if (wasHidden) {
+      targetElement.style.display = 'flex';
+      targetElement.style.visibility = 'hidden';
+    }
+    const targetRect = targetElement.getBoundingClientRect();
+    if (wasHidden) {
+      targetElement.style.display = prevDisplay;
+      targetElement.style.visibility = prevVisibility;
+    }
+
+    const dx = targetRect.left - textRect.left;
+
+    if (prefersReduced || !(textEl as any).animate) {
+      if (arrowEl) arrowEl.style.display = 'none';
+      backHeader.remove();
+      onFinish();
+      return;
+    }
+
+    const animations: Animation[] = [] as any;
+    if (arrowEl && (arrowEl as any).animate) {
+      const a = (arrowEl as any).animate(
+        [ { opacity: 1 }, { opacity: 0 } ],
+        { duration: 180, easing: 'ease-out', fill: 'forwards' }
+      );
+      animations.push(a);
+    }
+
+    const t = (textEl as any).animate(
+      [ { transform: 'translateX(0)' }, { transform: `translateX(${dx}px)` } ],
+      { duration: 240, easing: 'cubic-bezier(.22,1,.36,1)', fill: 'forwards' }
+    );
+    animations.push(t);
+
+    let finished = 0;
+    const done = () => {
+      finished += 1;
+      if (finished >= animations.length) {
+        backHeader.remove();
+        onFinish();
+      }
+    };
+    animations.forEach(a => a.onfinish = done);
+  }
+
+
 
   private createMobileDropdown(item: MenuItem): HTMLElement {
     const dropdownMenu = document.createElement('div');
@@ -2191,27 +2254,56 @@ private animateBackHeaderReturn(backHeader: HTMLElement, targetElement: HTMLElem
           dropdownEl.classList.remove('active');
           mobileMenuItem.classList.remove('active');
 
-          // Prepare lists
+          // Prepare lists and indices
           const itemsArray = Array.from(allMenuItems) as HTMLElement[];
+          const activeIndex = itemsArray.indexOf(mobileMenuItem as HTMLElement);
           const otherItems = itemsArray.filter((el) => el !== mobileMenuItem);
+          const beforeActive = itemsArray.slice(0, activeIndex).filter((el) => el !== mobileMenuItem);
+          const afterActive = itemsArray.slice(activeIndex + 1).filter((el) => el !== mobileMenuItem);
 
           const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
           // Animate and remove back header when closing dropdown
           const existingBackHeader = document.querySelector('.mobile-back-header') as HTMLElement | null;
           if (existingBackHeader) {
-            // While the back header flies back, reveal non-active items with a smooth stagger
-            this.revealSmoothStagger(otherItems, { baseDelay: 60, translateY: 12, duration: 260 });
+            // Reveal non-active items smoothly: first those above, then those below
+            this.revealSmoothStagger(beforeActive, { baseDelay: 50, translateY: 12, duration: 260 });
+            const beforeTime = (beforeActive.length - 1) * 50 + 180;
+            setTimeout(() => {
+              this.revealSmoothStagger(afterActive, { baseDelay: 50, translateY: 12, duration: 260 });
+            }, Math.max(0, beforeTime));
 
-            // After header returns, reveal the active item in its place
-            this.animateBackHeaderReturn(existingBackHeader, mobileMenuItem, () => {
-              // Ensure active item occupies its slot; reveal smoothly with a subtle lift
-              this.revealSmoothStagger([mobileMenuItem as HTMLElement], { baseDelay: 0, translateY: 8, duration: 220 });
-            });
+            // If active item belongs to index 0, hide only the left arrow and slide the label back into place
+            if (activeIndex === 0) {
+              // Pre-show the active item without animation to avoid flicker
+              const prevDisplay = (mobileMenuItem as HTMLElement).getAttribute('data-prev-display') || '';
+              (mobileMenuItem as HTMLElement).style.display = prevDisplay || 'flex';
+              (mobileMenuItem as HTMLElement).style.visibility = 'hidden';
+
+              this.animateBackHeaderTextReturn(existingBackHeader, mobileMenuItem, () => {
+                // Reveal instantly in place, no fade to avoid blink
+                (mobileMenuItem as HTMLElement).style.visibility = '';
+              });
+            } else {
+              // For other indices, pre-show the active item hidden to avoid flicker during FLIP
+              const prevDisplay = (mobileMenuItem as HTMLElement).getAttribute('data-prev-display') || '';
+              (mobileMenuItem as HTMLElement).style.display = prevDisplay || 'flex';
+              (mobileMenuItem as HTMLElement).style.visibility = 'hidden';
+
+              // Fly the back header to the active item's slot
+              this.animateBackHeaderReturn(existingBackHeader, mobileMenuItem, () => {
+                // Make the active item visible instantly in-place (no extra fade)
+                (mobileMenuItem as HTMLElement).style.visibility = '';
+              });
+            }
           } else {
             // No back header: smooth stagger others first, then the active item
-            this.revealSmoothStagger(otherItems, { baseDelay: 60, translateY: 12, duration: 260 });
-            const lastDelay = (otherItems.length - 1) * 60;
+            this.revealSmoothStagger(beforeActive, { baseDelay: 50, translateY: 12, duration: 260 });
+            const beforeTime = (beforeActive.length - 1) * 50 + 160;
+            setTimeout(() => {
+              this.revealSmoothStagger(afterActive, { baseDelay: 50, translateY: 12, duration: 260 });
+            }, Math.max(0, beforeTime));
+            const lastDelay = beforeTime + (afterActive.length - 1) * 50;
             if (prefersReduced) {
               this.revealSmoothStagger([mobileMenuItem as HTMLElement], { baseDelay: 0, translateY: 8, duration: 220 });
             } else {
@@ -2242,10 +2334,12 @@ private animateBackHeaderReturn(backHeader: HTMLElement, targetElement: HTMLElem
         // Cancel any in-flight animations and immediately hide dropdown content
         (dropdownEl as any).getAnimations?.().forEach((a: Animation) => a.cancel());
         dropdownEl.removeAttribute('data-closing');
-        dropdownEl.style.opacity = '';
-        dropdownEl.style.transform = '';
+        // Hide without layout jump to avoid blink
         dropdownEl.classList.remove('active');
-        dropdownEl.style.display = 'none';
+        dropdownEl.style.opacity = '0';
+        dropdownEl.style.transform = '';
+        dropdownEl.style.visibility = 'hidden';
+        dropdownEl.style.pointerEvents = 'none';
         // proceed to restore list
         finishClose();
       } else {
@@ -2256,6 +2350,8 @@ private animateBackHeaderReturn(backHeader: HTMLElement, targetElement: HTMLElem
         dropdownMenu.style.transform = '';
         // Ensure any inline display:none from previous close is cleared so CSS can show it
         dropdownMenu.style.removeProperty('display');
+        dropdownMenu.style.removeProperty('visibility');
+        dropdownMenu.style.removeProperty('pointer-events');
 
         // Force CSS animation restart by toggling animation property
         const prevAnim = dropdownMenu.style.animation;

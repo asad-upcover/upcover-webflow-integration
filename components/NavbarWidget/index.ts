@@ -2311,49 +2311,51 @@ private animateBackHeaderReturn(backHeader: HTMLElement, targetElement: HTMLElem
           // Animate and remove back header when closing dropdown
           const existingBackHeader = document.querySelector('.mobile-back-header') as HTMLElement | null;
           if (existingBackHeader) {
-            // Reveal non-active items smoothly: first those above, then those below
-            this.revealSmoothStagger(beforeActive, { baseDelay: 50, translateY: 12, duration: 260 });
-            const beforeTime = (beforeActive.length - 1) * 50 + 180;
-            setTimeout(() => {
-              this.revealSmoothStagger(afterActive, { baseDelay: 50, translateY: 12, duration: 260 });
-            }, Math.max(0, beforeTime));
+            // Reveal non-active items smoothly and immediately (no pause) — horizontal slide
+            const neighbors = [...beforeActive, ...afterActive] as HTMLElement[];
+            this.revealSmoothStaggerX(neighbors, { baseDelay: 0, translateX: -14, duration: 200 });
 
             // If active item belongs to index 0, hide only the left arrow and slide the label back into place
             if (activeIndex === 0) {
-              // Pre-show the active item without animation to avoid flicker
+              // Remove active item from layout immediately so neighbors can move without pause
               const prevDisplay = (mobileMenuItem as HTMLElement).getAttribute('data-prev-display') || '';
-              (mobileMenuItem as HTMLElement).style.display = prevDisplay || 'flex';
-              (mobileMenuItem as HTMLElement).style.visibility = 'hidden';
+              (mobileMenuItem as HTMLElement).setAttribute('data-prev-display', prevDisplay || 'flex');
+              (mobileMenuItem as HTMLElement).style.display = 'none';
+              (mobileMenuItem as HTMLElement).style.visibility = '';
 
-              // Neighbors: everyone else slides in horizontally immediately
-              this.revealSmoothStaggerX(beforeActive, { baseDelay: 30, translateX: -14, duration: 220 });
-              this.revealSmoothStaggerX(afterActive, { baseDelay: 30, translateX: -14, duration: 220 });
+              // Neighbors: horizontal slide into place immediately
+              const neighbors = [...beforeActive, ...afterActive] as HTMLElement[];
+              this.revealSmoothStaggerX(neighbors, { baseDelay: 0, translateX: -14, duration: 200 });
 
               this.animateBackHeaderTextReturn(existingBackHeader, mobileMenuItem, () => {
-                // Reveal instantly in place, no fade to avoid blink
+                // Restore the item to its original slot instantly
+                const prev = (mobileMenuItem as HTMLElement).getAttribute('data-prev-display') || 'flex';
+                (mobileMenuItem as HTMLElement).style.display = prev;
                 (mobileMenuItem as HTMLElement).style.visibility = '';
               });
             } else {
-              // Non-first: neighbors fill the gap first with a horizontal slide, leaving the active slot empty
-              this.revealSmoothStaggerX(beforeActive, { baseDelay: 30, translateX: -14, duration: 220 });
-              this.revealSmoothStaggerX(afterActive, { baseDelay: 30, translateX: -14, duration: 220 });
+              // Non-first: remove active item from layout immediately, then move neighbors
+              const prevDisplay = (mobileMenuItem as HTMLElement).getAttribute('data-prev-display') || '';
+              (mobileMenuItem as HTMLElement).setAttribute('data-prev-display', prevDisplay || 'flex');
+              (mobileMenuItem as HTMLElement).style.display = 'none';
+              (mobileMenuItem as HTMLElement).style.visibility = '';
+
+              const neighbors = [...beforeActive, ...afterActive] as HTMLElement[];
+              this.revealSmoothStaggerX(neighbors, { baseDelay: 0, translateX: -14, duration: 200 });
 
               // Fly the back header to the active item's slot
               this.animateBackHeaderReturn(existingBackHeader, mobileMenuItem, () => {
-                // After FLIP reaches the slot, reveal the active item instantly in place
-                const prevDisplay = (mobileMenuItem as HTMLElement).getAttribute('data-prev-display') || '';
-                (mobileMenuItem as HTMLElement).style.display = prevDisplay || 'flex';
+                // After FLIP reaches the slot, restore the active item instantly in place
+                const prev = (mobileMenuItem as HTMLElement).getAttribute('data-prev-display') || 'flex';
+                (mobileMenuItem as HTMLElement).style.display = prev;
                 (mobileMenuItem as HTMLElement).style.visibility = '';
               });
             }
           } else {
-            // No back header: smooth stagger others first, then the active item
-            this.revealSmoothStagger(beforeActive, { baseDelay: 50, translateY: 12, duration: 260 });
-            const beforeTime = (beforeActive.length - 1) * 50 + 160;
-            setTimeout(() => {
-              this.revealSmoothStagger(afterActive, { baseDelay: 50, translateY: 12, duration: 260 });
-            }, Math.max(0, beforeTime));
-            const lastDelay = beforeTime + (afterActive.length - 1) * 50;
+            // No back header: reveal all neighbors immediately without delay
+            const neighborsNoHeader = [...beforeActive, ...afterActive] as HTMLElement[];
+            this.revealSmoothStaggerX(neighborsNoHeader, { baseDelay: 0, translateX: -14, duration: 200 });
+            const lastDelay = 0;
             if (prefersReduced) {
               this.revealSmoothStagger([mobileMenuItem as HTMLElement], { baseDelay: 0, translateY: 8, duration: 220 });
             } else {

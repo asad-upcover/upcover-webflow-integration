@@ -1419,6 +1419,51 @@ export class NavbarWidget {
     });
   }
 
+  // Smoothly reveal a list of elements with horizontal translateX and staggered delays
+  private revealSmoothStaggerX(elements: HTMLElement[], options?: { display?: string; translateX?: number; duration?: number; easing?: string; baseDelay?: number }): void {
+    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const display = options?.display ?? 'flex';
+    const translateX = options?.translateX ?? -14;
+    const duration = options?.duration ?? 260;
+    const easing = options?.easing ?? 'cubic-bezier(.22,1,.36,1)';
+    const baseDelay = options?.baseDelay ?? 40;
+
+    elements.forEach((el, idx) => {
+      if (!el.getAttribute('data-prev-display')) {
+        el.setAttribute('data-prev-display', getComputedStyle(el).display || '');
+      }
+      el.style.display = display;
+
+      if (prefersReduced || !(el as any).animate) {
+        el.style.opacity = '';
+        el.style.transform = '';
+        return;
+      }
+
+      el.style.opacity = '0';
+      el.style.transform = `translateX(${translateX}px)`;
+      el.style.willChange = 'opacity, transform';
+
+      const delay = idx * baseDelay;
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          const anim = (el as any).animate(
+            [
+              { opacity: 0, transform: `translateX(${translateX}px)` },
+              { opacity: 1, transform: 'translateX(0)' }
+            ],
+            { duration, easing, fill: 'forwards' }
+          );
+          anim.onfinish = () => {
+            el.style.opacity = '';
+            el.style.transform = '';
+            el.style.willChange = '';
+          };
+        }, delay);
+      });
+    });
+  }
+
   private createActions(): HTMLElement {
     const actionsDiv = document.createElement("div");
     actionsDiv.className = "actions";
@@ -2280,19 +2325,24 @@ private animateBackHeaderReturn(backHeader: HTMLElement, targetElement: HTMLElem
               (mobileMenuItem as HTMLElement).style.display = prevDisplay || 'flex';
               (mobileMenuItem as HTMLElement).style.visibility = 'hidden';
 
+              // Neighbors: everyone else slides in horizontally immediately
+              this.revealSmoothStaggerX(beforeActive, { baseDelay: 30, translateX: -14, duration: 220 });
+              this.revealSmoothStaggerX(afterActive, { baseDelay: 30, translateX: -14, duration: 220 });
+
               this.animateBackHeaderTextReturn(existingBackHeader, mobileMenuItem, () => {
                 // Reveal instantly in place, no fade to avoid blink
                 (mobileMenuItem as HTMLElement).style.visibility = '';
               });
             } else {
-              // For other indices, pre-show the active item hidden to avoid flicker during FLIP
-              const prevDisplay = (mobileMenuItem as HTMLElement).getAttribute('data-prev-display') || '';
-              (mobileMenuItem as HTMLElement).style.display = prevDisplay || 'flex';
-              (mobileMenuItem as HTMLElement).style.visibility = 'hidden';
+              // Non-first: neighbors fill the gap first with a horizontal slide, leaving the active slot empty
+              this.revealSmoothStaggerX(beforeActive, { baseDelay: 30, translateX: -14, duration: 220 });
+              this.revealSmoothStaggerX(afterActive, { baseDelay: 30, translateX: -14, duration: 220 });
 
               // Fly the back header to the active item's slot
               this.animateBackHeaderReturn(existingBackHeader, mobileMenuItem, () => {
-                // Make the active item visible instantly in-place (no extra fade)
+                // After FLIP reaches the slot, reveal the active item instantly in place
+                const prevDisplay = (mobileMenuItem as HTMLElement).getAttribute('data-prev-display') || '';
+                (mobileMenuItem as HTMLElement).style.display = prevDisplay || 'flex';
                 (mobileMenuItem as HTMLElement).style.visibility = '';
               });
             }

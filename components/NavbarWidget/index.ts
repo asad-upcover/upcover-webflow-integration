@@ -580,7 +580,7 @@ export class NavbarWidget {
   margin: 10px 0;
   padding: 10px 20px;
   box-sizing: border-box;
-  z-index: 1000;
+  z-index: 1000 !important;
   animation: slideUp 0.25s ease-out;
 }
 

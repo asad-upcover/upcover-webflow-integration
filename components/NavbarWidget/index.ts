@@ -967,14 +967,16 @@ export class NavbarWidget {
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       }
       
-      .mobile-menu-overlay.active {
-        opacity: 1;
-        transform: translateY(0);
-        pointer-events: auto;
-        max-height: 100vh;
-        background-color: #FFFFFF;
-      }
-      
+        @media (max-width: 900px) {
+          .mobile-menu-overlay.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+            max-height: 100vh;
+            background-color: #FFFFFF;
+          }
+        }
+
       .mobile-menu-content {
         width: 100%;
         padding: 20px;

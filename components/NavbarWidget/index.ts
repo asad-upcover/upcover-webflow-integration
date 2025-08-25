@@ -569,6 +569,42 @@ export class NavbarWidget {
   font-weight: 600;
 }
 
+/* put this inside your existing @media (max-width: 900px) block */
+
+/* Make the moved dropdown render with mobile styles */
+.mobile-active-panel .dropdown-menu.three-column {
+  display: block !important;
+  width: 100%;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  margin: 10px 0;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  animation: slideUp 0.5s ease-out;
+}
+
+/* Mirror mobile column + content tweaks */
+.mobile-active-panel .dropdown-column { margin-bottom: 20px; max-width: none; }
+.mobile-active-panel .dropdown-column h4 { font-size: 16px; font-weight: 700; margin-bottom: 15px; color: #242826; }
+.mobile-active-panel .dropdown-column ul { list-style: none; padding: 0; margin: 0; border-top: 1px solid #F0F0F0; }
+.mobile-active-panel .dropdown-column ul li { margin-bottom: 12px; font-size: 14px; color: #555; cursor: pointer; transition: color 0.3s; }
+
+/* Box component mobile look */
+.mobile-active-panel .dropdown-box-container { margin-top: 20px; background-color: #f8f9fa; border-radius: 8px; }
+.mobile-active-panel .box-first-div,
+.mobile-active-panel .box-second-div {
+  background: #FFFFFF;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #e9ecef;
+  width: auto;
+}
+.mobile-active-panel .box-first-div img { width: 100%; height: 120px; object-fit: cover; border-radius: 6px; margin-bottom: 15px; }
+.mobile-active-panel .button-container { display: flex; flex-direction: column; gap: 10px; }
+.mobile-active-panel .box-button { padding: 12px 16px; border-radius: 6px; font-size: 14px; font-weight: 600; }
+
+
 @media (max-width: 900px) {
   .mobile-quick-links {
     padding-bottom: 24px;
@@ -1297,26 +1333,11 @@ export class NavbarWidget {
         .burger .line { transition: none !important; }
       }
 
+      .mobile-active-panel .dropdown-menu.three-column {
+  display: block !important;   /* ensure it shows when moved to the top panel */
+  margin-top: 10px;
+}
 
-      // @media screen and (max-width: 480px) {
-      //   #navbar {
-      //     padding: 1rem;
-      //   }
-        
-        
-      //   .mobile-menu-content {
-      //     padding: 15px;
-      //     padding-top: 20px;
-      //   }
-        
-      //   .mobile-menu-item {
-      //     padding: 15px 0;
-      //   }
-        
-      //   .mobile-menu-link {
-      //     font-size: 16px;
-      //   }
-      // }
 
     `;
     document.head.appendChild(style);
@@ -2261,266 +2282,224 @@ private animateBackHeaderReturn(backHeader: HTMLElement, targetElement: HTMLElem
     return dropdownMenu;
   }
 
-  private toggleMobileDropdown(
-    mobileMenuItem: HTMLElement,
-    item: MenuItem,
-    ev?: Event
-  ): void {
-    ev?.stopPropagation();
+private toggleMobileDropdown(
+  mobileMenuItem: HTMLElement,
+  item: MenuItem,
+  ev?: Event
+): void {
+  ev?.stopPropagation();
 
-    const dropdownMenu = mobileMenuItem.nextElementSibling as HTMLElement | null;
-    if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
-      // Close all other dropdowns first (accordion behavior)
-      const allDropdowns = document.querySelectorAll('.mobile-menu-items .dropdown-menu');
-      const allMenuItems = document.querySelectorAll('.mobile-menu-items .mobile-menu-item');
+  let dropdownMenu = mobileMenuItem.nextElementSibling as HTMLElement | null;
+  if (!dropdownMenu || !dropdownMenu.classList.contains('dropdown-menu')) {
+    dropdownMenu = this.target.querySelector('.mobile-active-panel .dropdown-menu') as HTMLElement | null;
+  }
+  if (!dropdownMenu) return;
 
-      allDropdowns.forEach(dropdown => {
-        if (dropdown !== dropdownMenu) {
-          dropdown.classList.remove('active');
-        }
-      });
+  const allDropdowns = this.target.querySelectorAll('.mobile-menu-items .dropdown-menu');
+  const allMenuItems = this.target.querySelectorAll('.mobile-menu-items .mobile-menu-item');
+  const mobileMenuContent = this.target.querySelector('.mobile-menu-content') as HTMLElement | null;
 
-      // Note: hide other menu items ONLY when opening (handled below)
+  const ensureTopScaffold = () => {
+    if (!mobileMenuContent) return { backHeader: null as HTMLElement | null, panel: null as HTMLElement | null };
 
-      // If a close animation is in progress, cancel it and keep dropdown open (prevents stuck state)
-      if (dropdownMenu.hasAttribute('data-closing')) {
-        (dropdownMenu as any).getAnimations?.().forEach((a: Animation) => a.cancel());
-        dropdownMenu.removeAttribute('data-closing');
+    const oldHeader = mobileMenuContent.querySelector('.mobile-back-header');
+    const oldPanel  = mobileMenuContent.querySelector('.mobile-active-panel');
+    oldHeader?.remove();
+    oldPanel?.remove();
+
+    const backHeader = document.createElement('div');
+    backHeader.className = 'mobile-back-header';
+    backHeader.innerHTML = `
+      <span class="mobile-back-arrow">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="-0.75 -0.75 24 24" fill="currentColor" width="16" height="16">
+          <path d="M15.234 21.797l-10.05-10.05a.702.702 0 010-.994L15.234.703" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+        </svg>
+      </span>
+      <span class="mobile-back-text">${item.label}</span>
+    `;
+
+    const bizSection = mobileMenuContent.querySelector('.mobile-business-section');
+    if (bizSection && bizSection.parentNode) {
+      bizSection.parentNode.insertBefore(backHeader, bizSection.nextSibling);
+    } else {
+      mobileMenuContent.insertBefore(backHeader, mobileMenuContent.firstChild);
+    }
+
+    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!prefersReduced && backHeader.animate) {
+      backHeader.animate(
+        [{ opacity: 0, transform: 'translateY(100px)' }, { opacity: 1, transform: 'translateY(0)' }],
+        { duration: 500, easing: 'ease-out', fill: 'forwards' }
+      );
+    }
+
+    const panel = document.createElement('div');
+    panel.className = 'mobile-active-panel';
+    mobileMenuContent.insertBefore(panel, backHeader.nextSibling);
+
+    backHeader.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      this.toggleMobileDropdown(mobileMenuItem, item);
+    });
+
+    return { backHeader, panel };
+  };
+
+  // Close other dropdowns
+  allDropdowns.forEach(d => {
+    if (d !== dropdownMenu) {
+      d.classList.remove('active');
+      (d as HTMLElement).style.opacity = '0';
+      (d as HTMLElement).style.transform = 'translateY(20px)';
+      (d as HTMLElement).style.pointerEvents = 'none';
+    }
+  });
+
+  const existingHeader = this.target.querySelector('.mobile-back-header');
+  const existingPanel  = this.target.querySelector('.mobile-active-panel');
+  const isOpen = dropdownMenu.classList.contains('active');
+
+  if (isOpen) {
+    // 🔴 CLOSE
+    const originId = dropdownMenu.dataset.originItemId;
+    const originItem = originId
+      ? this.target.querySelector<HTMLElement>(`#${originId}`)
+      : mobileMenuItem;
+
+    dropdownMenu.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+    dropdownMenu.style.opacity = '0';
+    dropdownMenu.style.transform = 'translateY(20px)';
+    dropdownMenu.style.pointerEvents = 'none';
+
+    // after animation completes, move back under its origin item
+      setTimeout(() => {
+        originItem?.insertAdjacentElement('afterend', dropdownMenu);
+        dropdownMenu.classList.remove('active');
         dropdownMenu.style.opacity = '';
         dropdownMenu.style.transform = '';
-        dropdownMenu.classList.add('active');
-        return;
-      }
-
-      if (dropdownMenu.classList.contains('active')) {
-        // Closing dropdown – immediately hide dropdown content and then restore list smoothly
-        const dropdownEl = dropdownMenu as HTMLElement;
-        const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-        const finishClose = () => {
-          dropdownEl.classList.remove('active');
-          mobileMenuItem.classList.remove('active');
-
-          // Prepare lists and indices
-          const itemsArray = Array.from(allMenuItems) as HTMLElement[];
-          const activeIndex = itemsArray.indexOf(mobileMenuItem as HTMLElement);
-          const otherItems = itemsArray.filter((el) => el !== mobileMenuItem);
-          const beforeActive = itemsArray.slice(0, activeIndex).filter((el) => el !== mobileMenuItem);
-          const afterActive = itemsArray.slice(activeIndex + 1).filter((el) => el !== mobileMenuItem);
-
-          const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-          // Animate and remove back header when closing dropdown
-          const existingBackHeader = document.querySelector('.mobile-back-header') as HTMLElement | null;
-          if (existingBackHeader) {
-            // Reveal non-active items smoothly and immediately (no pause) — horizontal slide
-            const neighbors = [...beforeActive, ...afterActive] as HTMLElement[];
-            this.revealSmoothStaggerX(neighbors, { baseDelay: 0, translateX: -14, duration: 200 });
-
-            // If active item belongs to index 0, hide only the left arrow and slide the label back into place
-            if (activeIndex === 0) {
-              // Remove active item from layout immediately so neighbors can move without pause
-              const prevDisplay = (mobileMenuItem as HTMLElement).getAttribute('data-prev-display') || '';
-              (mobileMenuItem as HTMLElement).setAttribute('data-prev-display', prevDisplay || 'flex');
-              (mobileMenuItem as HTMLElement).style.display = 'none';
-              (mobileMenuItem as HTMLElement).style.visibility = '';
-
-              // Neighbors: horizontal slide into place immediately
-              const neighbors = [...beforeActive, ...afterActive] as HTMLElement[];
-              this.revealSmoothStaggerX(neighbors, { baseDelay: 0, translateX: -14, duration: 200 });
-
-              this.animateBackHeaderTextReturn(existingBackHeader, mobileMenuItem, () => {
-                // Restore the item to its original slot instantly
-                const prev = (mobileMenuItem as HTMLElement).getAttribute('data-prev-display') || 'flex';
-                (mobileMenuItem as HTMLElement).style.display = prev;
-                (mobileMenuItem as HTMLElement).style.visibility = '';
-              });
-            } else {
-              // Non-first: remove active item from layout immediately, then move neighbors
-              const prevDisplay = (mobileMenuItem as HTMLElement).getAttribute('data-prev-display') || '';
-              (mobileMenuItem as HTMLElement).setAttribute('data-prev-display', prevDisplay || 'flex');
-              (mobileMenuItem as HTMLElement).style.display = 'none';
-              (mobileMenuItem as HTMLElement).style.visibility = '';
-
-              const neighbors = [...beforeActive, ...afterActive] as HTMLElement[];
-              this.revealSmoothStaggerX(neighbors, { baseDelay: 0, translateX: -14, duration: 200 });
-
-              // Fly the back header to the active item's slot
-              this.animateBackHeaderReturn(existingBackHeader, mobileMenuItem, () => {
-                // After FLIP reaches the slot, restore the active item instantly in place
-                const prev = (mobileMenuItem as HTMLElement).getAttribute('data-prev-display') || 'flex';
-                (mobileMenuItem as HTMLElement).style.display = prev;
-                (mobileMenuItem as HTMLElement).style.visibility = '';
-              });
-            }
-          } else {
-            // No back header: reveal all neighbors immediately without delay
-            const neighborsNoHeader = [...beforeActive, ...afterActive] as HTMLElement[];
-            this.revealSmoothStaggerX(neighborsNoHeader, { baseDelay: 0, translateX: -14, duration: 200 });
-            const lastDelay = 0;
-            if (prefersReduced) {
-              this.revealSmoothStagger([mobileMenuItem as HTMLElement], { baseDelay: 0, translateY: 8, duration: 220 });
-            } else {
-              setTimeout(() => this.revealSmoothStagger([mobileMenuItem as HTMLElement], { baseDelay: 0, translateY: 8, duration: 220 }), Math.max(0, lastDelay));
-            }
-          }
-
-          // Show quick links again
-          const quickLinksClosing = document.querySelector('.mobile-quick-links') as HTMLElement | null;
-          if (quickLinksClosing) {
-            quickLinksClosing.style.display = '';
-          }
-          // Reset businesses icon to plus when closing another dropdown
-          const bizArrowWrap = document.querySelector('.mobile-business-toggle .mb-arrow') as HTMLElement | null;
-          if (bizArrowWrap) bizArrowWrap.innerHTML = `${plusIcon}`;
-
-          const arrowElement = mobileMenuItem.querySelector('.mobile-menu-arrow');
-          if (arrowElement) {
-            arrowElement.classList.remove('open');
-            arrowElement.innerHTML = `
-              <svg data-v-0c3b2dd6="" xmlns="http://www.w3.org/2000/svg" viewBox="-0.75 -0.75 24 24" fill="currentColor" class="inline-block align-baseline w-4 h-4 text-pink-500" svg="arrow-right" scale="">
-                <path d="M5.156.703l10.05 10.05a.702.702 0 010 .994l-10.05 10.05" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
-              </svg>
-            `;
-          }
-        };
-
-        // Cancel any in-flight animations and immediately hide dropdown content
-        (dropdownEl as any).getAnimations?.().forEach((a: Animation) => a.cancel());
-        dropdownEl.removeAttribute('data-closing');
-        // Hide without layout jump to avoid blink
-        dropdownEl.classList.remove('active');
-        dropdownEl.style.opacity = '0';
-        dropdownEl.style.transform = '';
-        dropdownEl.style.visibility = 'hidden';
-        dropdownEl.style.pointerEvents = 'none';
-        // proceed to restore list
-        finishClose();
-      } else {
-        // Opening dropdown - hide other menu items and show back navigation
-        // Cancel any leftover animations and clear inline styles
-        (dropdownMenu as any).getAnimations?.().forEach((a: Animation) => a.cancel());
-        dropdownMenu.style.opacity = '';
-        dropdownMenu.style.transform = '';
-        // Ensure any inline display:none from previous close is cleared so CSS can show it
-        dropdownMenu.style.removeProperty('display');
-        dropdownMenu.style.removeProperty('visibility');
-        dropdownMenu.style.removeProperty('pointer-events');
-
-        // Force CSS animation restart by toggling animation property
-        const prevAnim = dropdownMenu.style.animation;
-        dropdownMenu.style.animation = 'none';
-        // Force reflow
-        void dropdownMenu.offsetWidth;
-        dropdownMenu.style.animation = prevAnim || '';
-        dropdownMenu.classList.add('active');
-        mobileMenuItem.classList.add('active');
-
-        // Hide the main menu item when dropdown is expanded
-        mobileMenuItem.style.display = 'none';
-
-        // Smoothly hide other mobile menu items (not the one opened)
-        allMenuItems.forEach(menuItem => {
-          if (menuItem !== mobileMenuItem) {
-            this.hideSmooth(menuItem as HTMLElement);
-            const arrowElement = menuItem.querySelector('.mobile-menu-arrow');
-            if (arrowElement) {
-              arrowElement.classList.remove('open');
-              arrowElement.innerHTML = `
-                <svg data-v-0c3b2dd6="" xmlns="http://www.w3.org/2000/svg" viewBox="-0.75 -0.75 24 24" fill="currentColor" class="inline-block align-baseline w-4 h-4 text-pink-500" svg="arrow-right" scale="">
-                  <path d="M5.156.703l10.05 10.05a.702.702 0 010 .994l-10.05 10.05" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
-                </svg>
-              `;
-            }
-          }
-        });
-
-        // Hide businesses toggle section and ensure its dropdown is closed (smooth)
-                  // const bizSection = document.querySelector('.mobile-business-section') as HTMLElement | null;
-                  // const bizDropdown = document.querySelector('.mobile-business-dropdown');
-                  // const bizToggle = document.querySelector('.mobile-business-toggle');
-                  // if (bizSection) this.hideSmooth(bizSection);
-                  // bizDropdown?.classList.remove('open');
-                  // bizToggle?.classList.remove('open');
-        // Immediately hide quick links under the items
-        const quickLinksOpening = document.querySelector('.mobile-quick-links') as HTMLElement | null;
-        if (quickLinksOpening) {
-          quickLinksOpening.style.display = 'none';
-        }
-
-        // Add back navigation header
-        const backHeader = document.createElement("div");
-        backHeader.className = "mobile-back-header";
-        backHeader.innerHTML = `
-          <span class="mobile-back-arrow">
-            <svg data-v-0c3b2dd6="" xmlns="http://www.w3.org/2000/svg" viewBox="-0.75 -0.75 24 24" fill="currentColor" class="inline-block align-baseline w-4 h-4 text-black" svg="arrow-left" scale="">
-              <path d="M15.234 21.797l-10.05-10.05a.702.702 0 010-.994L15.234.703" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
-            </svg>
-          </span>
-          <span class="mobile-back-text">${item.label}</span>
-        `;
-
-        // Insert back header at the beginning of mobile menu content
-        const mobileMenuContent = document.querySelector('.mobile-menu-content');
-        if (mobileMenuContent) {
-          // Remove existing back header if any
-          const existingBackHeader = mobileMenuContent.querySelector('.mobile-back-header');
-          if (existingBackHeader) existingBackHeader.remove();
-        
-          // 👉 Insert the back header right AFTER the Businesses section, not at the top
-          const bizSection = mobileMenuContent.querySelector('.mobile-business-section');
-          if (bizSection && bizSection.parentNode) {
-            bizSection.parentNode.insertBefore(backHeader, bizSection.nextSibling);
-          } else {
-            // Fallback: keep previous behavior if section isn't found
-            mobileMenuContent.insertBefore(backHeader, mobileMenuContent.firstChild);
-          }
-
-          // Animate the back header vertically (match dropdown)
-          const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-          if (!prefersReduced && backHeader.animate) {
-            backHeader.animate(
-              [
-                { opacity: 0, transform: 'translateY(100px)' },
-                { opacity: 1, transform: 'translateY(0)' }
-              ],
-              { duration: 500, easing: 'ease-out', fill: 'forwards' }
-            );
-          }
+        dropdownMenu.style.pointerEvents = '';
+        dropdownMenu.style.transition = '';
+        dropdownMenu.style.display = 'none';   // 👈 ensure it’s hidden when closed
+      }, 300);
 
 
-          // Add click handler for back navigation
-          const backArrow = backHeader.querySelector('.mobile-back-arrow');
-          if (backArrow) {
-            backArrow.addEventListener('click', (e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              this.toggleMobileDropdown(mobileMenuItem, item);
-            });
-          }
-          // Make the entire back header clickable to close
-          backHeader.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            this.toggleMobileDropdown(mobileMenuItem, item);
-          });
-        }
+    // Fade items back
+    allMenuItems.forEach(mi => {
+      (mi as HTMLElement).style.transition = 'opacity 0.3s ease';
+      (mi as HTMLElement).style.opacity = '1';
+    });
 
-        const arrowElement = mobileMenuItem.querySelector('.mobile-menu-arrow');
-        if (arrowElement) {
-          arrowElement.classList.add('open');
-          arrowElement.innerHTML = `
-            <svg data-v-0c3b2dd6="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Close">
-              <title>Close</title>
-              <path d="M6 6l12 12M6 18L18 6"/>
+    if (existingHeader) {
+  const arrow = existingHeader.querySelector('.mobile-back-arrow');
+  const text  = existingHeader.querySelector('.mobile-back-text');
+
+  if (arrow && text) {
+    // Animate arrow + text sliding out to the left
+    const anim1 = (arrow as any).animate(
+      [
+        { transform: 'translateX(0)', opacity: 1 },
+        { transform: 'translateX(-40px)', opacity: 0 }
+      ],
+      { duration: 100, easing: 'ease-in-out', fill: 'forwards' }
+    );
+
+    const anim2 = (text as any).animate(
+      [
+        { transform: 'translateX(0)', opacity: 1 },
+        { transform: 'translateX(-40px)', opacity: 0 }
+      ],
+      { duration: 100, easing: 'ease-in-out', fill: 'forwards' }
+    );
+
+    anim2.onfinish = () => {
+      existingHeader.remove();
+    };
+  } else {
+    existingHeader.remove();
+  }
+}
+
+    existingPanel?.remove();
+
+    const quickLinks = this.target.querySelector('.mobile-quick-links') as HTMLElement | null;
+    if (quickLinks) quickLinks.style.display = '';
+
+    const arrowElement = mobileMenuItem.querySelector('.mobile-menu-arrow');
+    if (arrowElement) {
+      arrowElement.classList.remove('open');
+      arrowElement.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="-0.75 -0.75 24 24" fill="currentColor" width="16" height="16">
+          <path d="M5.156.703l10.05 10.05a.702.702 0 010 .994l-10.05 10.05"
+            fill="none" stroke="currentColor" stroke-linecap="round"
+            stroke-linejoin="round" stroke-width="1.5"/>
+        </svg>
+      `;
+    }
+
+  } else {
+    // 🟢 OPEN
+    if (!mobileMenuItem.id) {
+      mobileMenuItem.id = `mmi-${Date.now()}-${Math.random().toString(36).slice(2,8)}`;
+    }
+    dropdownMenu.dataset.originItemId = mobileMenuItem.id;
+
+    const { panel } = ensureTopScaffold();
+    if (!panel) return;
+
+    panel.appendChild(dropdownMenu);
+
+    dropdownMenu.style.display = 'block';
+    dropdownMenu.classList.add('active');
+    dropdownMenu.style.opacity = '0';
+    dropdownMenu.style.transform = 'translateY(100px)';
+    dropdownMenu.style.pointerEvents = 'auto';
+    dropdownMenu.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+    requestAnimationFrame(() => {
+      dropdownMenu.style.opacity = '1';
+      dropdownMenu.style.transform = 'translateY(0)';
+    });
+
+    // Fade ALL items (keep layout)
+    allMenuItems.forEach(mi => {
+      (mi as HTMLElement).style.transition = 'opacity 0.3s ease';
+      (mi as HTMLElement).style.opacity = '0';
+    });
+
+    const quickLinks = this.target.querySelector('.mobile-quick-links') as HTMLElement | null;
+    if (quickLinks) quickLinks.style.display = 'none';
+
+    // Reset other arrows, set this one to cross
+    allMenuItems.forEach(mi => {
+      if (mi !== mobileMenuItem) {
+        const arr = mi.querySelector('.mobile-menu-arrow');
+        if (arr) {
+          arr.classList.remove('open');
+          arr.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="-0.75 -0.75 24 24" fill="currentColor" width="16" height="16">
+              <path d="M5.156.703l10.05 10.05a.702.702 0 010 .994l-10.05 10.05"
+                fill="none" stroke="currentColor" stroke-linecap="round"
+                stroke-linejoin="round" stroke-width="1.5"/>
             </svg>
           `;
         }
-
-        // Removed smooth reposition of dropdown per request
       }
+    });
+    const arrowElement = mobileMenuItem.querySelector('.mobile-menu-arrow');
+    if (arrowElement) {
+      arrowElement.classList.add('open');
+      arrowElement.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 6l12 12M6 18L18 6"/>
+        </svg>
+      `;
     }
   }
+}
+
+
+
 
   public render(): void {
     this.target.innerHTML = "";

@@ -2291,7 +2291,7 @@ private toggleMobileDropdown(
 
     // Fade ALL items (keep layout)
     allMenuItems.forEach(mi => {
-      (mi as HTMLElement).style.transition = 'opacity 0.3s ease';
+      (mi as HTMLElement).style.transition = 'opacity 0.1s ease';
       (mi as HTMLElement).style.opacity = '0';
     });
 

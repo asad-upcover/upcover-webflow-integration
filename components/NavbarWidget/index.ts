@@ -2391,35 +2391,8 @@ private toggleMobileDropdown(
     });
 
     if (existingHeader) {
-  const arrow = existingHeader.querySelector('.mobile-back-arrow');
-  const text  = existingHeader.querySelector('.mobile-back-text');
-
-  if (arrow && text) {
-    // Animate arrow + text sliding out to the left
-    const anim1 = (arrow as any).animate(
-      [
-        { transform: 'translateX(0)', opacity: 1 },
-        { transform: 'translateX(-40px)', opacity: 0 }
-      ],
-      { duration: 100, easing: 'ease-in-out', fill: 'forwards' }
-    );
-
-    const anim2 = (text as any).animate(
-      [
-        { transform: 'translateX(0)', opacity: 1 },
-        { transform: 'translateX(-40px)', opacity: 0 }
-      ],
-      { duration: 100, easing: 'ease-in-out', fill: 'forwards' }
-    );
-
-    anim2.onfinish = () => {
       existingHeader.remove();
-    };
-  } else {
-    existingHeader.remove();
-  }
-}
-
+    }
     existingPanel?.remove();
 
     const quickLinks = this.target.querySelector('.mobile-quick-links') as HTMLElement | null;

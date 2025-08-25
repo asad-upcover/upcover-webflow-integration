@@ -580,7 +580,7 @@ export class NavbarWidget {
   margin: 10px 0;
   padding: 10px 20px;
   box-sizing: border-box;
-  animation: slideUp 0.5s ease-out;
+  animation: slideUp 0.25s ease-out;
 }
 
 /* Mirror mobile column + content tweaks */
@@ -1139,7 +1139,7 @@ export class NavbarWidget {
          margin: 10px 0;
          padding: 10px 20px;
          box-sizing: border-box;
-         animation: slideUp 0.5s ease-out;
+         animation: slideUp 0.25s ease-out;
        }
        
        @keyframes slideUp {
@@ -1351,142 +1351,6 @@ export class NavbarWidget {
     return logoDiv;
   }
 
-  // Smoothly hide an element with a left translate + fade, then set display:none
-  private hideSmooth(element: HTMLElement, distance: number = 100, duration: number = 200, easing: string = 'ease-in'): void {
-    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!element.getAttribute('data-prev-display')) {
-      element.setAttribute('data-prev-display', getComputedStyle(element).display || '');
-    }
-    if (prefersReduced || !(element as any).animate) {
-      element.style.display = 'none';
-      return;
-    }
-    const animation = (element as any).animate(
-      [
-        { opacity: 1, transform: 'translateX(0)' },
-        { opacity: 0, transform: `translateX(-${distance}px)` }
-      ],
-      { duration, easing, fill: 'forwards' }
-    );
-    animation.onfinish = () => {
-      element.style.display = 'none';
-    };
-  }
-
-  // Smoothly show an element restoring its previous display (or provided), from left translate + fade
-  private showSmooth(element: HTMLElement, displayValue?: string, distance: number = 20, duration: number = 260, easing: string = 'ease-out'): void {
-    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const prevDisplay = element.getAttribute('data-prev-display') || '';
-    const isMobileItem = element.classList.contains('mobile-menu-item');
-    const targetDisplay = displayValue || prevDisplay || (isMobileItem ? 'flex' : '');
-    element.style.display = targetDisplay;
-    if (prefersReduced || !(element as any).animate) {
-      element.style.opacity = '';
-      element.style.transform = '';
-      return;
-    }
-    (element as any).animate(
-      [
-        { opacity: 0, transform: `translateX(-${distance}px)` },
-        { opacity: 1, transform: 'translateX(0)' }
-      ],
-      { duration, easing, fill: 'forwards' }
-    );
-  }
-
-  // Smoothly reveal a list of elements with a small translate and staggered delays
-  private revealSmoothStagger(elements: HTMLElement[], options?: { display?: string; translateY?: number; duration?: number; easing?: string; baseDelay?: number }): void {
-    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const display = options?.display ?? 'flex';
-    const translateY = options?.translateY ?? 12;
-    const duration = options?.duration ?? 260;
-    const easing = options?.easing ?? 'cubic-bezier(.22,1,.36,1)';
-    const baseDelay = options?.baseDelay ?? 60;
-
-    elements.forEach((el, idx) => {
-      // Ensure we know previous display
-      if (!el.getAttribute('data-prev-display')) {
-        el.setAttribute('data-prev-display', getComputedStyle(el).display || '');
-      }
-      el.style.display = display;
-
-      if (prefersReduced || !(el as any).animate) {
-        el.style.opacity = '';
-        el.style.transform = '';
-        return;
-      }
-
-      // Prime initial state
-      el.style.opacity = '0';
-      el.style.transform = `translateY(${translateY}px)`;
-      el.style.willChange = 'opacity, transform';
-
-      const delay = idx * baseDelay;
-      // Next frame, animate to final
-      requestAnimationFrame(() => {
-        setTimeout(() => {
-          const anim = (el as any).animate(
-            [
-              { opacity: 0, transform: `translateY(${translateY}px)` },
-              { opacity: 1, transform: 'translateY(0)' }
-            ],
-            { duration, easing, fill: 'forwards' }
-          );
-          anim.onfinish = () => {
-            el.style.opacity = '';
-            el.style.transform = '';
-            el.style.willChange = '';
-          };
-        }, delay);
-      });
-    });
-  }
-
-  // Smoothly reveal a list of elements with horizontal translateX and staggered delays
-  private revealSmoothStaggerX(elements: HTMLElement[], options?: { display?: string; translateX?: number; duration?: number; easing?: string; baseDelay?: number }): void {
-    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const display = options?.display ?? 'flex';
-    const translateX = options?.translateX ?? -14;
-    const duration = options?.duration ?? 260;
-    const easing = options?.easing ?? 'cubic-bezier(.22,1,.36,1)';
-    const baseDelay = options?.baseDelay ?? 40;
-
-    elements.forEach((el, idx) => {
-      if (!el.getAttribute('data-prev-display')) {
-        el.setAttribute('data-prev-display', getComputedStyle(el).display || '');
-      }
-      el.style.display = display;
-
-      if (prefersReduced || !(el as any).animate) {
-        el.style.opacity = '';
-        el.style.transform = '';
-        return;
-      }
-
-      el.style.opacity = '0';
-      el.style.transform = `translateX(${translateX}px)`;
-      el.style.willChange = 'opacity, transform';
-
-      const delay = idx * baseDelay;
-      requestAnimationFrame(() => {
-        setTimeout(() => {
-          const anim = (el as any).animate(
-            [
-              { opacity: 0, transform: `translateX(${translateX}px)` },
-              { opacity: 1, transform: 'translateX(0)' }
-            ],
-            { duration, easing, fill: 'forwards' }
-          );
-          anim.onfinish = () => {
-            el.style.opacity = '';
-            el.style.transform = '';
-            el.style.willChange = '';
-          };
-        }, delay);
-      });
-    });
-  }
-
   private createActions(): HTMLElement {
     const actionsDiv = document.createElement("div");
     actionsDiv.className = "actions";
@@ -1503,15 +1367,7 @@ export class NavbarWidget {
       `;
       mobileMenuButton.setAttribute('aria-expanded', 'false');
       mobileMenuButton.setAttribute('aria-label', 'Menu');
-    
-    // mobileMenuButton.innerHTML = `
-    //   <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-    //        stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-    //        role="img" aria-label="Menu">
-    //     <title>Menu</title>
-    //     <path d="M3 6.5h18M3 12h18M3 17.5h18"/>
-    //   </svg>
-    // `;
+
     mobileMenuButton.addEventListener("click", () => {
       this.toggleMobileMenu();
     });
@@ -2329,7 +2185,7 @@ private toggleMobileDropdown(
     if (!prefersReduced && backHeader.animate) {
       backHeader.animate(
         [{ opacity: 0, transform: 'translateY(100px)' }, { opacity: 1, transform: 'translateY(0)' }],
-        { duration: 500, easing: 'ease-out', fill: 'forwards' }
+        { duration: 250, easing: 'ease-out', fill: 'forwards' }
       );
     }
 

@@ -1094,6 +1094,7 @@ export class NavbarWidget {
         padding: 20px 0;
         border-bottom: 1px solid #F0F0F0;
         position: relative;
+        cursor: pointer;
       }
       
       .mobile-menu-item:last-child {

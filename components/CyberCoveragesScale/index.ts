@@ -117,6 +117,7 @@ function injectStyles() {
   line-height: normal;
 }
 .cis-tab-btn.active {
+  font-size: 22px;
   background: #005DFF;
   color: #fff;
   font-weight: 700;

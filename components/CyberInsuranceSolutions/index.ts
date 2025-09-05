@@ -83,7 +83,7 @@ function injectStyles() {
 }
 .cis-tab-btn {
   flex: 1;
-  padding: 22px 0px;
+  padding: 36px 0px;
   background: #F8F7F7;
   border: none;
   border-radius: 10px 10px 0 0;
@@ -92,7 +92,7 @@ function injectStyles() {
   font-size: 24px;
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
-  min-width: 160px;
+  // min-width: 160px;
 }
 .cis-tab-btn.active {
   background: #005DFF;
@@ -247,7 +247,7 @@ function injectStyles() {
     margin-right: 0;
   }
   .cis-tab-btn {
-    padding: 24px 0;
+    padding: 24px 10px;
     min-width: 120px;
   }
   .cis-section h3 {
@@ -269,7 +269,7 @@ function injectStyles() {
   }
   .cis-tab-btn {
     font-size: 16px;
-    padding: 14px 0;
+    padding: 14px 5px;
     min-width: 90px;
   }
   .cis-section h3 {

@@ -166,7 +166,7 @@ function injectStyles() {
   color: #005DFF;
   border: none;
   border-radius: 6px;
-  font-weight: 600 !important;
+  font-weight: 700 !important;
   font-size: 18px;
   text-decoration: none;
   text-align: center;

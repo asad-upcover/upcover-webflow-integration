@@ -72,7 +72,7 @@ function injectStyles() {
 .who-needs-cyber-left {
   flex: 1 1 320px;
   min-width: 320px;
-  max-width: 420px;
+  max-width: 500px;
 }
 .who-needs-cyber-tabs {
   display: flex;

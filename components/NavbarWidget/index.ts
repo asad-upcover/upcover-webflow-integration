@@ -481,7 +481,7 @@ export class NavbarWidget {
         list-style: none;
       }
 
-      @media (max-width: 900px) {
+      @media (max-width: 767px) {
         #navbar {
           // display: none !important;
           position: relative;
@@ -606,7 +606,7 @@ export class NavbarWidget {
 .mobile-active-panel .box-button { padding: 12px 16px; border-radius: 6px; font-size: 14px; font-weight: 600; }
 
 
-@media (max-width: 900px) {
+@media (max-width: 767px) {
   .mobile-quick-links {
     padding-bottom: 24px;
   }
@@ -1004,7 +1004,7 @@ export class NavbarWidget {
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       }
       
-        @media (max-width: 900px) {
+        @media (max-width: 767px) {
           .mobile-menu-overlay.active {
             opacity: 1;
             transform: translateY(0);
@@ -1326,7 +1326,7 @@ export class NavbarWidget {
       }
 
       /* Better tap target on mobile */
-      @media (max-width: 900px) {
+      @media (max-width: 767px) {
         .mobile-menu-toggle { display: flex !important; }
       }
 

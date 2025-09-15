@@ -30,6 +30,7 @@ interface MenuItem {
 }
 
 export interface NavbarConfig {
+  logoLink: string;
   logo?: string;
   menuItems?: {
     business: MenuItem[];
@@ -56,7 +57,9 @@ export class NavbarWidget {
   private target: HTMLElement;
   private themeManager: ThemeManager;
 
-  constructor(config: NavbarConfig = {}) {
+  constructor(config: NavbarConfig = {
+    logoLink: ""
+  }) {
     const initialTheme = config.defaultTheme || detectInitialTheme();
     this.config = {
       ...config,
@@ -1346,11 +1349,17 @@ export class NavbarWidget {
   }
 
   private createLogo(): HTMLElement {
+    const link = document.createElement("a");
+    link.href = this.config.logoLink || "/"; // default to homepage if not set
+    link.className = "brand-logo-link";
+
     const logoDiv = document.createElement("div");
     logoDiv.className = "brand-logo";
     logoDiv.id = "upcover-logo";
     logoDiv.innerHTML = this.config.logo!;
-    return logoDiv;
+
+    link.appendChild(logoDiv);
+    return link;
   }
 
   private createActions(): HTMLElement {
@@ -1367,8 +1376,8 @@ export class NavbarWidget {
           <span class="line"></span>
         </span>
       `;
-      mobileMenuButton.setAttribute('aria-expanded', 'false');
-      mobileMenuButton.setAttribute('aria-label', 'Menu');
+    mobileMenuButton.setAttribute('aria-expanded', 'false');
+    mobileMenuButton.setAttribute('aria-label', 'Menu');
 
     mobileMenuButton.addEventListener("click", () => {
       this.toggleMobileMenu();
@@ -1453,33 +1462,33 @@ export class NavbarWidget {
   private toggleMobileMenu(): void {
     const mobileMenu = document.querySelector('.mobile-menu-overlay') as HTMLElement | null;
     const mobileMenuButton = document.querySelector('.mobile-menu-toggle') as HTMLButtonElement | null;
-  
+
     if (!mobileMenu || !mobileMenuButton) return;
-  
+
     const willOpen = !mobileMenu.classList.contains('active');
-  
+
     if (!willOpen) {
       this.closeMobileMenu();
       return;
     }
-  
+
     // Open
     mobileMenu.classList.add('active');
     mobileMenuButton.classList.add('open');
     mobileMenuButton.setAttribute('aria-expanded', 'true');
     mobileMenuButton.setAttribute('aria-label', 'Close');
-  
+
     // Add click-outside listener
     setTimeout(() => {
       const handleClickOutside = (event: Event) => {
         const target = event.target as HTMLElement;
-  
+
         // Check if clicking on dropdown content or mobile menu items
         const isClickingDropdown = !!target.closest('.dropdown-menu');
         const isClickingMobileMenu = !!target.closest('.mobile-menu-overlay');
         const isClickingHamburger = !!mobileMenuButton.contains(target);
         const isClickingBizToggle = !!target.closest('.mobile-business-toggle');
-  
+
         // Only close if clicking completely outside the mobile menu system
         if (!isClickingMobileMenu && !isClickingHamburger && !isClickingBizToggle) {
           this.closeMobileMenu();
@@ -1489,12 +1498,12 @@ export class NavbarWidget {
       document.addEventListener('click', handleClickOutside);
     }, 100);
   }
-  
+
 
   private closeMobileMenu(): void {
     const mobileMenu = document.querySelector('.mobile-menu-overlay') as HTMLElement | null;
     const mobileMenuButton = document.querySelector('.mobile-menu-toggle') as HTMLButtonElement | null;
-  
+
     if (mobileMenu) {
       mobileMenu.classList.remove('active');
     }
@@ -1503,7 +1512,7 @@ export class NavbarWidget {
       mobileMenuButton.setAttribute('aria-expanded', 'false');
       mobileMenuButton.setAttribute('aria-label', 'Menu');
     }
-  
+
     // Reset businesses section visibility and state when closing overlay
     const bizSection = document.querySelector('.mobile-business-section') as HTMLElement | null;
     const bizDropdown = document.querySelector('.mobile-business-dropdown');
@@ -1513,12 +1522,12 @@ export class NavbarWidget {
     bizToggle?.classList.remove('open');
     const bizArrowWrap = document.querySelector('.mobile-business-toggle .mb-arrow') as HTMLElement | null;
     if (bizArrowWrap) bizArrowWrap.innerHTML = `${plusIcon}`;
-  
+
     // Restore quick links visibility when overlay closes
     const quickLinks = document.querySelector('.mobile-quick-links') as HTMLElement | null;
     if (quickLinks) quickLinks.style.display = '';
   }
-  
+
 
   private createMobileMenu(): HTMLElement {
     const mobileMenu = document.createElement("div");
@@ -1827,58 +1836,58 @@ export class NavbarWidget {
   }
 
   // Smoothly animate the back header back to a target element's position (FLIP)
-private animateBackHeaderReturn(backHeader: HTMLElement, targetElement: HTMLElement, onFinish: () => void) {
-  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  private animateBackHeaderReturn(backHeader: HTMLElement, targetElement: HTMLElement, onFinish: () => void) {
+    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  const firstRect = backHeader.getBoundingClientRect();
+    const firstRect = backHeader.getBoundingClientRect();
 
-  const run = () => {
-    // Ensure we can measure the target even if hidden
-    const computed = getComputedStyle(targetElement);
-    const wasHidden = computed.display === 'none';
-    const prevDisplay = targetElement.style.display;
-    const prevVisibility = targetElement.style.visibility;
-    if (wasHidden) {
-      targetElement.style.display = 'flex';
-      targetElement.style.visibility = 'hidden';
-    }
+    const run = () => {
+      // Ensure we can measure the target even if hidden
+      const computed = getComputedStyle(targetElement);
+      const wasHidden = computed.display === 'none';
+      const prevDisplay = targetElement.style.display;
+      const prevVisibility = targetElement.style.visibility;
+      if (wasHidden) {
+        targetElement.style.display = 'flex';
+        targetElement.style.visibility = 'hidden';
+      }
 
-    const lastRect = targetElement.getBoundingClientRect();
+      const lastRect = targetElement.getBoundingClientRect();
 
-    // Restore if we revealed for measurement
-    if (wasHidden) {
-      targetElement.style.display = prevDisplay;
-      targetElement.style.visibility = prevVisibility;
-    }
+      // Restore if we revealed for measurement
+      if (wasHidden) {
+        targetElement.style.display = prevDisplay;
+        targetElement.style.visibility = prevVisibility;
+      }
 
-    const dx = lastRect.left - firstRect.left;
-    const dy = lastRect.top  - firstRect.top;
+      const dx = lastRect.left - firstRect.left;
+      const dy = lastRect.top - firstRect.top;
 
-    if (prefersReduced || !(backHeader as any).animate) {
-      backHeader.remove();
-      onFinish();
-      return;
-    }
+      if (prefersReduced || !(backHeader as any).animate) {
+        backHeader.remove();
+        onFinish();
+        return;
+      }
 
-    backHeader.style.willChange = 'transform, opacity';
+      backHeader.style.willChange = 'transform, opacity';
 
-    const anim = (backHeader as any).animate(
-      [
-        { transform: 'translate(0,0)',           opacity: 1 },
-        { transform: `translate(${dx}px, ${dy}px)`, opacity: 0.001 }
-      ],
-      { duration: 360, easing: 'cubic-bezier(.22,1,.36,1)', fill: 'forwards' }
-    );
+      const anim = (backHeader as any).animate(
+        [
+          { transform: 'translate(0,0)', opacity: 1 },
+          { transform: `translate(${dx}px, ${dy}px)`, opacity: 0.001 }
+        ],
+        { duration: 360, easing: 'cubic-bezier(.22,1,.36,1)', fill: 'forwards' }
+      );
 
-    anim.onfinish = () => {
-      backHeader.remove();
-      onFinish();
+      anim.onfinish = () => {
+        backHeader.remove();
+        onFinish();
+      };
     };
-  };
 
-  // Wait a frame so any layout changes (revealed siblings) are applied before measuring
-  requestAnimationFrame(() => run());
-}
+    // Wait a frame so any layout changes (revealed siblings) are applied before measuring
+    requestAnimationFrame(() => run());
+  }
 
 
   // For first menu item: fade out the left arrow and slide the back-header text horizontally into the target slot
@@ -1920,14 +1929,14 @@ private animateBackHeaderReturn(backHeader: HTMLElement, targetElement: HTMLElem
     const animations: Animation[] = [] as any;
     if (arrowEl && (arrowEl as any).animate) {
       const a = (arrowEl as any).animate(
-        [ { opacity: 1 }, { opacity: 0 } ],
+        [{ opacity: 1 }, { opacity: 0 }],
         { duration: 180, easing: 'ease-out', fill: 'forwards' }
       );
       animations.push(a);
     }
 
     const t = (textEl as any).animate(
-      [ { transform: 'translateX(0)' }, { transform: `translateX(${dx}px)` } ],
+      [{ transform: 'translateX(0)' }, { transform: `translateX(${dx}px)` }],
       { duration: 240, easing: 'cubic-bezier(.22,1,.36,1)', fill: 'forwards' }
     );
     animations.push(t);
@@ -2140,34 +2149,34 @@ private animateBackHeaderReturn(backHeader: HTMLElement, targetElement: HTMLElem
     return dropdownMenu;
   }
 
-private toggleMobileDropdown(
-  mobileMenuItem: HTMLElement,
-  item: MenuItem,
-  ev?: Event
-): void {
-  ev?.stopPropagation();
+  private toggleMobileDropdown(
+    mobileMenuItem: HTMLElement,
+    item: MenuItem,
+    ev?: Event
+  ): void {
+    ev?.stopPropagation();
 
-  let dropdownMenu = mobileMenuItem.nextElementSibling as HTMLElement | null;
-  if (!dropdownMenu || !dropdownMenu.classList.contains('dropdown-menu')) {
-    dropdownMenu = this.target.querySelector('.mobile-active-panel .dropdown-menu') as HTMLElement | null;
-  }
-  if (!dropdownMenu) return;
+    let dropdownMenu = mobileMenuItem.nextElementSibling as HTMLElement | null;
+    if (!dropdownMenu || !dropdownMenu.classList.contains('dropdown-menu')) {
+      dropdownMenu = this.target.querySelector('.mobile-active-panel .dropdown-menu') as HTMLElement | null;
+    }
+    if (!dropdownMenu) return;
 
-  const allDropdowns = this.target.querySelectorAll('.mobile-menu-items .dropdown-menu');
-  const allMenuItems = this.target.querySelectorAll('.mobile-menu-items .mobile-menu-item');
-  const mobileMenuContent = this.target.querySelector('.mobile-menu-content') as HTMLElement | null;
+    const allDropdowns = this.target.querySelectorAll('.mobile-menu-items .dropdown-menu');
+    const allMenuItems = this.target.querySelectorAll('.mobile-menu-items .mobile-menu-item');
+    const mobileMenuContent = this.target.querySelector('.mobile-menu-content') as HTMLElement | null;
 
-  const ensureTopScaffold = () => {
-    if (!mobileMenuContent) return { backHeader: null as HTMLElement | null, panel: null as HTMLElement | null };
+    const ensureTopScaffold = () => {
+      if (!mobileMenuContent) return { backHeader: null as HTMLElement | null, panel: null as HTMLElement | null };
 
-    const oldHeader = mobileMenuContent.querySelector('.mobile-back-header');
-    const oldPanel  = mobileMenuContent.querySelector('.mobile-active-panel');
-    oldHeader?.remove();
-    oldPanel?.remove();
+      const oldHeader = mobileMenuContent.querySelector('.mobile-back-header');
+      const oldPanel = mobileMenuContent.querySelector('.mobile-active-panel');
+      oldHeader?.remove();
+      oldPanel?.remove();
 
-    const backHeader = document.createElement('div');
-    backHeader.className = 'mobile-back-header';
-    backHeader.innerHTML = `
+      const backHeader = document.createElement('div');
+      backHeader.className = 'mobile-back-header';
+      backHeader.innerHTML = `
       <span class="mobile-back-arrow">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="-0.75 -0.75 24 24" fill="currentColor" width="16" height="16">
           <path d="M15.234 21.797l-10.05-10.05a.702.702 0 010-.994L15.234.703" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
@@ -2176,61 +2185,61 @@ private toggleMobileDropdown(
       <span class="mobile-back-text">${item.label}</span>
     `;
 
-    const bizSection = mobileMenuContent.querySelector('.mobile-business-section');
-    if (bizSection && bizSection.parentNode) {
-      bizSection.parentNode.insertBefore(backHeader, bizSection.nextSibling);
-    } else {
-      mobileMenuContent.insertBefore(backHeader, mobileMenuContent.firstChild);
-    }
+      const bizSection = mobileMenuContent.querySelector('.mobile-business-section');
+      if (bizSection && bizSection.parentNode) {
+        bizSection.parentNode.insertBefore(backHeader, bizSection.nextSibling);
+      } else {
+        mobileMenuContent.insertBefore(backHeader, mobileMenuContent.firstChild);
+      }
 
-    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!prefersReduced && backHeader.animate) {
-      backHeader.animate(
-        [{ opacity: 0, transform: 'translateY(100px)' }, { opacity: 1, transform: 'translateY(0)' }],
-        { duration: 250, easing: 'ease-out', fill: 'forwards' }
-      );
-    }
+      const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!prefersReduced && backHeader.animate) {
+        backHeader.animate(
+          [{ opacity: 0, transform: 'translateY(100px)' }, { opacity: 1, transform: 'translateY(0)' }],
+          { duration: 250, easing: 'ease-out', fill: 'forwards' }
+        );
+      }
 
-    const panel = document.createElement('div');
-    panel.className = 'mobile-active-panel';
-    mobileMenuContent.insertBefore(panel, backHeader.nextSibling);
+      const panel = document.createElement('div');
+      panel.className = 'mobile-active-panel';
+      mobileMenuContent.insertBefore(panel, backHeader.nextSibling);
 
-    backHeader.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      this.toggleMobileDropdown(mobileMenuItem, item);
+      backHeader.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        this.toggleMobileDropdown(mobileMenuItem, item);
+      });
+
+      return { backHeader, panel };
+    };
+
+    // Close other dropdowns
+    allDropdowns.forEach(d => {
+      if (d !== dropdownMenu) {
+        d.classList.remove('active');
+        (d as HTMLElement).style.opacity = '0';
+        (d as HTMLElement).style.transform = 'translateY(20px)';
+        (d as HTMLElement).style.pointerEvents = 'none';
+      }
     });
 
-    return { backHeader, panel };
-  };
+    const existingHeader = this.target.querySelector('.mobile-back-header');
+    const existingPanel = this.target.querySelector('.mobile-active-panel');
+    const isOpen = dropdownMenu.classList.contains('active');
 
-  // Close other dropdowns
-  allDropdowns.forEach(d => {
-    if (d !== dropdownMenu) {
-      d.classList.remove('active');
-      (d as HTMLElement).style.opacity = '0';
-      (d as HTMLElement).style.transform = 'translateY(20px)';
-      (d as HTMLElement).style.pointerEvents = 'none';
-    }
-  });
+    if (isOpen) {
+      // 🔴 CLOSE
+      const originId = dropdownMenu.dataset.originItemId;
+      const originItem = originId
+        ? this.target.querySelector<HTMLElement>(`#${originId}`)
+        : mobileMenuItem;
 
-  const existingHeader = this.target.querySelector('.mobile-back-header');
-  const existingPanel  = this.target.querySelector('.mobile-active-panel');
-  const isOpen = dropdownMenu.classList.contains('active');
+      dropdownMenu.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+      dropdownMenu.style.opacity = '0';
+      dropdownMenu.style.transform = 'translateY(20px)';
+      dropdownMenu.style.pointerEvents = 'none';
 
-  if (isOpen) {
-    // 🔴 CLOSE
-    const originId = dropdownMenu.dataset.originItemId;
-    const originItem = originId
-      ? this.target.querySelector<HTMLElement>(`#${originId}`)
-      : mobileMenuItem;
-
-    dropdownMenu.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-    dropdownMenu.style.opacity = '0';
-    dropdownMenu.style.transform = 'translateY(20px)';
-    dropdownMenu.style.pointerEvents = 'none';
-
-    // after animation completes, move back under its origin item
+      // after animation completes, move back under its origin item
       setTimeout(() => {
         originItem?.insertAdjacentElement('afterend', dropdownMenu);
         dropdownMenu.classList.remove('active');
@@ -2242,92 +2251,92 @@ private toggleMobileDropdown(
       }, 300);
 
 
-    // Fade items back
-    allMenuItems.forEach(mi => {
-      (mi as HTMLElement).style.transition = 'opacity 0.3s ease';
-      (mi as HTMLElement).style.opacity = '1';
-    });
+      // Fade items back
+      allMenuItems.forEach(mi => {
+        (mi as HTMLElement).style.transition = 'opacity 0.3s ease';
+        (mi as HTMLElement).style.opacity = '1';
+      });
 
-    if (existingHeader) {
-      existingHeader.remove();
-    }
-    existingPanel?.remove();
+      if (existingHeader) {
+        existingHeader.remove();
+      }
+      existingPanel?.remove();
 
-    const quickLinks = this.target.querySelector('.mobile-quick-links') as HTMLElement | null;
-    if (quickLinks) quickLinks.style.display = '';
+      const quickLinks = this.target.querySelector('.mobile-quick-links') as HTMLElement | null;
+      if (quickLinks) quickLinks.style.display = '';
 
-    const arrowElement = mobileMenuItem.querySelector('.mobile-menu-arrow');
-    if (arrowElement) {
-      arrowElement.classList.remove('open');
-      arrowElement.innerHTML = `
+      const arrowElement = mobileMenuItem.querySelector('.mobile-menu-arrow');
+      if (arrowElement) {
+        arrowElement.classList.remove('open');
+        arrowElement.innerHTML = `
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="-0.75 -0.75 24 24" fill="currentColor" width="16" height="16">
           <path d="M5.156.703l10.05 10.05a.702.702 0 010 .994l-10.05 10.05"
             fill="none" stroke="currentColor" stroke-linecap="round"
             stroke-linejoin="round" stroke-width="1.5"/>
         </svg>
       `;
-    }
+      }
 
-  } else {
-    // 🟢 OPEN
-    if (!mobileMenuItem.id) {
-      mobileMenuItem.id = `mmi-${Date.now()}-${Math.random().toString(36).slice(2,8)}`;
-    }
-    dropdownMenu.dataset.originItemId = mobileMenuItem.id;
+    } else {
+      // 🟢 OPEN
+      if (!mobileMenuItem.id) {
+        mobileMenuItem.id = `mmi-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+      }
+      dropdownMenu.dataset.originItemId = mobileMenuItem.id;
 
-    const { panel } = ensureTopScaffold();
-    if (!panel) return;
+      const { panel } = ensureTopScaffold();
+      if (!panel) return;
 
-    panel.appendChild(dropdownMenu);
+      panel.appendChild(dropdownMenu);
 
-    dropdownMenu.style.display = 'block';
-    dropdownMenu.classList.add('active');
-    dropdownMenu.style.opacity = '0';
-    dropdownMenu.style.transform = 'translateY(100px)';
-    dropdownMenu.style.pointerEvents = 'auto';
-    dropdownMenu.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
-    requestAnimationFrame(() => {
-      dropdownMenu.style.opacity = '1';
-      dropdownMenu.style.transform = 'translateY(0)';
-    });
+      dropdownMenu.style.display = 'block';
+      dropdownMenu.classList.add('active');
+      dropdownMenu.style.opacity = '0';
+      dropdownMenu.style.transform = 'translateY(100px)';
+      dropdownMenu.style.pointerEvents = 'auto';
+      dropdownMenu.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+      requestAnimationFrame(() => {
+        dropdownMenu.style.opacity = '1';
+        dropdownMenu.style.transform = 'translateY(0)';
+      });
 
-    // Fade ALL items (keep layout)
-    allMenuItems.forEach(mi => {
-      (mi as HTMLElement).style.transition = 'opacity 0.1s ease';
-      (mi as HTMLElement).style.opacity = '0';
-    });
+      // Fade ALL items (keep layout)
+      allMenuItems.forEach(mi => {
+        (mi as HTMLElement).style.transition = 'opacity 0.1s ease';
+        (mi as HTMLElement).style.opacity = '0';
+      });
 
-    const quickLinks = this.target.querySelector('.mobile-quick-links') as HTMLElement | null;
-    if (quickLinks) quickLinks.style.display = 'none';
+      const quickLinks = this.target.querySelector('.mobile-quick-links') as HTMLElement | null;
+      if (quickLinks) quickLinks.style.display = 'none';
 
-    // Reset other arrows, set this one to cross
-    allMenuItems.forEach(mi => {
-      if (mi !== mobileMenuItem) {
-        const arr = mi.querySelector('.mobile-menu-arrow');
-        if (arr) {
-          arr.classList.remove('open');
-          arr.innerHTML = `
+      // Reset other arrows, set this one to cross
+      allMenuItems.forEach(mi => {
+        if (mi !== mobileMenuItem) {
+          const arr = mi.querySelector('.mobile-menu-arrow');
+          if (arr) {
+            arr.classList.remove('open');
+            arr.innerHTML = `
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="-0.75 -0.75 24 24" fill="currentColor" width="16" height="16">
               <path d="M5.156.703l10.05 10.05a.702.702 0 010 .994l-10.05 10.05"
                 fill="none" stroke="currentColor" stroke-linecap="round"
                 stroke-linejoin="round" stroke-width="1.5"/>
             </svg>
           `;
+          }
         }
-      }
-    });
-    const arrowElement = mobileMenuItem.querySelector('.mobile-menu-arrow');
-    if (arrowElement) {
-      arrowElement.classList.add('open');
-      arrowElement.innerHTML = `
+      });
+      const arrowElement = mobileMenuItem.querySelector('.mobile-menu-arrow');
+      if (arrowElement) {
+        arrowElement.classList.add('open');
+        arrowElement.innerHTML = `
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <path d="M6 6l12 12M6 18L18 6"/>
         </svg>
       `;
+      }
     }
   }
-}
 
 
 

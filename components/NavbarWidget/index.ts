@@ -1,30 +1,31 @@
 import { upcoverLogoBusiness, upcoverLogoTech, upcoverLogoMotor, arrowDownIcon, arrowIcon, plusIcon, minusIcon } from "../../assets/svgicons";
 import { ThemeManager } from "../../themes/theme";
 
+// ADD these two small interfaces
+interface DropdownLinkItem {
+  label: string;
+  href: string;
+}
+interface DropdownSection {
+  title: string;
+  items: DropdownLinkItem[];
+}
+
 interface MenuItem {
   label: string;
   href: string;
-  dropdown?: {
-    title: string;
-    items: string[];
-  }[];
+  dropdown?: DropdownSection[];
   boxComponent?: {
     firstDiv: {
       image: string;
       heading: string;
       paragraph: string;
-      buttons: {
-        label: string;
-        href: string;
-      }[];
+      buttons: { label: string; href: string }[];
     };
     secondDiv?: {
       heading: string;
       paragraph: string;
-      button: {
-        label: string;
-        href: string;
-      };
+      button: { label: string; href: string };
     };
   };
 }
@@ -180,35 +181,46 @@ export class NavbarWidget {
             title.textContent = section.title;
 
             const list = document.createElement('ul');
-            section.items.forEach(listItem => {
-              const li = document.createElement('li');
-              li.textContent = listItem;
-              if (listItem.toLowerCase().includes('view all')) {
-                li.style.cssText = `
-                  color: ${this.themeManager.getCurrentColor()};
-                  text-decoration: underline;
-                  font-weight: 700;
-                  text-underline-offset: 4px;
-                `;
-              }
-              // Add theme-aware hover event listeners
-              li.addEventListener('mouseenter', () => {
-                const currentTheme = this.themeManager.getCurrentTheme();
-                const hoverColor = currentTheme === 'motor' ? '#3B4125' : this.themeManager.getCurrentColor();
-                li.style.color = hoverColor;
-                li.style.textDecoration = 'underline';
-                li.style.textUnderlineOffset = '4px';
-              });
-              li.addEventListener('mouseleave', () => {
-                if (listItem.toLowerCase().includes('view all')) {
-                  li.style.color = this.themeManager.getCurrentColor();
-                } else {
-                  li.style.color = '#555';
-                }
-                li.style.textDecoration = 'none';
-              });
-              list.appendChild(li);
-            });
+section.items.forEach(linkItem => {
+  const li = document.createElement('li');
+
+  const anchor = document.createElement('a');
+  anchor.href = linkItem.href || '#';
+  anchor.textContent = linkItem.label;
+  anchor.style.textDecoration = 'none';
+  anchor.style.color = '#555';
+  anchor.setAttribute('role', 'menuitem');
+
+  if (linkItem.label.toLowerCase().includes('view all')) {
+    anchor.style.color = this.themeManager.getCurrentColor();
+    anchor.style.textDecoration = 'underline';
+    anchor.style.fontWeight = '700';
+    // keep underline offset if you like
+    (anchor.style as any).textUnderlineOffset = '4px';
+  }
+
+  // theme-aware hover styles
+  anchor.addEventListener('mouseenter', () => {
+    const currentTheme = this.themeManager.getCurrentTheme();
+    const hoverColor = currentTheme === 'motor' ? '#3B4125' : this.themeManager.getCurrentColor();
+    anchor.style.color = hoverColor;
+    anchor.style.textDecoration = 'underline';
+    (anchor.style as any).textUnderlineOffset = '4px';
+  });
+
+  anchor.addEventListener('mouseleave', () => {
+    if (linkItem.label.toLowerCase().includes('view all')) {
+      anchor.style.color = this.themeManager.getCurrentColor();
+    } else {
+      anchor.style.color = '#555';
+    }
+    anchor.style.textDecoration = 'none';
+  });
+
+  li.appendChild(anchor);
+  list.appendChild(li);
+});
+
 
             column.appendChild(title);
             column.appendChild(list);
@@ -1968,35 +1980,46 @@ export class NavbarWidget {
         title.textContent = section.title;
 
         const list = document.createElement('ul');
-        section.items.forEach(listItem => {
-          const li = document.createElement('li');
-          li.textContent = listItem;
-          if (listItem.toLowerCase().includes('view all')) {
-            li.style.cssText = `
-              color: ${this.themeManager.getCurrentColor()};
-              text-decoration: underline;
-              font-weight: 700;
-              text-underline-offset: 4px;
-            `;
-          }
-          // Add theme-aware hover event listeners
-          li.addEventListener('mouseenter', () => {
-            const currentTheme = this.themeManager.getCurrentTheme();
-            const hoverColor = currentTheme === 'motor' ? '#3B4125' : this.themeManager.getCurrentColor();
-            li.style.color = hoverColor;
-            li.style.textDecoration = 'underline';
-            li.style.textUnderlineOffset = '4px';
-          });
-          li.addEventListener('mouseleave', () => {
-            if (listItem.toLowerCase().includes('view all')) {
-              li.style.color = this.themeManager.getCurrentColor();
-            } else {
-              li.style.color = '#555';
-            }
-            li.style.textDecoration = 'none';
-          });
-          list.appendChild(li);
-        });
+section.items.forEach(linkItem => {
+  const li = document.createElement('li');
+
+  const anchor = document.createElement('a');
+  anchor.href = linkItem.href || '#';
+  anchor.textContent = linkItem.label;
+  anchor.style.textDecoration = 'none';
+  anchor.style.color = '#555';
+  anchor.setAttribute('role', 'menuitem');
+
+  if (linkItem.label.toLowerCase().includes('view all')) {
+    anchor.style.color = this.themeManager.getCurrentColor();
+    anchor.style.textDecoration = 'underline';
+    anchor.style.fontWeight = '700';
+    // keep underline offset if you like
+    (anchor.style as any).textUnderlineOffset = '4px';
+  }
+
+  // theme-aware hover styles
+  anchor.addEventListener('mouseenter', () => {
+    const currentTheme = this.themeManager.getCurrentTheme();
+    const hoverColor = currentTheme === 'motor' ? '#3B4125' : this.themeManager.getCurrentColor();
+    anchor.style.color = hoverColor;
+    anchor.style.textDecoration = 'underline';
+    (anchor.style as any).textUnderlineOffset = '4px';
+  });
+
+  anchor.addEventListener('mouseleave', () => {
+    if (linkItem.label.toLowerCase().includes('view all')) {
+      anchor.style.color = this.themeManager.getCurrentColor();
+    } else {
+      anchor.style.color = '#555';
+    }
+    anchor.style.textDecoration = 'none';
+  });
+
+  li.appendChild(anchor);
+  list.appendChild(li);
+});
+
 
         column.appendChild(title);
         column.appendChild(list);
@@ -2420,35 +2443,46 @@ export class NavbarWidget {
             title.textContent = section.title;
 
             const list = document.createElement('ul');
-            section.items.forEach(listItem => {
-              const li = document.createElement('li');
-              li.textContent = listItem;
-              if (listItem.toLowerCase().includes('view all')) {
-                li.style.cssText = `
-                  color: ${this.themeManager.getCurrentColor()};
-                  text-decoration: underline;
-                  font-weight: 700;
-                  text-underline-offset: 4px;
-                `;
-              }
-              // Add theme-aware hover event listeners
-              li.addEventListener('mouseenter', () => {
-                const currentTheme = this.themeManager.getCurrentTheme();
-                const hoverColor = currentTheme === 'motor' ? '#3B4125' : this.themeManager.getCurrentColor();
-                li.style.color = hoverColor;
-                li.style.textDecoration = 'underline';
-                li.style.textUnderlineOffset = '4px';
-              });
-              li.addEventListener('mouseleave', () => {
-                if (listItem.toLowerCase().includes('view all')) {
-                  li.style.color = this.themeManager.getCurrentColor();
-                } else {
-                  li.style.color = '#555';
-                }
-                li.style.textDecoration = 'none';
-              });
-              list.appendChild(li);
-            });
+section.items.forEach(linkItem => {
+  const li = document.createElement('li');
+
+  const anchor = document.createElement('a');
+  anchor.href = linkItem.href || '#';
+  anchor.textContent = linkItem.label;
+  anchor.style.textDecoration = 'none';
+  anchor.style.color = '#555';
+  anchor.setAttribute('role', 'menuitem');
+
+  if (linkItem.label.toLowerCase().includes('view all')) {
+    anchor.style.color = this.themeManager.getCurrentColor();
+    anchor.style.textDecoration = 'underline';
+    anchor.style.fontWeight = '700';
+    // keep underline offset if you like
+    (anchor.style as any).textUnderlineOffset = '4px';
+  }
+
+  // theme-aware hover styles
+  anchor.addEventListener('mouseenter', () => {
+    const currentTheme = this.themeManager.getCurrentTheme();
+    const hoverColor = currentTheme === 'motor' ? '#3B4125' : this.themeManager.getCurrentColor();
+    anchor.style.color = hoverColor;
+    anchor.style.textDecoration = 'underline';
+    (anchor.style as any).textUnderlineOffset = '4px';
+  });
+
+  anchor.addEventListener('mouseleave', () => {
+    if (linkItem.label.toLowerCase().includes('view all')) {
+      anchor.style.color = this.themeManager.getCurrentColor();
+    } else {
+      anchor.style.color = '#555';
+    }
+    anchor.style.textDecoration = 'none';
+  });
+
+  li.appendChild(anchor);
+  list.appendChild(li);
+});
+
 
             column.appendChild(title);
             column.appendChild(list);

@@ -1765,12 +1765,20 @@ section.items.forEach(linkItem => {
     const quickLinks = document.createElement("div");
     quickLinks.className = "mobile-quick-links";
 
+
+
     // 1) Login
+    const location = window.location.href;
     const qlLogin = document.createElement("a");
     qlLogin.href = "#";
     qlLogin.className = "mobile-quick-link";
+    if(location.includes("business-sole-traders")){
+    qlLogin.textContent = "Login";
+    } else{
     qlLogin.textContent = "Talk to an expert";
+    }
     quickLinks.appendChild(qlLogin);
+
 
     // 2) Get a quote
     const qlQuote = document.createElement("a");

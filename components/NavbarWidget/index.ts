@@ -1769,14 +1769,14 @@ section.items.forEach(linkItem => {
     const qlLogin = document.createElement("a");
     qlLogin.href = "#";
     qlLogin.className = "mobile-quick-link";
-    qlLogin.textContent = "Login";
+    qlLogin.textContent = "Talk to an expert";
     quickLinks.appendChild(qlLogin);
 
     // 2) Get a quote
     const qlQuote = document.createElement("a");
     qlQuote.href = "#";
     qlQuote.className = "mobile-quick-link";
-    qlQuote.textContent = "Get a quote";
+    qlQuote.textContent = "Get instant quote";
     quickLinks.appendChild(qlQuote);
 
     // 3) Call button (icon + number)

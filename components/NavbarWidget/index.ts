@@ -408,7 +408,7 @@ section.items.forEach(linkItem => {
 
       .actions {
         display: flex;
-        gap: 30px;
+        gap: 20px;
         align-items: center;
       }
 
@@ -416,6 +416,7 @@ section.items.forEach(linkItem => {
         text-decoration: none;
         font-size: 16px;
         font-weight: 700;
+        text-align: center;
       }
 
       .login:hover {

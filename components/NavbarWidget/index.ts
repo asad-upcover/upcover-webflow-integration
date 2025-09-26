@@ -456,6 +456,7 @@ section.items.forEach(linkItem => {
         display: flex;
         justify-content: center;
         flex-direction: column;
+        gap: 6px;
       }
 
       .more-wrapper.open .more-popup {
@@ -478,6 +479,7 @@ section.items.forEach(linkItem => {
         cursor: pointer;
         transition: background-color .2s ease, color .2s ease, border-radius 160ms ease-out;
         border: none;
+        background: #F8F7F7;
       }
 
 

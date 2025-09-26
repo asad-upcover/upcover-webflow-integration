@@ -474,7 +474,7 @@ section.items.forEach(linkItem => {
         text-decoration: none;
         border-radius: 10px;
         font-weight: 700;
-        font-size: 14px;
+        font-size: 16px;
         padding: 16px;
         cursor: pointer;
         transition: background-color .2s ease, color .2s ease, border-radius 160ms ease-out;
@@ -1554,8 +1554,14 @@ section.items.forEach(linkItem => {
     // Quote (as button) inside popup
     const popupQuote = document.createElement("button");
     popupQuote.type = "button";
-    popupQuote.className = "more-item quote-btn";
-    popupQuote.textContent = this.config.quoteText || "GET A QUOTE";
+    // add upcover-quote-btn to reuse the same arrow animation styles
+    popupQuote.className = "more-item quote-btn upcover-quote-btn";
+    popupQuote.innerHTML = `
+      <span class="upcover-quote-btn-inner">
+        <span class="upcover-quote-btn-arrow" aria-hidden="true">${arrow}</span>
+        <span class="upcover-quote-btn-text">${this.config.quoteText || "GET A QUOTE"}</span>
+      </span>
+    `;
     popupQuote.setAttribute("role", "menuitem");
 
     // Initial theming for popup items
@@ -1571,7 +1577,14 @@ section.items.forEach(linkItem => {
 
       // Quote button inside popup
       popupQuote.style.backgroundColor = color;
-      popupQuote.style.color = theme === "motor" ? "#000000" : "#ffffff";
+      popupQuote.style.color = theme === "motor" ? "#3B4125" : "#ffffff";
+      popupQuote.style.setProperty("--upcover-quote-btn-bg", color);
+      if (theme === "motor") {
+        popupQuote.classList.add("motor-theme");
+      } else {
+        popupQuote.classList.remove("motor-theme");
+      }
+
     };
     applyMoreTheme();
 

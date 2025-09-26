@@ -412,6 +412,111 @@ section.items.forEach(linkItem => {
         align-items: center;
       }
 
+            /* ---------- More... responsive popup ---------- */
+      .more-wrapper {
+        position: relative;
+        display: none; /* default hidden; shown only in 901–1165 */
+        border-radius: 50%;
+        padding: 0px 16px 5px 16px;
+        border: 1px solid #242826;
+      }
+
+      .more-btn {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 1;
+        padding: 12px 0;
+        color: #242826;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+
+
+      .more-popup {
+        position: absolute;
+        right: 0;
+        top: calc(100% + 8px);
+        min-width: 240px;
+        background: #FFFFFF;
+        border: 1px solid #EAEAEA;
+        border-radius: 10px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        padding: 12px;
+        z-index: 1002;
+        opacity: 0;
+        transform: translateY(-8px);
+        pointer-events: none;
+        transition: opacity .18s ease, transform .18s ease;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+      }
+
+      .more-wrapper.open .more-popup {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      /* items inside popup */
+      .more-item {
+        // width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: 14px;
+        padding: 16px;
+        cursor: pointer;
+        transition: background-color .2s ease, color .2s ease, border-radius 160ms ease-out;
+        border: none;
+      }
+
+
+      .more-item.login-link:hover {
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+
+      .more-item.quote-btn {
+        color: #fff;
+      }
+
+      /* RESPONSIVE BEHAVIOR */
+      /* Show More..., hide login/quote between 901–1165px */
+      @media (min-width: 901px) and (max-width: 1165px) {
+        .actions .login,
+        .actions .quote {
+          display: none !important;
+        }
+        .actions .more-wrapper {
+          display: inline-flex !important;
+        }
+      }
+
+      /* Above 1165px: keep original Login + Quote, hide More... */
+      @media (min-width: 1166px) {
+        .actions .more-wrapper {
+          display: none !important;
+        }
+      }
+
+      /* ≤900px: we already hide login/quote; also hide More... (mobile overlay handles CTAs) */
+      @media (max-width: 900px) {
+        .actions .more-wrapper {
+          display: none !important;
+        }
+      }
+
+
       .login {
         text-decoration: none;
         font-size: 16px;
@@ -1421,6 +1526,111 @@ section.items.forEach(linkItem => {
       quoteButton.classList.remove('motor-theme');
     }
 
+        // --- More... (901–1165px) ---
+    const moreWrap = document.createElement("div");
+    moreWrap.className = "more-wrapper";
+    moreWrap.setAttribute("role", "group");
+
+    const moreBtn = document.createElement("button");
+    moreBtn.type = "button";
+    moreBtn.className = "more-btn";
+    moreBtn.setAttribute("aria-haspopup", "true");
+    moreBtn.setAttribute("aria-expanded", "false");
+    moreBtn.innerHTML = `...`;
+
+    const morePopup = document.createElement("div");
+    morePopup.className = "more-popup";
+    morePopup.setAttribute("role", "menu");
+
+    // Login (as link) inside popup
+    const popupLogin = document.createElement("a");
+    popupLogin.href = loginLink.href;
+    popupLogin.className = "more-item login-link";
+    popupLogin.textContent = this.config.loginText || "LOGIN";
+    popupLogin.setAttribute("role", "menuitem");
+
+    // Quote (as button) inside popup
+    const popupQuote = document.createElement("button");
+    popupQuote.type = "button";
+    popupQuote.className = "more-item quote-btn";
+    popupQuote.textContent = this.config.quoteText || "GET A QUOTE";
+    popupQuote.setAttribute("role", "menuitem");
+
+    // Initial theming for popup items
+    const applyMoreTheme = () => {
+      const theme = this.themeManager.getCurrentTheme();
+      const color = this.themeManager.getCurrentColor();
+
+      // "More…" button color (match your nav hover logic)
+      moreBtn.style.color = theme === "motor" ? "#3B4125" : "#242826";
+
+      // Login link inside popup: text color matches theme for emphasis
+      popupLogin.style.color = theme === "motor" ? "#3B4125" : color;
+
+      // Quote button inside popup
+      popupQuote.style.backgroundColor = color;
+      popupQuote.style.color = theme === "motor" ? "#000000" : "#ffffff";
+    };
+    applyMoreTheme();
+
+    // Keep in sync with theme changes
+    this.themeManager.subscribe(() => {
+      applyMoreTheme();
+    });
+
+    // Toggle popup
+    const closeMore = () => {
+      moreWrap.classList.remove("open");
+      moreBtn.setAttribute("aria-expanded", "false");
+    };
+
+    const openMore = () => {
+      moreWrap.classList.add("open");
+      moreBtn.setAttribute("aria-expanded", "true");
+    };
+
+    moreBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (moreWrap.classList.contains("open")) {
+        closeMore();
+      } else {
+        openMore();
+      }
+    });
+
+    // Click actions – forward to the same flows as header CTAs (you can hook real handlers here)
+    popupLogin.addEventListener("click", (e) => {
+      e.preventDefault();
+      // same target as header login
+      window.location.href = loginLink.href || "#";
+      closeMore();
+    });
+
+    popupQuote.addEventListener("click", (e) => {
+      e.preventDefault();
+      // emulate header quote click — if you have a handler, trigger it; otherwise navigate
+      // Option A: trigger the real button
+      quoteButton.click();
+      // Option B (if no handler is attached): navigate somewhere
+      // window.location.href = "#";
+      closeMore();
+    });
+
+    // Click outside/escape to close
+    document.addEventListener("click", (evt) => {
+      const t = evt.target as HTMLElement;
+      if (!moreWrap.contains(t)) closeMore();
+    });
+    document.addEventListener("keydown", (evt) => {
+      if (evt.key === "Escape") closeMore();
+    });
+
+    morePopup.appendChild(popupLogin);
+    morePopup.appendChild(popupQuote);
+    moreWrap.appendChild(moreBtn);
+    moreWrap.appendChild(morePopup);
+
+
     // Set CSS variable for hover background color from config.themeColors
     let themeColor = this.themeManager.getCurrentColor();
     if (this.config.themeColors) {
@@ -1466,6 +1676,7 @@ section.items.forEach(linkItem => {
     });
 
     actionsDiv.appendChild(mobileMenuButton);
+    actionsDiv.appendChild(moreWrap);
     actionsDiv.appendChild(loginLink);
     actionsDiv.appendChild(quoteButton);
 

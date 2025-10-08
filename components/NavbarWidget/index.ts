@@ -807,7 +807,7 @@ section.items.forEach(linkItem => {
       .dropdown-column h4 {
         font-size: 16px;
         font-weight: 700;
-        margin-bottom: 30px;
+        margin-bottom: 15px;
         color: #242826;
       }
 

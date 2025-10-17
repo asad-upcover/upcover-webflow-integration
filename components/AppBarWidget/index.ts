@@ -266,7 +266,7 @@ export class AppBarWidget {
 
         .tabs button.active {
           background-color: #ffffff;
-          color: #242826;
+          color: var(--appbar-theme-color, #242826);
           font-weight: 700;
         }
         .tabs button.active::after {
@@ -310,6 +310,20 @@ export class AppBarWidget {
         }
       `;
     document.head.appendChild(style);
+
+    // set initial CSS variable for the active tab color and update on theme changes
+    document.documentElement.style.setProperty(
+      "--appbar-theme-color",
+      this.themeManager.getCurrentColor()
+    );
+
+    // update the CSS variable whenever the theme changes
+    this.themeManager.subscribe(() => {
+      document.documentElement.style.setProperty(
+        "--appbar-theme-color",
+        this.themeManager.getCurrentColor()
+      );
+    });
 
     const appbar = document.createElement("div");
     appbar.id = "appbar";

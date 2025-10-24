@@ -276,7 +276,7 @@ export class AppBarWidget {
           left: 0;
           height: 1px;
           width: 100%;
-          background-color: #242826;
+          background-color: var(--appbar-theme-color, #242826);
         }
         .contact {
           display: flex;
